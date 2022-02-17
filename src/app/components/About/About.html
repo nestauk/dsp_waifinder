@@ -1,0 +1,45 @@
+<div class="About">
+    <svelte:component this={Content}/>
+</div>
+
+<script>
+    import AboutFlyingHigh from "./AboutFlyingHigh.html";
+    import AboutGlass from "./AboutGlass.html";
+    import AboutMap from "./AboutMap.html";
+
+    export default {
+        computed: {
+            Content: ({content}) => {
+                if (content === "flying_high") {
+                    return AboutFlyingHigh;
+                } else if (content === "glass") {
+                    return AboutGlass;
+                } else if (content === "map") {
+                    return AboutMap;
+                };
+
+                return null;
+            }
+        },
+    }
+</script>
+
+<style>
+    .About {
+        width: 100%;
+        height: 100%;
+    }
+
+    :global(.panel) {
+        width: 100%;
+        height: 100%;
+        padding: 1em;
+    }
+
+    :global(.panel a) {
+        padding: 0.3em;
+        background-color: orange;
+        text-decoration: none;
+        color: white;
+    }
+</style>

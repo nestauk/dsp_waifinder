@@ -1,0 +1,226 @@
+<svelte:head>
+    <title>{$copy.title} ({withNestaFooter ? "fullscreen" : "embed"})</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.b449f74b658d.css">
+    <link rel="stylesheet" type="text/css" href="../css/ionicons.min.css">
+</svelte:head>
+<div class="app">
+    <header>
+        <Header
+            {activeAbout}
+            {isMenuOpen}
+            on:togglemenu="set({isMenuOpen: !isMenuOpen})"
+            on:about="toggleAbout(event.id)"
+        />
+    </header>
+    <main>
+    {#if isIterableNotEmpty($allCompanies)}
+    <div class="map">
+        <MapPies
+            {accessToken}
+            {colorScale}
+            {getLink}
+            {getLngLat}
+            getItemID={getID}
+            items={$companies}
+            keys={$allEntityTypes}
+            radiusMax=18
+            radiusMin=0.25
+            {styleURL}
+            withScaleControl={mapWithScaleControl}
+            withZoomControl={mapWithZoomControl}
+            on:enableItemsEditing="$fire('entityType:enableEditing')"
+        />
+    </div>
+    {#if isMenuOpen}
+    <div class="categories">
+        <BarChart
+            {colorScale}
+            items={byEntitytype}
+            on:toggleItem="$fire('entityType:toggle', event.key)"
+            on:deselectAllItems="$fire('entityType:deselectAll')"
+            on:selectAllItems="$fire('entityType:selectAll')"
+            selectedKeys={$entityTypes}
+            title="Entity types"
+            active={$areEntityTypesEditable}
+        />
+        {#if $isTechnologyDeveloperSelected}
+        <BarChart
+            color="hsla(9, 87%, 81%, 1)"
+            items={byTechnologyType}
+            on:toggleItem="$fire('technologyType:toggle', event.key)"
+            on:deselectAllItems="$fire('technologyType:deselectAll')"
+            on:selectAllItems="$fire('technologyType:selectAll')"
+            selectedKeys={$technologyTypes}
+            title="Technology types"
+            active={$areEntityTypesEditable}
+        />
+        {/if}
+    </div>
+    {/if}
+    {:else}
+    <Loading />
+    {/if}
+    <div class="about">
+        <div class="content">
+            <About content={activeAbout}/>
+        </div>
+    </div>
+    </main>
+
+    {#if withNestaFooter}
+    <footer>
+        <NestaFooter baseURL="https://www.nesta.org.uk"/>
+    </footer>
+    {/if}
+</div>
+
+<script>
+    import _ from "lamb";
+
+    import * as d3 from "@vendor/d3";
+
+    import {makeOccurrencesKeyValueArray} from "@utils/arrayUtils";
+    import {getID, getLink, getLngLat} from "@utils/companies";
+    import {isIterableNotEmpty} from "@utils/iterableUtils";
+    import {objectToKeyValueArray} from "@utils/objUtils";
+
+    import {MAPBOXGL_ACCESSTOKEN, MAPBOXGL_STYLEURL} from "../consts";
+
+    export default {
+        components: {
+            About: "./About/About.html",
+            BarChart: "./BarChart.html",
+            Header: "./Header.html",
+            Loading: "./Loading.html",
+            MapPies: "./MapPies/MapPies.html",
+            NestaFooter: "./NestaFooter/NestaFooter.html",
+        },
+
+        // state
+
+        data () {
+            return {
+                accessToken: MAPBOXGL_ACCESSTOKEN,
+                styleURL: MAPBOXGL_STYLEURL,
+                getLngLat,
+                getID,
+                isMenuOpen: true,
+                activeAbout: null
+            }
+        },
+        computed: {
+            byEntitytype: ({$allCompanies, $allEntityTypes}) =>
+                makeOccurrencesKeyValueArray($allCompanies, $allEntityTypes),
+
+            byTechnologyType: ({$allCompanies, $allTechnologyTypes}) =>
+                makeOccurrencesKeyValueArray($allCompanies, $allTechnologyTypes),
+
+            colorScale: ({$allEntityTypes}) =>
+                d3.scaleOrdinal()
+                .domain($allEntityTypes)
+                .range([
+                    "#F15235", // red
+                    "#0FC3A8", // teal
+                    "#FAD677", // yellow
+                    "#032B2F", // dark blue
+                    "rgb(152, 78, 163)" // purple
+                ])
+        },
+
+        methods: {
+            toggleAbout (id) {
+                const {activeAbout} = this.get();
+
+                if (activeAbout === id) {
+                    this.set({activeAbout: null});
+                } else {
+                    this.set({activeAbout: id});
+                }
+            }
+        },
+
+        helpers: {
+            isIterableNotEmpty
+        }
+    }
+</script>
+
+<style>
+    .app {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: APP_OVERFLOW_Y; /* replaced by rollup... */
+        /* replaced by rollup... */
+        /* overflow-y: APP_OVERFLOW_Y !important; */
+    }
+
+    header {
+        width: 100%;
+        height: 50px;
+    }
+
+    main {
+        width: 100%;
+        height: calc(100% - 50px); /* header height */
+
+        position: relative; /* .categories */
+    }
+
+    .map {
+        width: 100%;
+        height: 100%;
+    }
+
+    footer {
+        width: 100%;
+    }
+
+    .categories {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        /* x: move the scroolbar out of the window */
+
+        width: calc(350px + 50px + 0.5em);
+        padding-right: calc(50px + 0.5em);
+        margin-right: -50px;
+
+        /* thin screens - (mobile) */
+        max-width: calc(100% - 0.5em + 50px);
+
+        /* y */
+
+        margin-top: 1em;
+        max-height: calc(100% - 0.5em); /* margin-top */
+        overflow-y: scroll;
+    }
+
+    .about {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .about .content {
+        width: 600px;
+        max-width: calc(100% - 2em);
+        max-height: calc(100% - 2em);
+        user-select: none;
+
+        background-color: white;
+        box-shadow: 5px 5px 5px #c1c1c1;
+
+        pointer-events: auto;
+        overflow-y: auto;
+
+        font-size: 0.85em;
+    }
+</style>

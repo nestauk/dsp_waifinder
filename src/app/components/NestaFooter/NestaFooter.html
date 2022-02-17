@@ -1,0 +1,27 @@
+<Sprites />
+<div class="app-footer">
+    <div class="app-footer__container">
+        <div class="app-footer__icons">
+            <SocialLinks />
+            <FooterLinks {baseURL}/>
+            <Torchbox />
+        </div>
+        <div class="footer-link-item">
+            © 2018 Nesta Nesta is a registered charity in England and Wales 1144091 and Scotland SC042833. Our main address is 58 Victoria Embankment, London, EC4Y 0DS. You can reach us by phone on 020 7438 2500 or drop us a line at information@nesta.org.uk.
+        </div>
+        <div class="footer-link-item">
+            All our work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, unless it says otherwise. We hope you find it useful.
+        </div>
+    </div>
+</div>
+
+<script>
+    export default {
+        components: {
+            FooterLinks: "./FooterLinks.html",
+            SocialLinks: "./SocialLinks.html",
+            Sprites: "./Sprites.html",
+            Torchbox: "./Torchbox.html"
+        }
+    }
+</script>
