@@ -1,5 +1,7 @@
 # ds
 
+This folder contains flows for joining and the analysis of the datasets.
+
 ## Setup
 
 - Meet the data science cookiecutter [requirements](http://nestauk.github.io/ds-cookiecutter/quickstart), in brief:
@@ -8,7 +10,6 @@
 - Run `make install` to configure the development environment:
   - Setup the conda environment
   - Configure pre-commit
-  - Configure metaflow to use AWS
 
 ## Contributor guidelines
 
