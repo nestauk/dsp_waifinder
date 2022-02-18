@@ -2,7 +2,7 @@ import gulp from "gulp";
 
 import {BUILD_PATH} from "./index";
 
-const README_PATH = "README.md";
+const README_PATH = "../README.md";
 
 gulp.task("copy.readme", done => {
     gulp.src(README_PATH)
