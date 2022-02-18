@@ -1,6 +1,6 @@
 import gulp from "gulp";
 
-const COMPANIES_GLOB = "data/*";
+const COMPANIES_GLOB = "../data/*";
 
 gulp.task("copy.data", done => {
     gulp.src(COMPANIES_GLOB)

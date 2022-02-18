@@ -1,7 +1,3 @@
-build
-node_modules
-.git
-.gh-pages
-
-/* mac */
 .DS_Store
+.git
+node_modules
