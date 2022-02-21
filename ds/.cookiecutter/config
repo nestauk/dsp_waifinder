@@ -1,0 +1,5 @@
+# Change these at your peril:
+export PROJECT_NAME=ds
+export REPO_NAME=ds
+export DESCRIPTION=Data Science for the AI map project
+export PROJECT_OPENNESS=private
