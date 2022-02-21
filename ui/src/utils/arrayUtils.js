@@ -8,7 +8,6 @@ import {objectToKeyValueArray} from "./objUtils";
 
 // boolean elements
 
-export const areAllTrue = _.every(_.identity);
 export const areSomeTrue = _.some(_.identity);
 
 /* edit (array -> array) */

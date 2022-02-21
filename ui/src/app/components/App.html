@@ -43,15 +43,15 @@
             title="Entity types"
             active={$areEntityTypesEditable}
         />
-        {#if $isTechnologyDeveloperSelected}
+        {#if $isCompanySelected}
         <BarChart
             color="hsla(9, 87%, 81%, 1)"
-            items={byTechnologyType}
-            on:toggleItem="$fire('technologyType:toggle', event.key)"
-            on:deselectAllItems="$fire('technologyType:deselectAll')"
-            on:selectAllItems="$fire('technologyType:selectAll')"
-            selectedKeys={$technologyTypes}
-            title="Technology types"
+            items={bySector}
+            on:toggleItem="$fire('sector:toggle', event.key)"
+            on:deselectAllItems="$fire('sector:deselectAll')"
+            on:selectAllItems="$fire('sector:selectAll')"
+            selectedKeys={$sectors}
+            title="Sectors"
             active={$areEntityTypesEditable}
         />
         {/if}
@@ -112,8 +112,8 @@
             byEntitytype: ({$allCompanies, $allEntityTypes}) =>
                 makeOccurrencesKeyValueArray($allCompanies, $allEntityTypes),
 
-            byTechnologyType: ({$allCompanies, $allTechnologyTypes}) =>
-                makeOccurrencesKeyValueArray($allCompanies, $allTechnologyTypes),
+            bySector: ({$allCompanies, $allSectors}) =>
+                makeOccurrencesKeyValueArray($allCompanies, $allSectors),
 
             colorScale: ({$allEntityTypes}) =>
                 d3.scaleOrdinal()

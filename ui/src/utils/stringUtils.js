@@ -16,11 +16,6 @@ const split = _.generic(String.prototype.split);
 
 export const splitByEOL = _.partial(split, [_, "\n"]);
 
-export const makeRows = _.pipe(
-    splitByEOL,
-    _.tail
-);
-
 /* any type to string */
 
 export const stringify = item => `${JSON.stringify(item, null, 2)}`

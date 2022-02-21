@@ -13,24 +13,23 @@ import {
     isIterableNotEmpty
 } from "@utils/iterableUtils";
 import {
-    ENTITY_TYPE_TECHNOLOGY_DEVELOPER,
+    ENTITY_TYPE_COMPANY,
     ALL_ENTITY_TYPES,
-    ALL_TECHNOLOGY_TYPES,
+    SECTORS,
     getLngLat,
-    makeCompany,
+    parseDatapoint,
     filterCompanies,
 } from "@utils/companies";
-import {toGeoPoints} from "@utils/geoUtils";
 import {isObjNotEmpty} from "@utils/objUtils";
-import {makeRows, stringify} from "@utils/stringUtils";
+import {stringify} from "@utils/stringUtils";
 
 const initialState = {
     copy: {
-        title: "UK Drone Industry Map",
-        subtitle: "An interactive map showing UK drone industry technology developers, service providers and research organisations. Data provided by Glass.ai with supplemental data from Gateway to Research.",
-        copyright: "Nesta (c) 2018",
+        title: "UK AI Map",
+        subtitle: "An interactive map showing UK AI industry entities. Data provided by Glass.ai with supplemental data from Gateway to Research and Crunchbase.",
+        copyright: "Nesta (c) 2022",
     },
-    companiesURL: "../data/companies.tsv",
+    companiesURL: "../data/entities.tsv",
     allCompanies: [],
 
     // don't start with empty selection at startup the map fits to companies bounds
@@ -39,8 +38,8 @@ const initialState = {
     allEntityTypes: ALL_ENTITY_TYPES,
     areEntityTypesEditable: false,
 
-    allTechnologyTypes: ALL_TECHNOLOGY_TYPES,
-    technologyTypes: ALL_TECHNOLOGY_TYPES,
+    allSectors: SECTORS,
+    sectors: SECTORS,
 };
 
 class DronesStore extends Store {
@@ -48,34 +47,30 @@ class DronesStore extends Store {
         super(initialState);
 
         this.compute(
-            "isTechnologyDeveloperSelected",
+            "isCompanySelected",
             ["entityTypes"],
-            entityTypes => _.isIn(entityTypes, ENTITY_TYPE_TECHNOLOGY_DEVELOPER)
+            entityTypes => _.isIn(entityTypes, ENTITY_TYPE_COMPANY)
         );
 
         this.compute(
             "companies", [
                 "allCompanies",
                 "entityTypes",
-                "isTechnologyDeveloperSelected",
-                "technologyTypes"
+                "isCompanySelected",
+                "sectors"
             ], (
                 allCompanies,
                 entityTypes,
-                isTechnologyDeveloperSelected,
-                technologyTypes
+                isCompanySelected,
+                sectors
             ) =>
                 filterCompanies(
                     allCompanies,
                     entityTypes,
-                    isTechnologyDeveloperSelected,
-                    technologyTypes
+                    isCompanySelected,
+                    sectors
                 )
         );
-
-        // this.on("state", ({changed, current, previous}) => {
-        //     console.log("DronesStore", changed, current, previous);
-        // });
 
         this.setEvents();
         this.fetch();
@@ -96,40 +91,40 @@ class DronesStore extends Store {
         });
 
         this.on("entityType:deselectAll", () => {
-            const {allTechnologyTypes} = this.get();
+            const {allSectors} = this.get();
 
             this.set({
                 entityTypes: [],
-                technologyTypes: allTechnologyTypes
+                sectors: allSectors
             });
         });
 
         this.on("entityType:selectAll", () => {
-            const {allEntityTypes, allTechnologyTypes} = this.get();
+            const {allEntityTypes, allSectors} = this.get();
 
             this.set({
                 entityTypes: allEntityTypes,
-                technologyTypes: allTechnologyTypes
+                sectors: allSectors
             });
         });
 
-        /* technology types */
+        /* sectors */
 
-        this.on("technologyType:toggle", technologyType => {
-            const {technologyTypes: currentTechnologyTypes} = this.get();
-            const technologyTypes = toggleItem(currentTechnologyTypes, technologyType);
+        this.on("sector:toggle", sector => {
+            const {sectors: currentSectors} = this.get();
+            const sectors = toggleItem(currentSectors, sector);
 
-            this.set({technologyTypes});
+            this.set({sectors});
         });
 
-        this.on("technologyType:deselectAll", () => {
-            this.set({technologyTypes: []});
+        this.on("sector:deselectAll", () => {
+            this.set({sectors: []});
         });
 
-        this.on("technologyType:selectAll", () => {
-            const {allTechnologyTypes} = this.get();
+        this.on("sector:selectAll", () => {
+            const {allSectors} = this.get();
 
-            this.set({technologyTypes: allTechnologyTypes});
+            this.set({sectors: allSectors});
         });
     }
 
@@ -137,7 +132,7 @@ class DronesStore extends Store {
         const {companiesURL} = this.get();
 
         if (Modernizr.fetch) {
-            d3.tsv(companiesURL, makeCompany).then(allCompanies => {
+            d3.tsv(companiesURL, parseDatapoint).then(allCompanies => {
                 this.set({allCompanies});
             });
         } else {
@@ -145,7 +140,7 @@ class DronesStore extends Store {
             d3.tsv_request(companiesURL, (error, allRawCompanies) => {
                 if (error) throw error;
 
-                this.set({allCompanies: _.map(allRawCompanies, makeCompany)});
+                this.set({allCompanies: _.map(allRawCompanies, parseDatapoint)});
             });
         }
     }
