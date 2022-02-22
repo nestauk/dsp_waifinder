@@ -1,0 +1,3 @@
+flows:
+  gtr:
+    min_ai_prop: 0.2
