@@ -1,16 +1,12 @@
 """Data getters for Gateway to Research data."""
 
 from functools import lru_cache
-
-from metaflow import Flow, Run, Step
-from metaflow.exception import MetaflowNotFound
 from typing import Optional
-from pandas import DataFrame
 
-try:  # Hack for type-hints on attributes
-    import pandas as pd
-except ImportError:
-    pass
+from metaflow import Flow, Run
+from metaflow.exception import MetaflowNotFound
+
+from pandas import DataFrame
 
 
 @lru_cache()
@@ -22,6 +18,7 @@ def get_run(flow_name: str) -> Run:
     except StopIteration as exc:
         raise MetaflowNotFound("Matching run not found") from exc
 
+
 def get_local_run(flow_name: str) -> Run:
     """Gets last successful run executed with `--production`"""
     runs = Flow(flow_name).runs()
@@ -31,7 +28,9 @@ def get_local_run(flow_name: str) -> Run:
         raise MetaflowNotFound("Matching run not found") from exc
 
 
-def get_gtr_ai_orgs(run: Optional[Run] = None, local: Optional[bool] = False) -> DataFrame:
+def get_gtr_ai_orgs(
+    run: Optional[Run] = None, local: Optional[bool] = False
+) -> DataFrame:
     """get the AI research organisations with lon/lat
     Arguments:
         run: what run to get (if None it gets the lastest run)
@@ -50,5 +49,5 @@ def get_gtr_ai_orgs(run: Optional[Run] = None, local: Optional[bool] = False) ->
             run = get_run("GtR_AI")
 
     return run.data.ai_org_ids_df_filtered.dropna(
-        subset=['Longitude','Latitude']
-        ).reset_index(drop=True)[['Name', 'Latitude', 'Longitude']]
+        subset=["Longitude", "Latitude"]
+    ).reset_index(drop=True)[["Name", "Latitude", "Longitude"]]
