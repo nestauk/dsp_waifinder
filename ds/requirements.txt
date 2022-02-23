@@ -10,3 +10,4 @@ typer
 sh
 jupyter
 sqlalchemy
+pymysql

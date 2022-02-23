@@ -1,3 +1,4 @@
 flows:
   gtr:
-    min_ai_prop: 0.2
+    min_ai_prop: 0.1
+    min_num_proj: 10
