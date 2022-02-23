@@ -2,64 +2,82 @@
 Flow to get AI data from Gateway to Research SQL database
 """
 from metaflow import FlowSpec, JSONType, current, project, step, Parameter
-from ds.pipeline.gtr.utils import gtr_ai_tags
+from ds.pipeline.gtr.utils import est_conn
 from ds import config
 
 @project(name="ai_map")
 class GtR_AI(FlowSpec):
     """
     We query the Gateway to Research database to find institutions
-    which create AI research in decent proportions.
-    Attributes:
-        min_ai_prop: minimum proportion of AI for institution
-        
+    which create AI research in decent proportions.    
     """
 
-    min_ai_prop = Parameter(
-        "min-ai-prop", help="minimum proportion of AI for institution", default=0.2
-    )
-
-    test_mode = Parameter(
-        "test-mode",
-        help="Run in test mode",
-        default=True,
-    )
+    min_ai_prop = config['flows']['gtr']['min_ai_prop']
+    min_num_proj = config['flows']['gtr']['min_num_proj']
 
     @step
     def start(self):
         """Start flow"""
 
-        self.next(self.get_ai_orgs)
+        self.next(self.get_ai_orgs_data)
 
     @step
-    def get_ai_orgs(self):
-        """Get the orgs which have AI tagged projects"""
+    def get_ai_orgs_data(self):
+        """Get data for the research organisations which have AI tagged projects.
+        This includes:
+        Organisation name, id, lat/lon, number of AI projects, total number of projects"""
         
+        from ds.pipeline.gtr.utils import gtr_ai_tags, query_ai_topics, query_ai_orgs, query_ai_orgs_all_topics
+        import pandas as pd
 
-        # if self.test_mode is True and not current.is_production:
-        #     self.sectors_corpora = dict(take(2, all_sectors_corpora.items()))
-        # else:
-        #     self.sectors_corpora = all_sectors_corpora
+        # Establish the connection to the SQL database
+        conn = est_conn()
 
-        self.ai_orgs = {'google': 22, 'uni of cambridge': 44}
-        self.next(self.get_ai_props)
+        # Get all the project ids for AI topic-tagged projects
+        params = ['%' + ai_tag + '%' for ai_tag in gtr_ai_tags]
+        ai_project_ids_df = pd.read_sql(query_ai_topics, conn, params=params)
+        ai_project_ids = ai_project_ids_df['project_id'].tolist()
 
-    @step
-    def get_ai_props(self):
-        """For each AI org find out proportion of topics in AI"""
+        # Get all the organisational info for the AI projects
+        ai_org_ids_df = pd.read_sql(query_ai_orgs, conn, params={'l': tuple(ai_project_ids)})
+        ai_org_ids = ai_org_ids_df['id'].tolist()
+        ai_org_ids_df.rename(
+            columns = {'count(gtr_link_table.project_id)': 'n_ai_projects'},
+            inplace=True
+            )
 
-        self.ai_orgs_all_topics = {'google': 100, 'uni of cambridge': 100}
-        self.ai_orgs_prop_ai = {k:v/self.ai_orgs_all_topics[k] for k,v in self.ai_orgs.items()}
+        # Get all project counts for the AI organisations
+        ai_orgs_all_proj_df = pd.read_sql(query_ai_orgs_all_topics, conn, params={'l': tuple(ai_org_ids)})
+        ai_orgs_all_proj_df.rename(
+            columns = {'count(gtr_link_table.project_id)': 'n_total_projects'},
+            inplace=True
+            )
+
+        # Combine
+        self.ai_org_ids_df = ai_org_ids_df.merge(ai_orgs_all_proj_df, how='left', on ='id')
+        self.ai_org_ids_df.rename(
+            columns={
+                "name": "Name",
+                "id": "org_id",
+                "latitude": "Latitude",
+                "longitude": "Longitude"
+                },
+                inplace=True
+            )
 
         self.next(self.filter_ai_orgs)
 
     @step
     def filter_ai_orgs(self):
-        """Filter the AI orgs to just include those with higher
-        proportions of AI tags"""
+        """Filter the AI orgs to just include those with high
+        proportions of AI tags, and with a high total number of projects"""
 
+        self.ai_org_ids_df['prop_ai_projects'] = self.ai_org_ids_df['n_ai_projects']/self.ai_org_ids_df['n_total_projects']
+        self.ai_org_ids_df_filtered = self.ai_org_ids_df[
+            (self.ai_org_ids_df['prop_ai_projects'] >= self.min_ai_prop) &
+            (self.ai_org_ids_df['n_total_projects'] >= self.min_num_proj)
+            ].reset_index(drop=True)
         
-        self.ai_orgs_filtered = {k:v for k,v in self.ai_orgs_prop_ai.items() if v>= self.min_ai_prop}
         self.next(self.end)
 
     @step
