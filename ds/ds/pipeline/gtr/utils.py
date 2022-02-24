@@ -5,7 +5,47 @@ import pymysql
 
 from sqlalchemy import create_engine
 
-gtr_ai_tags = ["artificial intelligence"]
+gtr_ai_tags = [
+    "Digital Signal Processing",
+    "Systems engineering",
+    "Systems neuroscience",
+    "ICT and education",
+    "Human Communication in ICT",
+    "Info. & commun. Technol.",
+    "Fundamentals of Computing",
+    "Image & Vision Computing",
+    "Dev Informatics & Technology",
+    "System on Chip",
+    "Complexity Science",
+    "Intelligent & Expert Systems",
+    "Comput./Corpus Linguistics",
+    "Computer Sys. & Architecture",
+    "Design of Process systems",
+    "Modelling & simul. of IT sys.",
+    "Accelerator R&D",
+    "Statistics & Appl. Probability",
+    "Technology and method dev",
+    "Computational Studies",
+    "eScience",
+    "Mobile Computing",
+    "Bioinformatics",
+    "Computer Graphics & Visual.",
+    "Electronic Devices & Subsys.",
+    "Technol. for Environ. Appl.",
+    "Bionanoscience",
+    "Networks & Distributed Systems",
+    "Computational Methods & Tools",
+    "Intelligent Measurement Sys.",
+    "Bioelectronic Devices",
+    "Design & Testing Technology",
+    "Data Handling & Storage",
+    "Software Engineering",
+    "Human-Computer Interactions",
+    "Robotics & Autonomy",
+    "High Performance Computing",
+    "Parallel Computing",
+    "Artificial Intelligence",
+]
 
 query_ai_topics = (
     "SELECT gtr_link_table.project_id "
