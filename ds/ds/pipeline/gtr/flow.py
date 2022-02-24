@@ -41,8 +41,9 @@ class GtR_AI(FlowSpec):
         conn = est_conn()
 
         # Get all the project ids for AI topic-tagged projects
-        params = ["%" + ai_tag + "%" for ai_tag in gtr_ai_tags]
-        ai_project_ids_df = pd.read_sql(query_ai_topics, conn, params=params)
+        ai_project_ids_df = pd.read_sql(
+            query_ai_topics, conn, params={"l": tuple(gtr_ai_tags)}
+        )
         ai_project_ids = ai_project_ids_df["project_id"].tolist()
 
         # Get all the organisational info for the AI projects

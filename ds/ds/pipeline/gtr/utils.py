@@ -50,7 +50,7 @@ gtr_ai_tags = [
 query_ai_topics = (
     "SELECT gtr_link_table.project_id "
     "FROM gtr_topic, gtr_link_table "
-    "WHERE gtr_topic.id=gtr_link_table.id AND gtr_topic.text LIKE %s"
+    "WHERE gtr_topic.id=gtr_link_table.id AND gtr_topic.text IN %(l)s"
 )
 
 query_ai_orgs = (
