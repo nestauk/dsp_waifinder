@@ -9,3 +9,7 @@ To run steps 1 and 2 you will need to have the Nesta SQL database credentials st
 ## 1. Gateway to Research (GtR) dataset
 
 Run `python ds/pipeline/gtr/flow.py --datastore=s3 --production run` to get the Gateway to Research AI dataset.
+
+## 2. Crunchbase dataset
+
+Run `python ds/ds/pipeline/crunchbase/flow.py --production run` to get the Crunchbase AI dataset.
