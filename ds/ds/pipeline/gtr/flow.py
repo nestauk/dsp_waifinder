@@ -44,7 +44,7 @@ class GtR_AI(FlowSpec):
         ai_project_ids_df = pd.read_sql(
             query_ai_topics, conn, params={"l": tuple(gtr_ai_tags)}
         )
-        ai_project_ids = ai_project_ids_df["project_id"].tolist()
+        ai_project_ids = list(ai_project_ids_df["project_id"].unique())
 
         # Get all the organisational info for the AI projects
         ai_org_ids_df = pd.read_sql(

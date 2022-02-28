@@ -56,10 +56,10 @@ query_ai_topics = (
 query_ai_orgs = (
     "SELECT gtr_organisations.name, gtr_organisations.id, count(gtr_link_table.project_id), "
     "gtr_organisations_locations.latitude, gtr_organisations_locations.longitude "
-    "FROM gtr_link_table, gtr_organisations, gtr_organisations_locations "
-    "WHERE gtr_organisations.id=gtr_organisations_locations.id "
-    "AND gtr_organisations.id=gtr_link_table.id "
-    "AND gtr_link_table.project_id IN %(l)s"
+    "FROM gtr_link_table "
+    "INNER JOIN gtr_organisations ON gtr_organisations.id=gtr_link_table.id "
+    "INNER JOIN gtr_organisations_locations ON gtr_organisations.id=gtr_organisations_locations.id "
+    "WHERE gtr_link_table.project_id IN %(l)s "
     "GROUP BY gtr_organisations.id"
 )
 
