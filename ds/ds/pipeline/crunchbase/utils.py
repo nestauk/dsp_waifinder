@@ -119,26 +119,33 @@ query_ai_topics = (
     "WHERE crunchbase_organizations_categories.category_name IN %(l)s "
 )
 
-query_ai_funders = (
+query_ai_investors = (
     "SELECT count(crunchbase_funding_rounds.org_id) as 'num_ai_orgs_funded', "
     "crunchbase_investors.id as 'investor_id', crunchbase_investors.type, crunchbase_investors.investor_types, "
-    "crunchbase_investors.name, crunchbase_investors.investment_count, "
-    "crunchbase_investors.country, crunchbase_investors.region, crunchbase_investors.city, "
-    "crunchbase_investors.domain, crunchbase_investors.twitter_url, crunchbase_investors.linkedin_url, crunchbase_investors.facebook_url "
-    "FROM crunchbase_funding_rounds, crunchbase_investments, crunchbase_investors "
+    "crunchbase_investors.name as 'Name', crunchbase_investors.investment_count, "
+    "crunchbase_investors.country, crunchbase_investors.location_id, "
+    "crunchbase_investors.domain as 'Link' "
+    "FROM crunchbase_funding_rounds "
+    "INNER JOIN crunchbase_investments ON crunchbase_funding_rounds.id = crunchbase_investments.funding_round_id "
+    "INNER JOIN crunchbase_investors ON crunchbase_investments.investor_id = crunchbase_investors.id "
     "WHERE crunchbase_funding_rounds.org_id IN %(l)s "
-    "AND crunchbase_investments.funding_round_id = crunchbase_funding_rounds.id "
-    "AND crunchbase_investments.investor_id = crunchbase_investors.id "
     "GROUP BY crunchbase_investors.id"
 )
 
-query_ai_funders_all_topics = (
+
+query_ai_investors_all_topics = (
     "SELECT crunchbase_investments.investor_id as 'investor_id', "
     "count(crunchbase_funding_rounds.org_id) as 'num_orgs_funded' "
-    "FROM crunchbase_funding_rounds, crunchbase_investments "
+    "FROM crunchbase_funding_rounds "
+    "INNER JOIN crunchbase_investments ON crunchbase_investments.funding_round_id = crunchbase_funding_rounds.id "
     "WHERE crunchbase_investments.investor_id IN  %(l)s "
-    "AND crunchbase_investments.funding_round_id = crunchbase_funding_rounds.id "
     "GROUP BY crunchbase_investments.investor_id"
+)
+
+query_city = (
+    "SELECT geographic_data.id, geographic_data.latitude as 'Latitude', geographic_data.longitude as 'Longitude' "
+    "FROM geographic_data "
+    "WHERE geographic_data.id IN %(l)s "
 )
 
 def est_conn(dbname="production"):

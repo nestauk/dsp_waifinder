@@ -18,23 +18,12 @@ def get_run(flow_name: str) -> Run:
     except StopIteration as exc:
         raise MetaflowNotFound("Matching run not found") from exc
 
-
-def get_local_run(flow_name: str) -> Run:
-    """Gets last successful run executed with `--production`"""
-    runs = Flow(flow_name).runs()
-    try:
-        return next(filter(lambda run: run.successful, runs))
-    except StopIteration as exc:
-        raise MetaflowNotFound("Matching run not found") from exc
-
-
-def get_cb_ai_funders(
-    run: Optional[Run] = None, local: Optional[bool] = False
+def get_cb_ai_investors(
+    run: Optional[Run] = None
 ) -> DataFrame:
-    """get the funders of AI organisations
+    """get the investors of AI organisations
     Arguments:
         run: what run to get (if None it gets the lastest run)
-        local: if False will get latest production run only
     Returns:
         Columns:
             Name: Name, dtype: str, name of funder
@@ -43,13 +32,8 @@ def get_cb_ai_funders(
     """
 
     if run is None:
-        if local:
-            run = get_local_run("Crunchbase_AI")
-        else:
-            run = get_run("Crunchbase_AI")
+        run = get_run("Crunchbase_AI")
 
-    return run.data.ai_funders_df_filtered.dropna(
-        subset=["city"]
-    ).reset_index(drop=True).rename(
-            columns={"name": "Name", "domain": "Link"}, inplace=True
-        )[["Name", "Link", "city"]]
+    return run.data.ai_investors_df_filtered.dropna(
+        subset=["Longitude", "Latitude"]
+    ).reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
