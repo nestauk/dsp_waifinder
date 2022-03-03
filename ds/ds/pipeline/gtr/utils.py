@@ -1,8 +1,3 @@
-import configparser
-import os
-
-from sqlalchemy import create_engine
-
 gtr_ai_tags = [
     "Digital Signal Processing",
     "Systems engineering",
@@ -82,25 +77,37 @@ query_cb_urls = (
 )
 
 
-def est_conn(dbname="production"):
+def group_orgs(ai_org_ids_df):
 
-    SQL_DB_CREDS = os.environ.get("SQL_DB_CREDS")
-
-    config = configparser.ConfigParser()
-    try:
-        config.read(SQL_DB_CREDS)
-    except TypeError:
-        print(
-            "Try setting SQL_DB_CREDS environmental variable"
-            " to location of Nesta SQL credentials"
+    # There is some duplication in this data where orgs with the same
+    # name and lat/long coords are given 2 org IDs.
+    # Merge rows where this happens, and count up the distinct project IDs
+    return (
+        ai_org_ids_df.groupby(
+            ["Name", "Latitude", "Longitude", "country_name"], dropna=False
         )
+        .agg(
+            {
+                "ai_project_id": lambda x: x.nunique(),
+                "all_project_id": lambda x: x.nunique(),
+            }
+        )
+        .reset_index()
+    ).rename(
+        columns={
+            "ai_project_id": "n_ai_projects",
+            "all_project_id": "n_total_projects",
+        }
+    )
 
-    user = config["client"]["user"]
-    password = config["client"]["password"]
-    host = config["client"]["host"]
 
-    conn = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{dbname}")
-    return conn
+def combine_org_data(ai_org_ids_df, ai_orgs_all_proj_df):
+
+    return ai_org_ids_df.merge(ai_orgs_all_proj_df, how="left", on="id").rename(
+        columns={
+            "id": "org_id",
+        }
+    )
 
 
 def get_name_url_dict(org_names_url_df):

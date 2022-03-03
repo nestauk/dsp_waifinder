@@ -1,17 +1,29 @@
 """
 Flow to get AI data from Gateway to Research SQL database
 """
-from ds import config
-from ds.pipeline.gtr.utils import est_conn
-
 from metaflow import FlowSpec, project, step
+
+from ds import config
+from ds.utils.metaflow import est_conn
 
 
 @project(name="ai_map")
-class GtR_AI(FlowSpec):
+class GtrAI(FlowSpec):
     """
     We query the Gateway to Research database to find institutions
     which create AI research in decent proportions.
+
+    Attributes:
+        ai_orgs_grouped: A dataframe containing information about
+            the organisations which ran projects with AI tags.
+        multi_urls: A list of organisation names (in lower case) which linked
+            to multiple urls in the Crunchbase data.
+        ai_orgs_grouped_filtered: A dataframe containing containing a subset
+            of ai_orgs_grouped, filtered to only include organisations with
+            1. a total number of projects over a threshold of min_num_proj,
+            2. the proportion of AI projects over a threshold of min_ai_prop,
+            3. an address in the UK, and
+            4. Lat/Lon co-ordinates were found
     """
 
     min_ai_prop = config["flows"]["gtr"]["min_ai_prop"]
@@ -35,6 +47,8 @@ class GtR_AI(FlowSpec):
             query_ai_topics,
             query_ai_orgs,
             query_ai_orgs_all_topics,
+            combine_org_data,
+            group_orgs,
         )
         import pandas as pd
 
@@ -59,43 +73,9 @@ class GtR_AI(FlowSpec):
             query_ai_orgs_all_topics, conn, params={"l": tuple(ai_org_ids)}
         )
 
-        # Combine
-        ai_org_ids_df = ai_org_ids_df.merge(
-            ai_orgs_all_proj_df,
-            how="left",
-            on="id"
-            )
-        ai_org_ids_df.rename(
-            columns={
-                "id": "org_id",
-            },
-            inplace=True,
-        )
+        ai_org_ids_df = combine_org_data(ai_org_ids_df, ai_orgs_all_proj_df)
 
-        # There is some duplication in this data where orgs with the same
-        # name and lat/long coords are given 2 org IDs.
-        # Merge rows where this happens, and count up the distinct project IDs
-        self.ai_orgs_grouped = (
-            ai_org_ids_df.groupby(
-                ["Name", "Latitude", "Longitude", "country_name"],
-                dropna=False
-            )
-            .agg(
-                {
-                    "ai_project_id": lambda x: x.nunique(),
-                    "all_project_id": lambda x: x.nunique(),
-                }
-            )
-            .reset_index()
-        )
-
-        self.ai_orgs_grouped.rename(
-            columns={
-                "ai_project_id": "n_ai_projects",
-                "all_project_id": "n_total_projects",
-            },
-            inplace=True,
-        )
+        self.ai_orgs_grouped = group_orgs(ai_org_ids_df)
 
         self.next(self.find_urls)
 
@@ -114,17 +94,15 @@ class GtR_AI(FlowSpec):
 
         org_names = self.ai_orgs_grouped["Name"].unique().tolist()
         org_names_url_df = pd.read_sql(
-            query_cb_urls,
-            conn,
-            params={"l": tuple([s.lower() for s in org_names])}
+            query_cb_urls, conn, params={"l": tuple([s.lower() for s in org_names])}
         )
 
         # Create dictionary for merging
         name2url_dict, self.multi_urls = get_name_url_dict(org_names_url_df)
 
         # Merge on lower case name
-        self.ai_orgs_grouped["Link"] = self.ai_orgs_grouped["Name"].apply(
-            lambda x: name2url_dict.get(x.lower())
+        self.ai_orgs_grouped["Link"] = (
+            self.ai_orgs_grouped["Name"].str.lower().map(name2url_dict)
         )
 
         self.next(self.filter_ai_orgs)
@@ -139,11 +117,15 @@ class GtR_AI(FlowSpec):
             self.ai_orgs_grouped["n_ai_projects"]
             / self.ai_orgs_grouped["n_total_projects"]
         )
-        self.ai_orgs_grouped_filtered = self.ai_orgs_grouped[
-            (self.ai_orgs_grouped["prop_ai_projects"] >= self.min_ai_prop)
-            & (self.ai_orgs_grouped["n_total_projects"] >= self.min_num_proj)
-            & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
-        ].reset_index(drop=True)
+        self.ai_orgs_grouped_filtered = (
+            self.ai_orgs_grouped[
+                (self.ai_orgs_grouped["prop_ai_projects"] >= self.min_ai_prop)
+                & (self.ai_orgs_grouped["n_total_projects"] >= self.min_num_proj)
+                & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
+            ]
+            .dropna(subset=["Longitude", "Latitude"])
+            .reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
+        )
 
         self.next(self.end)
 
@@ -154,4 +136,4 @@ class GtR_AI(FlowSpec):
 
 
 if __name__ == "__main__":
-    GtR_AI()
+    GtrAI()
