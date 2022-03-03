@@ -54,20 +54,28 @@ query_ai_topics = (
 )
 
 query_ai_orgs = (
-    "SELECT gtr_organisations.name, gtr_organisations.id, count(gtr_link_table.project_id), "
-    "gtr_organisations_locations.latitude, gtr_organisations_locations.longitude "
+    "SELECT gtr_organisations.name as 'Name', gtr_organisations.id, gtr_link_table.project_id as ai_project_id, "
+    "gtr_organisations_locations.latitude as 'Latitude', gtr_organisations_locations.longitude as 'Longitude', "
+    "gtr_organisations_locations.country_name "
     "FROM gtr_link_table "
     "INNER JOIN gtr_organisations ON gtr_organisations.id=gtr_link_table.id "
     "INNER JOIN gtr_organisations_locations ON gtr_organisations.id=gtr_organisations_locations.id "
     "WHERE gtr_link_table.project_id IN %(l)s "
-    "GROUP BY gtr_organisations.id"
 )
 
 query_ai_orgs_all_topics = (
-    "SELECT gtr_link_table.id, count(gtr_link_table.project_id) "
+    "SELECT gtr_link_table.id, gtr_link_table.project_id as all_project_id "
     "FROM gtr_link_table "
     "WHERE gtr_link_table.id IN  %(l)s"
-    "GROUP BY gtr_link_table.id"
+)
+
+
+# Some of the urls can be found in the crunchbase data
+query_cb_urls = (
+    "SELECT crunchbase_organizations.homepage_url as Link, crunchbase_organizations.name, "
+    "crunchbase_organizations.country "
+    "FROM crunchbase_organizations "
+    "WHERE LOWER(crunchbase_organizations.name) IN %(l)s"
 )
 
 
@@ -89,3 +97,32 @@ def est_conn(dbname="production"):
 
     conn = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{dbname}")
     return conn
+
+
+def get_name_url_dict(org_names_url_df):
+    # Get a dictionary of {org_name: url}
+    # There can be multiple rows of urls for each organisation
+    # if there are multiple: choose first url from the UK
+    # if no UK, chose first url from US
+    # otherwise just use first one
+
+    org_names_url_df = org_names_url_df[org_names_url_df["Link"].notnull()]
+    org_names_url_df["Name lower"] = org_names_url_df["name"].str.lower()
+
+    lower_name2url_dict = {}
+    multi_urls = []
+    for name, url_info in org_names_url_df.groupby("Name lower"):
+        if len(url_info) > 1:
+            multi_urls.append(name)
+            uk_url_info = url_info[url_info["country"] == "United Kingdom"]
+            if len(uk_url_info) != 0:
+                lower_name2url_dict[name] = uk_url_info.iloc[0]["Link"]
+            else:
+                us_url_info = url_info[url_info["country"] == "United States"]
+                if len(us_url_info) != 0:
+                    lower_name2url_dict[name] = us_url_info.iloc[0]["Link"]
+                else:
+                    lower_name2url_dict[name] = url_info.iloc[0]["Link"]
+        else:
+            lower_name2url_dict[name] = url_info.iloc[0]["Link"]
+    return lower_name2url_dict, multi_urls

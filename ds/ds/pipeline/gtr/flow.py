@@ -44,38 +44,79 @@ class GtR_AI(FlowSpec):
         ai_project_ids_df = pd.read_sql(
             query_ai_topics, conn, params={"l": tuple(gtr_ai_tags)}
         )
-        ai_project_ids = list(ai_project_ids_df["project_id"].unique())
+        ai_project_ids = ai_project_ids_df["project_id"].unique().tolist()
 
         # Get all the organisational info for the AI projects
         ai_org_ids_df = pd.read_sql(
             query_ai_orgs, conn, params={"l": tuple(ai_project_ids)}
         )
-        ai_org_ids = ai_org_ids_df["id"].tolist()
-        ai_org_ids_df.rename(
-            columns={"count(gtr_link_table.project_id)": "n_ai_projects"}, inplace=True
-        )
+
+        ai_org_ids = ai_org_ids_df["id"].unique().tolist()
 
         # Get all project counts for the AI organisations
         ai_orgs_all_proj_df = pd.read_sql(
             query_ai_orgs_all_topics, conn, params={"l": tuple(ai_org_ids)}
         )
-        ai_orgs_all_proj_df.rename(
-            columns={"count(gtr_link_table.project_id)": "n_total_projects"},
+
+        # Combine
+        ai_org_ids_df = ai_org_ids_df.merge(ai_orgs_all_proj_df, how="left", on="id")
+        ai_org_ids_df.rename(
+            columns={
+                "id": "org_id",
+            },
             inplace=True,
         )
 
-        # Combine
-        self.ai_org_ids_df = ai_org_ids_df.merge(
-            ai_orgs_all_proj_df, how="left", on="id"
+        # There is some duplication in this data where orgs with the same
+        # name and lat/long coords are given 2 org IDs.
+        # Merge rows where this happens, and count up the distinct project IDs
+        self.ai_org_ids_grouped_df = (
+            ai_org_ids_df.groupby(
+                ["Name", "Latitude", "Longitude", "country_name"], dropna=False
+            )
+            .agg(
+                {
+                    "ai_project_id": lambda x: x.nunique(),
+                    "all_project_id": lambda x: x.nunique(),
+                }
+            )
+            .reset_index()
         )
-        self.ai_org_ids_df.rename(
+
+        self.ai_org_ids_grouped_df.rename(
             columns={
-                "name": "Name",
-                "id": "org_id",
-                "latitude": "Latitude",
-                "longitude": "Longitude",
+                "ai_project_id": "n_ai_projects",
+                "all_project_id": "n_total_projects",
             },
             inplace=True,
+        )
+
+        self.next(self.find_urls)
+
+    @step
+    def find_urls(self):
+        """
+        The GtR dataset doesn't include organisational urls
+        but some of these can be found elsewhere
+        """
+
+        from ds.pipeline.gtr.utils import query_cb_urls, get_name_url_dict
+        import pandas as pd
+
+        # Establish the connection to the SQL database
+        conn = est_conn()
+
+        org_names = self.ai_org_ids_grouped_df["Name"].unique().tolist()
+        org_names_url_df = pd.read_sql(
+            query_cb_urls, conn, params={"l": tuple([s.lower() for s in org_names])}
+        )
+
+        # Create dictionary for merging
+        lower_name2url_dict, self.multi_urls = get_name_url_dict(org_names_url_df)
+
+        # Merge on lower case name
+        self.ai_org_ids_grouped_df["Link"] = self.ai_org_ids_grouped_df["Name"].apply(
+            lambda x: lower_name2url_dict.get(x.lower())
         )
 
         self.next(self.filter_ai_orgs)
@@ -83,14 +124,17 @@ class GtR_AI(FlowSpec):
     @step
     def filter_ai_orgs(self):
         """Filter the AI orgs to just include those with high
-        proportions of AI tags, and with a high total number of projects"""
+        proportions of AI tags, and with a high total number of projects,
+        and based in the UK"""
 
-        self.ai_org_ids_df["prop_ai_projects"] = (
-            self.ai_org_ids_df["n_ai_projects"] / self.ai_org_ids_df["n_total_projects"]
+        self.ai_org_ids_grouped_df["prop_ai_projects"] = (
+            self.ai_org_ids_grouped_df["n_ai_projects"]
+            / self.ai_org_ids_grouped_df["n_total_projects"]
         )
-        self.ai_org_ids_df_filtered = self.ai_org_ids_df[
-            (self.ai_org_ids_df["prop_ai_projects"] >= self.min_ai_prop)
-            & (self.ai_org_ids_df["n_total_projects"] >= self.min_num_proj)
+        self.ai_org_ids_df_filtered = self.ai_org_ids_grouped_df[
+            (self.ai_org_ids_grouped_df["prop_ai_projects"] >= self.min_ai_prop)
+            & (self.ai_org_ids_grouped_df["n_total_projects"] >= self.min_num_proj)
+            & (self.ai_org_ids_grouped_df["country_name"] == "United Kingdom")
         ].reset_index(drop=True)
 
         self.next(self.end)
