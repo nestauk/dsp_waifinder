@@ -1,8 +1,6 @@
 import configparser
 import os
 
-import pymysql
-
 from sqlalchemy import create_engine
 
 gtr_ai_tags = [
@@ -54,12 +52,16 @@ query_ai_topics = (
 )
 
 query_ai_orgs = (
-    "SELECT gtr_organisations.name as 'Name', gtr_organisations.id, gtr_link_table.project_id as ai_project_id, "
-    "gtr_organisations_locations.latitude as 'Latitude', gtr_organisations_locations.longitude as 'Longitude', "
+    "SELECT gtr_organisations.name as 'Name', "
+    "gtr_organisations.id, "
+    "gtr_link_table.project_id as ai_project_id, "
+    "gtr_organisations_locations.latitude as 'Latitude', "
+    "gtr_organisations_locations.longitude as 'Longitude', "
     "gtr_organisations_locations.country_name "
     "FROM gtr_link_table "
     "INNER JOIN gtr_organisations ON gtr_organisations.id=gtr_link_table.id "
-    "INNER JOIN gtr_organisations_locations ON gtr_organisations.id=gtr_organisations_locations.id "
+    "INNER JOIN gtr_organisations_locations "
+    "ON gtr_organisations.id=gtr_organisations_locations.id "
     "WHERE gtr_link_table.project_id IN %(l)s "
 )
 
@@ -72,7 +74,8 @@ query_ai_orgs_all_topics = (
 
 # Some of the urls can be found in the crunchbase data
 query_cb_urls = (
-    "SELECT crunchbase_organizations.homepage_url as Link, crunchbase_organizations.name, "
+    "SELECT crunchbase_organizations.homepage_url as Link, "
+    "crunchbase_organizations.name, "
     "crunchbase_organizations.country "
     "FROM crunchbase_organizations "
     "WHERE LOWER(crunchbase_organizations.name) IN %(l)s"
@@ -88,7 +91,8 @@ def est_conn(dbname="production"):
         config.read(SQL_DB_CREDS)
     except TypeError:
         print(
-            "Try setting SQL_DB_CREDS environmental variable to location of Nesta SQL credentials"
+            "Try setting SQL_DB_CREDS environmental variable"
+            " to location of Nesta SQL credentials"
         )
 
     user = config["client"]["user"]

@@ -34,6 +34,6 @@ def get_gtr_ai_orgs(run: Optional[Run] = None) -> DataFrame:
     if run is None:
         run = get_run("GtR_AI")
 
-    return run.data.ai_org_ids_df_filtered.dropna(
+    return run.data.ai_orgs_grouped_filtered.dropna(
         subset=["Longitude", "Latitude"]
     ).reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]

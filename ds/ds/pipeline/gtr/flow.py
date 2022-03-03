@@ -25,9 +25,10 @@ class GtR_AI(FlowSpec):
 
     @step
     def get_ai_orgs_data(self):
-        """Get data for the research organisations which have AI tagged projects.
-        This includes:
-        Org name, id, lat/lon, number of AI projects, total number of projects"""
+        """Get data for the research organisations
+        which have AI tagged projects. This includes:
+        Org name, id, lat/lon, number of AI projects,
+        total number of projects"""
 
         from ds.pipeline.gtr.utils import (
             gtr_ai_tags,
@@ -59,7 +60,11 @@ class GtR_AI(FlowSpec):
         )
 
         # Combine
-        ai_org_ids_df = ai_org_ids_df.merge(ai_orgs_all_proj_df, how="left", on="id")
+        ai_org_ids_df = ai_org_ids_df.merge(
+            ai_orgs_all_proj_df,
+            how="left",
+            on="id"
+            )
         ai_org_ids_df.rename(
             columns={
                 "id": "org_id",
@@ -70,9 +75,10 @@ class GtR_AI(FlowSpec):
         # There is some duplication in this data where orgs with the same
         # name and lat/long coords are given 2 org IDs.
         # Merge rows where this happens, and count up the distinct project IDs
-        self.ai_org_ids_grouped_df = (
+        self.ai_orgs_grouped = (
             ai_org_ids_df.groupby(
-                ["Name", "Latitude", "Longitude", "country_name"], dropna=False
+                ["Name", "Latitude", "Longitude", "country_name"],
+                dropna=False
             )
             .agg(
                 {
@@ -83,7 +89,7 @@ class GtR_AI(FlowSpec):
             .reset_index()
         )
 
-        self.ai_org_ids_grouped_df.rename(
+        self.ai_orgs_grouped.rename(
             columns={
                 "ai_project_id": "n_ai_projects",
                 "all_project_id": "n_total_projects",
@@ -106,17 +112,19 @@ class GtR_AI(FlowSpec):
         # Establish the connection to the SQL database
         conn = est_conn()
 
-        org_names = self.ai_org_ids_grouped_df["Name"].unique().tolist()
+        org_names = self.ai_orgs_grouped["Name"].unique().tolist()
         org_names_url_df = pd.read_sql(
-            query_cb_urls, conn, params={"l": tuple([s.lower() for s in org_names])}
+            query_cb_urls,
+            conn,
+            params={"l": tuple([s.lower() for s in org_names])}
         )
 
         # Create dictionary for merging
-        lower_name2url_dict, self.multi_urls = get_name_url_dict(org_names_url_df)
+        name2url_dict, self.multi_urls = get_name_url_dict(org_names_url_df)
 
         # Merge on lower case name
-        self.ai_org_ids_grouped_df["Link"] = self.ai_org_ids_grouped_df["Name"].apply(
-            lambda x: lower_name2url_dict.get(x.lower())
+        self.ai_orgs_grouped["Link"] = self.ai_orgs_grouped["Name"].apply(
+            lambda x: name2url_dict.get(x.lower())
         )
 
         self.next(self.filter_ai_orgs)
@@ -127,14 +135,14 @@ class GtR_AI(FlowSpec):
         proportions of AI tags, and with a high total number of projects,
         and based in the UK"""
 
-        self.ai_org_ids_grouped_df["prop_ai_projects"] = (
-            self.ai_org_ids_grouped_df["n_ai_projects"]
-            / self.ai_org_ids_grouped_df["n_total_projects"]
+        self.ai_orgs_grouped["prop_ai_projects"] = (
+            self.ai_orgs_grouped["n_ai_projects"]
+            / self.ai_orgs_grouped["n_total_projects"]
         )
-        self.ai_org_ids_df_filtered = self.ai_org_ids_grouped_df[
-            (self.ai_org_ids_grouped_df["prop_ai_projects"] >= self.min_ai_prop)
-            & (self.ai_org_ids_grouped_df["n_total_projects"] >= self.min_num_proj)
-            & (self.ai_org_ids_grouped_df["country_name"] == "United Kingdom")
+        self.ai_orgs_grouped_filtered = self.ai_orgs_grouped[
+            (self.ai_orgs_grouped["prop_ai_projects"] >= self.min_ai_prop)
+            & (self.ai_orgs_grouped["n_total_projects"] >= self.min_num_proj)
+            & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
         ].reset_index(drop=True)
 
         self.next(self.end)
