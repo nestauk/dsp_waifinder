@@ -5,7 +5,6 @@ from typing import Optional
 
 from metaflow import Flow, Run
 from metaflow.exception import MetaflowNotFound
-
 from pandas import DataFrame
 
 
@@ -24,7 +23,7 @@ def get_gtr_ai_orgs(run: Optional[Run] = None) -> DataFrame:
     Arguments:
         run: what run to get (if None it gets the lastest run)
     Returns:
-        Columns:
+        Dataframe with columns:
             Name: Name, dtype: str, name of organisation
             Name: Link, str, url for the organisation (not all present)
             Name: Latitude, dtype: float, latitude of organisation
@@ -32,8 +31,6 @@ def get_gtr_ai_orgs(run: Optional[Run] = None) -> DataFrame:
     """
 
     if run is None:
-        run = get_run("GtR_AI")
+        run = get_run("GtrAI")
 
-    return run.data.ai_orgs_grouped_filtered.dropna(
-        subset=["Longitude", "Latitude"]
-    ).reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
+    return run.data.ai_orgs_grouped_filtered
