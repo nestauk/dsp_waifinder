@@ -1,3 +1,7 @@
+import random
+
+import pandas as pd
+
 gtr_ai_tags = [
     "Digital Signal Processing",
     "Systems engineering",
@@ -47,11 +51,11 @@ query_ai_topics = (
 )
 
 query_ai_orgs = (
-    "SELECT gtr_organisations.name as 'Name', "
+    "SELECT gtr_organisations.name Name, "
     "gtr_organisations.id, "
-    "gtr_link_table.project_id as ai_project_id, "
-    "gtr_organisations_locations.latitude as 'Latitude', "
-    "gtr_organisations_locations.longitude as 'Longitude', "
+    "gtr_link_table.project_id ai_project_id, "
+    "gtr_organisations_locations.latitude Latitude, "
+    "gtr_organisations_locations.longitude Longitude, "
     "gtr_organisations_locations.country_name "
     "FROM gtr_link_table "
     "INNER JOIN gtr_organisations ON gtr_organisations.id=gtr_link_table.id "
@@ -61,7 +65,7 @@ query_ai_orgs = (
 )
 
 query_ai_orgs_all_topics = (
-    "SELECT gtr_link_table.id, gtr_link_table.project_id as all_project_id "
+    "SELECT gtr_link_table.id, gtr_link_table.project_id all_project_id "
     "FROM gtr_link_table "
     "WHERE gtr_link_table.id IN  %(l)s"
 )
@@ -69,7 +73,7 @@ query_ai_orgs_all_topics = (
 
 # Some of the urls can be found in the crunchbase data
 query_cb_urls = (
-    "SELECT crunchbase_organizations.homepage_url as Link, "
+    "SELECT crunchbase_organizations.homepage_url Link, "
     "crunchbase_organizations.name, "
     "crunchbase_organizations.country "
     "FROM crunchbase_organizations "
@@ -103,37 +107,52 @@ def group_orgs(ai_org_ids_df):
 
 def combine_org_data(ai_org_ids_df, ai_orgs_all_proj_df):
 
-    return ai_org_ids_df.merge(ai_orgs_all_proj_df, how="left", on="id").rename(
-        columns={
-            "id": "org_id",
-        }
-    )
+    return ai_org_ids_df.merge(
+        ai_orgs_all_proj_df, how="left", on="id"
+        ).rename(
+            columns={
+                "id": "org_id",
+            }
+            )
 
 
 def get_name_url_dict(org_names_url_df):
     # Get a dictionary of {org_name: url}
     # There can be multiple rows of urls for each organisation
-    # if there are multiple: choose first url from the UK
-    # if no UK, chose first url from US
-    # otherwise just use first one
+    # if there are multiple: choose UK url
+    # if no UK, chose url from US
+    # otherwise just use random one
 
     org_names_url_df = org_names_url_df[org_names_url_df["Link"].notnull()]
     org_names_url_df["Name lower"] = org_names_url_df["name"].str.lower()
+    org_names_url_df.drop_duplicates(
+        ["Link", "Name lower", "country"],
+        inplace=True
+        )
+
+    def create_link_dict(x):
+        return {c: l for c, l in zip(x["country"], x["Link"])}
+
+    # For each company name, create a dict of all the
+    # country and link information given for it
+    full_url_dict = (
+        org_names_url_df.groupby("Name lower")
+        .apply(create_link_dict)
+        .reset_index(name="link_dict")
+    )
+    full_url_dict = pd.Series(
+        full_url_dict["link_dict"].values, index=full_url_dict["Name lower"]
+    ).to_dict()
 
     lower_name2url_dict = {}
-    multi_urls = []
-    for name, url_info in org_names_url_df.groupby("Name lower"):
-        if len(url_info) > 1:
-            multi_urls.append(name)
-            uk_url_info = url_info[url_info["country"] == "United Kingdom"]
-            if len(uk_url_info) != 0:
-                lower_name2url_dict[name] = uk_url_info.iloc[0]["Link"]
-            else:
-                us_url_info = url_info[url_info["country"] == "United States"]
-                if len(us_url_info) != 0:
-                    lower_name2url_dict[name] = us_url_info.iloc[0]["Link"]
-                else:
-                    lower_name2url_dict[name] = url_info.iloc[0]["Link"]
+    for name, link_info in full_url_dict.items():
+        if link_info.get("United Kingdom"):
+            country = "United Kingdom"
+        elif link_info.get("United States"):
+            country = "United States"
         else:
-            lower_name2url_dict[name] = url_info.iloc[0]["Link"]
-    return lower_name2url_dict, multi_urls
+            random.seed(42)
+            country = random.choice(list(link_info))
+        lower_name2url_dict[name] = link_info[country]
+
+    return lower_name2url_dict, full_url_dict

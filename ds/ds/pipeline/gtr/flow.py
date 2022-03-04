@@ -1,10 +1,10 @@
 """
 Flow to get AI data from Gateway to Research SQL database
 """
-from metaflow import FlowSpec, project, step
-
 from ds import config
 from ds.utils.metaflow import est_conn
+
+from metaflow import FlowSpec, project, step
 
 
 @project(name="ai_map")
@@ -16,8 +16,9 @@ class GtrAI(FlowSpec):
     Attributes:
         ai_orgs_grouped: A dataframe containing information about
             the organisations which ran projects with AI tags.
-        multi_urls: A list of organisation names (in lower case) which linked
-            to multiple urls in the Crunchbase data.
+        full_url_dict: A dictionary of all the organisation names
+            (in lower case) and the full data on countries and links given
+            for them in the Crunchbase data.
         ai_orgs_grouped_filtered: A dataframe containing containing a subset
             of ai_orgs_grouped, filtered to only include organisations with
             1. a total number of projects over a threshold of min_num_proj,
@@ -93,16 +94,22 @@ class GtrAI(FlowSpec):
         conn = est_conn()
 
         org_names = self.ai_orgs_grouped["Name"].unique().tolist()
-        org_names_url_df = pd.read_sql(
-            query_cb_urls, conn, params={"l": tuple([s.lower() for s in org_names])}
+        self.org_names_url_df = pd.read_sql(
+            query_cb_urls,
+            conn,
+            params={"l": tuple([s.lower() for s in org_names])}
         )
 
         # Create dictionary for merging
-        name2url_dict, self.multi_urls = get_name_url_dict(org_names_url_df)
+        name2url_dict, self.full_url_dict = get_name_url_dict(
+            self.org_names_url_df
+            )
 
         # Merge on lower case name
         self.ai_orgs_grouped["Link"] = (
-            self.ai_orgs_grouped["Name"].str.lower().map(name2url_dict)
+            self.ai_orgs_grouped["Name"].str.lower().map(
+                name2url_dict
+                )
         )
 
         self.next(self.filter_ai_orgs)
