@@ -18,22 +18,19 @@ def get_run(flow_name: str) -> Run:
     except StopIteration as exc:
         raise MetaflowNotFound("Matching run not found") from exc
 
-def get_cb_ai_investors(
-    run: Optional[Run] = None
-) -> DataFrame:
+
+def get_cb_ai_investors(run: Optional[Run] = None) -> DataFrame:
     """get the investors of AI organisations
     Arguments:
         run: what run to get (if None it gets the lastest run)
     Returns:
-        Columns:
+        DataFrame with columns:
             Name: Name, dtype: str, name of funder
             Name: Latitude, dtype: float, latitude of organisation
             Name: Longitude, dtype: float, longitude of organisation
     """
 
     if run is None:
-        run = get_run("Crunchbase_AI")
+        run = get_run("CrunchbaseAI")
 
-    return run.data.ai_investors_df_filtered.dropna(
-        subset=["Longitude", "Latitude"]
-    ).reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
+    return run.data.ai_investors_df_filtered

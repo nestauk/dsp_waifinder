@@ -4,4 +4,4 @@ flows:
     min_num_proj: 10
   crunchbase:
     min_ai_prop: 0.1
-    min_num_proj: 10
+    min_num_org_funded: 10

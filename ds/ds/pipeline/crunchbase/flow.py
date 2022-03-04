@@ -1,24 +1,38 @@
 """
 Flow to get AI data from Crunchbase SQL database
 
-Need who funded companies that are tagged with AI topics
-Shouldn't include persoanl venture capitals
+Find the investors which have funded organisations
+that are tagged with AI topics.
 """
 from ds import config
-from ds.pipeline.crunchbase.utils import est_conn
+from ds.utils.metaflow import est_conn
 
 from metaflow import FlowSpec, project, step
 
 
 @project(name="ai_map")
-class Crunchbase_AI(FlowSpec):
+class CrunchbaseAI(FlowSpec):
     """
-    We query the Crunchbase database to find companies 
-    which create AI research in decent proportions.
+    We query the Crunchbase database to find the investors of organisations
+    which are tagged with AI topics. We output the investors that invest in
+    AI in decent proportions.
+
+    Attributes:
+        ai_investors_df: Dataframe of investor information for all
+            investors of AI tagged organisations (investor_id is unique).
+        ai_investors_df_filtered: A dataframe containing containing a subset
+            of ai_investors_df, filtered to only include investors with
+            1. the total number of organisations funded is over 
+                a threshold of min_num_org_funded,
+            2. the proportion of AI organisations funded is over 
+                a threshold of min_ai_prop,
+            3. an address in the UK,
+            4. the investor type is not "person" (it is "organization")
+            4. Lat/Lon co-ordinates were found
     """
 
     min_ai_prop = config["flows"]["crunchbase"]["min_ai_prop"]
-    min_num_proj = config["flows"]["crunchbase"]["min_num_proj"]
+    min_num_org_funded = config["flows"]["crunchbase"]["min_num_org_funded"]
 
     @step
     def start(self):
@@ -28,15 +42,18 @@ class Crunchbase_AI(FlowSpec):
 
     @step
     def get_ai_orgs_data(self):
-        """Get data for the companies which have AI tags.
+        """Get data for the investors of organisations which have AI tags.
         This includes:
-        Org name, id, lat/lon, number of AI projects, total number of projects"""
+        Investor name, id, location data,
+        number of AI projects, total number of projects
+        """
 
         from ds.pipeline.crunchbase.utils import (
             cb_ai_tags,
             query_ai_topics,
             query_ai_investors,
             query_ai_investors_all_topics,
+            get_ai_investors,
         )
         import pandas as pd
 
@@ -44,38 +61,30 @@ class Crunchbase_AI(FlowSpec):
         conn = est_conn()
 
         # Get all the organisation ids for AI topic-tagged organisations
-        self.ai_orgs_ids_df = pd.read_sql(
+        ai_orgs_ids_df = pd.read_sql(
             query_ai_topics, conn, params={"l": tuple(cb_ai_tags)}
         )
-        ai_org_ids = list(self.ai_orgs_ids_df["org_id"].unique())
+        ai_org_ids = ai_orgs_ids_df["org_id"].unique().tolist()
 
         # Find the investors of these organisations
-        # SQL can't deal with querying them all in one go
-        # so need to query in chunks and then merge
-        # Each funder may have funded multiple AI orgs
-        chunk_size = 100000
-        self.ai_investors_df = pd.DataFrame()
-        for i in range(0, len(ai_org_ids), chunk_size):
-            ai_org_ids_chunk = ai_org_ids[i:i + chunk_size]
-            ai_investors_df_chunk = pd.read_sql(
-                query_ai_investors, conn, params={"l": tuple(ai_org_ids_chunk)}
+        # Each investor may have funded multiple AI orgs
+        self.ai_investors_df = get_ai_investors(
+            ai_org_ids,
+            query_ai_investors,
+            conn
             )
-            self.ai_investors_df = pd.concat([self.ai_investors_df, ai_investors_df_chunk])
-        
-        # Sum up the AI org counts for each of the investors (from each chunk)
-        df_funder_columns = self.ai_investors_df.columns.tolist()
-        df_funder_columns.remove('num_ai_orgs_funded')
-        self.ai_investors_df = self.ai_investors_df.groupby(df_funder_columns)['num_ai_orgs_funded'].sum().reset_index()
-        ai_funder_ids = list(self.ai_investors_df['investor_id'].unique())
-        
+        ai_investor_ids = self.ai_investors_df["investor_id"].unique().tolist()
+
         # Get all project counts for the AI organisations
-        self.ai_investors_all_orgs_df = pd.read_sql(
-            query_ai_investors_all_topics, conn, params={"l": tuple(ai_funder_ids)}
+        ai_investors_all_orgs_df = pd.read_sql(
+            query_ai_investors_all_topics,
+            conn,
+            params={"l": tuple(ai_investor_ids)}
         )
 
-        # Combine
+        # Combine investor information
         self.ai_investors_df = self.ai_investors_df.merge(
-            self.ai_investors_all_orgs_df, how="left", on="investor_id"
+            ai_investors_all_orgs_df, how="left", on="investor_id"
         )
 
         self.next(self.append_lon_lat)
@@ -92,38 +101,42 @@ class Crunchbase_AI(FlowSpec):
 
         conn = est_conn()
 
-        unique_cities = [c for c in self.ai_investors_df['location_id'].unique() if c]
+        cities = self.ai_investors_df["location_id"].dropna().unique().tolist()
 
-        self.city_lat_lon = pd.read_sql(
-            query_city, conn, params={"l": tuple(unique_cities)}
+        city_lat_lon = pd.read_sql(
+            query_city, conn, params={"l": tuple(cities)}
         )
-        self.ai_investors_df_latlon = self.ai_investors_df.merge(
-            self.city_lat_lon,
-            how='left',
-            left_on='location_id',
-            right_on='id'
-            )
+        self.ai_investors_df = self.ai_investors_df.merge(
+            city_lat_lon, how="left", left_on="location_id", right_on="id"
+        )
 
         self.next(self.filter_ai_investors)
 
     @step
     def filter_ai_investors(self):
         """Filter the investors of AI organisations to just include:
-        - those with high proportions of funding to AI organisations in whole portfolio, 
+        - those with high proportions of funding to AI organisations in
+            whole portfolio,
         - with a high total number of organisations in portfolio
         - UK address
         - No personal investors (the two options are organization or person)
+        - Has lat/long co-ordinates
         """
 
-        self.ai_investors_df_latlon["prop_ai_orgs_funded"] = (
-            self.ai_investors_df_latlon["num_ai_orgs_funded"] / self.ai_investors_df_latlon["num_orgs_funded"]
+        self.ai_investors_df["prop_ai_orgs_funded"] = (
+            self.ai_investors_df["num_ai_orgs_funded"]
+            / self.ai_investors_df["num_orgs_funded"]
         )
-        self.ai_investors_df_filtered = self.ai_investors_df_latlon[
-            (self.ai_investors_df_latlon["prop_ai_orgs_funded"] >= self.min_ai_prop)
-            & (self.ai_investors_df_latlon["num_ai_orgs_funded"] >= self.min_num_proj)
-            & (self.ai_investors_df_latlon['country'] == 'United Kingdom')
-            & (self.ai_investors_df_latlon['type'] != 'person')
-        ].reset_index(drop=True)
+        self.ai_investors_df_filtered = (
+            self.ai_investors_df[
+                (self.ai_investors_df["prop_ai_orgs_funded"] >= self.min_ai_prop)
+                & (self.ai_investors_df["num_ai_orgs_funded"] >= self.min_num_org_funded)
+                & (self.ai_investors_df["country"] == "United Kingdom")
+                & (self.ai_investors_df["type"] != "person")
+            ]
+            .dropna(subset=["Longitude", "Latitude"])
+            .reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
+        )
 
         self.next(self.end)
 
@@ -134,4 +147,4 @@ class Crunchbase_AI(FlowSpec):
 
 
 if __name__ == "__main__":
-    Crunchbase_AI()
+    CrunchbaseAI()

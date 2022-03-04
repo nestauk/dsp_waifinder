@@ -1,9 +1,4 @@
-import configparser
-import os
-
-import pymysql
-
-from sqlalchemy import create_engine
+import pandas as pd
 
 cb_ai_tags = [
     "3d printing",
@@ -114,55 +109,72 @@ cb_ai_tags = [
 
 # There can be muliple categories for each org
 query_ai_topics = (
-    "SELECT crunchbase_organizations_categories.organization_id as 'org_id' "
+    "SELECT crunchbase_organizations_categories.organization_id org_id "
     "FROM crunchbase_organizations_categories "
     "WHERE crunchbase_organizations_categories.category_name IN %(l)s "
 )
 
 query_ai_investors = (
-    "SELECT count(crunchbase_funding_rounds.org_id) as 'num_ai_orgs_funded', "
-    "crunchbase_investors.id as 'investor_id', crunchbase_investors.type, crunchbase_investors.investor_types, "
-    "crunchbase_investors.name as 'Name', crunchbase_investors.investment_count, "
+    "SELECT count(crunchbase_funding_rounds.org_id) num_ai_orgs_funded, "
+    "crunchbase_investors.id investor_id, crunchbase_investors.type, "
+    "crunchbase_investors.investor_types, "
+    "crunchbase_investors.name Name, crunchbase_investors.investment_count, "
     "crunchbase_investors.country, crunchbase_investors.location_id, "
-    "crunchbase_investors.domain as 'Link' "
+    "crunchbase_investors.domain Link "
     "FROM crunchbase_funding_rounds "
-    "INNER JOIN crunchbase_investments ON crunchbase_funding_rounds.id = crunchbase_investments.funding_round_id "
-    "INNER JOIN crunchbase_investors ON crunchbase_investments.investor_id = crunchbase_investors.id "
+    "INNER JOIN crunchbase_investments "
+    "ON crunchbase_funding_rounds.id=crunchbase_investments.funding_round_id "
+    "INNER JOIN crunchbase_investors "
+    "ON crunchbase_investments.investor_id = crunchbase_investors.id "
     "WHERE crunchbase_funding_rounds.org_id IN %(l)s "
     "GROUP BY crunchbase_investors.id"
 )
 
 
 query_ai_investors_all_topics = (
-    "SELECT crunchbase_investments.investor_id as 'investor_id', "
-    "count(crunchbase_funding_rounds.org_id) as 'num_orgs_funded' "
+    "SELECT crunchbase_investments.investor_id investor_id, "
+    "count(crunchbase_funding_rounds.org_id) num_orgs_funded "
     "FROM crunchbase_funding_rounds "
-    "INNER JOIN crunchbase_investments ON crunchbase_investments.funding_round_id = crunchbase_funding_rounds.id "
+    "INNER JOIN crunchbase_investments "
+    "ON crunchbase_investments.funding_round_id=crunchbase_funding_rounds.id "
     "WHERE crunchbase_investments.investor_id IN  %(l)s "
     "GROUP BY crunchbase_investments.investor_id"
 )
 
 query_city = (
-    "SELECT geographic_data.id, geographic_data.latitude as 'Latitude', geographic_data.longitude as 'Longitude' "
+    "SELECT geographic_data.id, "
+    "geographic_data.latitude Latitude, geographic_data.longitude Longitude "
     "FROM geographic_data "
     "WHERE geographic_data.id IN %(l)s "
 )
 
-def est_conn(dbname="production"):
 
-    SQL_DB_CREDS = os.environ.get("SQL_DB_CREDS")
+def sql_query_chunks(id_list, sql_query, conn, chunk_size=100000):
+    """
+    SQL can have problems with querying many ids in a list
+    (for queries with 'WHERE id IN %(l)s'),
+    so can query in chunks and then merge together.
+    """
 
-    config = configparser.ConfigParser()
-    try:
-        config.read(SQL_DB_CREDS)
-    except TypeError:
-        print(
-            "Try setting SQL_DB_CREDS environmental variable to location of Nesta SQL credentials"
+    output_df = pd.DataFrame()
+    for i in range(0, len(id_list), chunk_size):
+        id_list_chunk = id_list[i: i + chunk_size]
+        output_df_chunk = pd.read_sql(
+            sql_query, conn, params={"l": tuple(id_list_chunk)}
         )
+        output_df = pd.concat([output_df, output_df_chunk])
 
-    user = config["client"]["user"]
-    password = config["client"]["password"]
-    host = config["client"]["host"]
+    return output_df
 
-    conn = create_engine(f"mysql+pymysql://{user}:{password}@{host}/{dbname}")
-    return conn
+
+def get_ai_investors(ai_org_ids, query_ai_investors, conn):
+    ai_investors_df = sql_query_chunks(ai_org_ids, query_ai_investors, conn)
+
+    # Sum up the AI org counts for each of the investors (from each chunk)
+    df_investor_columns = ai_investors_df.columns.tolist()
+    df_investor_columns.remove("num_ai_orgs_funded")
+    return (
+        ai_investors_df.groupby(df_investor_columns)["num_ai_orgs_funded"]
+        .sum()
+        .reset_index()
+    )
