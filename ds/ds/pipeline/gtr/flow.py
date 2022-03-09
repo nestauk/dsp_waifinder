@@ -60,14 +60,14 @@ class GtrAI(FlowSpec):
         ai_project_ids_df = pd.read_sql(
             query_ai_topics, conn, params={"l": tuple(gtr_ai_tags)}
         )
-        ai_project_ids = ai_project_ids_df["project_id"].unique().tolist()
+        ai_project_ids = ai_project_ids_df["project_id"].unique()
 
         # Get all the organisational info for the AI projects
         ai_org_ids_df = pd.read_sql(
             query_ai_orgs, conn, params={"l": tuple(ai_project_ids)}
         )
 
-        ai_org_ids = ai_org_ids_df["id"].unique().tolist()
+        ai_org_ids = ai_org_ids_df["id"].unique()
 
         # Get all project counts for the AI organisations
         ai_orgs_all_proj_df = pd.read_sql(
@@ -93,7 +93,7 @@ class GtrAI(FlowSpec):
         # Establish the connection to the SQL database
         conn = est_conn()
 
-        org_names = self.ai_orgs_grouped["Name"].unique().tolist()
+        org_names = self.ai_orgs_grouped["Name"].unique()
         self.org_names_url_df = pd.read_sql(
             query_cb_urls,
             conn,
@@ -107,9 +107,9 @@ class GtrAI(FlowSpec):
 
         # Merge on lower case name
         self.ai_orgs_grouped["Link"] = (
-            self.ai_orgs_grouped["Name"].str.lower().map(
-                name2url_dict
-                )
+            self.ai_orgs_grouped["Name"]
+            .str.lower()
+            .map(name2url_dict)
         )
 
         self.next(self.filter_ai_orgs)

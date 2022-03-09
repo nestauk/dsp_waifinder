@@ -82,10 +82,10 @@ query_cb_urls = (
 
 
 def group_orgs(ai_org_ids_df):
-
-    # There is some duplication in this data where orgs with the same
-    # name and lat/long coords are given 2 org IDs.
-    # Merge rows where this happens, and count up the distinct project IDs
+    """There is some duplication in this data where orgs with the same
+    name and lat/long coords are given 2 org IDs.
+    Merge rows where this happens, and count up the distinct project IDs
+    """
     return (
         ai_org_ids_df.groupby(
             ["Name", "Latitude", "Longitude", "country_name"], dropna=False
@@ -105,10 +105,12 @@ def group_orgs(ai_org_ids_df):
     )
 
 
-def combine_org_data(ai_org_ids_df, ai_orgs_all_proj_df):
-
-    return ai_org_ids_df.merge(
-        ai_orgs_all_proj_df, how="left", on="id"
+def combine_org_data(df_1, df_2):
+    """Merge two dataframes on 'id' column and rename
+    this column to org_id
+    """
+    return df_1.merge(
+        df_2, how="left", on="id"
         ).rename(
             columns={
                 "id": "org_id",
@@ -117,11 +119,23 @@ def combine_org_data(ai_org_ids_df, ai_orgs_all_proj_df):
 
 
 def get_name_url_dict(org_names_url_df):
-    # Get a dictionary of {org_name: url}
-    # There can be multiple rows of urls for each organisation
-    # if there are multiple: choose UK url
-    # if no UK, chose url from US
-    # otherwise just use random one
+    """Get URL information for each organisation
+
+    Parameters:
+        org_names_url_df (DataFrame): Organisation names,
+            organisation country and URL. There can be multiple rows
+            of different urls/countries for each organisation.
+    Returns:
+        lower_name2url_dict (dict): dictionary of one URL
+            for each organisation in the form {organisation name: url, }.
+            If there are multiple URLs found for an organisation
+            then choose URL where the organisation country=United Kingdom,
+            and if this isn't available chose URL when country=United States,
+            otherwise just use random URL.
+        full_url_dict (dict): A nested dict of all the URL/country
+            information for each organisation in the form
+            {organisation name: {country: url, country: url,},}
+    """
 
     org_names_url_df = org_names_url_df[org_names_url_df["Link"].notnull()]
     org_names_url_df["Name lower"] = org_names_url_df["name"].str.lower()
