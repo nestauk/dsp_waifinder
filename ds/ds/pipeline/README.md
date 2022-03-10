@@ -12,4 +12,4 @@ Run `python ds/pipeline/gtr/flow.py --datastore=s3 --production run` to get the 
 
 ## 2. Crunchbase dataset
 
-Run `python ds/ds/pipeline/crunchbase/flow.py --datastore=s3 --production run` to get the Crunchbase AI dataset.
+Run `python ds/pipeline/crunchbase/flow.py --datastore=s3 --production run` to get the Crunchbase AI dataset.
