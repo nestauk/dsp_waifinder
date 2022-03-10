@@ -44,6 +44,14 @@ gtr_output["University/RTO"] = [1] * len(gtr_output)
 
 
 # %%
+# Add the 11 sector options
+for i in range(1, 12):
+    gtr_output[f"Sector {i}"] = [0] * len(gtr_output)
+
+# %%
+gtr_output
+
+# %%
 gtr_output.to_csv("../../outputs/data/gtr.csv", index=False)
 
 # %%
