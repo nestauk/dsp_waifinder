@@ -22,9 +22,9 @@ class CrunchbaseAI(FlowSpec):
             investors of AI tagged organisations (investor_id is unique).
         ai_investors_df_filtered: A dataframe containing containing a subset
             of ai_investors_df, filtered to only include investors with
-            1. the total number of organisations funded is over 
+            1. the total number of organisations funded is over
                 a threshold of min_num_org_funded,
-            2. the proportion of AI organisations funded is over 
+            2. the proportion of AI organisations funded is over
                 a threshold of min_ai_prop,
             3. an address in the UK,
             4. the investor type is not "person" (it is "organization")
@@ -64,22 +64,16 @@ class CrunchbaseAI(FlowSpec):
         ai_orgs_ids_df = pd.read_sql(
             query_ai_topics, conn, params={"l": tuple(cb_ai_tags)}
         )
-        ai_org_ids = ai_orgs_ids_df["org_id"].unique().tolist()
+        ai_org_ids = ai_orgs_ids_df["org_id"].unique()
 
         # Find the investors of these organisations
         # Each investor may have funded multiple AI orgs
-        self.ai_investors_df = get_ai_investors(
-            ai_org_ids,
-            query_ai_investors,
-            conn
-            )
-        ai_investor_ids = self.ai_investors_df["investor_id"].unique().tolist()
+        self.ai_investors_df = get_ai_investors(ai_org_ids, query_ai_investors, conn)
+        ai_investor_ids = self.ai_investors_df["investor_id"].unique()
 
         # Get all project counts for the AI organisations
         ai_investors_all_orgs_df = pd.read_sql(
-            query_ai_investors_all_topics,
-            conn,
-            params={"l": tuple(ai_investor_ids)}
+            query_ai_investors_all_topics, conn, params={"l": tuple(ai_investor_ids)}
         )
 
         # Combine investor information
@@ -101,11 +95,9 @@ class CrunchbaseAI(FlowSpec):
 
         conn = est_conn()
 
-        cities = self.ai_investors_df["location_id"].dropna().unique().tolist()
+        cities = self.ai_investors_df["location_id"].dropna().unique()
 
-        city_lat_lon = pd.read_sql(
-            query_city, conn, params={"l": tuple(cities)}
-        )
+        city_lat_lon = pd.read_sql(query_city, conn, params={"l": tuple(cities)})
         self.ai_investors_df = self.ai_investors_df.merge(
             city_lat_lon, how="left", left_on="location_id", right_on="id"
         )
@@ -130,7 +122,10 @@ class CrunchbaseAI(FlowSpec):
         self.ai_investors_df_filtered = (
             self.ai_investors_df[
                 (self.ai_investors_df["prop_ai_orgs_funded"] >= self.min_ai_prop)
-                & (self.ai_investors_df["num_ai_orgs_funded"] >= self.min_num_org_funded)
+                & (
+                    self.ai_investors_df["num_ai_orgs_funded"]
+                    >= self.min_num_org_funded
+                )
                 & (self.ai_investors_df["country"] == "United Kingdom")
                 & (self.ai_investors_df["type"] != "person")
             ]
