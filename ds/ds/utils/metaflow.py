@@ -1,8 +1,10 @@
 import configparser
 import os
+from contextlib import contextmanager
 from functools import lru_cache
+from typing import Generator, Optional
 
-from metaflow import Flow, Run
+from metaflow import Flow, Run, get_namespace, namespace
 from metaflow.exception import MetaflowNotFound
 
 from sqlalchemy import create_engine
@@ -16,6 +18,15 @@ def get_run(flow_name: str) -> Run:
         return next(filter(lambda run: run.successful, runs))
     except StopIteration as exc:
         raise MetaflowNotFound("Matching run not found") from exc
+
+
+@contextmanager
+def namespace_context(ns: Optional[str]) -> Generator[Optional[str], None, None]:
+    """Context manager to temporarily enter metaflow namespace `ns`."""
+    old_ns = get_namespace()
+    namespace(ns)
+    yield ns
+    namespace(old_ns)
 
 
 def est_conn(dbname="production"):

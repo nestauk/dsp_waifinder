@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from ds.utils.metaflow import get_run
+from ds.utils.metaflow import get_run, namespace_context
 
 from metaflow import Run
 
@@ -22,6 +22,7 @@ def get_gtr_ai_orgs(run: Optional[Run] = None) -> DataFrame:
     """
 
     if run is None:
-        run = get_run("GtrAI")
+        with namespace_context(None):
+            run = get_run("GtrAI")
 
     return run.data.ai_orgs_grouped_filtered
