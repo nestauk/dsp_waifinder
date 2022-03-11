@@ -49,6 +49,6 @@ for i in range(1, 12):
     cb_output[f"Sector {i}"] = [0] * len(cb_output)
 
 # %%
-cb_output.to_csv("../../outputs/data/crunchbase.csv", index=False)
+cb_output.to_csv("../../outputs/data/crunchbase.tsv", index=False, sep="\t")
 
 # %%
