@@ -1,14 +1,8 @@
 {
-  "name": "ui-kit-demo",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
-    "prepare": "svelte-kit sync",
-    "test": "playwright test",
-    "lint": "eslint --ignore-path .gitignore ."
+  "dependencies": {
+    "@fontsource/fira-mono": "^4.5.0",
+    "@lukeed/uuid": "^2.0.0",
+    "cookie": "^0.4.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.19.1",
@@ -18,10 +12,14 @@
     "eslint-plugin-svelte3": "^3.2.1",
     "svelte": "^3.46.0"
   },
-  "type": "module",
-  "dependencies": {
-    "@fontsource/fira-mono": "^4.5.0",
-    "@lukeed/uuid": "^2.0.0",
-    "cookie": "^0.4.1"
-  }
+  "scripts": {
+    "build": "svelte-kit build",
+    "dev": "svelte-kit dev",
+    "lint": "eslint --ignore-path .gitignore .",
+    "package": "svelte-kit package",
+    "prepare": "svelte-kit sync",
+    "preview": "svelte-kit preview",
+    "test": "playwright test"
+  },
+  "type": "module"
 }
