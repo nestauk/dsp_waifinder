@@ -1,3 +1,4 @@
 [build]
   base = "/uikit"
   command = "npm run build"
+  publish = "build"
