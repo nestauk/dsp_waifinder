@@ -33,7 +33,6 @@ cb_output = cb_output[["Name", "Link", "Latitude", "Longitude"]]
 # %%
 # Make sure all columns are in correct form
 
-cb_output.fillna("Not given", inplace=True)  # Not all Links are given
 cb_output["Name"] = cb_output["Name"].astype(str)
 cb_output["Link"] = cb_output["Link"].astype(str)
 cb_output["Latitude"] = cb_output["Latitude"].astype(float)
@@ -41,16 +40,16 @@ cb_output["Longitude"] = cb_output["Longitude"].astype(float)
 
 # %%
 # Add the 4 extra headers
-cb_output["Company"] = [0] * len(cb_output)
+cb_output["Company"] = [None] * len(cb_output)
 cb_output["Funder"] = [1] * len(cb_output)
-cb_output["Incubator/accelerator"] = [0] * len(cb_output)
-cb_output["University/RTO"] = [0] * len(cb_output)
+cb_output["Incubator / accelerator"] = [None] * len(cb_output)
+cb_output["University / RTO"] = [None] * len(cb_output)
 
 
 # %%
 # Add the 11 sector options
 for i in range(1, 12):
-    cb_output[f"Sector {i}"] = [0] * len(cb_output)
+    cb_output[f"Sector {i}"] = [None] * len(cb_output)
 
 # %%
 cb_output.to_csv("../../outputs/data/crunchbase.tsv", index=False, sep="\t")
