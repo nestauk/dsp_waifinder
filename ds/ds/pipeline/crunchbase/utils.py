@@ -156,13 +156,14 @@ def sql_query_chunks(id_list, sql_query, conn, chunk_size=100000):
     so can query in chunks and then merge together.
     """
 
-    output_df = pd.DataFrame()
+    output_chunks = []
     for i in range(0, len(id_list), chunk_size):
         id_list_chunk = id_list[i : i + chunk_size]
         output_df_chunk = pd.read_sql(
             sql_query, conn, params={"l": tuple(id_list_chunk)}
         )
-        output_df = pd.concat([output_df, output_df_chunk])
+        output_chunks.append(output_df_chunk)
+    output_df = pd.concat(output_chunks)
 
     return output_df
 
@@ -170,7 +171,7 @@ def sql_query_chunks(id_list, sql_query, conn, chunk_size=100000):
 def get_ai_investors(ai_org_ids, query_ai_investors, conn):
     """
     Get the investors of AI organisations from a list of organisation IDs and
-    sum up how many AI organisations each of them have funded.
+    find how many AI organisations each of them have funded.
     This needs to be queried in chunks and then combined together, where
     the AI org counts for each of the investors need to be summed for
     each chunk of results.
