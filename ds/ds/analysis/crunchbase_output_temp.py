@@ -44,7 +44,8 @@ cb_output["Longitude"] = cb_output["Longitude"].astype(float)
 # Add noise to the data since in some cities the lat/long are the same
 # Only do this for duplicated lat/long
 
-duplicate_lat_lon = (cb_output[["Latitude", "Longitude"]].value_counts() > 1).index
+duplicate_lat_lon = cb_output[["Latitude", "Longitude"]].value_counts() > 1
+duplicate_lat_lon = duplicate_lat_lon[duplicate_lat_lon].index
 
 
 def overlap_flag(row):
@@ -70,6 +71,7 @@ def add_lon_noise(row):
         return row["Longitude"]
 
 
+# %%
 cb_output["Latitude"] = cb_output.apply(add_lat_noise, axis=1)
 cb_output["Longitude"] = cb_output.apply(add_lon_noise, axis=1)
 
