@@ -23,6 +23,8 @@
 # %%
 from ds.getters.crunchbase import get_cb_ai_investors
 
+import random
+
 # %%
 cb_output = get_cb_ai_investors()
 
@@ -39,6 +41,39 @@ cb_output["Latitude"] = cb_output["Latitude"].astype(float)
 cb_output["Longitude"] = cb_output["Longitude"].astype(float)
 
 # %%
+# Add noise to the data since in some cities the lat/long are the same
+# Only do this for duplicated lat/long
+
+duplicate_lat_lon = (cb_output[["Latitude", "Longitude"]].value_counts() > 1).index
+
+
+def overlap_flag(row):
+    return (row["Latitude"], row["Longitude"]) in duplicate_lat_lon
+
+
+cb_output["Overlap flag"] = cb_output[["Latitude", "Longitude"]].apply(
+    overlap_flag, axis=1
+)
+
+
+def add_lat_noise(row):
+    if row["Overlap flag"]:
+        return row["Latitude"] + random.uniform(-0.05, 0.05)
+    else:
+        return row["Latitude"]
+
+
+def add_lon_noise(row):
+    if row["Overlap flag"]:
+        return row["Longitude"] + random.uniform(-0.07, 0.07)
+    else:
+        return row["Longitude"]
+
+
+cb_output["Latitude"] = cb_output.apply(add_lat_noise, axis=1)
+cb_output["Longitude"] = cb_output.apply(add_lon_noise, axis=1)
+
+# %%
 # Add the 4 extra headers
 cb_output["Company"] = [None] * len(cb_output)
 cb_output["Funder"] = [1] * len(cb_output)
@@ -50,6 +85,9 @@ cb_output["University / RTO"] = [None] * len(cb_output)
 # Add the 11 sector options
 for i in range(1, 12):
     cb_output[f"Sector {i}"] = [None] * len(cb_output)
+
+# %%
+cb_output.drop(columns="Overlap flag", inplace=True)
 
 # %%
 cb_output.to_csv("../../outputs/data/crunchbase.tsv", index=False, sep="\t")
