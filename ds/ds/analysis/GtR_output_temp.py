@@ -33,24 +33,22 @@ gtr_output = gtr_output[["Name", "Link", "Latitude", "Longitude"]]
 # %%
 # Make sure all columns are in correct form
 
-gtr_output.fillna("Not given", inplace=True)  # Not all Links are given
 gtr_output["Name"] = gtr_output["Name"].astype(str)
-gtr_output["Link"] = gtr_output["Link"].astype(str)
 gtr_output["Latitude"] = gtr_output["Latitude"].astype(float)
 gtr_output["Longitude"] = gtr_output["Longitude"].astype(float)
 
 # %%
 # Add the 4 extra headers
-gtr_output["Company"] = [0] * len(gtr_output)
-gtr_output["Funder"] = [0] * len(gtr_output)
-gtr_output["Incubator / accelerator"] = [0] * len(gtr_output)
+gtr_output["Company"] = [None] * len(gtr_output)
+gtr_output["Funder"] = [None] * len(gtr_output)
+gtr_output["Incubator / accelerator"] = [None] * len(gtr_output)
 gtr_output["University / RTO"] = [1] * len(gtr_output)
 
 
 # %%
 # Add the 11 sector options
 for i in range(1, 12):
-    gtr_output[f"Sector {i}"] = [0] * len(gtr_output)
+    gtr_output[f"Sector {i}"] = [None] * len(gtr_output)
 
 # %%
 gtr_output.to_csv("../../outputs/data/gtr.tsv", index=False, sep="\t")
