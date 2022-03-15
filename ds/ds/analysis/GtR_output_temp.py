@@ -39,8 +39,8 @@ gtr_output["Longitude"] = gtr_output["Longitude"].astype(float)
 # Add the 4 extra headers
 gtr_output["Company"] = [0] * len(gtr_output)
 gtr_output["Funder"] = [0] * len(gtr_output)
-gtr_output["Incubator/accelerator"] = [0] * len(gtr_output)
-gtr_output["University/RTO"] = [1] * len(gtr_output)
+gtr_output["Incubator / accelerator"] = [0] * len(gtr_output)
+gtr_output["University / RTO"] = [1] * len(gtr_output)
 
 
 # %%
@@ -50,5 +50,3 @@ for i in range(1, 12):
 
 # %%
 gtr_output.to_csv("../../outputs/data/gtr.tsv", index=False, sep="\t")
-
-# %%
