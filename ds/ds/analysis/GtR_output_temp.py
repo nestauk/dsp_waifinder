@@ -27,6 +27,10 @@ from ds.getters.gtr import get_gtr_ai_orgs
 gtr_output = get_gtr_ai_orgs()
 
 # %%
+# The column order is important
+gtr_output = gtr_output[["Name", "Link", "Latitude", "Longitude"]]
+
+# %%
 # Make sure all columns are in correct form
 
 gtr_output.fillna("Not given", inplace=True)  # Not all Links are given
@@ -50,3 +54,5 @@ for i in range(1, 12):
 
 # %%
 gtr_output.to_csv("../../outputs/data/gtr.tsv", index=False, sep="\t")
+
+# %%
