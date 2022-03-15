@@ -27,6 +27,10 @@ from ds.getters.crunchbase import get_cb_ai_investors
 cb_output = get_cb_ai_investors()
 
 # %%
+# The column order is important
+cb_output = cb_output[["Name", "Link", "Latitude", "Longitude"]]
+
+# %%
 # Make sure all columns are in correct form
 
 cb_output.fillna("Not given", inplace=True)  # Not all Links are given
