@@ -1,0 +1,103 @@
+<script>
+	import LinkButton from '@svizzle/ui/src/LinkButton.svelte';
+	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
+
+	import {contactEmail,toolName} from 'app/config';
+	import theme from 'app/theme';
+	// import {zipUrl} from 'app/utils/assets';
+	const zipUrl = '';
+
+	const lighthouseUrl = 'https://developers.google.com/web/tools/lighthouse';
+	const openDyslexicUrl = 'https://opendyslexic.org/';
+	const osxMouseURL = 'https://support.apple.com/guide/mac-help/change-cursor-preferences-for-accessibility-mchl5bb12e1e/mac';
+	const pa11yUrl = 'https://pa11y.org/'
+	const screenReadersUrl = 'https://en.wikipedia.org/wiki/List_of_screen_readers';
+	const wcag21Url = 'https://www.w3.org/TR/WCAG21/';
+	const windowsMouseURL = 'https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b';
+</script>
+
+# Accessibility
+
+Ensuring greater access to technologies by meeting the needs of people with
+disabilities lays the foundation for inclusive work cultures that empower
+individuals and teams to thrive.
+
+Therefore, {toolName} is committed to making its best effort towards continually
+improving the accessibility of all the information provided in this website.
+
+## Support
+
+We follow the recommendations of the [WCAG 2.1 guidelines]({wcag21Url}). Also:
+	* Ensure that the choices of color provide sufficient contrast for
+	  comfortable reading.
+	* Offer a selection of typefaces for improved legibility, including one
+	  widely believed to improve comprehension among people with
+	  [Dyslexia]({openDyslexicUrl}).
+	* Wherever it's possible, enhance the semantic meta information of each page
+	  to improve the reach of tools such as screen readers.
+	* We regularly measure our site using a variety of methods, such as
+	  third-party automated and manual audits across a range of different
+	  browsers and devices. You can review some of those results in the
+	  "Quality audits" section below.
+
+## WCAG compliance rating
+
+According to automated testing using the 
+[Pa11y accessibility testing tool]({pa11yUrl}), no accessibility issues were
+detected and this website is reported to have a WCAG 2.0 AAA compliance level.
+This website also passes the accessibility audits checked by 
+[Google's Lighthouse tool]({lighthouseUrl}).
+
+## Limitations
+
+Although we continually revise the website for proper support, we recognize that
+some pages may present occasional accessibility problems. Also, just as
+technology improves and standards evolve, our work is also never done and we
+continually strive to achieve the highest levels of compliance with the
+requirements and recommendations.
+
+Meeting all of the WCAG criteria requires evaluating some of them manually. Due
+to time constraints we might not have been able to test all of the
+recommendations listed in the section "Additional items to manually check" in
+the "Accessibility" part of each audit below, in the "Quality audits" section of
+this page. In particular at this time ARIA and keyboard navigation are only
+partially supported.
+
+While we aim to make the information provided as accessible as possible, this
+website presents data mostly as interactive charts which at the moment do not
+also render a text alternative, so those aren't accessible by screen readers.
+However, the data is available for [download in CSV format]({zipUrl}).
+
+## Feedback
+
+If you see any errors or have other suggestions on how we can further improve
+the accessibility of our site, please contact us at 
+[{contactEmail}](mailto:{contactEmail}).
+
+## Resources
+
+### Using a screen reader
+
+If you need a screen reader and have not installed one already, you may choose
+one from this [comprehensive list of screen readers]({screenReadersUrl}).
+
+### How to customize the mouse pointer
+
+You can customize a computer mouse pointer in several ways. For example, you can
+slow down the speed of the mouse pointer for easier handling. You can also
+change its appearance so that it contrasts more with the screen content.
+
+<ResponsiveFlex>
+	<LinkButton
+		href={windowsMouseURL}
+		text='Windows'
+		theme={{backgroundColor: theme.colorLink}}
+		type='external'
+	/>
+	<LinkButton
+		href={osxMouseURL}
+		text='OS X'
+		theme={{backgroundColor: theme.colorLink}}
+		type='external'
+	/>
+</ResponsiveFlex>
