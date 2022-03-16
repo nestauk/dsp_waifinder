@@ -23,6 +23,6 @@ def get_cb_ai_investors(run: Optional[Run] = None) -> DataFrame:
 
     if run is None:
         with namespace_context(None):
-            run = get_run("CrunchbaseAI")
-
-    return run.data.ai_investors_df_filtered
+            return get_run("CrunchbaseAI").data.ai_investors_df_filtered
+    else:
+        return run.data.ai_investors_df_filtered
