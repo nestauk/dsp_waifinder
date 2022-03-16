@@ -23,6 +23,6 @@ def get_gtr_ai_orgs(run: Optional[Run] = None) -> DataFrame:
 
     if run is None:
         with namespace_context(None):
-            run = get_run("GtrAI")
-
-    return run.data.ai_orgs_grouped_filtered
+            return get_run("GtrAI").data.ai_orgs_grouped_filtered
+    else:
+        return run.data.ai_orgs_grouped_filtered
