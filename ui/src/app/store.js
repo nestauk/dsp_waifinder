@@ -29,8 +29,8 @@ const initialState = {
         subtitle: "An interactive map showing UK AI industry entities. Data provided by Glass.ai with supplemental data from Gateway to Research and Crunchbase.",
         copyright: "Nesta (c) 2022",
     },
-    companiesURL: "../data/entities.tsv",
-    allCompanies: [],
+    dataURL: "../data/entities.tsv",
+    allItems: [],
 
     // don't start with empty selection at startup the map fits to companies bounds
     // TODO provide default bounds (UK bounds)
@@ -42,7 +42,7 @@ const initialState = {
     sectors: SECTORS,
 };
 
-class DronesStore extends Store {
+class AppStore extends Store {
     constructor () {
         super(initialState);
 
@@ -54,18 +54,18 @@ class DronesStore extends Store {
 
         this.compute(
             "companies", [
-                "allCompanies",
+                "allItems",
                 "entityTypes",
                 "isCompanySelected",
                 "sectors"
             ], (
-                allCompanies,
+                allItems,
                 entityTypes,
                 isCompanySelected,
                 sectors
             ) =>
                 filterCompanies(
-                    allCompanies,
+                    allItems,
                     entityTypes,
                     isCompanySelected,
                     sectors
@@ -129,18 +129,18 @@ class DronesStore extends Store {
     }
 
     fetch () {
-        const {companiesURL} = this.get();
+        const {dataURL} = this.get();
 
         if (Modernizr.fetch) {
-            d3.tsv(companiesURL, parseDatapoint).then(allCompanies => {
-                this.set({allCompanies});
+            d3.tsv(dataURL, parseDatapoint).then(allItems => {
+                this.set({allItems});
             });
         } else {
             // IE...
-            d3.tsv_request(companiesURL, (error, allRawCompanies) => {
+            d3.tsv_request(dataURL, (error, allRawCompanies) => {
                 if (error) throw error;
 
-                this.set({allCompanies: _.map(allRawCompanies, parseDatapoint)});
+                this.set({allItems: _.map(allRawCompanies, parseDatapoint)});
             });
         }
     }
@@ -151,7 +151,7 @@ class DronesStore extends Store {
     }
 
     debugSameLocation () {
-        const {allCompanies} = this.get();
+        const {allItems} = this.get();
 
         const makeWithSameLocation = _.pipe(
             _.groupBy(_.pipe(
@@ -160,7 +160,7 @@ class DronesStore extends Store {
             )),
             _.skipIf(hasIterableLength1)
         );
-        const withSameLocation = makeWithSameLocation(allCompanies);
+        const withSameLocation = makeWithSameLocation(allItems);
 
         if (isObjNotEmpty(withSameLocation)) {
             const loggable = _.mapValuesWith(
@@ -170,7 +170,7 @@ class DronesStore extends Store {
                         "Latitude",
                         "Name",
                         "Link",
-                        "UK postcode"
+                        "UK postcode" // FIXME seems unneeded
                     ])
                 )
             );
@@ -179,9 +179,9 @@ class DronesStore extends Store {
     }
 
     debugEmptyNames () {
-        const {allCompanies} = this.get();
+        const {allItems} = this.get();
 
-        const withEmptyName = _.filter(allCompanies, _.pipe(
+        const withEmptyName = _.filter(allItems, _.pipe(
             _.getKey("Name"),
             isIterableEmpty
         ));
@@ -192,4 +192,4 @@ class DronesStore extends Store {
     }
 }
 
-export default DronesStore;
+export default AppStore;

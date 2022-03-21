@@ -79,18 +79,20 @@ const makePropertiesGetters = _.pipe(
     _.apply(_.collect)
 );
 
-const isNotCompany = _.not(_.is(ENTITY_TYPE_COMPANY));
+// const isNotCompany = _.not(_.is(ENTITY_TYPE_COMPANY));
 
 export const filterCompanies = (
-    allCompanies,
+    allItems,
     entityTypes,
-    isCompanySelected,
-    sectors
+    // isCompanySelected, // FIXME unused for now
+    // sectors // FIXME for now we don't use sectors
 ) => {
-    const nonTechDevEntityTypes = _.filter(
+    /* FIXME for now we don't use sectors
+    const nonCompanyEntityTypes = _.filter(
         entityTypes,
         isNotCompany
     );
+
     const areSomeSectorsTrue = _.pipe(
         makePropertiesGetters(sectors),
         areSomeTrue
@@ -99,15 +101,21 @@ export const filterCompanies = (
     const condition = isCompanySelected
         ? _.anyOf(
             _.pipe(
-                makePropertiesGetters(nonTechDevEntityTypes),
+                makePropertiesGetters(nonCompanyEntityTypes),
                 areSomeTrue
             ),
-            areSomeSectorsTrue
+            // areSomeSectorsTrue // FIXME for now we don't use sectors
         )
         : _.pipe(
             makePropertiesGetters(entityTypes),
             areSomeTrue
         );
+    */
 
-    return _.filter(allCompanies, condition)
+    const condition = _.pipe(
+      makePropertiesGetters(entityTypes),
+      areSomeTrue
+    );
+
+    return _.filter(allItems, condition)
 }
