@@ -37,7 +37,7 @@
 	"name": "dap_uk_ai_map_ui",
 	"scripts": {
 		"newdir": "rm -rf build && mkdir build",
-		"devbuild": "npm run newdir && gulp build",
+		"build": "npm run newdir && gulp build",
 		"prodbuild": "npm run newdir && gulp build --production",
 		"dev": "npm run newdir && gulp",
 		"prod": "npm run newdir && gulp --production",

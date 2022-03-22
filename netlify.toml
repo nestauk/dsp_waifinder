@@ -1,5 +1,0 @@
-[build]
-  base = "/uinext"
-  publish = "/__sapper__/export/"
-  command = "npm run export"
-  environment = { NODE_VERSION = "16.3.0" }
