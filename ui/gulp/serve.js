@@ -24,7 +24,7 @@ gulp.task("serve", done => {
         middleware: [
             log,
             // {
-            //     route: "/embedded/bundle.js",
+            //     route: "/bundle.js",
             //     handle: log
             // }, {
             //     route: "/fullscreen/bundle.js",
@@ -38,15 +38,15 @@ gulp.task("serve", done => {
             "build/fullscreen/bundle.css",
             "build/fullscreen/bundle.js",
             "build/fullscreen/index.html",
-            "build/embedded/bundle.css",
-            "build/embedded/bundle.js",
-            "build/embedded/index.html",
+            "build/bundle.css",
+            "build/bundle.js",
+            "build/index.html",
         ],
         ignore: [
             "build/fullscreen/bundle.css.map",
             "build/fullscreen/bundle.js.map",
-            "build/embedded/bundle.css.map",
-            "build/embedded/bundle.js.map",
+            "build/bundle.css.map",
+            "build/bundle.js.map",
         ],
 
         logPrefix: `${pkg.name}`
