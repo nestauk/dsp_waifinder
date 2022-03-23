@@ -1,7 +1,7 @@
 import App from "./components/App.html";
-import Store from "./store.js";
+import AppStore from "./store.js";
 
-const store = new Store();
+const store = new AppStore();
 
 const app = new App({
     target: document.body,

@@ -1,0 +1,82 @@
+<script>
+	import {_screen}
+		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+</script>
+
+## What the accessibility menu does
+
+You can use the menu to change two groups of features.
+
+### Text features
+
+You can change:
+	* the font (in particular we provide a font specific to help people with
+	Dyslexia),
+	* the font size,
+	* the line height (distance between lines of text in a paragraph),
+	* the letter spacing (distance between letters in a word),
+	* the word spacing (distance between words).
+
+### Color features
+
+You can:
+	*	invert all the colors in the app,
+	* select a color vision deficiency: this will remap all the colors in the
+	  app to compensate for a diminished ability to see certain colors,
+	* edit the hue of all the colors in the app,
+	* edit the saturation of all the colors in the app (by editing their level
+	  of grey),
+	* edit the brightness of all the colors in the app,
+	* edit the contrast of all the colors in the app.
+
+## How to use the menu
+
+### How to toggle the menu on/off
+
+To show or hide the menu, you need to click the accessibility icon in the
+top-right corner of the app.
+
+### Where to find the menu
+
+{#if $_screen?.sizes.medium}
+The menu should appear at the center of the screen sligthly toward the bottom.
+
+{:else}
+The menu should appear below the navigation header, near the thumb.
+
+{/if}
+
+### How to navigate the menu
+
+The menu is composed of three sections:
+	* the main area, in the center, shows the controls to manipulate a certain
+	  feature,
+	* on the right, you have two buttons to navigate to the previous or next
+	  feature,
+	* on the left, you have two buttons to reset all the features of a
+	  particular group (text or color).
+
+### Editing features
+
+#### List of values
+
+When you have a list of options, you might get presented with a series of radio
+buttons. For small screens, the list of radio buttons will be just two buttons:
+	* for numeric values, these will be a plus and a minus button
+	* otherwise, these will be two left/right arrows that navigate to the
+	  previous/next option, respectively.
+
+For example, you can choose multiple font sizes.
+
+#### Pair of values
+
+When you have only two opposite options you get presented with a switch.
+
+For example, you can invert all colors of the app, or not.
+
+#### Range of values
+
+When the feature you are editing is defined by a numerical range, you can select
+any value in between the range extent using a slider.
+
+For example, you can change the saturation gradually, from no change to grey.

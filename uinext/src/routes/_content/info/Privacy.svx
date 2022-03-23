@@ -1,0 +1,15 @@
+## Cookies and data privacy policy
+
+Cookies are files saved on your phone, tablet or computer when you visit a
+websiteee.
+
+We only use essential cookies on this website:
+
+* the tool itself does not collect any personal data.
+* the feedback form is using 
+  [Google Forms](https://www.google.com/forms/about/),
+  which installs cookies in your browser.
+
+By submitting data with Google Forms you accept the
+[Terms of Service](https://policies.google.com/terms) and the
+[Data Privacy Policy of Google Inc](https://policies.google.com/privacy).

@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>{$copy.title} ({withNestaFooter ? "fullscreen" : "embed"})</title>
+    <title>{$copy.title} {withNestaFooter ? "(fullscreen)" : ""}</title>
     <link rel="stylesheet" type="text/css" href="../css/main.b449f74b658d.css">
     <link rel="stylesheet" type="text/css" href="../css/ionicons.min.css">
 </svelte:head>
@@ -13,7 +13,7 @@
         />
     </header>
     <main>
-    {#if isIterableNotEmpty($allCompanies)}
+    {#if isIterableNotEmpty($allItems)}
     <div class="map">
         <MapPies
             {accessToken}
@@ -43,6 +43,7 @@
             title="Entity types"
             active={$areEntityTypesEditable}
         />
+        <!-- FIXME don't show sectors for now
         {#if $isCompanySelected}
         <BarChart
             color="hsla(9, 87%, 81%, 1)"
@@ -55,6 +56,7 @@
             active={$areEntityTypesEditable}
         />
         {/if}
+        -->
     </div>
     {/if}
     {:else}
@@ -109,21 +111,20 @@
             }
         },
         computed: {
-            byEntitytype: ({$allCompanies, $allEntityTypes}) =>
-                makeOccurrencesKeyValueArray($allCompanies, $allEntityTypes),
+            byEntitytype: ({$allItems, $allEntityTypes}) =>
+                makeOccurrencesKeyValueArray($allItems, $allEntityTypes),
 
-            bySector: ({$allCompanies, $allSectors}) =>
-                makeOccurrencesKeyValueArray($allCompanies, $allSectors),
+            bySector: ({$allItems, $allSectors}) =>
+                makeOccurrencesKeyValueArray($allItems, $allSectors),
 
             colorScale: ({$allEntityTypes}) =>
                 d3.scaleOrdinal()
                 .domain($allEntityTypes)
                 .range([
-                    "#F15235", // red
-                    "#0FC3A8", // teal
-                    "#FAD677", // yellow
-                    "#032B2F", // dark blue
-                    "rgb(152, 78, 163)" // purple
+                    "rgb(88	120	163)", // blue (schemeTableau10)
+                    "rgb(7,212,137)", // bright green
+                    "red", // red
+                    "rgb(231,202,96)", // mustard (schemeTableau10)
                 ])
         },
 

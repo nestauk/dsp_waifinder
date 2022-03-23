@@ -24,7 +24,7 @@ const makeBuildConfig = (appConfig, isProductionBuild) => {
 
     const buildPath = withNestaFooter
         ? makeBuildSubpath("fullscreen")
-        : makeBuildSubpath("embedded");
+        : makeBuildSubpath(".");
 
     return {
         bundleOpts: {
@@ -93,7 +93,7 @@ gulp.task("rollup.fullscreen", async function (done) {
     done();
 });
 
-gulp.task("rollup.embedded", async function (done) {
+gulp.task("rollup.root", async function (done) {
     const {bundleOpts, outputOpts} = makeBuildConfig(
         {withNestaFooter: false},
         options.production
@@ -106,8 +106,8 @@ gulp.task("rollup.embedded", async function (done) {
 });
 
 gulp.task("rollup", options.fullscreen
-    ? gulp.parallel("rollup.embedded", "rollup.fullscreen")
-    : gulp.task("rollup.embedded")
+    ? gulp.parallel("rollup.root", "rollup.fullscreen")
+    : gulp.task("rollup.root")
 );
 
 gulp.task("watch.src", done => {
