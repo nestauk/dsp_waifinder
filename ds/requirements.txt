@@ -9,3 +9,5 @@ filelock
 typer
 sh
 jupyter
+sqlalchemy
+pymysql

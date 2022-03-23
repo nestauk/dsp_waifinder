@@ -7,9 +7,20 @@ This folder contains flows for joining and the analysis of the datasets.
 - Meet the data science cookiecutter [requirements](http://nestauk.github.io/ds-cookiecutter/quickstart), in brief:
   - Install: `git-crypt`, `direnv`, and `conda`
   - Have a Nesta AWS account configured with `awscli`
-- Run `make install` to configure the development environment:
-  - Setup the conda environment
-  - Configure pre-commit
+
+Run:
+
+```bash
+cd ds
+direnv allow .
+eval "$(direnv hook zsh)"
+make install
+```
+
+to configure the development environment:
+
+- Setup the conda environment
+- Configure pre-commit
 
 ## Contributor guidelines
 
