@@ -13,3 +13,7 @@ Run `python ds/pipeline/gtr/flow.py --datastore=s3 --production run` to get the 
 ## 2. Crunchbase dataset
 
 Run `python ds/pipeline/crunchbase/flow.py --datastore=s3 --production run` to get the Crunchbase AI dataset.
+
+## 3. GlassAI dataset
+
+Run `python ds/pipeline/glassai/flow.py --datastore=s3 --production run` to get the GlassAI dataset.
