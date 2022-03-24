@@ -12,17 +12,17 @@ import pandas as pd
 import numpy as np
 
 """
-	Read in the data provided from
-	(example GlassAI and find lat/lon
-	co-ordinates for each postcode.)
+    Read in the data provided from
+    (example GlassAI and find lat/lon
+    co-ordinates for each postcode.)
 
 
 
-	Attributes:
-		gtr_output: update
+    Attributes:
+        gtr_output: update
 
 
-	"""
+    """
 
 
 @project(name="ai_map")
@@ -106,11 +106,15 @@ class merge_map_datasets(FlowSpec):
                 f"error at ai_map_data['Incubator / accelerator']. {self.ai_map_data['Incubator / accelerator'].sum()} != {self.glass_output['is_incubator'].apply(lambda x: x=='Y').sum()}"
             )
 
-        self.next(self.save)
+        self.next(self.merge_names)
 
-    # @step
-    # def merge_names(self):
-    # 	pass
+    @step
+    def merge_names(self):
+        from ds.pipeline.ai_map.utils import get_merged_data
+
+        self.ai_map_data = get_merged_data(self.ai_map_data)
+
+        self.next(self.save)
 
     @step
     def save(self):
