@@ -11,3 +11,5 @@ sh
 jupyter
 sqlalchemy
 pymysql
+selenium
+webdriver_manager
