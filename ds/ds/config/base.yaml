@@ -7,5 +7,5 @@ flows:
     min_num_org_funded: 10
   glassai:
     bucket_name: "nesta-glass-ai"
-    glassai_filename: "dap_uk_ai_map/inputs/glass_ai/nesta_ai.orgs.20220318.csv"
+    glassai_filename: "dap_uk_ai_map/inputs/nesta_ai.orgs.20220314.csv"
     geoportal_url: "https://geoportal.statistics.gov.uk/datasets/national-statistics-postcode-lookup-february-2021"

@@ -61,8 +61,6 @@ class GlassAICompanies(FlowSpec):
             find_download_url,
             download_zip,
             read_nspl_data,
-            get_cleaned_postcode,
-            get_lat_long,
         )
 
         geoportal_url = config["flows"]["glassai"]["geoportal_url"]
@@ -74,13 +72,12 @@ class GlassAICompanies(FlowSpec):
             # Load main postcode lookup
             nspl_data = read_nspl_data(zipfile)
 
-        self.ai_companies_df["cleaned_postcode"] = get_cleaned_postcode(
-            self.ai_companies_df
+        self.ai_companies_df["Latitude"] = self.ai_companies_df["source_postcode"].map(
+            nspl_data["lat"]
         )
-        (
-            self.ai_companies_df["Latitude"],
-            self.ai_companies_df["Longitude"],
-        ) = get_lat_long(self.ai_companies_df, nspl_data)
+        self.ai_companies_df["Longitude"] = self.ai_companies_df["source_postcode"].map(
+            nspl_data["long"]
+        )
 
         self.next(self.format_output)
 
