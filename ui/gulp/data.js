@@ -3,14 +3,14 @@ import gulp from "gulp";
 const COMPANIES_GLOB = "../data/*";
 
 gulp.task("copy.data", done => {
-    gulp.src(COMPANIES_GLOB)
-    .pipe(gulp.dest("build/data"));
+	gulp.src(COMPANIES_GLOB)
+	.pipe(gulp.dest("build/data"));
 
-    done();
+	done();
 });
 
 gulp.task("watch.data", done => {
-    gulp.watch(COMPANIES_GLOB, gulp.series("copy.data"));
+	gulp.watch(COMPANIES_GLOB, gulp.series("copy.data"));
 
-    done();
+	done();
 });

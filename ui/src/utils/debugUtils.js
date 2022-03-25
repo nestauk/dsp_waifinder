@@ -1,7 +1,7 @@
 import _ from "lamb";
 
 export const tap = x => {
-    console.log(x);
+	console.log(x);
 
-    return x;
+	return x;
 }

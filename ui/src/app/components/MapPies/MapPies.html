@@ -1,45 +1,45 @@
 <div class="mapwrap">
-    {#if isMapboxGLSupported}
-    <Map
-        {accessToken}
-        {colorScale}
-        {getItemID}
-        {getLink}
-        {getLngLat}
-        {items}
-        {keys}
-        {styleURL}
-        {radiusMax}
-        {radiusMin}
-        {withScaleControl}
-        {withZoomControl}
-        on:enableItemsEditing="fire('enableItemsEditing')"
-    />
-    {:else}
-    <MapboxglUnsupported />
-    {/if}
+	{#if isMapboxGLSupported}
+		<Map
+			{accessToken}
+			{colorScale}
+			{getItemID}
+			{getLink}
+			{getLngLat}
+			{items}
+			{keys}
+			{styleURL}
+			{radiusMax}
+			{radiusMin}
+			{withScaleControl}
+			{withZoomControl}
+			on:enableItemsEditing="fire('enableItemsEditing')"
+		/>
+	{:else}
+		<MapboxglUnsupported />
+	{/if}
 </div>
 
 <script>
-    import mapboxgl from "mapbox-gl";
+	import mapboxgl from "mapbox-gl";
 
-    export default {
-        data () {
-            return {
-                isMapboxGLSupported: mapboxgl.supported()
-            }
-        },
+	export default {
+		data () {
+			return {
+				isMapboxGLSupported: mapboxgl.supported()
+			}
+		},
 
-        components: {
-            MapboxglUnsupported: "./MapboxglUnsupported.html",
-            Map: "./Map.html"
-        },
-    }
+		components: {
+			MapboxglUnsupported: "./MapboxglUnsupported.html",
+			Map: "./Map.html"
+		},
+	}
 </script>
 
 <style>
-    .mapwrap {
-        width: 100%;
-        height: 100%;
-    }
+	.mapwrap {
+		width: 100%;
+		height: 100%;
+	}
 </style>
