@@ -25,7 +25,7 @@ import {stringify} from "@utils/stringUtils";
 
 const initialState = {
 	copy: {
-		title: "UK AI Map",
+		title: "UK WAIfinder",
 		subtitle: "An interactive map showing UK AI industry entities. Data provided by Glass.ai with supplemental data from Gateway to Research and Crunchbase.",
 		copyright: "Nesta (c) 2022",
 	},

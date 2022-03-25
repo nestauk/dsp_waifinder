@@ -1,41 +1,66 @@
 <div class="Header">
+
+	<!-- left -->
+
 	<div class="about-logos">
-		<div class="about-logo {activeAbout === 'map' ? 'active' : ''}"
-			on:click="fire('about', {id: 'map'})"
+
+		<!-- About -->
+
+		<div
+			class="about-logo {activeInfoPanel === 'project' ? 'active' : ''}"
+			on:click="fire('toggledInfoPanel', {id: 'project'})"
 		>
-			<div class="ico">
+			<!-- <div class="label">
+				<span>About</span>
+			</div> -->
+			<Image
+				src="../images/UKRI_logo_horizontal.png"
+				alt="UKRI"
+				width="136"
+				height="40"
+			/>
+		</div>
+
+		<!-- Guide -->
+
+		<div
+			class="about-logo {activeInfoPanel === 'guide' ? 'active' : ''}"
+			on:click="fire('toggledInfoPanel', {id: 'guide'})"
+		>
+			<div class="label">
+				<span>Guide</span>
+			</div>
+			<!-- <div class="ico">
 				<Ionicon
 					name="information-circle-outline"
 					platform="ios"
 				/>
-			</div>
-			<!-- <div class="label">
-				<span>About</span>
 			</div> -->
 		</div>
-		<div class="about-logo {activeAbout === 'flying_high' ? 'active' : ''}"
-			on:click="fire('about', {id: 'flying_high'})"
+
+		<!-- Data -->
+
+		<div
+			class="about-logo {activeInfoPanel === 'data' ? 'active' : ''}"
+			on:click="fire('toggledInfoPanel', {id: 'data'})"
 		>
-			<Image
-				src="../images/flying_high.png"
-				alt="Flying High"
-				width="100"
-				height="40"
-			/>
-		</div>
-		<div class="about-logo {activeAbout === 'glass' ? 'active' : ''}"
-			on:click="fire('about', {id: 'glass'})"
-		>
-			<Image
+			<div class="label">
+				<span>Data</span>
+			</div>
+			<!-- <Image
 				src="../images/glass_ai.png"
 				alt="Glass AI"
 				width="100"
 				height="40"
-			/>
+			/> -->
 		</div>
 	</div>
-	<div class="control"
-		on:click="fire('togglemenu')"
+
+	<!-- right -->
+
+	<div
+		class="control"
+		on:click="fire('toggledMenu')"
 	>
 		<!-- <div class="label">
 			<span>{isMenuOpen ? "Hide" : "Show"} categories</span>

@@ -42,7 +42,7 @@ gulp.task("copy.nesta.css", done => {
 
 /* images */
 
-const IMAGES_GLOB = "assets/images/*";
+const IMAGES_GLOB = "assets/images/**/*";
 
 gulp.task("copy.images", done => {
 	gulp.src(IMAGES_GLOB)

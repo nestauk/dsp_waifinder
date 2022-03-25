@@ -7,10 +7,10 @@
 <div class="app">
 	<header>
 		<Header
-			{activeAbout}
+			{activeInfoPanel}
 			{isMenuOpen}
-			on:togglemenu="set({isMenuOpen: !isMenuOpen})"
-			on:about="toggleAbout(event.id)"
+			on:toggledMenu="set({isMenuOpen: !isMenuOpen})"
+			on:toggledInfoPanel="toggleInfoPanel(event.id)"
 		/>
 	</header>
 
@@ -67,7 +67,7 @@
 
 		<div class="about">
 			<div class="content">
-				<About content={activeAbout}/>
+				<About content={activeInfoPanel}/>
 			</div>
 		</div>
 	</main>
@@ -110,7 +110,7 @@
 				getLngLat,
 				getID,
 				isMenuOpen: true,
-				activeAbout: null
+				activeInfoPanel: null
 			}
 		},
 		computed: {
@@ -132,13 +132,13 @@
 		},
 
 		methods: {
-			toggleAbout (id) {
-				const {activeAbout} = this.get();
+			toggleInfoPanel (id) {
+				const {activeInfoPanel} = this.get();
 
-				if (activeAbout === id) {
-					this.set({activeAbout: null});
+				if (activeInfoPanel === id) {
+					this.set({activeInfoPanel: null});
 				} else {
-					this.set({activeAbout: id});
+					this.set({activeInfoPanel: id});
 				}
 			}
 		},

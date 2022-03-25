@@ -3,19 +3,19 @@
 </div>
 
 <script>
-	import AboutFlyingHigh from "./AboutFlyingHigh.html";
-	import AboutGlass from "./AboutGlass.html";
-	import AboutMap from "./AboutMap.html";
+	import Data from "./Data.html";
+	import Guide from "./Guide.html";
+	import Project from "./Project.html";
 
 	export default {
 		computed: {
 			Content: ({content}) => {
-				if (content === "flying_high") {
-					return AboutFlyingHigh;
-				} else if (content === "glass") {
-					return AboutGlass;
-				} else if (content === "map") {
-					return AboutMap;
+				if (content === "project") {
+					return Project;
+				} else if (content === "guide") {
+					return Guide;
+				} else if (content === "data") {
+					return Data;
 				};
 
 				return null;
