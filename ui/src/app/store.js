@@ -19,7 +19,7 @@ import {
 	getLngLat,
 	parseDatapoint,
 	filterCompanies,
-} from "@utils/companies";
+} from "@utils/entities";
 import {isObjNotEmpty} from "@utils/objUtils";
 import {stringify} from "@utils/stringUtils";
 
@@ -29,10 +29,10 @@ const initialState = {
 		subtitle: "An interactive map showing UK AI industry entities. Data provided by Glass.ai with supplemental data from Gateway to Research and Crunchbase.",
 		copyright: "Nesta (c) 2022",
 	},
-	dataURL: "../data/entities.tsv",
+	dataURL: "../data/ai_map_data.tsv",
 	allItems: [],
 
-	// don't start with empty selection at startup the map fits to companies bounds
+	// don't start with empty selection at startup the map fits to entities bounds
 	// TODO provide default bounds (UK bounds)
 	entityTypes: ALL_ENTITY_TYPES,
 	allEntityTypes: ALL_ENTITY_TYPES,
