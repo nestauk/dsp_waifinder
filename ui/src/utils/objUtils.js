@@ -33,10 +33,16 @@ export const objectToKeyValueArray = _.pipe(
 
 export const applyFnMap = fnMap => obj => _.mapValues(fnMap, _.applyTo([obj]));
 
-export const applyFnMap2 = fnMap => _.mapValuesWith(
-	(value, key) => _.application(fnMap[key], [value])
+// same as @svizzle/utils v0.16.0
+export const transformValues = fnMap => _.mapValuesWith(
+	(value, key) => key in fnMap
+		? _.application(fnMap[key], [value])
+		: value
 );
 
-// export const applyFnGroups = fnMap => _.mapValuesWith(
-//	 (value, key) => _.application(fnMap[key], [value])
-// );
+// same as @svizzle/utils v0.16.0
+export const makeMergeAppliedFnMap = fnMap => {
+	const makeProps = applyFnMap(fnMap);
+
+	return obj => _.merge(obj, makeProps(obj));
+}

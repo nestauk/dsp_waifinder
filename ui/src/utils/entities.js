@@ -1,10 +1,11 @@
 import _ from "lamb";
 
 import {areSomeTrue} from "./arrayUtils";
-import {applyFnMap2} from "./objUtils";
+import {isIterableEmpty} from "./iterableUtils";
+import {makeMergeAppliedFnMap, transformValues} from "./objUtils";
 import {trim} from "./stringUtils";
 import {Null} from "./types";
-import {sanitizeURLProtocol} from "./urlUtils";
+import {makeSearchEngineURL, sanitizeURLProtocol} from "./urlUtils";
 
 export const ENTITY_TYPE_COMPANY = "Company";
 
@@ -40,32 +41,39 @@ const processCoordValue = _.condition(
 	Null
 );
 
-export const parseDatapoint = applyFnMap2({
-	// Organisation details
-	"Name": _.identity,
-	"Link": sanitizeURLProtocol,
-	"Latitude": processCoordValue,
-	"Longitude": processCoordValue,
+export const parseDatapoint = _.pipe(
+	makeMergeAppliedFnMap({
+		Link: ({Name, Link}) => isIterableEmpty(Link)
+			? makeSearchEngineURL(Name)
+			: sanitizeURLProtocol(Link)
+	}),
+	transformValues({
+		// Organisation details
+		Latitude: processCoordValue,
+		Longitude: processCoordValue,
 
-	// entity types
-	[ALL_ENTITY_TYPES[0]]: Boolean,
-	[ALL_ENTITY_TYPES[1]]: Boolean,
-	[ALL_ENTITY_TYPES[2]]: Boolean,
-	[ALL_ENTITY_TYPES[3]]: Boolean,
+		// entity types
+		[ALL_ENTITY_TYPES[0]]: Boolean,
+		[ALL_ENTITY_TYPES[1]]: Boolean,
+		[ALL_ENTITY_TYPES[2]]: Boolean,
+		[ALL_ENTITY_TYPES[3]]: Boolean,
 
-	// sectors
-	[SECTORS[0]]: Boolean,
-	[SECTORS[1]]: Boolean,
-	[SECTORS[2]]: Boolean,
-	[SECTORS[3]]: Boolean,
-	[SECTORS[4]]: Boolean,
-	[SECTORS[5]]: Boolean,
-	[SECTORS[6]]: Boolean,
-	[SECTORS[7]]: Boolean,
-	[SECTORS[8]]: Boolean,
-	[SECTORS[9]]: Boolean,
-	[SECTORS[10]]: Boolean
-});
+		// sectors
+		[SECTORS[0]]: Boolean,
+		[SECTORS[1]]: Boolean,
+		[SECTORS[2]]: Boolean,
+		[SECTORS[3]]: Boolean,
+		[SECTORS[4]]: Boolean,
+		[SECTORS[5]]: Boolean,
+		[SECTORS[6]]: Boolean,
+		[SECTORS[7]]: Boolean,
+		[SECTORS[8]]: Boolean,
+		[SECTORS[9]]: Boolean,
+		[SECTORS[10]]: Boolean
+	})
+)
+
+
 
 /* property getters */
 
