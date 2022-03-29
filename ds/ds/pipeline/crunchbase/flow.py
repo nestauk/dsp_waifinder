@@ -89,7 +89,7 @@ class CrunchbaseAI(FlowSpec):
         Query the geographic_data table to get lat/lon coordinates
         for each city
         """
-        from ds.pipeline.crunchbase.utils import query_city
+        from ds.pipeline.crunchbase.utils import query_city, add_lat_lon_noise
 
         import pandas as pd
 
@@ -101,6 +101,8 @@ class CrunchbaseAI(FlowSpec):
         self.ai_investors_df = self.ai_investors_df.merge(
             city_lat_lon, how="left", left_on="location_id", right_on="id"
         )
+
+        self.ai_investors_df = add_lat_lon_noise(self.ai_investors_df)
 
         self.next(self.filter_ai_investors)
 
