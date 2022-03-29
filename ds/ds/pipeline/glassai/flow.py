@@ -97,6 +97,11 @@ class GlassAICompanies(FlowSpec):
             inplace=True,
         )
 
+        # Removing GlassAI's url queries
+        self.ai_companies_df["Link"] = self.ai_companies_df["Link"].apply(
+            lambda x: x[0 : x.find("?utm_")] if "?utm_" in x else x
+        )
+
         self.ai_companies_df_filtered = self.ai_companies_df.dropna(
             subset=["Longitude", "Latitude"]
         ).reset_index(drop=True)[
