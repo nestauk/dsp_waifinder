@@ -206,14 +206,12 @@ def add_lat_lon_noise(ai_investors_df):
     )
 
     def add_lat_noise(row):
-        random.seed(42)
         if row["Overlap flag"]:
             return row["Latitude"] + random.uniform(-0.05, 0.05)
         else:
             return row["Latitude"]
 
     def add_lon_noise(row):
-        random.seed(42)
         if row["Overlap flag"]:
             return row["Longitude"] + random.uniform(-0.07, 0.07)
         else:
