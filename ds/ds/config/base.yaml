@@ -2,6 +2,7 @@ flows:
   gtr:
     min_ai_prop: 0.1
     min_num_proj: 10
+    gtr_orgs_filename: "ds/utils/gtr_org_names.txt"
   crunchbase:
     min_ai_prop: 0.1
     min_num_org_funded: 10

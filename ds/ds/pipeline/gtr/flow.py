@@ -27,8 +27,9 @@ class GtrAI(FlowSpec):
             4. Lat/Lon co-ordinates were found
     """
 
-    min_ai_prop = config["flows"]["gtr"]["min_ai_prop"]
-    min_num_proj = config["flows"]["gtr"]["min_num_proj"]
+    # min_ai_prop = config["flows"]["gtr"]["min_ai_prop"]
+    # min_num_proj = config["flows"]["gtr"]["min_num_proj"]
+    gtr_orgs_filename = config["flows"]["gtr"]["gtr_orgs_filename"]
 
     @step
     def start(self):
@@ -95,21 +96,15 @@ class GtrAI(FlowSpec):
 
         org_names = self.ai_orgs_grouped["Name"].unique()
         self.org_names_url_df = pd.read_sql(
-            query_cb_urls,
-            conn,
-            params={"l": tuple([s.lower() for s in org_names])}
+            query_cb_urls, conn, params={"l": tuple([s.lower() for s in org_names])}
         )
 
         # Create dictionary for merging
-        name2url_dict, self.full_url_dict = get_name_url_dict(
-            self.org_names_url_df
-            )
+        name2url_dict, self.full_url_dict = get_name_url_dict(self.org_names_url_df)
 
         # Merge on lower case name
         self.ai_orgs_grouped["Link"] = (
-            self.ai_orgs_grouped["Name"]
-            .str.lower()
-            .map(name2url_dict)
+            self.ai_orgs_grouped["Name"].str.lower().map(name2url_dict)
         )
 
         self.next(self.filter_ai_orgs)
@@ -124,10 +119,22 @@ class GtrAI(FlowSpec):
             self.ai_orgs_grouped["n_ai_projects"]
             / self.ai_orgs_grouped["n_total_projects"]
         )
+        # self.ai_orgs_grouped_filtered = (
+        #     self.ai_orgs_grouped[
+        #         (self.ai_orgs_grouped["prop_ai_projects"] >= self.min_ai_prop)
+        #         & (self.ai_orgs_grouped["n_total_projects"] >= self.min_num_proj)
+        #         & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
+        #     ]
+        #     .dropna(subset=["Longitude", "Latitude"])
+        #     .reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
+        # )
+
+        with open(self.gtr_orgs_filename) as f:
+            gtr_orgs_list = set(f.read().splitlines())
+
         self.ai_orgs_grouped_filtered = (
             self.ai_orgs_grouped[
-                (self.ai_orgs_grouped["prop_ai_projects"] >= self.min_ai_prop)
-                & (self.ai_orgs_grouped["n_total_projects"] >= self.min_num_proj)
+                (self.ai_orgs_grouped["Name"].isin(gtr_orgs_list))
                 & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
             ]
             .dropna(subset=["Longitude", "Latitude"])

@@ -1,5 +1,7 @@
 import pandas as pd
 
+import random
+
 cb_ai_tags = [
     "3d printing",
     "3d technology",
@@ -185,3 +187,39 @@ def get_ai_investors(ai_org_ids, query_ai_investors, conn):
         .sum()
         .reset_index()
     )
+
+
+def add_lat_lon_noise(ai_investors_df):
+    """
+    Add noise to the lat/long data since in some cities the lat/long are the same
+    Only do this for duplicated lat/long
+    """
+
+    duplicate_lat_lon = ai_investors_df[["Latitude", "Longitude"]].value_counts() > 1
+    duplicate_lat_lon = duplicate_lat_lon[duplicate_lat_lon].index
+
+    def overlap_flag(row):
+        return (row["Latitude"], row["Longitude"]) in duplicate_lat_lon
+
+    ai_investors_df["Overlap flag"] = ai_investors_df[["Latitude", "Longitude"]].apply(
+        overlap_flag, axis=1
+    )
+
+    def add_lat_noise(row):
+        if row["Overlap flag"]:
+            return row["Latitude"] + random.uniform(-0.05, 0.05)
+        else:
+            return row["Latitude"]
+
+    def add_lon_noise(row):
+        if row["Overlap flag"]:
+            return row["Longitude"] + random.uniform(-0.07, 0.07)
+        else:
+            return row["Longitude"]
+
+    ai_investors_df["Latitude"] = ai_investors_df.apply(add_lat_noise, axis=1)
+    ai_investors_df["Longitude"] = ai_investors_df.apply(add_lon_noise, axis=1)
+
+    ai_investors_df.drop(columns="Overlap flag", inplace=True)
+
+    return ai_investors_df
