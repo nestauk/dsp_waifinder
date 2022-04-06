@@ -57,15 +57,17 @@ class GlassAICompanies(FlowSpec):
         """Find and append lat/lon coordinates from postcodes using NSPL"""
 
         from ds.pipeline.glassai.utils import (
+            get_cleaned_postcode,
+            get_lat_long,
+        )
+        from ds.utils.nspl_data import (
             chrome_driver,
             find_download_url,
             download_zip,
             read_nspl_data,
-            get_cleaned_postcode,
-            get_lat_long,
         )
 
-        geoportal_url = config["flows"]["glassai"]["geoportal_url"]
+        geoportal_url = config["flows"]["utils"]["geoportal_url"]
 
         with chrome_driver() as driver:
             download_url = find_download_url(driver, geoportal_url)
