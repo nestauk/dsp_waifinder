@@ -53,6 +53,7 @@ class CrunchbaseAI(FlowSpec):
             query_ai_topics,
             query_ai_investors,
             query_ai_investors_all_topics,
+            query_ai_investors_locations,
             get_ai_investors,
         )
         import pandas as pd
@@ -81,28 +82,48 @@ class CrunchbaseAI(FlowSpec):
             ai_investors_all_orgs_df, how="left", on="investor_id"
         )
 
-        self.next(self.append_lon_lat)
-
-    @step
-    def append_lon_lat(self):
-        """
-        Query the geographic_data table to get lat/lon coordinates
-        for each city
-        """
-        from ds.pipeline.crunchbase.utils import query_city, add_lat_lon_noise
-
-        import pandas as pd
-
-        conn = est_conn()
-
-        cities = self.ai_investors_df["location_id"].dropna().unique()
-
-        city_lat_lon = pd.read_sql(query_city, conn, params={"l": tuple(cities)})
-        self.ai_investors_df = self.ai_investors_df.merge(
-            city_lat_lon, how="left", left_on="location_id", right_on="id"
+        # Get organisation location and description data
+        self.ai_investors_location_df = pd.read_sql(
+            query_ai_investors_locations, conn, params={"l": tuple(ai_investor_ids)}
         )
 
-        self.ai_investors_df = add_lat_lon_noise(self.ai_investors_df)
+        # Combine location and description data
+        self.ai_investors_df = self.ai_investors_df.merge(
+            self.ai_investors_location_df,
+            how="left",
+            left_on="investor_id",
+            right_on="id",
+        )
+
+        self.next(self.find_lon_lat)
+
+    @step
+    def find_lon_lat(self):
+
+        from ds.utils.nspl_data import (
+            chrome_driver,
+            find_download_url,
+            download_zip,
+            read_nspl_data,
+        )
+
+        from ds.pipeline.crunchbase.utils import nspl_match_postcodes
+
+        geoportal_url = config["flows"]["utils"]["geoportal_url"]
+
+        with chrome_driver() as driver:
+            download_url = find_download_url(driver, geoportal_url)
+
+        with download_zip(download_url) as zipfile:
+            # Load main postcode lookup
+            nspl_data = read_nspl_data(zipfile)
+
+        (
+            self.ai_investors_df["Latitude"],
+            self.ai_investors_df["Longitude"],
+        ) = nspl_match_postcodes(
+            self.ai_investors_df["postal_code"].tolist(), nspl_data
+        )
 
         self.next(self.filter_ai_investors)
 
