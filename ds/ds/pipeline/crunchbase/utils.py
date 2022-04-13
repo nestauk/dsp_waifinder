@@ -144,8 +144,8 @@ query_ai_investors_all_topics = (
 )
 
 query_ai_investors_locations = (
-    "SELECT crunchbase_organizations.id, crunchbase_organizations.city, crunchbase_organizations.long_description, "
-    "crunchbase_organizations.short_description, crunchbase_organizations.postal_code "
+    "SELECT crunchbase_organizations.id, crunchbase_organizations.city City, crunchbase_organizations.long_description Description_long, "
+    "crunchbase_organizations.short_description Description, crunchbase_organizations.postal_code Postcode "
     "FROM crunchbase_organizations "
     "WHERE crunchbase_organizations.id IN  %(l)s "
 )
