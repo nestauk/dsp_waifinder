@@ -143,11 +143,11 @@ query_ai_investors_all_topics = (
     "GROUP BY crunchbase_investments.investor_id"
 )
 
-query_city = (
-    "SELECT geographic_data.id, "
-    "geographic_data.latitude Latitude, geographic_data.longitude Longitude "
-    "FROM geographic_data "
-    "WHERE geographic_data.id IN %(l)s "
+query_ai_investors_locations = (
+    "SELECT crunchbase_organizations.id, crunchbase_organizations.city, crunchbase_organizations.long_description, "
+    "crunchbase_organizations.short_description, crunchbase_organizations.postal_code "
+    "FROM crunchbase_organizations "
+    "WHERE crunchbase_organizations.id IN  %(l)s "
 )
 
 
@@ -189,37 +189,25 @@ def get_ai_investors(ai_org_ids, query_ai_investors, conn):
     )
 
 
-def add_lat_lon_noise(ai_investors_df):
+def nspl_match_postcodes(postcode_list, nspl_data):
     """
-    Add noise to the lat/long data since in some cities the lat/long are the same
-    Only do this for duplicated lat/long
+    From a list of postcodes
+
     """
 
-    duplicate_lat_lon = ai_investors_df[["Latitude", "Longitude"]].value_counts() > 1
-    duplicate_lat_lon = duplicate_lat_lon[duplicate_lat_lon].index
+    def clean_postcode(pcd):
+        return str(pcd).lower().replace(" ", "") if pcd else None
 
-    def overlap_flag(row):
-        return (row["Latitude"], row["Longitude"]) in duplicate_lat_lon
+    # NSPL doesn't have lat/long for all postcodes (e.g. Isle of Man data)
+    # NSPL code this with 'lat'=99.999999 & 'long'=0.0
+    nspl_data = nspl_data[
+        ~((nspl_data["lat"] == 99.999999) & (nspl_data["long"] == 0.0))
+    ]
+    # Normalise since postcodes can sometimes be lower case/spaces in different places
+    nspl_data.index = nspl_data.index.map(clean_postcode)
+    postcode_list = [clean_postcode(pcd) for pcd in postcode_list]
 
-    ai_investors_df["Overlap flag"] = ai_investors_df[["Latitude", "Longitude"]].apply(
-        overlap_flag, axis=1
+    return (
+        list(map(nspl_data["lat"].get, postcode_list)),
+        list(map(nspl_data["long"].get, postcode_list)),
     )
-
-    def add_lat_noise(row):
-        if row["Overlap flag"]:
-            return row["Latitude"] + random.uniform(-0.05, 0.05)
-        else:
-            return row["Latitude"]
-
-    def add_lon_noise(row):
-        if row["Overlap flag"]:
-            return row["Longitude"] + random.uniform(-0.07, 0.07)
-        else:
-            return row["Longitude"]
-
-    ai_investors_df["Latitude"] = ai_investors_df.apply(add_lat_noise, axis=1)
-    ai_investors_df["Longitude"] = ai_investors_df.apply(add_lon_noise, axis=1)
-
-    ai_investors_df.drop(columns="Overlap flag", inplace=True)
-
-    return ai_investors_df
