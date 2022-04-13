@@ -75,7 +75,11 @@ query_ai_orgs_all_topics = (
 query_cb_urls = (
     "SELECT crunchbase_organizations.homepage_url Link, "
     "crunchbase_organizations.name, "
-    "crunchbase_organizations.country "
+    "crunchbase_organizations.country, "
+    "crunchbase_organizations.city City, "
+    "crunchbase_organizations.long_description Description_long, "
+    "crunchbase_organizations.short_description Description, "
+    "crunchbase_organizations.postal_code Postcode "
     "FROM crunchbase_organizations "
     "WHERE LOWER(crunchbase_organizations.name) IN %(l)s"
 )
@@ -109,13 +113,11 @@ def combine_org_data(df_1, df_2):
     """Merge two dataframes on 'id' column and rename
     this column to org_id
     """
-    return df_1.merge(
-        df_2, how="left", on="id"
-        ).rename(
-            columns={
-                "id": "org_id",
-            }
-            )
+    return df_1.merge(df_2, how="left", on="id").rename(
+        columns={
+            "id": "org_id",
+        }
+    )
 
 
 def get_name_url_dict(org_names_url_df):
@@ -139,10 +141,7 @@ def get_name_url_dict(org_names_url_df):
 
     org_names_url_df = org_names_url_df[org_names_url_df["Link"].notnull()]
     org_names_url_df["Name lower"] = org_names_url_df["name"].str.lower()
-    org_names_url_df.drop_duplicates(
-        ["Link", "Name lower", "country"],
-        inplace=True
-        )
+    org_names_url_df.drop_duplicates(["Link", "Name lower", "country"], inplace=True)
 
     def create_link_dict(x):
         return {c: l for c, l in zip(x["country"], x["Link"])}

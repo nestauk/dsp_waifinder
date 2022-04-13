@@ -67,6 +67,9 @@ class merge_map_datasets(FlowSpec):
                 "Link",
                 "Latitude",
                 "Longitude",
+                "City",
+                "Postcode",
+                "Description",
                 "Company",
                 "Funder",
                 "Incubator / accelerator",
@@ -113,6 +116,37 @@ class merge_map_datasets(FlowSpec):
         from ds.pipeline.ai_map.utils import get_merged_data
 
         self.ai_map_data = get_merged_data(self.ai_map_data)
+
+        self.next(self.add_cities)
+
+    @step
+    def add_cities(self):
+        """
+        Find the city for an organisation using postcode and lat/long
+        for those organisations which don't already have this data
+        """
+
+        from ds.pipeline.ai_map.utils import get_pgeocode_cities, get_geopy_cities
+
+        self.ai_map_data.reset_index(inplace=True)
+
+        # Try to find cities using the pgeocode package (quick but incomplete)
+        self.ai_map_data["City_pgeocode"] = get_pgeocode_cities(
+            self.ai_map_data["Postcode"].tolist()
+        )
+
+        # Fill in the City field with City_pgeocode if Null
+        self.ai_map_data.loc[
+            self.ai_map_data["City"].isnull(), "City"
+        ] = self.ai_map_data["City_pgeocode"]
+
+        # Find cities using the geopy package (slow)
+        self.ai_map_data["City_geopy"] = get_geopy_cities(self.ai_map_data)
+
+        # Fill in the City field with City_geopy if still Null
+        self.ai_map_data.loc[
+            self.ai_map_data["City"].isnull(), "City"
+        ] = self.ai_map_data["City_geopy"]
 
         self.next(self.save)
 
