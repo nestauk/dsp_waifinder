@@ -1,6 +1,5 @@
 import {mdsvex} from 'mdsvex';
 import babel from 'rollup-plugin-babel';
-import cleanup from "rollup-plugin-cleanup";
 import commonjs from '@rollup/plugin-commonjs';
 import dsv from '@rollup/plugin-dsv';
 import json from '@rollup/plugin-json';
@@ -18,16 +17,13 @@ const mode = process.env.NODE_ENV;
 const isExported = process.env.SAPPER_EXPORT;
 const dev = mode === 'development';
 const legacy = Boolean(process.env.SAPPER_LEGACY_BUILD);
-const removeComments = cleanup({
-	extensions: ['js', 'mjs']
-});
 
 const onwarn = (warning, onwarn) => {
 	// console.log(warning);
 
 	return (
-		(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message))
-		|| (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message))
+		warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message)
+		|| warning.code === 'CIRCULAR_DEPENDENCY' && (/[/\\]@sapper[/\\]/u).test(warning.message)
 		|| warning.code !== 'CIRCULAR_DEPENDENCY'
 	) && onwarn(warning)
 };
@@ -66,7 +62,6 @@ export default {
 			dsv(),
 			json(),
 			yaml(),
-			removeComments,
 
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
@@ -124,7 +119,6 @@ export default {
 			dsv(),
 			json(),
 			yaml(),
-			removeComments,
 		],
 		external:
 			Object.keys(pkg.dependencies)
@@ -156,7 +150,6 @@ export default {
 			dsv(),
 			json(),
 			yaml(),
-			removeComments,
 			!dev && terser()
 		],
 
