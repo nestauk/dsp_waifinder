@@ -115,9 +115,12 @@ class GtrAI(FlowSpec):
 
         self.ai_orgs_grouped["Link"] = get_cb_info("Link")
         self.ai_orgs_grouped["City"] = get_cb_info("City")
-        self.ai_orgs_grouped["Description"] = get_cb_info("Description")
-        self.ai_orgs_grouped["Description_long"] = get_cb_info("Description_long")
         self.ai_orgs_grouped["Postcode"] = get_cb_info("Postcode")
+        self.ai_orgs_grouped["Description"] = get_cb_info("Description")
+        # If there is no description, use the short description
+        self.ai_orgs_grouped.loc[
+            self.ai_orgs_grouped["Description"].isnull(), "Description"
+        ] = get_cb_info("Description_short")
 
         self.next(self.filter_ai_orgs)
 
@@ -159,7 +162,6 @@ class GtrAI(FlowSpec):
                     "City",
                     "Postcode",
                     "Description",
-                    "Description_long",
                 ]
             ]
         )

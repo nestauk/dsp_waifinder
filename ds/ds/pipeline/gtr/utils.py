@@ -77,8 +77,8 @@ query_cb_urls = (
     "crunchbase_organizations.name, "
     "crunchbase_organizations.country, "
     "crunchbase_organizations.city City, "
-    "crunchbase_organizations.long_description Description_long, "
-    "crunchbase_organizations.short_description Description, "
+    "crunchbase_organizations.long_description Description, "
+    "crunchbase_organizations.short_description Description_short, "
     "crunchbase_organizations.postal_code Postcode "
     "FROM crunchbase_organizations "
     "WHERE LOWER(crunchbase_organizations.name) IN %(l)s"
@@ -147,7 +147,7 @@ def get_crunchbase_links(cb_org_info):
     cb_org_info.drop_duplicates(["Name lower"], inplace=True)
 
     lower_name2org_info = cb_org_info.set_index("Name lower")[
-        ["Link", "City", "Description", "Description_long", "Postcode"]
+        ["Link", "City", "Description", "Description_short", "Postcode"]
     ].to_dict(orient="index")
 
     return lower_name2org_info
