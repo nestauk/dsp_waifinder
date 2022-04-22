@@ -86,6 +86,10 @@ class CrunchbaseAI(FlowSpec):
         self.ai_investors_location_df = pd.read_sql(
             query_ai_investors_locations, conn, params={"l": tuple(ai_investor_ids)}
         )
+        # If there is no description, use the short description
+        self.ai_investors_location_df.loc[
+            self.ai_investors_location_df["Description"].isnull(), "Description"
+        ] = self.ai_investors_location_df["Description_short"]
 
         # Combine location and description data
         self.ai_investors_df = self.ai_investors_df.merge(
@@ -160,7 +164,6 @@ class CrunchbaseAI(FlowSpec):
                     "City",
                     "Postcode",
                     "Description",
-                    "Description_long",
                 ]
             ]
         )
