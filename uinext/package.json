@@ -71,7 +71,7 @@
 		"dev": "npm run rmsappers && sapper dev",
 		"export": "npm run rmsappers && export SAPPER_EXPORT=true && sapper export --legacy",
 		"lighthouse": "node -r esm test/lighthouse/validate.js",
-		"linksvizzles": "npm link @svizzle/time_region_value @svizzle/ui @svizzle/atlas @svizzle/dev @svizzle/file @svizzle/utils && npm list",
+		"linksvizzles": "npm link @svizzle/ui @svizzle/dev @svizzle/file @svizzle/utils && npm list",
 		"lint": "eslint rollup.config.js 'src/**/*.{js,svelte}'",
 		"makedata": "npm run makeindex && npm run rmdata && npm run copydata",
 		"makeindex": "npm run chmod && node -r esm src/bin/make_index.js",

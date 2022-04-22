@@ -1,40 +1,24 @@
 <script>
-	import LinkButton from '@svizzle/ui/src/LinkButton.svelte';
-	import Home from './_content/Index.svx';
-	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
-	
-	import {toolName} from 'app/config';
-	import theme from 'app/theme';
+    import mapboxgl from 'mapbox-gl';
+	import {
+		MAPBOXGL_ACCESSTOKEN as accessToken,
+		MAPBOXGL_STYLEURL as styleURL
+	} from "app/consts";
+	import Map from 'app/components/Map/Map.svelte';
+	import MapboxglUnsupported from 'app/components/Map/MapboxglUnsupported.svelte';
+
+	const withScaleControl = false;
+    const withZoomControl = true;
+	const isMapboxGLSupported = mapboxgl.supported();
 </script>
 
-<svelte:head>
-	<title>Home - {toolName}</title>
-	<meta
-		content='{toolName}: homepage'
-		name='description'
-	>
-</svelte:head>
-
-<main>
-	<div>
-		<Home />
-	</div>
-</main>
-
-<style>
-	main {
-		background-color: var(--color-background);
-		display: flex;
-		font-weight: 200;
-		height: 100%;
-		justify-content: space-around;
-		width: 100%;
-	}
-
-	div {
-		background-color: white;
-		max-width: 900px;
-		overflow-y: auto;
-		padding: 2rem;
-	}
-</style>
+{#if isMapboxGLSupported}
+	<Map
+		{accessToken}
+		{styleURL}
+		{withScaleControl}
+		{withZoomControl}
+	/>
+{:else}
+	<MapboxglUnsupported />
+{/if}
