@@ -1,5 +1,5 @@
 <script>
-    import mapboxgl from 'mapbox-gl';
+	import mapboxgl from 'mapbox-gl';
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL
@@ -8,7 +8,7 @@
 	import MapboxglUnsupported from 'app/components/Map/MapboxglUnsupported.svelte';
 
 	const withScaleControl = false;
-    const withZoomControl = true;
+	const withZoomControl = true;
 	const isMapboxGLSupported = mapboxgl.supported();
 </script>
 
