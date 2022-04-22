@@ -77,9 +77,6 @@ class merge_map_datasets(FlowSpec):
             ]
         ]
 
-        for i in range(1, 12):
-            self.ai_map_data[f"Sector {i}"] = None
-
         self.next(self.quality)
 
     @step
@@ -117,42 +114,132 @@ class merge_map_datasets(FlowSpec):
 
         self.ai_map_data = get_merged_data(self.ai_map_data)
 
-        self.next(self.add_cities)
+        self.next(self.add_places)
 
     @step
-    def add_cities(self):
+    def add_places(self):
         """
-        Find the city for an organisation using postcode and lat/long
+        Find the place for an organisation using postcode and lat/long
         for those organisations which don't already have this data
         """
 
-        from ds.pipeline.ai_map.utils import get_pgeocode_cities, get_geopy_cities
+        from ds.pipeline.ai_map.utils import get_pgeocode_cities, get_geopy_addresses
 
         self.ai_map_data.reset_index(inplace=True)
 
         # Try to find cities using the pgeocode package (quick but incomplete)
-        self.ai_map_data["City_pgeocode"] = get_pgeocode_cities(
+        self.ai_map_data["pgeocode_city"] = get_pgeocode_cities(
             self.ai_map_data["Postcode"].tolist()
         )
 
-        # Fill in the City field with City_pgeocode if Null
+        # Fill in the City field with pgeocode_city if Null
         self.ai_map_data.loc[
             self.ai_map_data["City"].isnull(), "City"
-        ] = self.ai_map_data["City_pgeocode"]
+        ] = self.ai_map_data["pgeocode_city"]
 
-        # Find cities using the geopy package (slow)
-        self.ai_map_data["City_geopy"] = get_geopy_cities(self.ai_map_data)
+        # Find places using the geopy package (slow)
+        self.geopy_addresses = get_geopy_addresses(self.ai_map_data)
+        self.ai_map_data = pd.concat(
+            [self.ai_map_data, self.geopy_addresses.add_prefix("geopy_")], axis=1
+        )
 
-        # Fill in the City field with City_geopy if still Null
-        self.ai_map_data.loc[
-            self.ai_map_data["City"].isnull(), "City"
-        ] = self.ai_map_data["City_geopy"]
-
-        self.next(self.save)
+        self.next(self.organise_places)
 
     @step
-    def save(self):
-        self.ai_map_data.to_csv("outputs/data/ai_map_data.tsv", index=False, sep="\t")
+    def organise_places(self):
+        """
+        For each organisation there should be one place, and each place should be linked to NUTS codes
+
+        """
+        from ds.pipeline.ai_map.utils import (
+            get_geo_data,
+            clean_places,
+            get_final_places,
+        )
+
+        self.geo_data = get_geo_data()
+        city_names = self.geo_data["city"].tolist()
+
+        self.ai_map_data = clean_places(self.ai_map_data)
+        self.ai_map_data["Place"], self.ai_map_data["Place type"] = get_final_places(
+            self.ai_map_data, city_names
+        )
+
+        self.next(self.nuts3_info)
+
+    @step
+    def nuts3_info(self):
+
+        from ds.pipeline.ai_map.utils import merge_place_data, add_nuts
+
+        self.places = merge_place_data(self.ai_map_data, self.geo_data)
+        self.places = add_nuts(self.places)
+
+        place_type_dict = {
+            k: v[0]
+            for k, v in dict(
+                self.ai_map_data.groupby("Place")["Place type"].unique()
+            ).items()
+        }
+        self.places["place_type"] = self.places["Place"].map(place_type_dict)
+
+        self.next(self.save_tsv)
+
+    @step
+    def save_tsv(self):
+        """
+        This is the original v1 tsv output
+        """
+        self.ai_map_data["Postcode"] = self.ai_map_data["Postcode"].apply(
+            lambda x: x.upper().replace(" ", "") if x else None
+        )
+        self.ai_map_data = pd.merge(
+            self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
+        ).reset_index(drop=True)
+
+        self.ai_map_data_final = self.ai_map_data[
+            [
+                "Name",
+                "Link",
+                "Longitude",
+                "Latitude",
+                "Place",
+                "Postcode",
+                "place_id",
+                "Description",
+                "Company",
+                "Funder",
+                "Incubator / accelerator",
+                "University / RTO",
+            ]
+        ]
+
+        for i in range(1, 12):
+            self.ai_map_data_final[f"Sector {i}"] = None
+
+        self.ai_map_data_final.to_csv(
+            "outputs/data/ai_map_data.tsv", index=False, sep="\t"
+        )
+
+        self.places.to_csv("outputs/data/ai_map_places.tsv", index=False, sep="\t")
+
+        self.next(self.save_json)
+
+    @step
+    def save_json(self):
+        """
+        This is the v2 output
+        """
+        from ds.pipeline.ai_map.utils import format_places, format_organisations
+
+        import json
+
+        self.output_dict = {
+            "orgs": format_organisations(self.ai_map_data),
+            "places": format_places(self.places),
+        }
+        with open("outputs/data/ai_map_orgs_places.json", "w") as outfile:
+            json.dump(self.output_dict, outfile)
 
         self.next(self.end)
 
