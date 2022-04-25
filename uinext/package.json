@@ -4,7 +4,6 @@
 		"@svizzle/ui": "^0.5.0",
 		"@svizzle/utils": "^0.16.0",
 		"lamb": "^0.59.2",
-		"modernizr": "^3.6.0",
 		"node-fetch": "^2.6.1",
 		"queue-promise": "^2.1.0"
 	},
