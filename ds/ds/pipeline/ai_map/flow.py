@@ -255,7 +255,7 @@ class merge_map_datasets(FlowSpec):
         import json
 
         types_dict = {
-            name: number
+            name: str(number)
             for number, name in enumerate(
                 ["Company", "Funder", "Incubator / accelerator", "University / RTO"]
             )
@@ -264,7 +264,7 @@ class merge_map_datasets(FlowSpec):
         self.output_dict = {
             "orgs": format_organisations(self.ai_map_data, types_dict),
             "places": format_places(self.places),
-            "types": types_dict,
+            "types": {v: k for k, v in types_dict.items()},
         }
         with open("outputs/data/ai_map_orgs_places.json", "w") as outfile:
             json.dump(self.output_dict, outfile)

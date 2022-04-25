@@ -181,13 +181,16 @@ def get_final_places(ai_map_data, city_names):
     # e.g. geopy_city_clean='Vale of White Horse' (not in geographic data)
     # but geopy_suburb='Botley' (is in geographic data)
 
+    # geographic_data isn't perfect - "Bury" and "Bury St Edmunds"
+    # have the same lat/lon (which is st edmunds one)
+
     first_pass_places = []
     first_pass_place_types = []
 
     for place_options in ai_map_data[trust_order].to_dict(orient="records"):
         place_found = False
         for place_type, place_name in place_options.items():
-            if place_name and (place_name in city_names):
+            if place_name and (place_name != "Bury") and (place_name in city_names):
                 first_pass_places.append(place_name)
                 first_pass_place_types.append(place_type)
                 place_found = True
@@ -231,22 +234,41 @@ def get_final_places(ai_map_data, city_names):
 def merge_place_data(ai_map_data, geo_data):
     all_places = set(ai_map_data["Place"])
 
-    places = geo_data[geo_data["city"].isin(all_places)].reset_index(drop=True)
-    places.rename(
-        columns={"city": "Place", "latitude": "Latitude", "longitude": "Longitude"},
-        inplace=True,
-    )
+    ## Trust geodata lat/long primarily
+    # places = geo_data[geo_data["city"].isin(all_places)].reset_index(drop=True)
+    # places.rename(
+    #     columns={"city": "Place", "latitude": "Latitude", "longitude": "Longitude"},
+    #     inplace=True,
+    # )
 
-    average_latlong_places = (
+    # average_latlong_places = (
+    #     ai_map_data.groupby("Place")[["Latitude", "Longitude"]].mean().reset_index()
+    # )
+    # average_latlong_places.rename(
+    #     columns={"Latitude": "Latitude_centroid", "Longitude": "Longitude_centroid"},
+    #     inplace=True,
+    # )
+    # places = pd.merge(
+    #     average_latlong_places, places, how="left", on="Place"
+    # ).reset_index(drop=True)
+
+    # Trust average lat/long primarily
+    places = (
         ai_map_data.groupby("Place")[["Latitude", "Longitude"]].mean().reset_index()
     )
-    average_latlong_places.rename(
-        columns={"Latitude": "Latitude_centroid", "Longitude": "Longitude_centroid"},
+
+    geo_data_places = geo_data[geo_data["city"].isin(all_places)].reset_index(drop=True)
+    geo_data_places.rename(
+        columns={
+            "city": "Place",
+            "latitude": "Latitude geo_data",
+            "longitude": "Longitude geo_data",
+        },
         inplace=True,
     )
-    places = pd.merge(
-        places, average_latlong_places, how="left", on="Place"
-    ).reset_index(drop=True)
+    places = pd.merge(places, geo_data_places, how="left", on="Place").reset_index(
+        drop=True
+    )
 
     return places
 
@@ -275,20 +297,21 @@ def add_nuts(places):
     (
         places.loc[:, "NUTS3_ID geo_data"],
         places.loc[:, "NUTS3_NAME geo_data"],
-    ) = get_nuts_code(places, "Latitude", "Longitude")
+    ) = get_nuts_code(places, "Latitude geo_data", "Longitude geo_data")
 
     # The NUTS when using the average lat/long
     (
         places.loc[:, "NUTS3_ID centroid"],
         places.loc[:, "NUTS3_NAME centroid"],
-    ) = get_nuts_code(places, "Latitude_centroid", "Longitude_centroid")
+    ) = get_nuts_code(places, "Latitude", "Longitude")
 
-    # For the final output, use the geodata unless its not found
-    places["NUTS3_ID"] = places["NUTS3_ID geo_data"]
-    places["NUTS3_NAME"] = places["NUTS3_NAME geo_data"]
-    places.loc[places["NUTS3_ID"].isnull(), "NUTS3_ID"] = places["NUTS3_ID centroid"]
+    # For the final output, use the average lat/long unless its not found
+    # in which case use the NUTS found using the geodata lat/long
+    places["NUTS3_ID"] = places["NUTS3_ID centroid"]
+    places["NUTS3_NAME"] = places["NUTS3_NAME centroid"]
+    places.loc[places["NUTS3_ID"].isnull(), "NUTS3_ID"] = places["NUTS3_ID geo_data"]
     places.loc[places["NUTS3_NAME"].isnull(), "NUTS3_NAME"] = places[
-        "NUTS3_NAME centroid"
+        "NUTS3_NAME geo_data"
     ]
 
     places["place_id"] = places.apply(
@@ -313,8 +336,8 @@ def format_organisations(ai_map_data, types_dict):
                 },
                 "description": organisation["Description"],
                 "location": {
-                    "latitude": organisation["Latitude"],
-                    "longitude": organisation["Longitude"],
+                    "lat": organisation["Latitude"],
+                    "lon": organisation["Longitude"],
                 },
                 "name": organisation["Name"],
                 "place_id": organisation["place_id"],
@@ -338,8 +361,8 @@ def format_places(places):
         places_list.append(
             {
                 "centroid": {
-                    "latitude": place["Latitude"],
-                    "longitude": place["Longitude"],
+                    "lat": place["Latitude"],
+                    "lon": place["Longitude"],
                 },
                 "id": place["place_id"],
                 "name": place["Place"],
