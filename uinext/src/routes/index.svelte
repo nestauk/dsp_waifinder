@@ -3,7 +3,7 @@
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL
-	} from "app/consts";
+	} from "app/config";
 	import Map from 'app/components/Map/Map.svelte';
 	import MapboxglUnsupported from 'app/components/Map/MapboxglUnsupported.svelte';
 
