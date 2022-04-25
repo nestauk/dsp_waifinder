@@ -12,16 +12,36 @@ import pandas as pd
 import numpy as np
 
 """
-    Read in the data provided from
-    (example GlassAI and find lat/lon
-    co-ordinates for each postcode.)
+    Read in the data provided from GtR, Crunchbase and GlassAI
+    and merge and reformat for outputs.
 
-
+    Place information (e.g. city) is added for each organisation
+    using either the original data source (if city was given), or
+    by querying the postcode using the pgeocode package (quick but
+    incomplete) or by querying the lat/long coordinates using the
+    geopy package (slow but complete).
+    NUT3 codes are also found for all places.
 
     Attributes:
-        gtr_output: update
-
-
+        gtr_output: (DataFrame)
+            The final output of the GtrAI flow
+        glass_output: (DataFrame)
+            The final output of the GlassAICompanies flow
+        cb_output: (DataFrame)
+            The final output of the CrunchbaseAI flow
+        ai_map_data: (DataFrame)
+            The merged organisation data for all the data sources,
+            including place name.
+        geopy_addresses: (DataFrame)
+            The address information found for each organisation's
+            lat/long coordinate
+        places: (DataFrame)
+            Information about each place - central lat/long, NUTS3
+        ai_map_data_final: (DataFrame)
+            The v1 output of each organisation's information
+        output_dict: (dict)
+            The v2 output of a dictionary of each organisation's
+            information, plus each place's information
     """
 
 
@@ -228,15 +248,23 @@ class merge_map_datasets(FlowSpec):
     @step
     def save_json(self):
         """
-        This is the v2 output
+        This is the v2 output.
         """
         from ds.pipeline.ai_map.utils import format_places, format_organisations
 
         import json
 
+        types_dict = {
+            name: number
+            for number, name in enumerate(
+                ["Company", "Funder", "Incubator / accelerator", "University / RTO"]
+            )
+        }
+
         self.output_dict = {
-            "orgs": format_organisations(self.ai_map_data),
+            "orgs": format_organisations(self.ai_map_data, types_dict),
             "places": format_places(self.places),
+            "types": types_dict,
         }
         with open("outputs/data/ai_map_orgs_places.json", "w") as outfile:
             json.dump(self.output_dict, outfile)

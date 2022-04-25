@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from geopy.geocoders import Nominatim
 import pgeocode
+from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 from tqdm import tqdm
 
@@ -252,6 +252,8 @@ def merge_place_data(ai_map_data, geo_data):
 
 
 def add_nuts(places):
+    import hashlib
+
     from nuts_finder import NutsFinder
 
     nf = NutsFinder(year=2021)
@@ -290,13 +292,16 @@ def add_nuts(places):
     ]
 
     places["place_id"] = places.apply(
-        lambda x: hash(x["Place"] + (x["NUTS3_ID"] if x["NUTS3_ID"] else "X")), axis=1
+        lambda x: hashlib.sha1(
+            (str(x["Latitude"]) + str(x["Longitude"])).encode("utf-8")
+        ).hexdigest(),
+        axis=1,
     )
 
     return places
 
 
-def format_organisations(ai_map_data):
+def format_organisations(ai_map_data, types_dict):
 
     orgs_list = []
     for i, organisation in ai_map_data.iterrows():
@@ -313,15 +318,13 @@ def format_organisations(ai_map_data):
                 },
                 "name": organisation["Name"],
                 "place_id": organisation["place_id"],
-                "sector_label": None,
-                "sector_sic_code": None,
+                "sector": {"label": None, "sic_code": None},
                 "topics": None,
-                "type": {
-                    "Company": organisation["Company"],
-                    "Funder": organisation["Funder"],
-                    "Incubator / accelerator": organisation["Incubator / accelerator"],
-                    "University / RTO": organisation["University / RTO"],
-                },
+                "types": [
+                    type_number
+                    for type_name, type_number in types_dict.items()
+                    if organisation[type_name]
+                ],
                 "url": organisation["Link"],
             }
         )
