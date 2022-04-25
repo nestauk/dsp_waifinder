@@ -1,6 +1,7 @@
 {
 	"author": "nestauk (https://www.nesta.org.uk/)",
 	"dependencies": {
+		"@svizzle/geo": "^0.7.0",
 		"@svizzle/ui": "^0.5.0",
 		"@svizzle/utils": "^0.16.0",
 		"lamb": "^0.59.2",
@@ -15,7 +16,7 @@
 		"@babel/preset-env": "^7.9.5",
 		"@babel/runtime": "^7.9.2",
 		"@macfja/svelte-persistent-store": "^1.2.0",
-		"@mapbox/geo-viewport": "^0.3.0",
+		"@mapbox/geo-viewport": "^0.4.1",
 		"@rollup/plugin-commonjs": "17.0.0",
 		"@rollup/plugin-dsv": "^2.0.1",
 		"@rollup/plugin-json": "^4.0.3",
