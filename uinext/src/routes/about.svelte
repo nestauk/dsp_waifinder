@@ -1,10 +1,7 @@
 <script>
-	import LinkButton from '@svizzle/ui/src/LinkButton.svelte';
-	import Home from './_content/Index.svx';
-	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
-	
 	import {toolName} from 'app/config';
-	import theme from 'app/theme';
+
+	import Content from './_content/Index.svx';
 </script>
 
 <svelte:head>
@@ -17,7 +14,7 @@
 
 <main>
 	<div>
-		<Home />
+		<Content />
 	</div>
 </main>
 
