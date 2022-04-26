@@ -174,7 +174,7 @@
 		width: 480px;
 	}
 	.hidden {
-		display: none;
+		visibility: hidden;
 	}
 
 	.spinnerContainer {
