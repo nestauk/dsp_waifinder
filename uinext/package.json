@@ -1,10 +1,12 @@
 {
 	"author": "nestauk (https://www.nesta.org.uk/)",
 	"dependencies": {
+		"@mapbox/geo-viewport": "^0.4.1",
 		"@svizzle/geo": "^0.7.0",
 		"@svizzle/ui": "^0.5.0",
 		"@svizzle/utils": "^0.16.0",
 		"lamb": "^0.59.2",
+		"mapbox-gl": "^2.8.1",
 		"node-fetch": "^2.6.1",
 		"queue-promise": "^2.1.0"
 	},
@@ -16,7 +18,6 @@
 		"@babel/preset-env": "^7.9.5",
 		"@babel/runtime": "^7.9.2",
 		"@macfja/svelte-persistent-store": "^1.2.0",
-		"@mapbox/geo-viewport": "^0.4.1",
 		"@rollup/plugin-commonjs": "17.0.0",
 		"@rollup/plugin-dsv": "^2.0.1",
 		"@rollup/plugin-json": "^4.0.3",
@@ -31,6 +32,7 @@
 		"browserstack-local": "^1.4.8",
 		"compression": "^1.7.4",
 		"cpy": "^8.1.0",
+		"cpy-cli": "^4.1.0",
 		"cypress": "^6.5.0",
 		"del": "^5.1.0",
 		"eslint": "^6.8.0",
@@ -38,7 +40,6 @@
 		"js-yaml": "^3.14.1",
 		"just-compare": "^1.4.0",
 		"lighthouse": "^7.4.0",
-		"mapbox-gl": "^2.8.1",
 		"mdsvex": "^0.9.8",
 		"mocha": "^7.1.1",
 		"npm-run-all": "^4.1.5",
@@ -55,7 +56,6 @@
 		"selenium-webdriver": "^4.0.0-beta.1",
 		"sirv": "^1.0.10",
 		"svelte": "^3.38.3",
-		"svelte-media": "^0.0.3",
 		"tempy": "^0.5.0",
 		"unist-util-visit": "^2.0.1",
 		"zip-a-folder": "0.0.12"
@@ -67,6 +67,7 @@
 		"build": "npm run rmsappers && sapper build --legacy",
 		"chmod": "chmod u+x src/bin/*",
 		"copydata": "npm run chmod && node -r esm src/bin/copy_data.js",
+		"copymapboxcss": "cpy --flat ./node_modules/mapbox-gl/dist/mapbox-gl.css ./static/css/",
 		"deploy": "npm run makedata && npm run export",
 		"dev": "npm run rmsappers && sapper dev",
 		"export": "npm run rmsappers && export SAPPER_EXPORT=true && sapper export --legacy",
