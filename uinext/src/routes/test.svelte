@@ -6,7 +6,7 @@
 </script>
 
 <ViewsXor
-	currentViewId='1'
+	currentViewId='0'
 >
 	<MaybeView id='0'>
 		<Quads />
