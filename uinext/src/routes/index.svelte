@@ -15,6 +15,10 @@
 		<Medium />
 	</MaybeView>
 	<MaybeView id='1'>
-		<Small/>
+			<Small/>
 	</MaybeView>
 </ViewsXor>
+
+<style>
+
+</style>
