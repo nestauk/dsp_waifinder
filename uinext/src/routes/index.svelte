@@ -1,24 +1,24 @@
 <script>
-	import mapboxgl from 'mapbox-gl';
-	import {
-		MAPBOXGL_ACCESSTOKEN as accessToken,
-		MAPBOXGL_STYLEURL as styleURL
-	} from 'app/config';
-	import Map from 'app/components/Map/Map.svelte';
-	import MapboxglUnsupported from 'app/components/Map/MapboxglUnsupported.svelte';
+	import {_screen}
+		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 
-	const withScaleControl = false;
-	const withZoomControl = true;
-	const isMapboxGLSupported = mapboxgl.supported();
+	import Medium from 'app/components/homeScreen/Medium.svelte';
+	import Small from 'app/components/homeScreen/Small.svelte';
+	import View from 'app/components/ViewPorts/View.svelte';
+	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
 </script>
 
-{#if isMapboxGLSupported}
-	<Map
-		{accessToken}
-		{styleURL}
-		{withScaleControl}
-		{withZoomControl}
-	/>
-{:else}
-	<MapboxglUnsupported />
-{/if}
+<ViewsXor
+	viewId='{$_screen?.sizes?.medium? 'medium':'small'}'
+>
+	<View id='medium'>
+		<Medium />
+	</View>
+	<View id='small'>
+		<Small/>
+	</View>
+</ViewsXor>
+
+<style>
+
+</style>
