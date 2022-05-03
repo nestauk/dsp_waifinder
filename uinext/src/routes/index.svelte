@@ -2,21 +2,21 @@
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 
-	import MaybeView from 'app/components/ViewPorts/MaybeView.svelte'
-	import Medium from 'app/components/Medium.svelte';
-	import Small from 'app/components/Small.svelte';
-	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte'
+	import Medium from 'app/components/homeScreen/Medium.svelte';
+	import Small from 'app/components/homeScreen/Small.svelte';
+	import View from 'app/components/ViewPorts/View.svelte';
+	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
 </script>
 
 <ViewsXor
-	currentViewId='{$_screen?.sizes?.medium? '0':'1'}'
+	currentViewId='{$_screen?.sizes?.medium? 'medium':'small'}'
 >
-	<MaybeView id='0'>
+	<View id='medium'>
 		<Medium />
-	</MaybeView>
-	<MaybeView id='1'>
+	</View>
+	<View id='small'>
 		<Small/>
-	</MaybeView>
+	</View>
 </ViewsXor>
 
 <style>
