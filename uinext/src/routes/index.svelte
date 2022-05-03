@@ -9,7 +9,7 @@
 </script>
 
 <ViewsXor
-	currentViewId='{$_screen?.sizes?.medium? 'medium':'small'}'
+	viewId='{$_screen?.sizes?.medium? 'medium':'small'}'
 >
 	<View id='medium'>
 		<Medium />
