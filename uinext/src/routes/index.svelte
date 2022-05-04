@@ -13,7 +13,7 @@
 	};
 
 	const loadData = async () => {
-		const response = await fetch('/data/ai_map_orgs_places.json');
+		const response = await fetch('/data/tests/ai_map_orgs_places.json');
 		data = await response.json();
 		data.orgs.length = Math.max(3000, data.orgs.length);
 	}
