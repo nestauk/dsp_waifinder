@@ -2,7 +2,6 @@
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
-	import * as _ from 'lamb';
 
 	import Medium from 'app/components/homeScreen/Medium.svelte';
 	import Small from 'app/components/homeScreen/Small.svelte';
