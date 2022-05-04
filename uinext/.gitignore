@@ -3,7 +3,5 @@ _
 /cypress/screenshots/
 /node_modules/
 /src/node_modules/@sapper/
-/static/data/
-!/static/data/tests
 /static/font/unused/
 /test/browserstack/.config.mjs
