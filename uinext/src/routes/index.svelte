@@ -1,4 +1,5 @@
 <script>
+	import * as _ from 'lamb';
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
@@ -9,6 +10,16 @@
 	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
 
 	let organizations = [];
+
+	/* property getters */
+
+	export const getLngLat = _.pipe([
+		_.getKey('location'),
+		_.collect([_.getKey('lon'), _.getKey('lat')])
+	]);
+	export const getID = _.getKey("name");
+	export const getLink = _.getKey("url");
+
 
 	const loadData = async () => {
 		const response = await fetch('/data/ai_map_orgs_places.json');
@@ -23,9 +34,19 @@
 
 <ViewsXor {viewId}>
 	<View id='medium'>
-		<Medium {organizations}/>
+		<Medium
+			items={organizations}
+			{getID}
+			{getLink}
+			{getLngLat}
+		/>
 	</View>
 	<View id='small'>
-		<Small {organizations}/>
+		<Small
+			items={organizations}
+			{getID}
+			{getLink}
+			{getLngLat}
+		/>
 	</View>
 </ViewsXor>
