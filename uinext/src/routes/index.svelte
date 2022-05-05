@@ -1,13 +1,14 @@
 <script>
+	import * as _ from 'lamb';
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
-	import * as _ from 'lamb';
 
 	import Medium from 'app/components/homeScreen/Medium.svelte';
 	import Small from 'app/components/homeScreen/Small.svelte';
 	import View from 'app/components/ViewPorts/View.svelte';
 	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
+	import {getLonLat} from 'app/utils/dataUtils';
 
 	let organizations = [];
 
@@ -24,9 +25,15 @@
 
 <ViewsXor {viewId}>
 	<View id='medium'>
-		<Medium {organizations}/>
+		<Medium
+			{getLonLat}
+			items={organizations}
+		/>
 	</View>
 	<View id='small'>
-		<Small {organizations}/>
+		<Small
+			{getLonLat}
+			items={organizations}
+		/>
 	</View>
 </ViewsXor>
