@@ -15,7 +15,7 @@
 		const response = await fetch('/data/ai_map_orgs_places.json');
 		const fulldata = await response.json();
 
-		organizations = _.takeFrom(fulldata?.orgs || [], 400);
+		organizations = fulldata?.orgs || [];
 	}
 
 	$: isClientSide && loadData();
