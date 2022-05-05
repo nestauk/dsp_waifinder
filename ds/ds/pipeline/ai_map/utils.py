@@ -330,20 +330,17 @@ def format_organisations(ai_map_data, types_dict):
     for i, organisation in ai_map_data.iterrows():
         orgs_list.append(
             {
-                "address": {
-                    "postcode": organisation["Postcode"],
-                    "place": organisation["Place"],
-                },
                 "description": organisation["Description"],
                 "location": {
                     "lat": organisation["Latitude"],
                     "lon": organisation["Longitude"],
+                    "postcode": organisation["Postcode"],
                 },
                 "name": organisation["Name"],
                 "place_id": organisation["place_id"],
                 "sector": {"label": None, "sic_code": None},
                 "topics": None,
-                "types": [
+                "org_types": [
                     type_number
                     for type_name, type_number in types_dict.items()
                     if organisation[type_name]
