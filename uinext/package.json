@@ -10,8 +10,7 @@
 		"lamb": "^0.59.2",
 		"mapbox-gl": "^2.8.1",
 		"node-fetch": "^2.6.1",
-		"queue-promise": "^2.1.0",
-		"svelte-virtual-list": "^3.0.1"
+		"queue-promise": "^2.1.0"
 	},
 	"description": "App UI",
 	"devDependencies": {
