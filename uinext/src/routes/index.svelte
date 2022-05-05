@@ -30,7 +30,3 @@
 		<Small {organizations}/>
 	</View>
 </ViewsXor>
-
-<style>
-
-</style>
