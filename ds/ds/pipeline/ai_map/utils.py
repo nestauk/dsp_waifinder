@@ -123,6 +123,17 @@ def get_geopy_addresses(all_output):
     )
 
 
+def get_postcode_field(postcode, geopy_postcode, lat_long):
+    if postcode:
+        return postcode
+    elif geopy_postcode:
+        return geopy_postcode
+    else:
+        locator = Nominatim(user_agent="myGeocoder", timeout=10)
+        address = locator.reverse(lat_long)
+        return address.raw["address"]["postcode"]
+
+
 def get_geo_data():
     query_geodata = (
         "SELECT geographic_data.city, geographic_data.latitude, geographic_data.longitude "
@@ -137,13 +148,27 @@ def clean_places(ai_map_data):
 
     ai_map_data.replace(to_replace=[np.nan], value=None, inplace=True)
 
-    # London is an anomyly, sometimes city is empty but the city district or state district is clearly London
-    ai_map_data.loc[
-        (ai_map_data["geopy_city"].isnull())
-        & (ai_map_data["geopy_city_district"].str.contains("London Borough of"))
-        & (ai_map_data["geopy_state_district"].str.contains("Greater London")),
-        "geopy_city",
-    ] = "London"
+    # There are some anomylies, sometimes city is empty but the city
+    # district or state district is clearly London/Manchester
+
+    if "geopy_state_district" in ai_map_data:
+        ai_map_data.loc[
+            (ai_map_data["geopy_city"].isnull())
+            & (ai_map_data["geopy_state_district"].str.contains("Greater Manchester")),
+            "geopy_city",
+        ] = "Manchester"
+        ai_map_data.loc[
+            (ai_map_data["geopy_city"].isnull())
+            & (ai_map_data["geopy_state_district"].str.contains("Greater London")),
+            "geopy_city",
+        ] = "London"
+
+    if "geopy_city_district" in ai_map_data:
+        ai_map_data.loc[
+            (ai_map_data["geopy_city"].isnull())
+            & (ai_map_data["geopy_city_district"].str.contains("London Borough of")),
+            "geopy_city",
+        ] = "London"
 
     def clean_city_names(city_name):
         if city_name:

@@ -203,6 +203,28 @@ class merge_map_datasets(FlowSpec):
         }
         self.places["place_type"] = self.places["Place"].map(place_type_dict)
 
+        self.next(self.data_clean_up)
+
+    @step
+    def data_clean_up(self):
+
+        from ds.pipeline.ai_map.utils import get_postcode_field
+
+        # If there was no postcode given, then use the geopy package
+        self.ai_map_data["Postcode"] = self.ai_map_data.apply(
+            lambda x: get_postcode_field(
+                x["Postcode"], x["geopy_postcode"], x["lat_long"]
+            ),
+            axis=1,
+        )
+
+        self.ai_map_data["Postcode"] = self.ai_map_data["Postcode"].apply(
+            lambda x: x.upper().replace(" ", "") if x else None
+        )
+        self.ai_map_data = pd.merge(
+            self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
+        ).reset_index(drop=True)
+
         self.next(self.save_tsv)
 
     @step
@@ -210,12 +232,6 @@ class merge_map_datasets(FlowSpec):
         """
         This is the original v1 tsv output
         """
-        self.ai_map_data["Postcode"] = self.ai_map_data["Postcode"].apply(
-            lambda x: x.upper().replace(" ", "") if x else None
-        )
-        self.ai_map_data = pd.merge(
-            self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
-        ).reset_index(drop=True)
 
         self.ai_map_data_final = self.ai_map_data[
             [
