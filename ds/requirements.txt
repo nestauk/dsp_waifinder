@@ -13,3 +13,6 @@ sqlalchemy
 pymysql
 selenium
 webdriver_manager
+geopy
+pgeocode
+nuts-finder

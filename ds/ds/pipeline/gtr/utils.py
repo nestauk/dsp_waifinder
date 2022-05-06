@@ -75,7 +75,11 @@ query_ai_orgs_all_topics = (
 query_cb_urls = (
     "SELECT crunchbase_organizations.homepage_url Link, "
     "crunchbase_organizations.name, "
-    "crunchbase_organizations.country "
+    "crunchbase_organizations.country, "
+    "crunchbase_organizations.city City, "
+    "crunchbase_organizations.long_description Description, "
+    "crunchbase_organizations.short_description Description_short, "
+    "crunchbase_organizations.postal_code Postcode "
     "FROM crunchbase_organizations "
     "WHERE LOWER(crunchbase_organizations.name) IN %(l)s"
 )
@@ -109,64 +113,41 @@ def combine_org_data(df_1, df_2):
     """Merge two dataframes on 'id' column and rename
     this column to org_id
     """
-    return df_1.merge(
-        df_2, how="left", on="id"
-        ).rename(
-            columns={
-                "id": "org_id",
-            }
-            )
+    return df_1.merge(df_2, how="left", on="id").rename(
+        columns={
+            "id": "org_id",
+        }
+    )
 
 
-def get_name_url_dict(org_names_url_df):
-    """Get URL information for each organisation
+def get_crunchbase_links(cb_org_info):
+    """Get extra information for each organisation
 
     Parameters:
-        org_names_url_df (DataFrame): Organisation names,
-            organisation country and URL. There can be multiple rows
+        cb_org_info (DataFrame): Organisation names,
+            and extra information from crunchbase. There can be multiple rows
             of different urls/countries for each organisation.
     Returns:
-        lower_name2url_dict (dict): dictionary of one URL
-            for each organisation in the form {organisation name: url, }.
-            If there are multiple URLs found for an organisation
-            then choose URL where the organisation country=United Kingdom,
-            and if this isn't available chose URL when country=United States,
-            otherwise just use random URL.
-        full_url_dict (dict): A nested dict of all the URL/country
-            information for each organisation in the form
-            {organisation name: {country: url, country: url,},}
+        lower_name2org_info (dict): A dictionary of lower case name
+            to organisation information found from crunchbase
+
     """
-
-    org_names_url_df = org_names_url_df[org_names_url_df["Link"].notnull()]
-    org_names_url_df["Name lower"] = org_names_url_df["name"].str.lower()
-    org_names_url_df.drop_duplicates(
-        ["Link", "Name lower", "country"],
-        inplace=True
-        )
-
-    def create_link_dict(x):
-        return {c: l for c, l in zip(x["country"], x["Link"])}
-
-    # For each company name, create a dict of all the
-    # country and link information given for it
-    full_url_dict = (
-        org_names_url_df.groupby("Name lower")
-        .apply(create_link_dict)
-        .reset_index(name="link_dict")
+    cb_org_info["Name lower"] = cb_org_info["name"].str.lower()
+    cb_org_info["Country order"] = cb_org_info["country"].apply(
+        lambda x: 0 if x == "United Kingdom" else (1 if x == "United States" else 2)
     )
-    full_url_dict = pd.Series(
-        full_url_dict["link_dict"].values, index=full_url_dict["Name lower"]
-    ).to_dict()
+    cb_org_info["Link order"] = cb_org_info["Link"].apply(lambda x: 0 if x else 1)
 
-    lower_name2url_dict = {}
-    for name, link_info in full_url_dict.items():
-        if link_info.get("United Kingdom"):
-            country = "United Kingdom"
-        elif link_info.get("United States"):
-            country = "United States"
-        else:
-            random.seed(42)
-            country = random.choice(list(link_info))
-        lower_name2url_dict[name] = link_info[country]
+    # Randomise order, then sort by country order, then delete duplicates
+    # UK data with links is our priority to include.
+    cb_org_info.sample(frac=1)
+    cb_org_info.sort_values(
+        by=["Country order", "Link order"], ascending=True, inplace=True
+    )
+    cb_org_info.drop_duplicates(["Name lower"], inplace=True)
 
-    return lower_name2url_dict, full_url_dict
+    lower_name2org_info = cb_org_info.set_index("Name lower")[
+        ["Link", "City", "Description", "Description_short", "Postcode"]
+    ].to_dict(orient="index")
+
+    return lower_name2org_info

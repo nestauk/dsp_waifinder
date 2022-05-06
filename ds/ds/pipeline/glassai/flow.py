@@ -95,7 +95,12 @@ class GlassAICompanies(FlowSpec):
         """
 
         self.ai_companies_df.rename(
-            columns={"organization_name": "Name", "organization_website": "Link"},
+            columns={
+                "organization_name": "Name",
+                "organization_website": "Link",
+                "cleaned_postcode": "Postcode",
+                "organization_description": "Description",
+            },
             inplace=True,
         )
 
@@ -107,7 +112,15 @@ class GlassAICompanies(FlowSpec):
         self.ai_companies_df_filtered = self.ai_companies_df.dropna(
             subset=["Longitude", "Latitude"]
         ).reset_index(drop=True)[
-            ["Name", "Link", "Longitude", "Latitude", "is_incubator"]
+            [
+                "Name",
+                "Link",
+                "Longitude",
+                "Latitude",
+                "is_incubator",
+                "Postcode",
+                "Description",
+            ]
         ]
 
         self.next(self.end)

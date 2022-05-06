@@ -79,16 +79,17 @@ class GtrAI(FlowSpec):
 
         self.ai_orgs_grouped = group_orgs(ai_org_ids_df)
 
-        self.next(self.find_urls)
+        self.next(self.find_cb_org_info)
 
     @step
-    def find_urls(self):
+    def find_cb_org_info(self):
         """
-        The GtR dataset doesn't include organisational urls
-        but some of these can be found elsewhere
+        The GtR dataset doesn't include organisational urls, cities or descriptions
+        but some of these can be found in the crunchbase data.
+        Here we create a dict of name: {url, city, description} for each org name.
         """
 
-        from ds.pipeline.gtr.utils import query_cb_urls, get_name_url_dict
+        from ds.pipeline.gtr.utils import query_cb_urls, get_crunchbase_links
         import pandas as pd
 
         # Establish the connection to the SQL database
@@ -99,13 +100,27 @@ class GtrAI(FlowSpec):
             query_cb_urls, conn, params={"l": tuple([s.lower() for s in org_names])}
         )
 
-        # Create dictionary for merging
-        name2url_dict, self.full_url_dict = get_name_url_dict(self.org_names_url_df)
+        self.name2orginfo = get_crunchbase_links(self.org_names_url_df)
 
-        # Merge on lower case name
-        self.ai_orgs_grouped["Link"] = (
-            self.ai_orgs_grouped["Name"].str.lower().map(name2url_dict)
-        )
+        def get_cb_info(col_name):
+            return (
+                self.ai_orgs_grouped["Name"]
+                .str.lower()
+                .apply(
+                    lambda x: self.name2orginfo[x][col_name]
+                    if self.name2orginfo.get(x)
+                    else None
+                )
+            )
+
+        self.ai_orgs_grouped["Link"] = get_cb_info("Link")
+        self.ai_orgs_grouped["City"] = get_cb_info("City")
+        self.ai_orgs_grouped["Postcode"] = get_cb_info("Postcode")
+        self.ai_orgs_grouped["Description"] = get_cb_info("Description")
+        # If there is no description, use the short description
+        self.ai_orgs_grouped.loc[
+            self.ai_orgs_grouped["Description"].isnull(), "Description"
+        ] = get_cb_info("Description_short")
 
         self.next(self.filter_ai_orgs)
 
@@ -138,7 +153,17 @@ class GtrAI(FlowSpec):
                 & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
             ]
             .dropna(subset=["Longitude", "Latitude"])
-            .reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
+            .reset_index(drop=True)[
+                [
+                    "Name",
+                    "Link",
+                    "Longitude",
+                    "Latitude",
+                    "City",
+                    "Postcode",
+                    "Description",
+                ]
+            ]
         )
 
         self.next(self.end)
