@@ -363,9 +363,7 @@ def format_organisations(ai_map_data, types_dict):
                 },
                 "name": organisation["Name"],
                 "place_id": organisation["place_id"],
-                "sector": {"label": None, "sic_code": None},
-                "topics": None,
-                "org_types": [
+                "types": [
                     type_number
                     for type_name, type_number in types_dict.items()
                     if organisation[type_name]
