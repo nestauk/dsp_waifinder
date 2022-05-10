@@ -1,13 +1,13 @@
-import {mdsvex} from 'mdsvex';
-import babel from 'rollup-plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import dsv from '@rollup/plugin-dsv';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
+import yaml from '@rollup/plugin-yaml';
+import {mdsvex} from 'mdsvex';
+import babel from 'rollup-plugin-babel';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
-import yaml from '@rollup/plugin-yaml';
 import config from 'sapper/config/rollup.js';
 
 import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
@@ -18,15 +18,11 @@ const isExported = process.env.SAPPER_EXPORT;
 const dev = mode === 'development';
 const legacy = Boolean(process.env.SAPPER_LEGACY_BUILD);
 
-const onwarn = (warning, onwarn) => {
-	// console.log(warning);
-
-	return (
-		warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message)
-		|| warning.code === 'CIRCULAR_DEPENDENCY' && (/[/\\]@sapper[/\\]/u).test(warning.message)
-		|| warning.code !== 'CIRCULAR_DEPENDENCY'
-	) && onwarn(warning)
-};
+const onwarn = (warning, warn) => (
+	warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message) ||
+	warning.code === 'CIRCULAR_DEPENDENCY' && (/[/\\]@sapper[/\\]/u).test(warning.message) ||
+	warning.code !== 'CIRCULAR_DEPENDENCY'
+) && warn(warning);
 
 export default {
 	client: {
