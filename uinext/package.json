@@ -66,7 +66,7 @@
 	"scripts": {
 		"build": "npm run rmsappers && sapper build --legacy",
 		"chmod": "chmod u+x src/bin/*",
-		"copydata": "npm run chmod && node -r esm src/bin/copy_data.js",
+		"copydata": "cpy --flat ../ds/outputs/data/ai_map_orgs_places.json ./static/data/",
 		"copymapboxcss": "cpy --flat ./node_modules/mapbox-gl/dist/mapbox-gl.css ./static/css/",
 		"deploy": "npm run makedata && npm run export",
 		"dev": "npm run rmsappers && sapper dev",
@@ -74,15 +74,14 @@
 		"lighthouse": "node -r esm test/lighthouse/validate.js",
 		"linksvizzles": "npm link @svizzle/ui @svizzle/dev @svizzle/file @svizzle/utils && npm list",
 		"lint": "eslint rollup.config.js 'src/**/*.{js,svelte}'",
-		"makedata": "npm run makeindex && npm run rmdata && npm run copydata",
-		"makeindex": "npm run chmod && node -r esm src/bin/make_index.js",
+		"makedata": "npm run rmdata && npm run copydata",
 		"pa11y": "node -r esm test/pa11y/validate.js",
 		"reportToCSV": "npm run chmod && node -r esm src/bin/reportToCSV.js",
 		"rmdata": "rimraf static/data",
 		"rmsappers": "rimraf __sapper__ src/node_modules/@sapper",
+		"selenium": "node test/browserstack/selenium-runner.mjs",
 		"start": "node __sapper__/build",
 		"test": "run-p --race dev cy:run",
-		"selenium": "node test/browserstack/selenium-runner.mjs",
 		"unittest": "mocha -r esm --spec src/**/*.spec.js"
 	}
 }

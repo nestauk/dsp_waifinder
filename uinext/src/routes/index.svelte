@@ -1,8 +1,9 @@
 <script>
-	import * as _ from 'lamb';
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {getId} from '@svizzle/utils';
+	import * as _ from 'lamb';
 
 	import Medium from 'app/components/homeScreen/Medium.svelte';
 	import Small from 'app/components/homeScreen/Small.svelte';
@@ -10,13 +11,23 @@
 	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
 	import {getLonLat} from 'app/utils/dataUtils';
 
-	let organizations = [];
+	let items;
 
 	const loadData = async () => {
 		const response = await fetch('/data/ai_map_orgs_places.json');
-		const fulldata = await response.json();
+		const json = await response.json();
 
-		organizations = fulldata?.orgs || [];
+		if (json) {
+			const {orgs, places, org_types} = json;
+			const placesById = _.index(places, getId);
+			items = _.map(orgs,
+				org => ({
+					...org,
+					place: placesById[org.place_id],
+					types: _.map(org.types, typeId => org_types[typeId])
+				})
+			)
+		}
 	}
 
 	$: isClientSide && loadData();
@@ -27,13 +38,13 @@
 	<View id='medium'>
 		<Medium
 			{getLonLat}
-			items={organizations}
+			{items}
 		/>
 	</View>
 	<View id='small'>
 		<Small
 			{getLonLat}
-			items={organizations}
+			{items}
 		/>
 	</View>
 </ViewsXor>
