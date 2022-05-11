@@ -8,10 +8,8 @@
 		"@svizzle/ui": "^0.5.0",
 		"@svizzle/utils": "^0.16.0",
 		"@turf/bbox": "^6.0.1",
-		"lamb": "^0.59.2",
-		"mapbox-gl": "^2.8.1",
-		"node-fetch": "^2.6.1",
-		"queue-promise": "^2.1.0"
+		"lamb": "^0.60.0",
+		"mapbox-gl": "^2.8.1"
 	},
 	"description": "App UI",
 	"devDependencies": {
@@ -39,9 +37,12 @@
 		"lighthouse": "^7.4.0",
 		"mdsvex": "^0.9.8",
 		"mocha": "^7.1.1",
+		"node-fetch": "^2.6.1",
+		"object-hash": "^3.0.0",
 		"pa11y": "^6.0.0",
 		"pa11y-reporter-html": "^2.0.0",
 		"polka": "^0.5.2",
+		"queue-promise": "^2.1.0",
 		"rimraf": "^3.0.2",
 		"rollup": "^2.36.2",
 		"rollup-plugin-babel": "^4.4.0",
@@ -68,6 +69,7 @@
 		"linksvizzles": "npm link @svizzle/ui @svizzle/dev @svizzle/file @svizzle/utils && npm list",
 		"lint": "eslint rollup.config.js 'src/**/*.{js,svelte}'",
 		"makedata": "npm run rmdata && npm run copydata",
+		"mergeAnnotations": "node -r esm src/bin/mergeAnnotations.js",
 		"pa11y": "node -r esm test/pa11y/validate.js",
 		"reportToCSV": "npm run chmod && node -r esm src/bin/reportToCSV.js",
 		"rmdata": "rimraf static/data",

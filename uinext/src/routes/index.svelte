@@ -14,7 +14,7 @@
 	let items;
 
 	const loadData = async () => {
-		const response = await fetch('/data/ai_map_orgs_places.json');
+		const response = await fetch('/data/ai_map_annotated_orgs.json');
 		const json = await response.json();
 
 		if (json) {
