@@ -10,12 +10,12 @@
 	} from '@svizzle/ui/src/a11y/menu/settings';
 	import FontsLoader from '@svizzle/ui/src/drivers/fonts/FontsLoader.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
-	import MultiBanner from '@svizzle/ui/src/MultiBanner.svelte';
 	import NoScript from '@svizzle/ui/src/NoScript.svelte';
 	import ScreenSensor, {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {onMount, beforeUpdate, tick} from 'svelte';
 
+	import MultiBanner from 'app/components/MultiBanner.svelte';
 	import Nav from 'app/components/Nav.svelte';
 	import {a11yFontFamilies, fontsInfo} from 'app/config';
 	import theme from 'app/theme';
