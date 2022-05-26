@@ -6,7 +6,7 @@
 	import Small from 'app/components/homeScreen/small/Small.svelte';
 	import View from 'app/components/ViewPorts/View.svelte';
 	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
-	import {_data, _orgs} from 'app/stores/data';
+	import {_data, updateData} from 'app/stores/data';
 	import {_screenId} from 'app/stores/layout';
 	import {setDefaultActiveView} from 'app/stores/navigation';
 	import {getLonLat} from 'app/utils/dataUtils';
@@ -15,9 +15,7 @@
 		const response = await fetch('/data/ai_map_annotated_orgs.json');
 		const json = await response.json();
 
-		if (json) {
-			_data.set(json);
-		}
+		json && updateData(json);
 	}
 
 	$: isClientSide && loadData();
@@ -28,13 +26,13 @@
 	<View id='medium'>
 		<Medium
 			{getLonLat}
-			items={$_orgs}
+			items={$_data.orgs}
 		/>
 	</View>
 	<View id='small'>
 		<Small
 			{getLonLat}
-			items={$_orgs}
+			items={$_data.orgs}
 		/>
 	</View>
 </ViewsXor>
