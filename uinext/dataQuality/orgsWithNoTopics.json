@@ -1,0 +1,1711 @@
+{
+  "minScore": 60,
+  "orgs": [
+    {
+      "description": "Novoic is a digital biotech company that develops AI-based speech analysis.",
+      "id": "471a438f4625ef4507fce2f9e778db78dcb57cdc",
+      "location": {
+        "lat": 51.525207,
+        "lon": -0.167722,
+        "postcode": "NW88SS"
+      },
+      "name": "Novoic",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.novoic.com"
+    },
+    {
+      "description": "[u'Unlisted Ltd. Real-time AI-powered valuations of private companies.. ']",
+      "id": "376cac1a7cbbb994996687fc602b884c8a860075",
+      "location": {
+        "lat": 55.865464,
+        "lon": -4.26894,
+        "postcode": "G24JR"
+      },
+      "name": "Unlisted Ltd",
+      "place_id": "3f4da5818818d50e770d539ea958f6cacffb775d",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.unlistedvaluations.com"
+    },
+    {
+      "description": "Ub hair is an AI-driven marketplace app that matches customers to hairstylists / barbers based on their hair type, location, price & style.",
+      "id": "87aee40f9e9fcc21b0b385dd0a849d6f49b636de",
+      "location": {
+        "lat": 51.524074,
+        "lon": -0.076689,
+        "postcode": "E16JJ"
+      },
+      "name": "ub hair",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://ubhair.net"
+    },
+    {
+      "description": "Trint unlocks the power of speech. Our platform uses A.I. to automatically transcribe audio and video, making it easy to find the moments that matter. We connect teams for seamless, fast and secure content creation. Trint liberates you from the menial…so you can focus on the meaningful.",
+      "id": "8d0ed1ce8f94cfe9b217e83bb1411ee14376d987",
+      "location": {
+        "lat": 51.514816,
+        "lon": -0.069325,
+        "postcode": "E11LN"
+      },
+      "name": "Trint",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.trint.com"
+    },
+    {
+      "description": "From its inception, TouchByte has focussed on developing exciting and innovative business solutions which solve problems for medium and large corporate customers. Retailers, banks and leisure venues suffer greatly from the lack of information they have about their visiting customers. We have therefore developed anonymous customer footfall / analytics, recognition and validation solutions using the latest, fast and accurate Face Recognition algorithms. TouchByte is a dynamic company focussed on delivering proven systems to meet new and challenging business requirements. Our business has a strategic focus of TRANSFORMING CUSTOMER INSIGHTS.",
+      "id": "c80fe74dc19b7960592cb9378ace453595801343",
+      "location": {
+        "lat": 50.161823,
+        "lon": -5.076174,
+        "postcode": "TR112SY"
+      },
+      "name": "TouchByte",
+      "place_id": "d094189cfb6758585eaae6d7a5eaa2a4e6d4227e",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.touchbyte.co.uk/"
+    },
+    {
+      "description": "Tech Nation fuels the growth of game-changing founders, leaders and scaling companies so they can positively transform societies and economies. We provide them with the coaching, community and connections they need for their journey in designing the future. Tech Nation - the growth platform for tech companies and leaders.",
+      "id": "1fbb134a6cf9b48c3d304e13074a389d34583a56",
+      "location": {
+        "lat": 51.519645,
+        "lon": -0.084083,
+        "postcode": "EC2M2PA"
+      },
+      "name": "TechNation Applied AI Programme",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "https://technation.io/programmes/applied-ai/"
+    },
+    {
+      "description": "Nova partner with talented people to conceive and scale digital business models that open new markets or disrupt existing ones. We have a seasoned team of over 100 professionals experienced in successful digital innovation. Nova co-invest alongside angel syndicates and fund managers to partner with accelerators and incubators. Through this \"Cofoundery\", we discover and mentor entrepreneurial talent and opportunity. Nova partner with founders to complete a trusted cofounder team. We then deliver capability, knowledge and experience to conceive and scale a successful digital business. We enable our founders to leverage their domain expertise and business network to successfully identify real problems and engage with real users. At the same time, our cofoundery team work on creating a solution with a viable business model. Nova have developed a scalable methodology that increases the chances of investments succeeding and we make active investments in seed stage opportunities. Consequently, 48.85% of our startups are succeeding.",
+      "id": "82852cb9a1a2435aa45c1f4c55df55dd0c4b170c",
+      "location": {
+        "lat": 53.425686,
+        "lon": -2.994401,
+        "postcode": "L59UB"
+      },
+      "name": "Nova",
+      "place_id": "b7c388ce99ae31d5a9b5b4769aa4e6c8b2b4d1c6",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "http://www.wearenova.co.uk"
+    },
+    {
+      "description": "UnLtd's mission is to reach out and unleash the energies of people who can transform the world in which they live. We call these people social entrepreneurs. We are the leading provider of support to social entrepreneurs in the UK and offers the largest such network in the world. We resource nearly 1,000 individuals each year through our core Awards programme. We operate a unique model by investing directly in individuals and offering a complete package of resources; from Awards of funding between £500 and £15,000 to ongoing advice, networking and practical support. We also resource community entrepreneurs to start-up; support those with more established ventures to scale up; and are committed to developing an eco-system of support to make it easier for those who need help to find it.",
+      "id": "b3e2fc6e1d5c60e77ecbd77ac730be4ab5b68689",
+      "location": {
+        "lat": 51.522664,
+        "lon": -0.092935,
+        "postcode": "EC1Y8JJ"
+      },
+      "name": "UnLtd",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "http://unltd.org.uk/"
+    },
+    {
+      "description": "Quadible helps businesses mitigate fraud and improve customer satisfaction while reducing their operating costs. It’s an AI-platform that continuously authenticates users, without the need of any active user input, learning their behavioural patterns.",
+      "id": "dbbbcffe9aa772112bbf2dbc847265dd955b4a34",
+      "location": {
+        "lat": 51.514897,
+        "lon": -0.123615,
+        "postcode": "WC2H9JQ"
+      },
+      "name": "Quadible",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.quadible.co.uk"
+    },
+    {
+      "description": "Deploying AI-operated greenhouses outside every city on earth",
+      "id": "4c2b74b75ff97cb07b3839e5e657c3d1f6b24255",
+      "location": {
+        "lat": 51.493393,
+        "lon": -0.226335,
+        "postcode": "W60NB"
+      },
+      "name": "Optimal Labs",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://optimal.ag"
+    },
+    {
+      "description": "Our AI-powered algorithms help you source and score early stage startups so you’ll never miss a deal.",
+      "id": "9ba1d3ae8b8d940f19c9e0521a4c290a33bedc8f",
+      "location": {
+        "lat": 51.524388,
+        "lon": -0.082296,
+        "postcode": "EC2A4EG"
+      },
+      "name": "Koble",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.koble.ai"
+    },
+    {
+      "description": "Ravelin provides sophisticated technology and dedicated support to help online businesses prevent advanced fraud threats and accept payments confidently.",
+      "id": "a4c0b4b52d02b3d54535f61e5293af95d70b25a6",
+      "location": {
+        "lat": 51.525169,
+        "lon": -0.090466,
+        "postcode": "EC1V9BP"
+      },
+      "name": "Ravelin Technology",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.ravelin.com/"
+    },
+    {
+      "description": "RealSam is an Artificial Intelligence-powered technology solution for people living with Sight Loss.",
+      "id": "940c8db365e39d0ada929cafcdcaf31a26ca2f55",
+      "location": {
+        "lat": 51.522259,
+        "lon": -0.115165,
+        "postcode": "WC1N2EB"
+      },
+      "name": "RealSam",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.realsam.co.uk"
+    },
+    {
+      "description": "We elevate individual performance. The Raiys app connects your employees on an organisation-wide level to a wealth of world-class coaches via our AI-driven, Optimal Matching Tool (OMT). With 20+ interactive features, Raiys is the only app your people need to pursue a fulfilling career with 24-hour support and guidance. Our proprietary coaching method focuses on two areas: mindset and growth. Throughout your career, there’s a lot that lies outside your sphere of influence. We focus on what’s inside that sphere, your attainable attributes. - Wellbeing - Confidence - Resilience - Perspective - Motivation - Connection - Productivity - Leadership Some of the country’s leading business use our platform to further their people’s careers - collectively employing over 750,000 employees! Let's #RaiysOurGame together, visit www.raiys.com",
+      "id": "3971a63d085e2691ce54ce7d58d1a335e2cd0f2b",
+      "location": {
+        "lat": 53.388629,
+        "lon": -2.597123,
+        "postcode": "WA11SL"
+      },
+      "name": "Raiys",
+      "place_id": "5721da60e5282143f471727a8dcbc69e5c0c6b83",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.raiys.com"
+    },
+    {
+      "description": "We build AI-based conversational experiences",
+      "id": "3e0ac284fbd18a508ef2df99d093ea8dc04d8523",
+      "location": {
+        "lat": 51.522201,
+        "lon": -0.109736,
+        "postcode": "EC1R5DF"
+      },
+      "name": "PolyAI",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://poly.ai"
+    },
+    {
+      "description": "Javelyn Technologies is a privately held incubator and investment vehicle for social impact and cutting edge technology ventures.",
+      "id": "4e03aa2da0a479ef0862fa4fd8d01bf9522b72a6",
+      "location": {
+        "lat": 51.514772,
+        "lon": -0.072095,
+        "postcode": "E18FA"
+      },
+      "name": "Javelyn Technology",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "http://www.javelyn.io"
+    },
+    {
+      "description": "We're developing a new range of cutting-edge AI-based tools that enable machines to think like humans.",
+      "id": "57804d2a8934fcbe21bfa047420fcf58a629e9dc",
+      "location": {
+        "lat": 51.577844,
+        "lon": -1.309304,
+        "postcode": "OX110RL"
+      },
+      "name": "Oxford Dynamics",
+      "place_id": "1a9d43d065aa445a0a4c99d38c217ca36e1a956c",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.oxdynamics.com"
+    },
+    {
+      "description": "Photonic Vision Limited (PVL), established in 2014, leverages space imaging technology to develop LidarVision, a key sensing modality for the autonomous vehicles & robots revolution. Our approach delivers inherent technological advantages at a break-through price, enabling mass market adoption.",
+      "id": "6f83239cd5a2f199273fe584556c50423b170d3e",
+      "location": {
+        "lat": 51.273053,
+        "lon": 0.190679,
+        "postcode": "TN131XR"
+      },
+      "name": "PhotonicVision",
+      "place_id": "3c6eac5ede6d5948892713650b9ace319d36ae94",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://photonic.vision"
+    },
+    {
+      "description": "AI-powered customer feedback analysis",
+      "id": "8e94a8c83161a7770e9a0beed1ed7c0606b16611",
+      "location": {
+        "lat": 51.521843,
+        "lon": -0.084997,
+        "postcode": "EC2A2BB"
+      },
+      "name": "Prodsight",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.prodsight.com/"
+    },
+    {
+      "description": "PatSnap has brought together the world's most comprehensive R&D dataset in one easy to use platform to help innovation leaders analyse tech trends, assess new opportunities, conduct competitor intelligence and maximise return on IP assets. By combining millions of data points from patents, licensing, litigation and company information with non-patent literature, PatSnap provides the world's most innovative organisations with a new intuitive source of information to accelerate their R&D.",
+      "id": "7ef965cde41c9e0d9ef23e1aad0571baea4e762b",
+      "location": {
+        "lat": 51.493859,
+        "lon": -0.273951,
+        "postcode": "W45YS"
+      },
+      "name": "Patsnap",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.patsnap.com/login/"
+    },
+    {
+      "description": "Nci Labs is committed to accelerating the commercialisation of nano-drugs by engineering AI-enabled platform predicting precise targeting and delivery of nano-drugs directly to desired site in diseased individuals.",
+      "id": "dbc468e1bf6e7112af384fd44290d3dbbe9a014a",
+      "location": {
+        "lat": 51.581946,
+        "lon": -0.237476,
+        "postcode": "NW44PL"
+      },
+      "name": "Nci Labs",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://ncilabs.co.uk"
+    },
+    {
+      "description": "Robotics and Analytics",
+      "id": "e38ec51eaf2306a5f69780e854cb7ae526299950",
+      "location": {
+        "lat": 51.498499,
+        "lon": -0.112817,
+        "postcode": "SE17DP"
+      },
+      "name": "Kainotomo Solutions",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://kainotomo.co.uk"
+    },
+    {
+      "description": "Meeow is an AI-powered video networking platform.",
+      "id": "767b92e4d399b4667435618674d9fc56a97b995c",
+      "location": {
+        "lat": 53.797875,
+        "lon": -1.553619,
+        "postcode": "LS12JR"
+      },
+      "name": "Meeow",
+      "place_id": "a21ab7df6d6a3f7d804151ccb3818205ff292358",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.meeow.com"
+    },
+    {
+      "description": "Picojar is an AI-powered note-taking system that provides a unique workflow to help you efficiently turn your spontaneous thoughts and discoveries into smart and interconnected notes.",
+      "id": "b11683c2078f8f51c4f9eb8160b31a6a68b831b8",
+      "location": {
+        "lat": 55.929944,
+        "lon": -3.205051,
+        "postcode": "EH104AR"
+      },
+      "name": "PicoJar",
+      "place_id": "f5e51e5206dd01b4c23feddeff9b02d543fbaf3d",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://picojar.com"
+    },
+    {
+      "description": "Kristalic is building an AI-powered assistant designed to record your work-related conversations",
+      "id": "d70fe7d4aa4e9edb52f496af3230c7923b1157a9",
+      "location": {
+        "lat": 52.198361,
+        "lon": 0.120673,
+        "postcode": "CB21PZ"
+      },
+      "name": "Kristalic",
+      "place_id": "866e3595165f2e9b8f45714448c04fe2201ec452",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.kristalic.com"
+    },
+    {
+      "description": "Mesg.ai automates your research and copywriting process, so your sales team can send personalised outreach emails in one click",
+      "id": "cfeb606f4f812e8fb824834e004fd787cbc6f23f",
+      "location": {
+        "lat": 51.514897,
+        "lon": -0.123615,
+        "postcode": "WC2H9JQ"
+      },
+      "name": "Mesg.ai",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://mesg.ai"
+    },
+    {
+      "description": "AI-Powered Digital Health Coach designed to keep older adults healthy, safe, and more connected to their loved ones",
+      "id": "a3277a6038a57344b21e73ff116e25cca8fcfc0e",
+      "location": {
+        "lat": 51.520592,
+        "lon": -0.12221,
+        "postcode": "WC1N3AX"
+      },
+      "name": "Miicare",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://miicare.co.uk"
+    },
+    {
+      "description": "We believe that everyone deserves the opportunity to achieve mastery. The Recourse experiential learning platform instantly lets you put theory into practice, using conversational AI-powered Digital Humans to simulate complex interactions. With instant feedback anytime, anywhere, we support healthcare organisations to achieve optimum performance.",
+      "id": "e728eda27351965104c8ebea366a5d6a66b89d55",
+      "location": {
+        "lat": 53.473768,
+        "lon": -2.250625,
+        "postcode": "M154GB"
+      },
+      "name": "Recourse AI",
+      "place_id": "af153f49d29db94443684d493468e2a93621887d",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://recourseai.com"
+    },
+    {
+      "description": "Startup Of The Year at the Travolution Awards 2020 and Champions of Content at the Travolution Awards 2021, tripAbrood is the award-winning tech startup, shaping the future of family travel. Live with the world’s first AI-powered family travel booking experience.",
+      "id": "a6bb2adb567f6940f6acc3c89ade5dbe3841ef6f",
+      "location": {
+        "lat": 51.527304,
+        "lon": -0.088894,
+        "postcode": "EC1V2NX"
+      },
+      "name": "tripAbrood",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://tripabrood.com"
+    },
+    {
+      "description": "Experts in Human, Vehicle and Object Detection. Bi3 have been keeping property secure and people safe and informed since 2009. We combine innovative, cutting-edge technology from around the world with in-house expertise to provide bespoke solutions for the security and business information sectors. We are committed to being the best in our ﬁeld by providing a ﬁrst class, trusted and friendly service. We operate in the spirit of mutually beneﬁcial co-operation and aim to exceed expectations of customers, suppliers, and partners. We actively encourage our employees to contribute and share in our success, promoting an open and creative working environment enabling everyone to achieve their potential both professionally and personally.",
+      "id": "299258b1b82bc9d7a57378bfe20d5606d5dfcf89",
+      "location": {
+        "lat": 53.760415,
+        "lon": -2.717607,
+        "postcode": "PR18UQ"
+      },
+      "name": "Business Insight 3",
+      "place_id": "fa91305f5cc7895b2e2e5c93cca5d9ef51dd762f",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.bi3.co.uk"
+    },
+    {
+      "description": "Bibblio offers an AI-driven content recommendation platform to publishing and media businesses that helps them increase engagement, improve monetization and boost growth. Built as a utility technology for digital publishers, Bibblio allows them to easily power their site’s related and popular content, improve monetization by promoting branded, sponsored or affiliate content, and partner with other sites to drive new audiences. Our offering is affordable, easy-to-onboard and now runs on over 900 sites, serving app. 100m users a month. The product suite consists of the following tools: Circulation, Promotion and Syndication. Our Circulation tool suggests the best of your content to your visitors, making them stay longer and consume more. Our Promotion tool displays your revenue-generating content in all the right places. Lastly, our Syndication tool lets you share your audiences across your own digital properties or partner with other sites to drive quality audiences and share revenue. The results are empowering for publishing businesses - on average our clients see an uplift of 5-7% in engagement and 5x ROI.",
+      "id": "0fb62be76a50e2670acfb4270728cd2cc7b94600",
+      "location": {
+        "lat": 51.523874,
+        "lon": -0.096546,
+        "postcode": "EC1V9AE"
+      },
+      "name": "Bibblio",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.bibblio.org"
+    },
+    {
+      "description": "ChatBot development isn't a standard process for us. So we should understand your targets and needs properly. According to pre-analyse, we present a technical and commercial offer for your project. In this offer, we state a clear timetable and project KPIs. We work on the persona of ChatBot with the help of your team and we present ChatBot persona and design report at the end of this process. We make a plan to collect data which feeds ChatBot. Integration plan with 3rd party systems will be designed during this part of the project. We develop ChatBot, make designated integrations and customize our ChatBot management panel according to your needs. You will have your ChatBot and ChatBot management system. We make user tests in coordination with your teams. Training of the ChatBot will be activated in this part of the project. Using our ChatBot management platform, you can develop ChatBot knowledge base continuously.",
+      "id": "8f466484f265718bc26e34a4894c0f1651df45c5",
+      "location": {
+        "lat": 51.590841,
+        "lon": -0.102106,
+        "postcode": "N153NP"
+      },
+      "name": "BOT-IOT",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.bot-iot.com"
+    },
+    {
+      "description": "Protect your business from financial crimes with Sanction Scanner, an AI-driven compliance software.",
+      "id": "72510a19349c614a91586f1a5d6e93e401ae3f2c",
+      "location": {
+        "lat": 51.520592,
+        "lon": -0.12221,
+        "postcode": "WC1N3AX"
+      },
+      "name": "Sanction Scanner",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://sanctionscanner.com/"
+    },
+    {
+      "description": "Developers of an AI-powered tool for engineers to design better infrastructure. Accelerates design by 40% and reduces total cost by 10%.",
+      "id": "8fda742bd46845b2183430ef28bb63332ff6545e",
+      "location": {
+        "lat": 55.946941,
+        "lon": -3.201752,
+        "postcode": "EH39DR"
+      },
+      "name": "Continuum Industries",
+      "place_id": "b688061d53ead1d46b7c38bdeef82ece38e48cfe",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://continuum.industries"
+    },
+    {
+      "description": "AI-based online skin analysis tool and skin care recommendation engine.",
+      "id": "cd47142971ff2f61837f5c70f98504cdfdf3b3d1",
+      "location": {
+        "lat": 51.514455,
+        "lon": -0.111772,
+        "postcode": "WC2A2JR"
+      },
+      "name": "Skinora",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.skinora.co.uk/"
+    },
+    {
+      "description": "Enabling technologies for autonomous vehicles, UAVs and drones",
+      "id": "433ede3dd505e3acb59a6f502135904b10786115",
+      "location": {
+        "lat": 51.496875,
+        "lon": -0.101359,
+        "postcode": "SE16LN"
+      },
+      "name": "Albora Technologies",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.albora.io"
+    },
+    {
+      "description": "Staff Timer app is an AI-enabled software that effectively tracks employee work hours using key features like real-time monitoring etc.",
+      "id": "fc4806e3e6fa851be304dd517614d76daf02ff12",
+      "location": {
+        "lat": 51.530785,
+        "lon": -0.093391,
+        "postcode": "N17GU"
+      },
+      "name": "Stafftimer LTD",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.stafftimerapp.com"
+    },
+    {
+      "description": "Our mission here at Scholarcy is to democratise knowledge, by helping you to learn more while reading less. We've developed AI-powered tools that turn your research papers, reports and books into interactive summary flashcards, simplifying the process of reading and consuming research. Scholarcy extracts tables and data, figures as downloadable images, and gives you the key highlights, helping you to speed-read the paper, follow the arguments and take away the main points.",
+      "id": "0f7162346cd2459944d53ecd21b70e696ef61a64",
+      "location": {
+        "lat": 51.514897,
+        "lon": -0.123615,
+        "postcode": "WC2H9JQ"
+      },
+      "name": "Scholarcy",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.scholarcy.com/"
+    },
+    {
+      "description": "Pioneering safety-tech company that exists to keep children safe online. We provide award winning technology with a focus on prevention, real-time on device safeguarding and preserving privacy. We want to work with partners across sectors to keep children safer online.",
+      "id": "89a33d037d9cdc81dbe0f802ed634019e57d9b70",
+      "location": {
+        "lat": 51.513579,
+        "lon": -0.118377,
+        "postcode": "WC2B4AS"
+      },
+      "name": "SafeToNet",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://safetonet.com/en-gb/"
+    },
+    {
+      "description": "The new generation, blockchain-based and AI-powered platform where customers and professionals get in touch, strengthen their network, make deals and design new projects.",
+      "id": "5dcb1bc0b4426d9a12092bacaa65ced9f73ba5dc",
+      "location": {
+        "lat": 51.484738,
+        "lon": -0.319534,
+        "postcode": "TW89DN"
+      },
+      "name": "Sensitrust",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.sensitrust.io/"
+    },
+    {
+      "description": "Swapp aims to disrupt the current planning methodologies by providing an AI-driven end-to-end planning service.",
+      "id": "32c673bb35714a82ffc505d24472271e88661ea4",
+      "location": {
+        "lat": 51.520839,
+        "lon": -0.135869,
+        "postcode": "W1T4AH"
+      },
+      "name": "Swapp",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.swapp.net/"
+    },
+    {
+      "description": "Sumsub is an AI-based solution that automates identity verification and anti-fraud.",
+      "id": "56d83832cac7f993b95e32f6affebb9c1f5de4b9",
+      "location": {
+        "lat": 51.514484,
+        "lon": -0.080463,
+        "postcode": "EC3A8BF"
+      },
+      "name": "Sum&Substance",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://sumsub.com"
+    },
+    {
+      "description": "Revolutionising the cot so you could sleep too. Smart cot is packed with sensors and latest technologies to track your baby’s health, growth and development.",
+      "id": "f5e459146d4fd6db2664cabb200f869b21492aea",
+      "location": {
+        "lat": 51.522586,
+        "lon": -0.08537,
+        "postcode": "EC2A4BX"
+      },
+      "name": "Smart-cot",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.smart-cot.com"
+    },
+    {
+      "description": "CAP-AI is London’s first A.I. enabling programme focused on stimulating growth in London’s A.I. cluster. We help SMEs gain access to computational power, resource and talent that they would not normally be able to find or afford, enabling them to move their businesses forward.",
+      "id": "70180f0f882779fd2d297bc76bec5230eb537619",
+      "location": {
+        "lat": 51.521843,
+        "lon": -0.084997,
+        "postcode": "EC2A2BB"
+      },
+      "name": "Capital Enterprise",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "https://capitalenterprise.org/programme-cap-ai/"
+    },
+    {
+      "description": "VSaaS.Cloud is the World's first robotic video based home security system. It uses Ai to manage the outside of your home or business to stop people before they get inside.",
+      "id": "80001a6a60048daf02fbdd2e49a00a55937c894e",
+      "location": {
+        "lat": 52.899533,
+        "lon": -1.460082,
+        "postcode": "DE248BE"
+      },
+      "name": "VSaaS Cloud",
+      "place_id": "b31f74bcf335209659d4d0994e6a4bbaaa80e73f",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.vsaas.cloud"
+    },
+    {
+      "description": "Xihelm is automating robotic, laborious handwork.",
+      "id": "8e4d11d435491b83e151859ba7d59a628122636b",
+      "location": {
+        "lat": 50.75889,
+        "lon": -2.074734,
+        "postcode": "BH166FA"
+      },
+      "name": "Xihelm",
+      "place_id": "8315df4e4cfe6881b4dbfcda87d320fdfa5df33e",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.xihelm.com/"
+    },
+    {
+      "description": "AI-backed platform to assess the Credit Risk of SMEs",
+      "id": "700ffdbed7a15d44302d895b42b058dbb351abda",
+      "location": {
+        "lat": 51.509974,
+        "lon": -0.086735,
+        "postcode": "EC4R9AN"
+      },
+      "name": "Wiserfunding",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.wiserfunding.com"
+    },
+    {
+      "description": "We are a multi-award winning, international partnership marketing and activation agency. We use our AI-powered insight and research tools combined with our bespoke brand matcher software to identify the best partners for our clients. Our expert team then work with both parties to deliver the activation.",
+      "id": "692d88ca4855fae69b03029ecd2348497f98f12b",
+      "location": {
+        "lat": 51.523127,
+        "lon": -0.086993,
+        "postcode": "EC1Y1AA"
+      },
+      "name": "BRIDGE",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.bridgeglobal.co"
+    },
+    {
+      "description": "Calyo is developing the next generation AI-enabled perception system that offers unprecedented combination of high performance, flexibility and low cost for smart mobile robots and autonomous vehicles.",
+      "id": "866d5b401977040ef3670a8fc6e8ace45751cb18",
+      "location": {
+        "lat": 51.499618,
+        "lon": -2.551821,
+        "postcode": "BS348RB"
+      },
+      "name": "Calyo",
+      "place_id": "aca1b9e9441fafc9f311d095335c44bb5f79a44d",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://calyo.co.uk"
+    },
+    {
+      "description": "Inspiring, innovating, & growing the best creative & technical minds. A world-class workspace for digital and technology companies and individuals",
+      "id": "7e2cff0034d7acd6c7a0bb0e1a22179f24552d7c",
+      "location": {
+        "lat": 53.738909,
+        "lon": -0.333217,
+        "postcode": "HU11UU"
+      },
+      "name": "C4DI – Centre for Digital Innovation",
+      "place_id": "b45a22c907c1545dde867b49492419843069427e",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "http://www.c4di.co.uk/"
+    },
+    {
+      "description": "Corigan is an AI-driven suite of tools that allows brands to take control of their search performance at speed & scale, without needing to grow their team. It serves the function of SEO specialist, analyst & content writer in one.",
+      "id": "d42c6d58aeee716a02e28044b39cda6dcf15a789",
+      "location": {
+        "lat": 51.517516,
+        "lon": -0.122222,
+        "postcode": "WC1V6PX"
+      },
+      "name": "Corigan SEO Platform",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://corigan.io"
+    },
+    {
+      "description": "Causaly accelerates how humans acquire knowledge and develop insights in Biomedicine. We help researchers and decision-makers to discover evidence from millions of academic publications, clinical trials, regulatory documents, patents and other data sources, in minutes.",
+      "id": "259c381f584bab1a49049b9938ef02c419dd6512",
+      "location": {
+        "lat": 51.532863,
+        "lon": -0.110058,
+        "postcode": "N19PP"
+      },
+      "name": "Causaly",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.causaly.com"
+    },
+    {
+      "description": "IntellSense is a brand under which dedicated professionals collaborate to provide a range of data analytics consulting services to select clients. Analytics is not just about data. It is about segmenting together skills, technologies, practices for continuous iterative exploration and investigation of past business performance to gain insight and drive business planning. Together with our clients, we help them manage what is measured to achieve overall better performance through data.",
+      "id": "3c1d8938eb6e0b6cd13bfe3754c5d5079d4dfa27",
+      "location": {
+        "lat": 51.515527,
+        "lon": -0.097009,
+        "postcode": "EC1A4EN"
+      },
+      "name": "IntellSense",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://intellsenseltd.com"
+    },
+    {
+      "description": "Nine years ago we started Insiris with the belief that AI-Powered technology could change the landscape of business planning and working software. Since that time we have transformed the way organisations do business. At the heart of our ethos is the central goal to provide real, demonstrable value to our customers. We believe that technology can make organisations more effective, more productive, and more profitable when working hand-in-hand with a company's most valuable asset: its staff. This is why our AI-Powered Mobile Working and Planning software has been designed with planners, managers, field workers and your teams first. We believe that once staff champion technology and software that makes their lives easier, their jobs richer and the business more productive, that the sky is the limit.",
+      "id": "21af92fa51da04eea1494ae2936bbbc7afa5c934",
+      "location": {
+        "lat": 53.755722,
+        "lon": -2.702558,
+        "postcode": "PR13JJ"
+      },
+      "name": "Insiris",
+      "place_id": "fa91305f5cc7895b2e2e5c93cca5d9ef51dd762f",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.insiris.com/"
+    },
+    {
+      "description": "AeroCloud is bringing cloud-native, AI-powered software to airports of all sizes.",
+      "id": "819e210fc048a9aac701aed25c270eff8d131124",
+      "location": {
+        "lat": 53.326486,
+        "lon": -2.235724,
+        "postcode": "SK95AJ"
+      },
+      "name": "AeroCloud",
+      "place_id": "f47eaa133f9bc43239ed1381385d130b76d2efc2",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://aerocloudsystems.com"
+    },
+    {
+      "description": "ACVERA is one of the most complex development platform designed by developers for developers. It uses one of the most advanced neural networks to shape, develop and enhance software. We aim to revolutionise how our current industry operates and we plan to make this platform so simple to use that anyone with zero coding skill will be able to create the product or business they need.",
+      "id": "64c26f9a3bc2444dce160c7bfc07ea1562ddacbf",
+      "location": {
+        "lat": 51.527304,
+        "lon": -0.088894,
+        "postcode": "EC1V2NX"
+      },
+      "name": "ACVERA",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.acvera.com"
+    },
+    {
+      "description": "Transforming investment research using knowledge graphs and NLP",
+      "id": "784d6714e53d86d1c103125aed4ff2bc79494e94",
+      "location": {
+        "lat": 51.523891,
+        "lon": -0.083802,
+        "postcode": "EC2A4DP"
+      },
+      "name": "Auquan",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://auquan.com"
+    },
+    {
+      "description": "Concirrus' Quest platform provides proprietary behavioural data and predictive models that significantly outperform traditional risk assessment and underwriting techniques in the insurance market. Concirrus take a fresh approach to solving the challenges faced by the insurance industry. Our Quest products access and interpret large sets of static demographic and dynamic behavior-based data sets, and combine these with historical claims information to reveal the behaviours that correlate to claims. The outcome is new insights and rating factors that simply did not exist before, the ability to better deploy risk capital, improve loss ratios and drive down operating costs.",
+      "id": "4f8d31bd3068b748a1fadbb39db6fd754e8fd887",
+      "location": {
+        "lat": 51.504656,
+        "lon": -0.088617,
+        "postcode": "SE19RS"
+      },
+      "name": "Concirrus",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.concirrus.ai"
+    },
+    {
+      "description": "babaCLICK is a multinational consumer goods corporation in the making. Utilising the overwhelming reach of online marketplaces to enable faster, more nimble, more resilient and AI-driven supply chains to target the growing $200B+ market of 3P merchants.",
+      "id": "41814302b5092ad9d3201cf3ff7ef952586684df",
+      "location": {
+        "lat": 51.518467,
+        "lon": -0.142405,
+        "postcode": "W1W7LT"
+      },
+      "name": "babaCLICK",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://babaclick.com"
+    },
+    {
+      "description": "The Insurtech Gateway is the only investor with it’s own FCA authorised incubator + fund, the Insurtech Gateway is the fastest place to build and launch an insurtech idea. The insurance industry has so many barriers to entry, founders often run out of energy and money just trying to get in. The Gateway is a one-stop-shop for founders, where they can get underwriting paper, investment capital and advice on how to design and build their startup, all surrounded by great insurance partners. The Gateway fund supports the portfolio post incubation, to Series A and beyond. “They are our insurance sherpers, guiding us through the wilderness of insurance” Mark Musson, co-founder, Humn.ai (Gateway portfolio company) Insurers often struggle to innovate within their own businesses, the Gateway enable insurers to do this in a safe environment. They facilitate insurers, technology partners and insurtechs to get to know each other and work together, over the whole duration of building a business. The Gateway would like to meet early-stage founders with game-changing ideas or products, and progressive (re)insurers who are interested in collaboration. opensesame@insurtechgateway.com",
+      "id": "8dff64d96624a667e6a236dc745357820d12d752",
+      "location": {
+        "lat": 51.505836,
+        "lon": -0.10492,
+        "postcode": "SE18PB"
+      },
+      "name": "InsurTech Gateway",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0",
+        "1",
+        "2"
+      ],
+      "url": "http://www.insurtechgateway.com/"
+    },
+    {
+      "description": "15gifts integrates recommendation technology into third party sites to help customers quickly find their ideal product.",
+      "id": "58ff0a4347caa1a89f9f2a7e4dd7e59e54cca82b",
+      "location": {
+        "lat": 50.824166,
+        "lon": -0.145108,
+        "postcode": "BN13FE"
+      },
+      "name": "15gifts Ltd",
+      "place_id": "2d4fcc1efb63c76c4001b094d239800205dd12c7",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://15gifts.com/"
+    },
+    {
+      "description": "Through DigitalCity, we connect businesses with the knowledge, skills and expertise they need to thrive in a digital future. We’re here to support digital start-ups, help small- and medium-sized businesses who want to use digital to grow, and work with bigger companies to help put digital at the heart of their business.",
+      "id": "142d7f504d52da7fb441e9ef5a1ee9e7d133f5f2",
+      "location": {
+        "lat": 54.570374,
+        "lon": -1.236984,
+        "postcode": "TS13BX"
+      },
+      "name": "Industy 4.0 Accelerator",
+      "place_id": "e0b072173dac885b2a1276c71b1e7b8159fcde41",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "http://www.thedigitalcity.com"
+    },
+    {
+      "description": "Use a camera to check the integrity of your PCBA. A Neural Network will look for components faults on the board and will highlight them in matter of seconds. Any board and any type of component. Fast and reliable. A helping hand in your inspection process.",
+      "id": "be68ba273ca52c16a6a807e3a8a9c474891d2991",
+      "location": {
+        "lat": 55.958374,
+        "lon": -3.202282,
+        "postcode": "EH36RE"
+      },
+      "name": "AgnosPCB",
+      "place_id": "b688061d53ead1d46b7c38bdeef82ece38e48cfe",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://agnospcb.com"
+    },
+    {
+      "description": "AI-Backed Car-Advertising Platform. The GIG economy driven on-car mobility media Platform that delivers high reach at low cost CPM via vehicle wrapped advertising campaigns for D2C brands. Adverttu - Get your brand on the road.",
+      "id": "d4744d465f65fca46ec26441e2e5f395c412f73e",
+      "location": {
+        "lat": 51.504661,
+        "lon": -0.094468,
+        "postcode": "SE11RU"
+      },
+      "name": "Adverttu",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.adverttu.com"
+    },
+    {
+      "description": "The 7bridges platform generates ROI in just four weeks, and drives 30% savings on direct costs for our customers. Unlike other logistics technologies, we’re fast to integrate: for many the process takes less than two weeks. Our platform is flexible and scalable - and comes without the capital expenditure (CapEx) needed to build and maintain your own tools (or paying a consultancy to develop them for you). We’re confident that the 7bridges platform is the last logistics integration you’ll ever need to make, to future-proof your business.",
+      "id": "59936901fd0457b8965d56a189afec96802c10ac",
+      "location": {
+        "lat": 51.513055,
+        "lon": -0.133416,
+        "postcode": "W1F0EY"
+      },
+      "name": "7bridges",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.the7bridges.com/"
+    },
+    {
+      "description": "Automata is a deep-tech company that creates products that empower people to automate physical work. The company's product, Eva, is a lightweight and affordable robot arm built for professionals in a production line, in a lab, a home workshop or even in a classroom. People don't need to be technical experts to communicate with robots. The web-based software platform can be programmed by anyone, anywhere, any time, from any device, making it easy to reconfigure for a wide range of different tasks.",
+      "id": "d62bc70fc861387143e16fbcb0d6ff28bc71d265",
+      "location": {
+        "lat": 51.530054,
+        "lon": -0.097758,
+        "postcode": "EC1V1JX"
+      },
+      "name": "Automata",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://automata.tech/"
+    },
+    {
+      "description": "An AI-driven online film marketplace for movies designed to streamline and unify the sales acquisition journey.",
+      "id": "e3a2f4329dfcf020e9d40fb2ab2af4dcd655868a",
+      "location": {
+        "lat": 51.516947,
+        "lon": -0.104733,
+        "postcode": "EC1A2BN"
+      },
+      "name": "Cinnect",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.cinnect.net"
+    },
+    {
+      "description": "Forcive a software platform with an ideal combination of features that make the vision of an AI-driven company real.",
+      "id": "c5e981755a0e54f05f4577b76b86f8e3f3067cec",
+      "location": {
+        "lat": 51.537774,
+        "lon": -0.140526,
+        "postcode": "NW10AG"
+      },
+      "name": "Forcive",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.forcive.com"
+    },
+    {
+      "description": "AI-powered answers for modern research problems.",
+      "id": "4de5829ce44f76ee981c87a4701e082e2a323772",
+      "location": {
+        "lat": 51.50663,
+        "lon": -0.130335,
+        "postcode": "SW1Y5AH"
+      },
+      "name": "Genei",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://www.genei.io/lpv2/home-linkedin2"
+    },
+    {
+      "description": "Data that makes you more human. Real Human insight. Real-time communications. Real marketing returns. Welcome to the next generation of self-learning predictive marketing. The brains behind brand conversations that become more relevant, more human and more profitable the longer they’re ‘wired into’ your consumer. Delivering accountability, cost savings and step changes in marketing performance.",
+      "id": "29253a6d8cea1fb3802f4925a44840fa5f1762d8",
+      "location": {
+        "lat": 51.520362,
+        "lon": -0.107189,
+        "postcode": "EC1N8TS"
+      },
+      "name": "Ignition Ai",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.ignition.ai"
+    },
+    {
+      "description": "Emma.ai does those annoying travel planning admin tasks: - Adds accurate travel plans directly into your calendar - Quick appointment booking with travel plans added automatically - Shows clashes in your calendar to avoid scheduling errors Join our mission to eliminate time-wasting admin.",
+      "id": "d52d1b30bf598daa3d03e21c0fb670315d2d9484",
+      "location": {
+        "lat": 51.524419,
+        "lon": -0.099539,
+        "postcode": "EC1V7EN"
+      },
+      "name": "Emma.ai",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://emma.ai"
+    },
+    {
+      "description": "An AI-driven Mathematics platform that designs personalised study plans to address fundamental knowledge gaps by precisely measuring student performance across UK national curriculum learning outcomes.",
+      "id": "da66e2339aae5e348780a817c0307e7689ddd182",
+      "location": {
+        "lat": 51.521843,
+        "lon": -0.084997,
+        "postcode": "EC2A2BB"
+      },
+      "name": "Edicat Learning",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.edicat.co.uk"
+    },
+    {
+      "description": "Automation technology for creative businesses. Build a team of robots to run your creative tasks automatically for you.",
+      "id": "3c18c1b740f1b39bfade0210bb731c7a77d35fbf",
+      "location": {
+        "lat": 51.517167,
+        "lon": -0.139229,
+        "postcode": "W1W8RH"
+      },
+      "name": "Firedrop",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "https://firedrop.com"
+    },
+    {
+      "description": "EcoMachines Ventures supports innovative solutions to these global problems by investing in promising technology companies and actively supporting their growth into world class high-growth enterprises. We are London-based with a pan-European focus in investments and a global reach in terms of investment and corporate networks.",
+      "id": "065440d8c42c64b3b8fd350987b32d4fd83a2161",
+      "location": {
+        "lat": 51.504937,
+        "lon": -0.019523,
+        "postcode": "E145AB"
+      },
+      "name": "EcoMachines Incubator",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0",
+        "2"
+      ],
+      "url": "http://ecomachinesventures.com/"
+    },
+    {
+      "description": "New Wave Ventures is a privately owned fund seeking the opportunity to invest for the long term in companies with significant growth potential. Their target initial investment is £500,000 to £2,000,000. They invest their own money without the need for external investors or borrowings. They are not driven by the need to service interest charges or to dispose of their investments by an artificial deadline. They do not believe in using leverage to boost their returns. They are willing to co-invest with like-minded investors, although their preference is to be the sole investor alongside owner-managers.",
+      "id": "cb3a1173d6a39799f79855dce7aa0d1f92ddfc98",
+      "location": {
+        "lat": 51.509764,
+        "lon": -0.122054,
+        "postcode": "WC2N6AA"
+      },
+      "name": "New Wave Ventures",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "nwventures.co.uk"
+    },
+    {
+      "description": "Entale offers an AI-powered platform that provides an immersive podcasting experience.",
+      "id": "a71855c7feabc86c021dbf6ec7361bb61173d72b",
+      "location": {
+        "lat": 51.501645,
+        "lon": -0.189647,
+        "postcode": "W85EH"
+      },
+      "name": "Entale Media",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.entale.co"
+    },
+    {
+      "description": "Simpleweb combines Art, Strategy, and Engineer to create software for clients that improve the quality of people’s lives.",
+      "id": "98edfd7a5134b827534d421c0137501dc2c299c6",
+      "location": {
+        "lat": 51.443819,
+        "lon": -2.593509,
+        "postcode": "BS34HL"
+      },
+      "name": "Simpleweb",
+      "place_id": "aca1b9e9441fafc9f311d095335c44bb5f79a44d",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "simpleweb.co.uk"
+    },
+    {
+      "description": "NTU is one of the UK's biggest and most innovative universities, with a fantastic reputation for launching graduate careers.",
+      "id": "8a1416c076e1364a1dbf06d22fe7735b509ffaa9",
+      "location": {
+        "lat": 52.956118,
+        "lon": -1.151841,
+        "postcode": "NG14BU"
+      },
+      "name": "Nottingham Trent University",
+      "place_id": "8982db953f512336cd825ac88f21b469cd53c82d",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "http://www.ntu.ac.uk/"
+    },
+    {
+      "description": "Future Cities Catapult, a global centre of excellence on urban innovation. A place where cities, businesses and universities come together to develop solutions to the future needs of their cities.",
+      "id": "e7d4b84ebf433c520c1cd53d181bb6612416a166",
+      "location": {
+        "lat": 51.500087,
+        "lon": -0.08431,
+        "postcode": "SE13ER"
+      },
+      "name": "Future Cities Catapult",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "https://futurecities.catapult.org.uk/"
+    },
+    {
+      "description": "A world top-100 university that strives to solve society's greatest challenges through unique teaching and outstanding research.",
+      "id": "d52b55c88570a9426657abb2922dab2bf2b80cc3",
+      "location": {
+        "lat": 53.382744,
+        "lon": -1.48729,
+        "postcode": "S102TN"
+      },
+      "name": "University of Sheffield",
+      "place_id": "a059f8a54bc9c6f92250a9f144968334367630b2",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "http://www.sheffield.ac.uk/"
+    },
+    {
+      "description": "University of the Highlands and Islands is an integrated university encompassing both further and higher education.",
+      "id": "776a1699b2311ddb90e0344f13be6013fe7a2aa0",
+      "location": {
+        "lat": 57.469001,
+        "lon": -4.230506,
+        "postcode": "IV35SQ"
+      },
+      "name": "University of the Highlands and Islands",
+      "place_id": "ef46fdcf456e146b9d607b90c0b098c546c72dbf",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "https://uhi.ac.uk"
+    },
+    {
+      "description": "University of Central Lancashire is a school.",
+      "id": "634d1186c762be885c5dbd916d5bbd91fe80bace",
+      "location": {
+        "lat": 53.761536,
+        "lon": -2.708656,
+        "postcode": "BB120EQ"
+      },
+      "name": "University of Central Lancashire",
+      "place_id": "9ef08ec6bf88b4fd146736f2556a450cc11807e2",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "http://www.uclan.ac.uk/"
+    },
+    {
+      "description": "Blackfinch Ventures invests across sectors in fledgling companies with strong ideas and solid management teams. It provides initial and follow-on funding to start-ups, those looking to grow to the next level, and scale-ups. It then works closely with investee companies over many years, providing assistance and guidance to help businesses succeed.",
+      "id": "1cd8ed7c8e9286022608c8e57be7934fa39ee9d8",
+      "location": {
+        "lat": 51.847125,
+        "lon": -2.178102,
+        "postcode": "GL34AH"
+      },
+      "name": "Blackfinch Ventures",
+      "place_id": "bce8363a92544a226daaaa14d7e427f87b507c17",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "blackfinch.com"
+    },
+    {
+      "description": "They want to see the power of innovation and technology used to solve major social problems, bringing the benefits of innovation to everyone in society. They help to do this by investing in ventures with inclusive and scalable innovations that are run by outstanding entrepreneurs. They are an experienced team of sector experts, venture capitalists, impact investors and evaluators backed by a strong, innovative institution - Nesta.",
+      "id": "03198cb1e4e5edbe086a430ef56fe4b72d6ca6b5",
+      "location": {
+        "lat": 51.511348,
+        "lon": -0.107548,
+        "postcode": "EC4Y0DS"
+      },
+      "name": "Nesta Impact Investments",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "nestainvestments.org.uk"
+    },
+    {
+      "description": "ADM Capital is launching the Cibus Fund",
+      "id": "beb6f8c92d0be88c20d7ef7b80e6e0e5f86c3981",
+      "location": {
+        "lat": 51.501412,
+        "lon": -0.194435,
+        "postcode": "W87RX"
+      },
+      "name": "Cibus Fund",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "cibusfund.com"
+    },
+    {
+      "description": "FindTheRipple is a London-based startup that created the first AI-driven bot that supports marketers with automatic content generation about trending topics relevant for their target. Marketers will reach their target audience, creating relevant content before anyone else in a fraction of the time. With FindTheRipple you can surf the trend before it peaks!",
+      "id": "862dcf90af82ad213a3f69002c75a50fc2f267aa",
+      "location": {
+        "lat": 51.508413,
+        "lon": -0.106932,
+        "postcode": "SE19PD"
+      },
+      "name": "FindTheRipple",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "0"
+      ],
+      "url": "http://www.findtheripple.com"
+    },
+    {
+      "description": "The AMRC with Boeing is dedicated to working with manufacturing businesses, from global aerospace giants to local SMEs. Businesses can work with us on a one-off project, or join us as a member for long-term collaboration.  They have over 90 member companies which pay an annual fee to access Their resources and expertise, and which help determine Their research programme – membership is open to all. Boeing is Their founding partner and continues to play a key role in Their continuing development.",
+      "id": "98f398e8d5de89afcc0ee765fa93f3be1e2c6e34",
+      "location": {
+        "lat": 53.387929,
+        "lon": -1.375864,
+        "postcode": "S605TZ"
+      },
+      "name": "Advanced Manufacturing Research Centre",
+      "place_id": "c4b087d0d34117159e9c9895e656d476ece9cfa5",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "http://www.amrc.co.uk/"
+    },
+    {
+      "description": "Entrepreneurs Fund provides early stage and growth financing alongside active support to entrepreneurial teams. Their current areas of investment focus are Life-sciences, Water, Materials and Automotive Technology.",
+      "id": "7784e1f30769eb8359e63241df449f93e628d5bb",
+      "location": {
+        "lat": 51.493078,
+        "lon": -0.168407,
+        "postcode": "SW36RD"
+      },
+      "name": "Entrepreneurs Fund",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "entrepreneursfund.com"
+    },
+    {
+      "description": "Praetura have been supporting SMEs since 2011, raising capital and investing in the early stages of business life cycles. We have a strong track record in past performance and have developed a reputation for being a supportive and proactive investor who injects more than just capital. We can evidence the value from our differentiated approach both from investment returns and testament from our portfolio companies. Our partnered entrepreneurs embrace the shoulder to shoulder Praetura approach and utilise our experience and resource to maximise their businesses’ potential.",
+      "id": "5d0a0976445ecf3c8ad5a7aea8f99949cc5969f7",
+      "location": {
+        "lat": 53.478949,
+        "lon": -2.253987,
+        "postcode": "M33GY"
+      },
+      "name": "Praetura Ventures",
+      "place_id": "af153f49d29db94443684d493468e2a93621887d",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "praeturaventures.com"
+    },
+    {
+      "description": "Libertus Capital invests in companies that enhance and protect individual freedom and privacy.",
+      "id": "e8a957824767d71ba0ea2bcefcc1fd4663e80742",
+      "location": {
+        "lat": 51.508555,
+        "lon": -0.143399,
+        "postcode": "W1J8DZ"
+      },
+      "name": "Libertus Capital",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "libertuscapital.com"
+    },
+    {
+      "description": "Mobeus Equity Partners is a provider of finance to SMEs. They invest up to £15 million into UK based companies across all sectors. They provide attractive and flexible funding packages that include equity and loan finance. They are very experienced investors who have a strong reputation for delivering on their promises and they know what it takes to get a deal done.",
+      "id": "07eab36ee1bc2ef9ca037d1dabc72758a684b971",
+      "location": {
+        "lat": 51.509859,
+        "lon": -0.13261,
+        "postcode": "SW1Y4EX"
+      },
+      "name": "Mobeus Equity Partners",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "mobeusequity.co.uk"
+    },
+    {
+      "description": "MSIF provides funding to support all sorts of businesses across a range of sectors and for a variety of needs.   We invest in small to medium sized businesses (less than 250 employees) but this includes the very small end, the much larger end and everything in between. MSIF can provide funding to sole traders, partnerships and limited companies.",
+      "id": "092016716832fe3e98eecc2e1c7824e2bfaa20bc",
+      "location": {
+        "lat": 53.407448,
+        "lon": -2.991148,
+        "postcode": "L22PP"
+      },
+      "name": "Merseyside Special Investment Fund",
+      "place_id": "b7c388ce99ae31d5a9b5b4769aa4e6c8b2b4d1c6",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "msif.co.uk"
+    },
+    {
+      "description": "Apposite Capital solely focuses on healthcare. They work closely with management teams; providing operational support and strategic guidance as much as capital to together build market leading companies. They invest in high potential revenue-generating companies across Europe. They tailor their investment to each company’s needs and consider all types of financing structures (minority, growth, buyout, buyin, etc). They typically seek to invest £10-20 million over the life of each investment but an initial investment can be £5 million or less.",
+      "id": "48525ef4d5e377f421640698e5f1b972ad94bafe",
+      "location": {
+        "lat": 51.512423,
+        "lon": -0.098972,
+        "postcode": "EC4V5BD"
+      },
+      "name": "Apposite Capital",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "appositecapital.com"
+    },
+    {
+      "description": "They are not only a top 20 global asset manager, but also the UK’s largest provider of individual life assurance products and a market leader in managing retirement risk for pension schemes, both in the UK and US. Their purpose is improving the lives of their customers, building a better society for the long term and creating value for their shareholders. They are committed to being economically and socially useful. Their long term financial sustainability is for the benefit of their customers, employees, shareholders, suppliers and society at large. Their products, services and investments should show both economic and social value for the future. They recognise and reward success, investing in the development and wellbeing of their  employees. They strive to be a vibrant business that values inclusiveness and embraces difference, where their people are engaged and empowered to deliver outstanding results.",
+      "id": "75eb3d88c0241bea41b69cbd4d7814a041234a9a",
+      "location": {
+        "lat": 51.5172,
+        "lon": -0.089805,
+        "postcode": "EC2R5AA"
+      },
+      "name": "Legal & General",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "legalandgeneral.com"
+    },
+    {
+      "description": "Concrete makes Seed investments with insightful driven founders that have solid technology and RE credentials. They give you the expertise to hone your digital business, and the introductions to take and own the market quickly.",
+      "id": "d05f061d8c9c04ef36edc36cb18e27460f333b5d",
+      "location": {
+        "lat": 51.522586,
+        "lon": -0.08537,
+        "postcode": "EC2A4BX"
+      },
+      "name": "Concrete Venture Capital",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "concretevc.com"
+    },
+    {
+      "description": "Ballpark Ventures is a small, boutique fund investing in early stage technology startups. Their partners are all successful entrepreneurs and at this stage, investing their own money.",
+      "id": "caccff4851a52969976b675e7dca2fbf937cbcc3",
+      "location": {
+        "lat": 51.89392,
+        "lon": -2.083802,
+        "postcode": "GL502QJ"
+      },
+      "name": "Ballpark Ventures",
+      "place_id": "9e1fc4601e8e78902670b925dc0b208a060a12d4",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "ballparkventures.com"
+    },
+    {
+      "description": "Imagine a world where journeys are seamless, transport is smart and connected, and delays and congestion are a thing of the past.",
+      "id": "0aee4c0e7f0fe41bad01be63e231ebc96a884659",
+      "location": {
+        "lat": 51.900976,
+        "lon": -2.081245,
+        "postcode": "MK91BP"
+      },
+      "name": "Transport Systems Catapult",
+      "place_id": "52ffbcb3fc5afa8c9dbe75b231d0cb7dce34359b",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "https://ts.catapult.org.uk/home"
+    },
+    {
+      "description": "Angel Investment Network is a London-based investment company founded in 2004 whose aim is to connect entrepreneurs and investors. Today they have 35+ angel networks worldwide covering over 80 countries. They have over 150,000 investor members and over 600,000 entrepreneurs have signed up to use their services.",
+      "id": "3b34c0cf041ec430a1a47c0280094b65915c36b9",
+      "location": {
+        "lat": 51.459968,
+        "lon": -0.322344,
+        "postcode": "TW11NL"
+      },
+      "name": "Angel Investment Network",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "angelinvestmentnetwork.co.uk"
+    },
+    {
+      "description": "York St John is a UK university with roots going back to the 1840’s",
+      "id": "c86a5b399df4db1c21bc5bb1fad08c833b6ee45d",
+      "location": {
+        "lat": 53.965691,
+        "lon": -1.081047,
+        "postcode": "YO317EX"
+      },
+      "name": "York St John University",
+      "place_id": "d826bc702260e55d964fc7031683a62c81d1c21c",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "https://www.yorksj.ac.uk/"
+    },
+    {
+      "description": "We provide companies with access to world-class facilities and skills to scale-up and prove-out high value manufacturing technologies. Problem Solving We give companies of all sizes access to the specialist knowledge, expertise and equipment they need to master the challenges they face. Policy Insight & Intelligence",
+      "id": "ac85eff16ac45d7edd135298e08f4e64b5728fed",
+      "location": {
+        "lat": 52.376535,
+        "lon": -1.794572,
+        "postcode": "B908AD"
+      },
+      "name": "High Value Manufacturing Catapult",
+      "place_id": "ef88ea91d511ac63d0ce2ebf5d648c0b4ea5ec9b",
+      "topics": [],
+      "types": [
+        "3"
+      ],
+      "url": "https://hvm.catapult.org.uk/"
+    },
+    {
+      "description": "Craigie Capital builds, accelerates and invests in early-stage technology startups. Established in 2010, Craigie Capital has experience across finance, enterprise sales and technology. Based in central London, they have invested equity in over 30 companies across the technology scene with a particular focus on high-growth and scalable startups in the following sectors. They also support companies across the UK and across the debt funding spectrum via Rangewell.",
+      "id": "0646d7a4eaaf48411318af4af21a46f0ac040b8c",
+      "location": {
+        "lat": 51.517943,
+        "lon": -0.090177,
+        "postcode": "EC2Y9DT"
+      },
+      "name": "Craigie Capital",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "craigiecapital.com"
+    },
+    {
+      "description": "Pitch@Palace gives Entrepreneurs the opportunity to meet the people who can help make their business dreams become a reality. Pitch@Palace guides, helps and connects Entrepreneurs and early-stage businesses with potential supporters, including CEOs, Influencers, Angels, Mentors and Business Partners. Pitch@Palace provides a platform for Entrepreneurs, creating introductions to Mentors and Advisors, access to Distribution Systems and Supply Chains and Connections and Investment.",
+      "id": "087963352e55275e2e774dfbb796c063573e2f7e",
+      "location": {
+        "lat": 51.493102,
+        "lon": -0.146519,
+        "postcode": "SW1W9SH"
+      },
+      "name": "Pitch@Palace",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "pitchatpalace.com"
+    },
+    {
+      "description": "Social Tech Trust is a UK's leading dedicated investor of socially motivated tech. They challenge their selves and others to think differently about the relationship between tech and society. Their purpose is to transform lives with tech - The internet has revolutionised their world. They exist to ensure that the ongoing tech revolution delivers positive and equitable social impact: that when their lives are transformed by tech, they are transformed for the better. Their vision is for a world where social transformation is the driving force behind tech - Tech can open up opportunities previously out of reach, creating inspirational change. Their experience shows that when social transformation is the driving force behind tech, it has the greatest potential to improve lives. This is why they want a world where people’s needs inform and shape tech from the outset, to deliver the best return for everyone. They identify where tech has the greatest potential to transform lives, then back people and organisations to demonstrate what’s possible. Building on this knowledge, they seek out and join forces with others to create a supportive environment for those striving to realise the full promise of socially motivated tech. Their core purpose is at the heart of what they do – they transform lives with tech. Whether they are leading the conversation about transformative tech, enabling socially motivated tech ventures to grow, or directly investing in change, they work hard to achieve their vision – and deliver with pride.",
+      "id": "41d7ac6e226c5fb556fa763757b1ac6f9b821c89",
+      "location": {
+        "lat": 51.621233,
+        "lon": -1.293972,
+        "postcode": "OX144RY"
+      },
+      "name": "Social Tech Trust",
+      "place_id": "255324398636604cb9e39b5dc33a3f561e2e8a71",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "socialtechtrust.org"
+    },
+    {
+      "description": "Angels 5K is a group of private investors based in the South of England. We focus on high growth business opportunities and have invested over £4 million of our own money to date in dozens of companies throughout the UK. We are entrepreneurs ourselves and are passionate about encouraging new businesses.",
+      "id": "78ef9f689da4764e30d51021487faf28f6a7ed86",
+      "location": {
+        "lat": 51.061011,
+        "lon": -1.317836,
+        "postcode": "SO239EH"
+      },
+      "name": "Angels 5K",
+      "place_id": "bc0e5214f7aff03c14be07dc28bff1eb5c9e07b7",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "angels5k.org.uk"
+    },
+    {
+      "description": "The First Investment Fund Dedicated To Subscription Based Digital Services. They fund early stage start-ups and help ambitious teams develop growth profitable online businesses. IronCapital will invest 10M€ over 5 years, focusing on early stage investments, from Seed to Series A, providing 100K€ to 300K€ per company.",
+      "id": "46e49a45c2288ba861cbd9e832e783b04731cdaa",
+      "location": {
+        "lat": 51.517223,
+        "lon": -0.148423,
+        "postcode": "W1G9YL"
+      },
+      "name": "IronCapital",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "iron-capital.co"
+    },
+    {
+      "description": "ETF Partners supports talented entrepreneurs and management teams with investment capital and experience. They create value by investing in technology companies that make a difference. They call it ‘sustainability through innovation’.",
+      "id": "cee4ac77f71916e7477a09ec521b3e4e19b63d78",
+      "location": {
+        "lat": 51.510355,
+        "lon": -0.145732,
+        "postcode": "W1J6EQ"
+      },
+      "name": "ETF Partners",
+      "place_id": "471aa94f1ff710bd9215bed03da9568ce4111446",
+      "topics": [],
+      "types": [
+        "1"
+      ],
+      "url": "etfpartners.capital"
+    }
+  ]
+}

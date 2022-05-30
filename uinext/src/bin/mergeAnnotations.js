@@ -1,68 +1,98 @@
 import {tapMessage} from '@svizzle/dev';
-import {readJson, saveObj} from '@svizzle/file';
-import {getId, transformValues} from '@svizzle/utils';
+import {readJson, saveObj, saveObjPassthrough} from '@svizzle/file';
+import {getId, isIterableEmpty, transformValues} from '@svizzle/utils';
 import * as _ from 'lamb';
 import fetch from 'node-fetch';
 import hash from 'object-hash';
 
-const SOURCE_URL =
+import {MIN_SCORE} from 'app/config';
+import {getTopics} from 'app/utils/dataUtils';
+import {stripDbrPrefix} from 'app/utils/dbpedia';
+
+const ANNOTATED_ORGS_URL =
 	'https://s3.eu-west-2.amazonaws.com/dap-uk-ai-map.public/ai_map.json';
 const IN_FILE = '../ds/outputs/data/ai_map_orgs_places.json';
-const OUT_FILE = 'static/data/ai_map_annotated_orgs.json';
+const OUT_FILE_DATA = 'static/data/ai_map_annotated_orgs.json';
+const OUT_FILE_UNTAGGED_ORGS = 'dataQuality/orgsWithNoTopics.json';
+
+const getRegionsById = _.pipe([
+	_.indexBy(_.getKey('region_id')),
+	_.mapValuesWith(_.pipe([
+		_.rename({region_id: 'id', region_name: 'name'}),
+		_.pick(['id', 'name']),
+	])),
+]);
 
 // from @svizzle/utils@0.17.0 (not released yet)
 // TODO upgrade @svizzle/utils
 const sortObjectKeysAsc = _.pipe([
 	_.pairs,
-	_.sortWith([_.getAt(0)]),
+	_.sortWith([_.head]),
 	_.fromPairs
 ]);
 
-const stripBase = _.replace('http://dbpedia.org/resource/', '');
-const transformEntity = ({confidence, URI}) => ({
-	id: stripBase(URI),
-	score: confidence,
-});
-const transformOrg = _.pipe([
+const processTopics = _.pipe([
+	_.mapWith(({confidence, URI}) => ({
+		id: stripDbrPrefix(URI),
+		score: confidence,
+	})),
+	_.filterWith(({score}) => score >= MIN_SCORE),
+	_.sortWith([
+		_.sorterDesc(_.getKey('score')),
+		getId
+	]),
+]);
+const processOrg = _.pipe([
 	_.skip(['dbpedia_entities_metadata']),
 	_.rename({dbpedia_entities: 'topics'}),
-	transformValues({
-		topics: _.pipe([
-			_.mapWith(transformEntity),
-			_.sortWith([
-				_.sorterDesc(_.getKey('score')),
-				getId
-			])
-		])
-	}),
+	transformValues({topics: processTopics}),
 	obj => ({...obj, id: hash(obj)}),
-	sortObjectKeysAsc
+	sortObjectKeysAsc,
 ]);
 
-const transformOrgs = _.pipe([
-	_.mapWith(transformOrg),
-	_.sortWith([
-		_.sorterDesc(_.getPath('topics.0.score')),
-		_.getKey('name')
-	])
+const processData = ({org_types, orgs, places}) => {
+	const placesById = _.index(places, getId);
+	const regionsById = getRegionsById(places);
+	const processedOrgs = _.map(orgs, processOrg);
+
+	return {
+		org_types,
+		orgs: processedOrgs,
+		placesById,
+		regionsById,
+	}
+}
+
+const getOrgsWithNoTopics = _.pipe([
+	_.getKey('orgs'),
+	_.filterWith(
+		_.pipe([getTopics, isIterableEmpty])
+	),
+	orgs => ({minScore: MIN_SCORE, orgs})
 ]);
 
 const main = async () => {
-	console.log(`Fetching ${SOURCE_URL}...`);
+
+	/* fetch annotated orgs */
+
+	console.log(`Fetching ${ANNOTATED_ORGS_URL}...`);
 
 	const orgs =
-		await fetch(SOURCE_URL)
+		await fetch(ANNOTATED_ORGS_URL)
 		.then(res => res.json())
-		.then(tapMessage('Transforming...'))
-		.then(transformOrgs)
 		.catch(err => console.error(err));
 
-	console.log('Saving...');
+	/* process & save */
 
 	await readJson(IN_FILE)
 	.then(obj => ({...obj, orgs}))
-	.then(saveObj(OUT_FILE))
-	.then(tapMessage(`Saved output in ${OUT_FILE}`))
+	.then(tapMessage('Processing...'))
+	.then(processData)
+	.then(saveObjPassthrough(OUT_FILE_DATA))
+	.then(tapMessage(`Saved processed data in ${OUT_FILE_DATA}`))
+	.then(getOrgsWithNoTopics)
+	.then(saveObj(OUT_FILE_UNTAGGED_ORGS, 2))
+	.then(tapMessage(`Saved objects with no topics in ${OUT_FILE_UNTAGGED_ORGS}`))
 	.catch(err => console.error(err));
 };
 
