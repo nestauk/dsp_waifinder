@@ -3,14 +3,15 @@
 	"dependencies": {
 		"@macfja/svelte-persistent-store": "^1.2.0",
 		"@mapbox/geo-viewport": "^0.4.1",
-		"@svizzle/barchart": "^0.6.8",
 		"@svizzle/dom": "^0.5.1",
 		"@svizzle/geo": "^0.7.0",
 		"@svizzle/ui": "^0.5.0",
 		"@svizzle/utils": "^0.16.0",
 		"@turf/bbox": "^6.0.1",
+		"just-compare": "^2.1.0",
 		"lamb": "^0.60.0",
-		"mapbox-gl": "^2.8.1"
+		"mapbox-gl": "^2.8.1",
+		"yootils": "^0.3.1"
 	},
 	"description": "App UI",
 	"devDependencies": {
