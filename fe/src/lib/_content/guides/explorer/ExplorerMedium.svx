@@ -1,7 +1,7 @@
 <script>
 	import DetailsIntro from './DetailsIntro.svx';
 	import MapIntro from './MapIntro.svx';
-	import PlacesBarchart from './PlacesBarchart.svx';
+	import PlacesBar from './PlacesBar.svx';
 	import RegionsBarchart from './RegionsBarchart.svx';
 	import Settings from './Settings.svx';
 	import TopicsBarchartIntro from './TopicsBarchartIntro.svx';
@@ -72,7 +72,7 @@ Hovering a topic will show the same pop-up described in the section above.
 
 #### Places tab
 
-<PlacesBarchart />
+<PlacesBar />
 
 #### Region tab
 

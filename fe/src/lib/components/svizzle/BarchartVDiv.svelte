@@ -135,7 +135,7 @@
 	$: bars = items.map(item => {
 		const {key} = item;
 
-		const isDeselected = hasSelectedKeys && !isIn(selectedKeys, key);
+		const isDeselected = !hasSelectedKeys || !isIn(selectedKeys, key);
 
 		/* label */
 

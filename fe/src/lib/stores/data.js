@@ -7,6 +7,7 @@ import {
 	isNotNil,
 	objectToKeyValueArray,
 	sortValueDescKeyAsc,
+	isIterableNotEmpty,
 } from '@svizzle/utils';
 import isEqual from 'just-compare';
 import * as _ from 'lamb';
@@ -18,14 +19,21 @@ import {_autoZoom} from '$lib/stores/interaction';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
+	_isPlacesEditMode,
 	_orgSearchRegex,
 	_orgTypesSelectionMode,
 	_placesSearchRegex,
 	_selectedOrgTypes,
+	_selectedPlaceIds,
 	_zoom,
 	bbox_WS_EN_UK
 } from '$lib/stores/selection';
-import {countOrgTypes, getLonLat, getTopics} from '$lib/utils/dataUtils';
+import {
+	countOrgTypes,
+	getLonLat,
+	getPlaceId,
+	getTopics,
+} from '$lib/utils/dataUtils';
 import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
 /* filtered orgs */
@@ -72,21 +80,29 @@ const makeIsOrgInPlace = regexp =>
 export const _allOrgs = derived(
 	[
 		_dataset,
+		_isPlacesEditMode,
 		_orgSearchRegex,
 		_orgTypesSelectionMode,
 		_placesSearchRegex,
 		_selectedOrgTypes,
+		_selectedPlaceIds,
 	],
 	([
 		{orgs},
+		isPlacesEditMode,
 		orgSearchRegex,
 		orgTypesSelectionMode,
 		placesSearchRegex,
 		selectedOrgTypes,
+		selectedPlaceIds,
 	]) => {
 		const predicates = [
 			makeIsOrgOfTypes(selectedOrgTypes, orgTypesSelectionMode)
 		];
+
+		if (!isPlacesEditMode && isIterableNotEmpty(selectedPlaceIds)) {
+			predicates.push(({place_id}) => _.isIn(selectedPlaceIds, place_id))
+		}
 
 		if (isRegexpNotEmpty(orgSearchRegex)) {
 			predicates.push(makeIsTextInOrg(orgSearchRegex))
@@ -185,6 +201,16 @@ export const _keyOrgTypeValueOrgsCount = derived(
 	}
 );
 
+/* places */
+
+export const _selectedPlaces = derived(
+	[_dataset, _selectedPlaceIds],
+	([{placesById}, selectedPlaceIds]) => _.map(
+		selectedPlaceIds,
+		id => placesById[id]
+	)
+);
+
 /* barchart of topics */
 
 export const _keyTopicIdValueOrgsCount = derived(
@@ -203,21 +229,13 @@ export const _keyTopicIdValueOrgsCount = derived(
 
 /* barchart of places */
 
-const makeKeyPlaceIdValueOrgsCount = _.pipe([
-	_.countBy(_.getKey('place_id')),
-	objectToKeyValueArray,
-]);
-export const _keyPlaceLabelValueOrgsCount = derived(
-	[_orgs, _dataset],
-	([orgs, {placesById}]) => sortValueDescKeyAsc(
-		_.map(
-			makeKeyPlaceIdValueOrgsCount(orgs),
-			({key, value}) => ({
-				key: placesById[key].name,
-				value
-			})
-		)
-	)
+export const _keyPlaceIdValueOrgsCount = derived(
+	_orgs,
+	_.pipe([
+		_.countBy(getPlaceId),
+		objectToKeyValueArray,
+		sortValueDescKeyAsc,
+	])
 );
 
 /* barchart by region */

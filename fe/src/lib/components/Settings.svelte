@@ -1,14 +1,27 @@
 <script>
-	import {Download, Icon, Switch} from '@svizzle/ui';
+	import {
+		Download,
+		Icon,
+		Switch,
+		XCircle,
+	} from '@svizzle/ui';
 
+	import City from '$lib/components/icons/City.svelte';
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
-	import {_keyOrgTypeValueOrgsCount, _orgsCount} from '$lib/stores/data';
 	import {
+		_keyOrgTypeValueOrgsCount,
+		_orgsCount,
+		_selectedPlaces,
+	} from '$lib/stores/data';
+	import {
+		_hasSelectedPlaces,
 		_orgSearchValue,
 		_orgTypesSelectionMode,
 		_placesSearchValue,
 		_selectedOrgTypes,
+		deselectAllPlaces,
+		deselectPlace,
 		orgTypesSelectionModes,
 		toggleOrgType,
 		toggleOrgTypesSelectionMode,
@@ -99,7 +112,7 @@
 					theme={{
 						padding: 0,
 						selectedKeyBackgroundColor:
-							$_currThemeVars['--colorOrgPlace'],
+							$_currThemeVars['--colorSelectedLight'],
 					}}
 				/>
 			</div>
@@ -112,11 +125,71 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Selected places -->
+
+	<div class='panel'>
+		<header>
+			<h3>{$_selectedPlaces.length || 'No'} selected places</h3>
+		</header>
+
+		{#if $_hasSelectedPlaces}
+
+			<!-- selected places -->
+
+			<div class='item'>
+				<div class='stack'>
+					{#each $_selectedPlaces as {id, name}}
+						<div
+							class='clickable row selectedItem'
+							on:click={() => deselectPlace(id)}
+						>
+							<span class='label'>{name}</span>
+							<span>
+								<Icon
+									glyph={XCircle}
+									strokeWidth=1.25
+								/>
+							</span>
+						</div>
+					{/each}
+				</div>
+			</div>
+
+			<!-- deselect all -->
+
+			<div class='item'>
+				<div class='row deselectAll'>
+					<span>Deselect all</span>
+					<span
+						class='clickable'
+						on:click={deselectAllPlaces}
+					>
+						<Icon glyph={XCircle} />
+					</span>
+				</div>
+			</div>
+		{:else}
+			<div class='item'>
+				<span>
+					<Icon
+						fill='black'
+						glyph={City}
+						stroke='none'
+					/>
+				</span>
+				<span class='tip'>To select some places, please head to the Places bar, enter edit mode and click on items</span>
+			</div>
+		{/if}
+
+	</div>
+
 </div>
 
 <style>
 	.Settings {
 		height: 100%;
+		overflow-y: auto;
 		padding: 1em;
 		width: 100%;
 	}
@@ -126,7 +199,6 @@
 		margin-bottom: 1em;
 		padding-bottom: 1em;
 	}
-
 	.panel header {
 		align-items: center;
 		display: grid;
@@ -156,5 +228,34 @@
 		display: flex;
 		gap: 1em;
 		justify-content: center;
+	}
+
+	.stack {
+		width: 100%;
+	}
+
+	.row {
+		align-items: center;
+		display: flex;
+		gap: 0.5rem;
+		height: 100%;
+		padding: 0.25rem 0;
+		width: 100%;
+	}
+	.selectedItem {
+		justify-content: space-between;
+	}
+	.selectedItem:hover {
+		background-color: var(--colorHoverToDelete);
+	}
+	.deselectAll {
+		justify-content: end;
+	}
+	.tip {
+		justify-content: start;
+	}
+
+	.label {
+		flex: 1;
 	}
 </style>

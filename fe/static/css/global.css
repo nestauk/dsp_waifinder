@@ -50,6 +50,7 @@ a {
 	--colorClusterTextBkgStroke: white;
 	--colorDisabled: grey;
 	--colorEvalHighlighted: aqua;
+	--colorHoverToDelete: mistyrose;
 	--colorLink: #0658aa;
 	--colorMain: #333;
 	--colorMainInverted: white;
@@ -57,7 +58,6 @@ a {
 	--colorMarkerFocused: red;
 	--colorOrgAddress: aquamarine;
 	--colorOrgHighlighted: lavender;
-	--colorOrgPlace: aliceblue;
 	--colorOrgtype0: #2455ad;
 	--colorOrgtype0Text: white;
 	--colorOrgtype1: yellowgreen;
@@ -71,6 +71,7 @@ a {
 	--colorPillScore: white;
 	--colorSecondary: #075aa2;
 	--colorSelected: #00645f;
+	--colorSelectedLight: aliceblue;
 	--colorSelectedText: white;
 	--colorTagBlockquoteBackground: aliceblue;
 	--colorTagBlockquoteLeftborder: dodgerblue;

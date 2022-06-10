@@ -2,11 +2,11 @@
 	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
 	import Pill from '$lib/components/orgs/Pill.svelte';
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
+	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {noOrgsMessage} from '$lib/config';
 	import {
-		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
 		_orgs,
@@ -59,9 +59,7 @@
 			<View id='places'>
 				<div class='scrollable'>
 					{#if $_orgs.length > 0}
-						<BarchartVDiv
-							items={$_keyPlaceLabelValueOrgsCount}
-						/>
+						<PlacesBar />
 					{:else}
 						<div class='noOrgsMessage'>
 							<Pill
@@ -90,7 +88,7 @@
 			</View>
 		</ViewsXor>
 	</div>
-	<div>
+	<div class='tabs'>
 		<MultiviewSelector
 			activeViewId={$_activeViewId}
 			setView={setActiveView}
@@ -102,8 +100,8 @@
 	.Multiview {
 		display: grid;
 		grid-auto-flow: row;
-		grid-template-rows: 1fr min-content;
 		grid-template-columns: 100%;
+		grid-template-rows: 1fr min-content;
 		height: 100%;
 	}
 	.slider {

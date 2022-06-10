@@ -21,6 +21,15 @@ bar chart:
 	* `OR` means selecting all orgs of ANY of the active types;
 	* `AND` means selecting all orgs of ALL the active types.
 
-Enabling auto-zoom on the map to automatically scale the
+Enabling auto-zoom on the map to automatically scales the
 map to the region encompassing the markers selected by the search parameters
 (see below).
+
+#### Places panel
+
+Here you have a list of the places you have selected in the Places tab
+(see below).
+
+You can deselect places by clicking the cross button at their right.
+
+Clicking the cross button at the bottom of this panel should deselect them all.

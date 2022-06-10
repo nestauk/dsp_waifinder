@@ -1,6 +1,7 @@
 <script>
 	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
@@ -18,7 +19,6 @@
 	import {
 		_allOrgsBBox,
 		_clusters,
-		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
 		_orgs,
@@ -95,9 +95,7 @@
 			<View id='places'>
 				<div class='scrollable'>
 					{#if $_orgs.length > 0}
-						<BarchartVDiv
-							items={$_keyPlaceLabelValueOrgsCount}
-						/>
+						<PlacesBar />
 					{:else}
 						<div class='noOrgsMessage'>
 							<Pill label={noOrgsMessage} />

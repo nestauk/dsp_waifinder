@@ -40,15 +40,13 @@
 	}
 
 	.views {
-		width: calc( 100% * var(--viewsCount) );
-		height: 100%;
 		display: grid;
-		grid-template-columns: repeat(var(--viewsCount), calc( 100% / var(--viewsCount) ));
 		grid-auto-flow: column;
+		grid-template-columns: repeat(var(--viewsCount), calc( 100% / var(--viewsCount) ));
+		height: 100%;
 		transform: translateX(calc( var(--currentViewIndex) * -100% / var(--viewsCount)));
-		transition:
-			transform
-			0.25s
-			ease;
+		transition: transform 0.25s ease;
+		width: calc( 100% * var(--viewsCount) );
+		overflow-y: hidden;
 	}
 </style>

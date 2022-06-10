@@ -1,6 +1,6 @@
 import {getId, swapKeyValue} from '@svizzle/utils';
 import * as _ from 'lamb';
-import {writable} from 'svelte/store';
+import {derived, writable} from 'svelte/store';
 
 import {_selectedOrgTypes} from '$lib/stores/selection';
 
@@ -45,3 +45,8 @@ export const updateDataset = ({
 
 	_selectedOrgTypes.set(orgTypes);
 };
+
+export const _placeIdToLabel = derived(
+	_dataset,
+	({placesById}) => id => `${placesById[id].name} (${placesById[id].type})`
+);

@@ -1,4 +1,4 @@
-import {toggleItem} from '@svizzle/utils';
+import {isIterableNotEmpty, toggleItem} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, get, writable} from 'svelte/store';
 
@@ -57,3 +57,32 @@ export const _orgSearchRegex = derived(_orgSearchValue, safeRegexOf);
 
 export const _placesSearchValue = writable('');
 export const _placesSearchRegex = derived(_placesSearchValue, safeRegexOf);
+
+/* places selection */
+
+export const _isPlacesEditMode = writable(false);
+export const _selectedPlaceIds = writable([]);
+
+export const _hasSelectedPlaces =
+	derived(_selectedPlaceIds, isIterableNotEmpty);
+
+export const deselectPlace = id => {
+	_selectedPlaceIds.update(
+		ids => _.pullFrom(ids, [id])
+	);
+}
+export const deselectAllPlaces = () => {
+	_selectedPlaceIds.set([]);
+}
+export const togglePlaceId = id => {
+	_selectedPlaceIds.update(
+		ids => toggleItem(ids, id)
+	);
+}
+
+export const enterPlacesEditMode = () => {
+	_isPlacesEditMode.set(true);
+}
+export const exitPlacesEditMode = () => {
+	_isPlacesEditMode.set(false);
+}
