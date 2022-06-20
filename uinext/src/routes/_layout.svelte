@@ -15,8 +15,8 @@
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {onMount, beforeUpdate, tick} from 'svelte';
 
-	import MultiBanner from 'app/components/MultiBanner.svelte';
 	import Nav from 'app/components/Nav.svelte';
+	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
 	import {a11yFontFamilies, fontsInfo} from 'app/config';
 	import theme from 'app/theme';
 
