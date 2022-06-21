@@ -8,13 +8,13 @@ import {isDev} from 'app/config';
 const { PORT } = process.env;
 
 polka()
-	.use(
-		compression({ threshold: 0 }),
-		sirv('static', { dev: isDev }),
-		sapper.middleware()
-	)
-	.listen(PORT, err => {
-		if (err) {
-			console.log('error', err)
-		}
-	});
+.use(
+	compression({ threshold: 0 }),
+	sirv('static', { dev: isDev }),
+	sapper.middleware()
+)
+.listen(PORT, err => {
+	if (err) {
+		console.log('error', err)
+	}
+});

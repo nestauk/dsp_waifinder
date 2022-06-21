@@ -41,7 +41,7 @@
 		iconStroke: theme.colorLink
 	};
 
-	let {currentreport} = reportNames;
+	let [currentreport] = reportNames;
 	let environment;
 	let lighthouseFrame;
 	let loadingResults = false;
@@ -50,18 +50,18 @@
 		passed: false
 	};
 
-	async function loadResults (environment) {
-		const fileName = getTestResultsFilename(environment);
+	async function loadResults (env) {
+		const fileName = getTestResultsFilename(env);
 		if (fileName) {
 			const response = await fetch(`${testResultsBaseURL}/${fileName}`);
 			const allTests = await response.json();
 			const indexedResults = groupTests(allTests);
-			const test = getTest(indexedResults, environment)
+			const test = getTest(indexedResults, env)
 			testResults = summarizeResults(test);
 		}
 	}
 
-	function resizeIFrameToFitContent ( iFrame ) {
+	function resizeIFrameToFitContent (iFrame) {
 		loadingResults = false
 		iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
 	}
