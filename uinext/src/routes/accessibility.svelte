@@ -75,7 +75,7 @@
 	})
 
 	$: {
-		// / eslint-disable-next-line no-unused-expressions
+		// eslint-disable-next-line no-unused-expressions
 		currentreport; // expression is used for reactivity
 		loadingResults = true;
 	}
