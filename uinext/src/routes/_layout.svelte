@@ -17,7 +17,11 @@
 
 	import Nav from 'app/components/Nav.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
-	import {a11yFontFamilies, fontsInfo} from 'app/config';
+	import {
+		a11yFontFamilies,
+		bannersDefaultFooterText,
+		fontsInfo,
+	} from 'app/config';
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -80,6 +84,7 @@
 	<MultiBanner
 		{_screen}
 		components={bannerComponents}
+		footerText={bannersDefaultFooterText}
 	/>
 {/if}
 
