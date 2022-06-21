@@ -58,11 +58,6 @@
 		"svelte": "^3.38.3",
 		"unist-util-visit": "^2.0.1"
 	},
-	"husky": {
-		"hooks": {
-			"pre-push": "npm run lint"
-		}
-	},
 	"license": "MIT",
 	"main": "index.js",
 	"name": "ai_map_ui",
@@ -86,6 +81,7 @@
 		"rmsappers": "rimraf __sapper__ src/node_modules/@sapper",
 		"selenium": "node test/browserstack/selenium-runner.mjs",
 		"start": "node __sapper__/build",
-		"unittest": "mocha -r esm --spec src/**/*.spec.js"
+		"unittest": "mocha -r esm --spec src/**/*.spec.js",
+		"prepare": "husky install"
 	}
 }
