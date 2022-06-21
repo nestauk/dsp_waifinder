@@ -1,6 +1,5 @@
 <script>
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
-	import * as _ from 'lamb';
 
 	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
 	import Small from 'app/components/homeScreen/small/Small.svelte';

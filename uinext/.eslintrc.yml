@@ -3,13 +3,27 @@ env:
   es6: true
   node: true
   mocha: true
-extends: 'eslint:recommended'
+extends:
+  - eslint:recommended
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+overrides:
+  -
+    files:
+      - '**/*.svelte'
+    processor: svelte3/svelte3
+    rules:
+      brace-style: off
+      import/no-unresolved: off # svelte components not found
+      no-invalid-this: off
+      no-new: off
+      node/no-missing-import: off # svelte components not found
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 2020
   sourceType: module
+plugins:
+  - svelte3
 rules:
   accessor-pairs: error
   array-bracket-newline: off
@@ -69,8 +83,12 @@ rules:
   id-length: off
   id-match: error
   implicit-arrow-linebreak: off
-  indent: off
-  indent-legacy: off
+  indent:
+    - error
+    - tab
+    -
+      MemberExpression: 0
+      SwitchCase: 1
   init-declarations: off
   jsx-quotes: error
   key-spacing: off

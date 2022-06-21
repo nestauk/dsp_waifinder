@@ -41,7 +41,7 @@
 		iconStroke: theme.colorLink
 	};
 
-	let currentreport = reportNames[0];
+	let {currentreport} = reportNames;
 	let environment;
 	let lighthouseFrame;
 	let loadingResults = false;
@@ -228,7 +228,7 @@
 			marginwidth='0'
 			src={reportUrl}
 			title='Accessibility validation results'
-			on:load={e => resizeIFrameToFitContent(lighthouseFrame)}
+			on:load={() => resizeIFrameToFitContent(lighthouseFrame)}
 		>
 			Loading...
 		</iframe>

@@ -103,7 +103,6 @@
 >
 	<header
 		aria-label='Website header'
-		role='banner'
 		use:headerSizeObserver
 	>
 		<Nav
@@ -117,7 +116,6 @@
 	<main
 		aria-label='Website content'
 		use:contentSizeObserver
-		role='main'
 	>
 		<slot></slot>
 	</main>
@@ -125,7 +123,6 @@
 		<section
 			bind:offsetHeight={a11yHeight}
 			class='accessibility'
-			role='region'
 		>
 			<A11yMenu {_screen} />
 		</section>
