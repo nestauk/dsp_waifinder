@@ -34,7 +34,6 @@
 	const lighthouseIssueUrl = 'https://github.com/GoogleChrome/lighthouse/issues/12039';
 
 	const reportNames = _.keys(lighthouseUrls)
-	const updateCurrentReport = id => currentreport = id;
 
 	const linkTheme = {
 		color: theme.colorLink,
@@ -49,6 +48,10 @@
 		tested: false,
 		passed: false
 	};
+
+	function updateCurrentReport (id) {
+		currentreport = id
+	}
 
 	async function loadResults (env) {
 		const fileName = getTestResultsFilename(env);
@@ -71,7 +74,11 @@
 		loadResults(environment);
 	})
 
-	$: currentreport, loadingResults = true;
+	$: {
+		// / eslint-disable-next-line no-unused-expressions
+		currentreport; // expression is used for reactivity
+		loadingResults = true;
+	}
 	$: currentValueIndex = _.findIndex(
 		reportNames,
 		_.is(currentreport)
