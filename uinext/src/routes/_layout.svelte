@@ -15,9 +15,13 @@
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {onMount, beforeUpdate, tick} from 'svelte';
 
-	import MultiBanner from 'app/components/MultiBanner.svelte';
 	import Nav from 'app/components/Nav.svelte';
-	import {a11yFontFamilies, fontsInfo} from 'app/config';
+	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
+	import {
+		a11yFontFamilies,
+		bannersDefaultFooterText,
+		fontsInfo,
+	} from 'app/config';
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -80,6 +84,7 @@
 	<MultiBanner
 		{_screen}
 		components={bannerComponents}
+		footerText={bannersDefaultFooterText}
 	/>
 {/if}
 
