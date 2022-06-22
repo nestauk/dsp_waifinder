@@ -34,14 +34,13 @@
 	const lighthouseIssueUrl = 'https://github.com/GoogleChrome/lighthouse/issues/12039';
 
 	const reportNames = _.keys(lighthouseUrls)
-	const updateCurrentReport = id => currentreport = id;
 
 	const linkTheme = {
 		color: theme.colorLink,
 		iconStroke: theme.colorLink
 	};
 
-	let currentreport = reportNames[0];
+	let [currentreport] = reportNames;
 	let environment;
 	let lighthouseFrame;
 	let loadingResults = false;
@@ -50,18 +49,22 @@
 		passed: false
 	};
 
-	async function loadResults (environment) {
-		const fileName = getTestResultsFilename(environment);
+	function updateCurrentReport (id) {
+		currentreport = id
+	}
+
+	async function loadResults (env) {
+		const fileName = getTestResultsFilename(env);
 		if (fileName) {
 			const response = await fetch(`${testResultsBaseURL}/${fileName}`);
 			const allTests = await response.json();
 			const indexedResults = groupTests(allTests);
-			const test = getTest(indexedResults, environment)
+			const test = getTest(indexedResults, env)
 			testResults = summarizeResults(test);
 		}
 	}
 
-	function resizeIFrameToFitContent ( iFrame ) {
+	function resizeIFrameToFitContent (iFrame) {
 		loadingResults = false
 		iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
 	}
@@ -71,7 +74,11 @@
 		loadResults(environment);
 	})
 
-	$: currentreport, loadingResults = true;
+	$: {
+		currentreport; // eslint-disable-line no-unused-expressions
+
+		loadingResults = true;
+	}
 	$: currentValueIndex = _.findIndex(
 		reportNames,
 		_.is(currentreport)
@@ -228,7 +235,7 @@
 			marginwidth='0'
 			src={reportUrl}
 			title='Accessibility validation results'
-			on:load={e => resizeIFrameToFitContent(lighthouseFrame)}
+			on:load={() => resizeIFrameToFitContent(lighthouseFrame)}
 		>
 			Loading...
 		</iframe>

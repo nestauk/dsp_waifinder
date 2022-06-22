@@ -1,3 +1,4 @@
+/* eslint-disable no-process-env */
 import commonjs from '@rollup/plugin-commonjs';
 import dsv from '@rollup/plugin-dsv';
 import json from '@rollup/plugin-json';
@@ -124,6 +125,7 @@ export default {
 				'@svizzle/utils',
 			].includes(name))
 			.concat(
+				// eslint-disable-next-line global-require
 				require('module').builtinModules ||
 				Object.keys(process.binding('natives'))
 			),
