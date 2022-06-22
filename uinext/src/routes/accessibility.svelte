@@ -75,8 +75,8 @@
 	})
 
 	$: {
-		// eslint-disable-next-line no-unused-expressions
-		currentreport; // expression is used for reactivity
+		currentreport; // eslint-disable-line no-unused-expressions
+
 		loadingResults = true;
 	}
 	$: currentValueIndex = _.findIndex(
