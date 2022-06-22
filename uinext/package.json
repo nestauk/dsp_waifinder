@@ -80,7 +80,6 @@
 		"rmsappers": "rimraf __sapper__ src/node_modules/@sapper",
 		"selenium": "node test/browserstack/selenium-runner.mjs",
 		"start": "node __sapper__/build",
-		"unittest": "mocha -r esm --spec src/**/*.spec.js",
-		"prepare": "cd .. && husky install uinext/.husky"
+		"unittest": "mocha -r esm --spec src/**/*.spec.js"
 	}
 }
