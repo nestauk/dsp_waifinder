@@ -5,6 +5,7 @@ import * as sapper from '@sapper/server';
 
 import {isDev} from 'app/config';
 
+// eslint-disable-next-line no-process-env
 const { PORT } = process.env;
 
 polka()

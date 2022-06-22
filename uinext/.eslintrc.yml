@@ -18,7 +18,6 @@ overrides:
       import/no-unresolved: off # svelte components not found
       no-invalid-this: off
       no-new: off
-      no-process-env: error
       node/no-missing-import: off # svelte components not found
 parserOptions:
   ecmaVersion: 2020
@@ -172,7 +171,7 @@ rules:
   no-param-reassign: error
   no-path-concat: error
   no-plusplus: off
-  no-process-env: off
+  no-process-env: error
   no-process-exit: error
   no-proto: error
   no-restricted-globals: error
