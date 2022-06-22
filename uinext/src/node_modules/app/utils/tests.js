@@ -44,12 +44,12 @@ const bowserToFilenameMap = {
 	*/
 }
 
-export const getTestResultsFilename = (environment) => {
-	const {os, browserMap} = bowserToFilenameMap[environment.os.name];
+export const getTestResultsFilename = environment => {
+	const {os, browserMap: browsersMap} = bowserToFilenameMap[environment.os.name];
 	if (!os) {
 		return null;
 	}
-	const browser = browserMap?.[environment.browser.name];
+	const browser = browsersMap?.[environment.browser.name];
 	if (!browser) {
 		return null;
 	}
@@ -81,7 +81,7 @@ export const getTest = (testsIndex, env) => {
 	return results?.[0];
 };
 
-export const summarizeResults = (platform) => {
+export const summarizeResults = platform => {
 	if (platform) {
 		return {
 			tested: true,
@@ -92,11 +92,10 @@ export const summarizeResults = (platform) => {
 			// TODO add reasons for failure
 			notes: [],
 		};
-	} else {
-		return {
-			tested: false,
-			passed: false,
-			notes: [`Untested platform.`],
-		};
 	}
+	return {
+		tested: false,
+		passed: false,
+		notes: [`Untested platform.`],
+	};
 };
