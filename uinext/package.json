@@ -36,7 +36,6 @@
 		"eslint": "^8.18.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"esm": "^3.2.25",
-		"husky": "^8.0.0",
 		"lighthouse": "^7.4.0",
 		"mdsvex": "^0.9.8",
 		"mkdirp": "^1.0.4",
