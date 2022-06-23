@@ -12,14 +12,14 @@
 	>
 </svelte:head>
 
-<main>
+<main class='about'>
 	<div>
 		<Content />
 	</div>
 </main>
 
 <style>
-	main {
+	.about {
 		background-color: var(--color-background);
 		display: flex;
 		font-weight: 200;

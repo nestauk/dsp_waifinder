@@ -3,8 +3,8 @@
 
 	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
 	import Small from 'app/components/homeScreen/small/Small.svelte';
-	import View from 'app/components/ViewPorts/View.svelte';
-	import ViewsXor from 'app/components/ViewPorts/ViewsXor.svelte';
+	import View from 'app/components/viewports/View.svelte';
+	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
 	import {updateDataset} from 'app/stores/dataset';
 	import {_orgs} from 'app/stores/data';
 	import {_screenId} from 'app/stores/layout';

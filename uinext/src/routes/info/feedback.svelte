@@ -10,7 +10,7 @@
 	>
 </svelte:head>
 
-<main>
+<main class='feedback'>
 	<iframe
 		frameborder='0'
 		marginheight='0'
