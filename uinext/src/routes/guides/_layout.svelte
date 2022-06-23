@@ -27,7 +27,7 @@
 	$: hasNextSegment = isNotNil(nextSegment);
 </script>
 
-<main class={$_screen?.classes}>
+<main class='_layout guides {$_screen?.classes}'>
 	<section>
 		<h1>Guides</h1>
 		<menu class='tabs'>
@@ -81,7 +81,7 @@
 		</menu>
 		<div>
 			<slot />
-			
+
 			<ResponsiveFlex>
 				<LinkButton
 					href='/accessibility'

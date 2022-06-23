@@ -96,7 +96,7 @@
 {/if}
 
 <div
-	class={$_screen?.classes}
+	class='_layout root {$_screen?.classes}'
 	class:hidden={isLayoutUndefined}
 	style='--menu-height: {menuHeight}px;'
 	role='none'

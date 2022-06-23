@@ -27,7 +27,7 @@
 	$: hasNextSegment = isNotNil(nextSegment);
 </script>
 
-<main class={$_screen?.classes}>
+<main class='_layout info {$_screen?.classes}'>
 	<section>
 		<h1>App information</h1>
 		<menu class='tabs'>

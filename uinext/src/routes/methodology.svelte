@@ -16,7 +16,7 @@
 	>
 </svelte:head>
 
-<main class={$_screen?.classes}>
+<main class='methodology {$_screen?.classes}'>
 	<div>
 		<Methodology/>
 
@@ -31,7 +31,7 @@
 </main>
 
 <style>
-	main {
+	.methodology {
 		background-color: var(--color-background);
 		display: flex;
 		font-weight: 200;

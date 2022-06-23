@@ -102,7 +102,7 @@
 	>
 </svelte:head>
 
-<main class={$_screen?.classes}>
+<main class='accessibility {$_screen?.classes}'>
 	<section>
 		<Accessibility/>
 
@@ -243,7 +243,7 @@
 </main>
 
 <style>
-	main {
+	.accessibility {
 		background-color: var(--color-background);
 		display: flex;
 		font-weight: 200;
