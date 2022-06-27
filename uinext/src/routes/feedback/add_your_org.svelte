@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Survey - {toolName}</title>
+	<title>Add your org - {toolName}</title>
 	<meta
 		content='{toolName}: a survey where you can leave your feedback on this tool'
 		name='description'
