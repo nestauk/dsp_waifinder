@@ -11,11 +11,10 @@
 	import {isNotNil} from '@svizzle/utils';
 	import theme from 'app/theme';
 
-	const segments = ['privacy', 'disclaimer', 'feedback'];
+	const segments = ['privacy', 'disclaimer'];
 	const titles = {
 		privacy: 'Privacy',
-		disclaimer: 'Disclaimer',
-		feedback: 'Feedback',
+		disclaimer: 'Disclaimer'
 	}
 
 	export let segment;

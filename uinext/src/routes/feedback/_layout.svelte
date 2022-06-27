@@ -11,7 +11,7 @@
 	import {isNotNil} from '@svizzle/utils';
 	import theme from 'app/theme';
 
-	const segments = ['add_your_org', 'survey'];
+	const segments = ['survey', 'add_your_org'];
 	const titles = {
 		add_your_org: 'Add your org',
 		survey: 'Survey'
