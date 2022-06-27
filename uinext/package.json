@@ -1,6 +1,7 @@
 {
 	"author": "nestauk (https://www.nesta.org.uk/)",
 	"dependencies": {
+		"@fingerprintjs/fingerprintjs": "^3.3.3",
 		"@macfja/svelte-persistent-store": "^1.2.0",
 		"@mapbox/geo-viewport": "^0.4.1",
 		"@svizzle/dom": "^0.5.1",
