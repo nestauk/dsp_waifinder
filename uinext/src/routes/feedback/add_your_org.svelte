@@ -5,7 +5,7 @@
 <svelte:head>
 	<title>Add your org - {toolName}</title>
 	<meta
-		content='{toolName}: a survey where you can leave your feedback on this tool'
+		content='{toolName}: a form to propose your org to be added to the map'
 		name='description'
 	>
 </svelte:head>
