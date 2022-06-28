@@ -1,5 +1,5 @@
 <script>
-	import {toolName, userTestingUrl} from 'app/config';
+	import {toolName, surveyFormUrl} from 'app/config';
 </script>
 
 <svelte:head>
@@ -15,7 +15,7 @@
 		frameborder='0'
 		marginheight='0'
 		marginwidth='0'
-		src={userTestingUrl}
+		src={surveyFormUrl}
 		title='User testing survey'
 	/>
 </main>
