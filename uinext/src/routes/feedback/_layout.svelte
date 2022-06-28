@@ -11,11 +11,11 @@
 	import {isNotNil} from '@svizzle/utils';
 	import theme from 'app/theme';
 
-	const segments = ['privacy', 'disclaimer'];
+	const segments = ['survey', 'add_your_org'];
 	const titles = {
-		privacy: 'Privacy',
-		disclaimer: 'Disclaimer'
-	}
+		add_your_org: 'Add your org',
+		survey: 'Survey'
+	};
 
 	export let segment;
 
@@ -26,16 +26,16 @@
 	$: hasNextSegment = isNotNil(nextSegment);
 </script>
 
-<main class='_layout info {$_screen?.classes}'>
+<main class='_layout feedback {$_screen?.classes}'>
 	<section>
-		<h1>App information</h1>
+		<h1>Feedback</h1>
 		<menu class='tabs'>
 			{#if $_screen?.sizes?.medium}
 				<ul>
 					{#each segments as id}
 						<li class:selected={segment === id}>
 							<Link
-								href='/info/{id}'
+								href='/feedback/{id}'
 								theme={{
 									color: segment === id ? 'white' : theme.colorLink,
 								}}
@@ -55,7 +55,7 @@
 
 					<div>
 						<Link
-							href={hasPrevSegment && `/info/${prevSegment}`}
+							href={hasPrevSegment && `/feedback/${prevSegment}`}
 							theme={{
 								color: hasPrevSegment ? theme.colorLink : 'gray',
 							}}
@@ -65,7 +65,7 @@
 					</div>
 					<div>
 						<Link
-							href={hasNextSegment && `/info/${nextSegment}`}
+							href={hasNextSegment && `/feedback/${nextSegment}`}
 							theme={{
 								color: hasNextSegment ? theme.colorLink : 'gray',
 							}}
