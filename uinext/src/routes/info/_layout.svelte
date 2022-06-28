@@ -33,9 +33,7 @@
 			{#if $_screen?.sizes?.medium}
 				<ul>
 					{#each segments as id}
-						<li
-							class:selected={segment === id}
-						>
+						<li class:selected={segment === id}>
 							<Link
 								href='/info/{id}'
 								theme={{
