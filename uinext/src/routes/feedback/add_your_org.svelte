@@ -16,7 +16,7 @@
 		marginheight='0'
 		marginwidth='0'
 		src={addOrgFormUrl}
-		title='User testing survey'
+		title='Add your organisation'
 	/>
 </main>
 
