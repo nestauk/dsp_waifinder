@@ -33,11 +33,11 @@ import { stringify } from '@svizzle/utils';
 		};
 	};
 
-	const sendOrg = () => {
+	const sendOrg = async () => {
 		console.log($_deviceId, $_currentOrg._id, evaluations);
-		sendEvaluations($_deviceId, $_currentOrg._id, evaluations);
+		await sendEvaluations($_deviceId, $_currentOrg._id, evaluations);
 		evaluations = {};
-		loadNextOrg();
+		await loadNextOrg();
 		console.log('sent');
 	};
 
@@ -88,7 +88,7 @@ import { stringify } from '@svizzle/utils';
 						<button on:click={() => onVoteClick('dunno')}>Not sure</button>
 						<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
 				{:else}
-					<button on:click={() => sendOrg()}>Next</button>
+					<button on:click={sendOrg}>Next</button>
 				{/if}
 			</div>
 		</div>
