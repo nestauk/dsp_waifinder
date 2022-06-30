@@ -1,38 +1,70 @@
 <script>
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
-	import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { stringify } from '@svizzle/utils';
 
 	import Pill from 'app/components/orgs/Pill.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import {_deviceId} from 'app/stores/device';
+	import {_currentOrg, loadNextOrg } from 'app/stores/eval';
 	import {getTopicLabel} from 'app/utils/dataUtils';
+	import {sendEvaluations} from 'app/utils/eval';
 
-	import {responseSample} from 'app/utils/temp.js';
+	let currentEntity;
+	let description;
+	let entities;
+	let entitiesIterator;
+	let label;
+	let score;
+	let source;
+	let evaluations = {};
 
-	const getDeviceId = async () => {
-		$_deviceId =
-			await FingerprintJS.load({monitoring: false})
-			.then(fp => fp.get())
-			.then(result => result.visitorId);
+	const getNextEntity = () => {
+		const next = entitiesIterator.next();
+		// eslint-disable-next-line prefer-destructuring
+		const value = next.value?.[1];
+		console.log('value', value);
+		return value;
+	};
+
+	const addEvaluation = (URI, value) => {
+		evaluations = {
+			...evaluations,
+			[URI]: value
+		};
+	};
+
+	const sendOrg = () => {
+		console.log($_deviceId, $_currentOrg._id, evaluations);
+		sendEvaluations($_deviceId, $_currentOrg._id, evaluations);
+		evaluations = {};
+		loadNextOrg();
+		console.log('sent');
+	};
+
+	const onVoteClick = vote => {
+		addEvaluation(currentEntity.URI, vote);
+		currentEntity = getNextEntity();
+		console.log('vote', evaluations);
+	};
+
+	$: isClientSide && !$_currentOrg && loadNextOrg();
+	$: if ($_currentOrg) {
+		source = $_currentOrg._source;
+		entities = source.dbpedia_entities;
+		console.log('org', $_currentOrg)
+		entitiesIterator = entities.entries();
+		currentEntity = getNextEntity();
 	}
-
-	let currentEntityId;
-
-	$: isClientSide && getDeviceId();
-
-	$: source = responseSample._source;
-	$: entities = source.dbpedia_entities;
-	$: entities, (currentEntityId = 0);
-	$: currentEntity = entities[currentEntityId];
-
-	$: description = source.description?.replace(
-		currentEntity.surfaceForm,
-		`<span>${currentEntity.surfaceForm}</span>`
-	);
-	$: score = currentEntity.confidence;
-	$: label = getTopicLabel(
-		currentEntity.URI.replace('http://dbpedia.org/resource/', '')
-	);
+	$: if (currentEntity) {
+		description = source.description.replace(
+			currentEntity.surfaceForm,
+			`<span>${currentEntity.surfaceForm}</span>`
+		);
+		score = currentEntity.confidence;
+		label = getTopicLabel(
+			currentEntity.URI.replace('http://dbpedia.org/resource/', '')
+		);
+	}
 </script>
 
 <div class='eval'>
@@ -50,13 +82,24 @@
 				{label}
 				{score}
 			/>
+			<div class='answers'>
+				{#if currentEntity}
+						<button on:click={() => onVoteClick('keep')}>Keep</button>
+						<button on:click={() => onVoteClick('dunno')}>Not sure</button>
+						<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
+				{:else}
+					<button on:click={() => sendOrg()}>Next</button>
+				{/if}
+			</div>
 		</div>
 	</LayoutHMF>
+	<pre>{JSON.stringify(evaluations, null, 2)}</pre>
 </div>
 
 <style>
 	.footer {
-		display: flex;
+		display: grid;
+		grid-template-columns: 1fr, 1fr;
 	}
 	:global(.eval .main p span) {
 		background: yellow;
