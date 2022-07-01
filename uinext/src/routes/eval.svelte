@@ -13,7 +13,7 @@
 		asyncUpdateTopicDetails,
 		clearActiveTopic
 	} from 'app/stores/topics';
-	import {getTopicLabel} from 'app/utils/dataUtils';
+	import {getTopicLabel, getFirstPhrases} from 'app/utils/dataUtils';
 	import {sendEvaluations} from 'app/utils/eval';
 
 
@@ -26,7 +26,12 @@
 	let score;
 	let source;
 	let evaluations = {};
+	let isImgErrored = false;
 	let isLoading;
+
+	const notifyImgError = () => {
+		isImgErrored = true;
+	}
 
 	const getNextEntity = () => {
 		const next = entitiesIterator.next();
@@ -73,9 +78,16 @@
 		score = currentEntity.confidence;
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
+		asyncUpdateTopicDetails(id);
 	} else if ($_currentOrg) {
 		description = source.description;
+		clearActiveTopic();
 	}
+
+	$: abstract = $_activeTopicDetails?.abstract
+		? getFirstPhrases($_activeTopicDetails.abstract, 300)
+		: 'No info';
+	$: thumbnailURL = $_activeTopicDetails?.thumbnailURL;
 </script>
 
 <div class='eval {$_screen?.classes}'>
@@ -94,29 +106,43 @@
 				</p>
 				<div class='controls'>
 					{#if currentEntity}
-						<div
-							on:mouseenter={() => asyncUpdateTopicDetails(id)}
-							on:mouseleave={clearActiveTopic}
-						>
+						<div class='topicPill'>
 							<Pill
 								{label}
 								{score}
 							/>
 						</div>
-						<div class='answers'>
+						<div class='options'>
 									<button on:click={() => onVoteClick('keep')}>Keep</button>
 									<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
 									<button on:click={() => onVoteClick('dunno')}>Not sure</button>
 						</div>
 					{:else}
-						<button on:click={sendOrg}>Next</button>
+						<div class='options'>
+							<button on:click={sendOrg}>Next</button>
+						</div>
 					{/if}
+					<div class='topicDetails'>
+						{#if $_activeTopicDetails}
+							{#if $_activeTopicDetails.isLoading}
+								<LoadingView />
+							{:else}
+								{#if thumbnailURL && !isImgErrored}
+									<img
+										alt='Topic thumbnail.'
+										on:error={notifyImgError}
+										src={thumbnailURL}
+									/>
+								{/if}
+								<p>
+									{abstract}
+								</p>
+							{/if}
+						{/if}
+					</div>
 				</div>
 			</div>
 		</LayoutHMF>
-	{/if}
-	{#if $_activeTopicDetails}
-		<TopicBanner isPinned={false} />
 	{/if}
 </div>
 
@@ -133,13 +159,16 @@
 	}
 
 	.small:not(.medium) .controls {
-		grid-auto-flow: row;
-		grid-template-rows: 1fr min-content;
+		grid-template-areas:
+			"topicPill"
+			"topicDetails"
+			"options";
 	}
 
 	.medium .controls {
-		grid-auto-flow: column;
-		grid-template-columns: 1fr min-content;
+		grid-template-areas:
+			"topicPill options"
+			"topicDetails topicDetails";
 	}
 
 	.eval {
@@ -154,12 +183,26 @@
 		justify-items: center;
 	}
 
-	.answers {
+	.topicPill {
+		grid-area: topicPill;
+	}
+	.topicDetails {
+		grid-area: topicDetails;
+	}
+	.options {
 		padding: 1em;
 		white-space: nowrap;
+		grid-area: options;
 	}
 
 	:global(.eval .main p span) {
 		background: yellow;
+	}
+
+	img {
+		float: right;
+		margin: 0.5em;
+		max-height: 10em;
+		max-width: 50%;
 	}
 </style>
