@@ -73,6 +73,8 @@
 		score = currentEntity.confidence;
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
+	} else if ($_currentOrg) {
+		description = source.description;
 	}
 </script>
 
@@ -91,24 +93,24 @@
 					{@html description}
 				</p>
 				<div class='controls'>
-					<div
-						on:mouseenter={() => asyncUpdateTopicDetails(id)}
-						on:mouseleave={clearActiveTopic}
-					>
-						<Pill
-							{label}
-							{score}
-						/>
-					</div>
-					<div class='answers'>
-						{#if currentEntity}
-								<button on:click={() => onVoteClick('keep')}>Keep</button>
-								<button on:click={() => onVoteClick('dunno')}>Not sure</button>
-								<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
-						{:else}
-							<button on:click={sendOrg}>Next</button>
-						{/if}
-					</div>
+					{#if currentEntity}
+						<div
+							on:mouseenter={() => asyncUpdateTopicDetails(id)}
+							on:mouseleave={clearActiveTopic}
+						>
+							<Pill
+								{label}
+								{score}
+							/>
+						</div>
+						<div class='answers'>
+									<button on:click={() => onVoteClick('keep')}>Keep</button>
+									<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
+									<button on:click={() => onVoteClick('dunno')}>Not sure</button>
+						</div>
+					{:else}
+						<button on:click={sendOrg}>Next</button>
+					{/if}
 				</div>
 			</div>
 		</LayoutHMF>
