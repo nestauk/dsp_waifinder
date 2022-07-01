@@ -1,13 +1,18 @@
 <script>
+	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
-import { stringify } from '@svizzle/utils';
 
 	import Pill from 'app/components/orgs/Pill.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import {_deviceId} from 'app/stores/device';
 	import {_currentOrg, loadNextOrg } from 'app/stores/eval';
+	import {
+		asyncUpdateTopicDetails,
+		clearActiveTopic
+	} from 'app/stores/topics';
 	import {getTopicLabel} from 'app/utils/dataUtils';
 	import {sendEvaluations} from 'app/utils/eval';
+
 
 	let currentEntity;
 	let description;
@@ -17,12 +22,12 @@ import { stringify } from '@svizzle/utils';
 	let score;
 	let source;
 	let evaluations = {};
+	let isLoading;
 
 	const getNextEntity = () => {
 		const next = entitiesIterator.next();
 		// eslint-disable-next-line prefer-destructuring
 		const value = next.value?.[1];
-		console.log('value', value);
 		return value;
 	};
 
@@ -34,26 +39,28 @@ import { stringify } from '@svizzle/utils';
 	};
 
 	const sendOrg = async () => {
-		console.log($_deviceId, $_currentOrg._id, evaluations);
+		isLoading = true;
 		await sendEvaluations($_deviceId, $_currentOrg._id, evaluations);
 		evaluations = {};
 		await loadNextOrg();
-		console.log('sent');
 	};
 
 	const onVoteClick = vote => {
 		addEvaluation(currentEntity.URI, vote);
 		currentEntity = getNextEntity();
-		console.log('vote', evaluations);
 	};
 
-	$: isClientSide && !$_currentOrg && loadNextOrg();
+	$: if (isClientSide && !$_currentOrg) {
+		isLoading = true;
+		loadNextOrg();
+	}
 	$: if ($_currentOrg) {
+		isLoading = false;
 		source = $_currentOrg._source;
 		entities = source.dbpedia_entities;
-		console.log('org', $_currentOrg)
 		entitiesIterator = entities.entries();
 		currentEntity = getNextEntity();
+		// console.log(currentEntity)
 	}
 	$: if (currentEntity) {
 		description = source.description.replace(
@@ -68,39 +75,70 @@ import { stringify } from '@svizzle/utils';
 </script>
 
 <div class='eval'>
-	<LayoutHMF>
-		<div slot='header'>
-			User: {$_deviceId}
+	{#if isLoading}
+		<div class='loadPanel'>
+			<LoadingView />
 		</div>
-		<div class='main' slot='main'>
-			<p>
-				{@html description}
-			</p>
-		</div>
-		<div slot='footer' class='footer'>
-			<Pill
-				{label}
-				{score}
-			/>
-			<div class='answers'>
-				{#if currentEntity}
-						<button on:click={() => onVoteClick('keep')}>Keep</button>
-						<button on:click={() => onVoteClick('dunno')}>Not sure</button>
-						<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
-				{:else}
-					<button on:click={sendOrg}>Next</button>
-				{/if}
+	{:else}
+		<LayoutHMF>
+			<div slot='header'>
+				User: {$_deviceId}
 			</div>
-		</div>
-	</LayoutHMF>
-	<pre>{JSON.stringify(evaluations, null, 2)}</pre>
+			<div class='main' slot='main'>
+				<p>
+					{@html description}
+				</p>
+				<div class='controls'>
+					<Pill
+						{label}
+						{score}
+					/>
+					<div class='answers'>
+						{#if currentEntity}
+								<button on:click={() => onVoteClick('keep')}>Keep</button>
+								<button on:click={() => onVoteClick('dunno')}>Not sure</button>
+								<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
+						{:else}
+							<button on:click={sendOrg}>Next</button>
+						{/if}
+					</div>
+				</div>
+			</div>
+		</LayoutHMF>
+	{/if}
 </div>
 
 <style>
-	.footer {
-		display: grid;
-		grid-template-columns: 1fr, 1fr;
+	.main {
+		padding: 1em;
 	}
+
+	.controls {
+		align-items: center;
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-columns: 1fr min-content;
+		justify-items: center;
+		padding-top: 1em;
+	}
+
+	.eval {
+		width: 100%;
+		height: 100%;
+	}
+	.loadPanel {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		align-items: center;
+		justify-items: center;
+	}
+
+	.answers {
+		padding: 1em;
+		white-space: nowrap;
+	}
+
 	:global(.eval .main p span) {
 		background: yellow;
 	}
