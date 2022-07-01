@@ -1,12 +1,15 @@
 <script>
+	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
 	import Pill from 'app/components/orgs/Pill.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
+	import TopicBanner from 'app/components/banners/TopicBanner.svelte';
 	import {_deviceId} from 'app/stores/device';
 	import {_currentOrg, loadNextOrg } from 'app/stores/eval';
 	import {
+		_activeTopicDetails,
 		asyncUpdateTopicDetails,
 		clearActiveTopic
 	} from 'app/stores/topics';
@@ -18,6 +21,7 @@
 	let description;
 	let entities;
 	let entitiesIterator;
+	let id;
 	let label;
 	let score;
 	let source;
@@ -60,7 +64,6 @@
 		entities = source.dbpedia_entities;
 		entitiesIterator = entities.entries();
 		currentEntity = getNextEntity();
-		// console.log(currentEntity)
 	}
 	$: if (currentEntity) {
 		description = source.description.replace(
@@ -68,13 +71,12 @@
 			`<span>${currentEntity.surfaceForm}</span>`
 		);
 		score = currentEntity.confidence;
-		label = getTopicLabel(
-			currentEntity.URI.replace('http://dbpedia.org/resource/', '')
-		);
+		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
+		label = getTopicLabel(id);
 	}
 </script>
 
-<div class='eval'>
+<div class='eval {$_screen?.classes}'>
 	{#if isLoading}
 		<div class='loadPanel'>
 			<LoadingView />
@@ -89,10 +91,15 @@
 					{@html description}
 				</p>
 				<div class='controls'>
-					<Pill
-						{label}
-						{score}
-					/>
+					<div
+						on:mouseenter={() => asyncUpdateTopicDetails(id)}
+						on:mouseleave={clearActiveTopic}
+					>
+						<Pill
+							{label}
+							{score}
+						/>
+					</div>
 					<div class='answers'>
 						{#if currentEntity}
 								<button on:click={() => onVoteClick('keep')}>Keep</button>
@@ -106,6 +113,9 @@
 			</div>
 		</LayoutHMF>
 	{/if}
+	{#if $_activeTopicDetails}
+		<TopicBanner isPinned={false} />
+	{/if}
 </div>
 
 <style>
@@ -116,10 +126,18 @@
 	.controls {
 		align-items: center;
 		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: 1fr min-content;
 		justify-items: center;
 		padding-top: 1em;
+	}
+
+	.small:not(.medium) .controls {
+		grid-auto-flow: row;
+		grid-template-rows: 1fr min-content;
+	}
+
+	.medium .controls {
+		grid-auto-flow: column;
+		grid-template-columns: 1fr min-content;
 	}
 
 	.eval {
