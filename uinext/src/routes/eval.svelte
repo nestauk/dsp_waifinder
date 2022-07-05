@@ -1,13 +1,21 @@
 <script>
+	import {tick} from 'svelte';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 
 	import Pill from 'app/components/orgs/Pill.svelte';
+	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
-	import TopicBanner from 'app/components/banners/TopicBanner.svelte';
-	import {_deviceId} from 'app/stores/device';
-	import {_currentOrg, loadNextOrg } from 'app/stores/eval';
+	import Scroller from 'app/components/svizzle/Scroller.svelte';
+	// import {_deviceId} from 'app/stores/device';
+	import {
+		_currentOrg,
+		_evaluatorSettings,
+		defaultEvaluatorSettings,
+		loadNextOrg
+	} from 'app/stores/eval';
 	import {
 		_activeTopicDetails,
 		asyncUpdateTopicDetails,
@@ -15,7 +23,6 @@
 	} from 'app/stores/topics';
 	import {getTopicLabel, getFirstPhrases} from 'app/utils/dataUtils';
 	import {sendEvaluations} from 'app/utils/eval';
-
 
 	let currentEntity;
 	let description;
@@ -25,9 +32,11 @@
 	let label;
 	let score;
 	let source;
+	let surfaceFormRegex;
 	let evaluations = {};
 	let isImgErrored = false;
 	let isLoading;
+	let userEmail = '';
 
 	const notifyImgError = () => {
 		isImgErrored = true;
@@ -49,7 +58,11 @@
 
 	const sendOrg = async () => {
 		isLoading = true;
-		await sendEvaluations($_deviceId, $_currentOrg._id, evaluations);
+		await sendEvaluations(
+			$_evaluatorSettings,
+			$_currentOrg._id,
+			evaluations
+		);
 		evaluations = {};
 		await loadNextOrg();
 	};
@@ -58,6 +71,18 @@
 		addEvaluation(currentEntity.URI, vote);
 		currentEntity = getNextEntity();
 	};
+
+	const onSubmitEmail = () => {
+		$_evaluatorSettings = {userEmail};
+		console.log($_evaluatorSettings)
+	}
+
+	const onKeyPress = e => {
+		if (e.keyCode === 13) {
+			e.preventDefault();
+			onSubmitEmail();
+		}
+	}
 
 	$: if (isClientSide && !$_currentOrg) {
 		isLoading = true;
@@ -69,18 +94,25 @@
 		entities = source.dbpedia_entities;
 		entitiesIterator = entities.entries();
 		currentEntity = getNextEntity();
+		({description} = source);
 	}
 	$: if (currentEntity) {
-		description = source.description.replace(
-			currentEntity.surfaceForm,
-			`<span>${currentEntity.surfaceForm}</span>`
-		);
+		surfaceFormRegex = new RegExp(currentEntity.surfaceForm, 'ugi');
 		score = currentEntity.confidence;
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
+		tick().then(() => {
+			const targetElement = document.getElementById('highlighted-0');
+			if (targetElement) {
+				if (targetElement.scrollIntoViewIfNeeded) {
+					targetElement.scrollIntoViewIfNeeded(); // Chrome/Safari/Edge
+				} else {
+					targetElement.scrollIntoView(); // FF
+				}
+			}
+		})
 	} else if ($_currentOrg) {
-		description = source.description;
 		clearActiveTopic();
 	}
 
@@ -90,91 +122,145 @@
 	$: thumbnailURL = $_activeTopicDetails?.thumbnailURL;
 </script>
 
+<StorageIO
+	_store={_evaluatorSettings}
+	defaultValue={defaultEvaluatorSettings}
+	isReactive={true}
+	key='evaluatorSettings'
+	type='localStorage'
+/>
+
 <div class='eval {$_screen?.classes}'>
-	{#if isLoading}
-		<div class='loadPanel'>
-			<LoadingView />
+	{#if !$_evaluatorSettings}
+		<div class='emailForm'>
+			<p>
+				Please input your email address before evaluating topic extractions.
+			</p>
+			<input type='email' bind:value={userEmail} on:keypress={onKeyPress}/>
+			<button on:click={onSubmitEmail}>Save</button>
 		</div>
 	{:else}
-		<LayoutHMF>
-			<div slot='header'>
-				User: {$_deviceId}
+		{#if isLoading}
+			<div class='loadPanel'>
+				<LoadingView />
 			</div>
-			<div class='main' slot='main'>
-				<p>
-					{@html description}
-				</p>
-				<div class='controls'>
-					{#if currentEntity}
-						<div class='topicPill'>
+		{:else}
+			<LayoutHMF>
+
+				<div slot='header'>
+					e-mail: {$_evaluatorSettings.userEmail}
+				</div>
+
+				<div class='main' slot='main'>
+					<div class='topicPill'>
+						{#if currentEntity}
 							<Pill
 								{label}
 								{score}
 							/>
-						</div>
-						<div class='options'>
-									<button on:click={() => onVoteClick('keep')}>Keep</button>
-									<button on:click={() => onVoteClick('dismiss')}>Dismiss</button>
-									<button on:click={() => onVoteClick('dunno')}>Not sure</button>
-						</div>
-					{:else}
-						<div class='options'>
-							<button on:click={sendOrg}>Next</button>
-						</div>
-					{/if}
+						{/if}
+					</div>
 					<div class='topicDetails'>
-						{#if $_activeTopicDetails}
-							{#if $_activeTopicDetails.isLoading}
-								<LoadingView />
-							{:else}
-								{#if thumbnailURL && !isImgErrored}
-									<img
-										alt='Topic thumbnail.'
-										on:error={notifyImgError}
-										src={thumbnailURL}
-									/>
+						<Scroller>
+							{#if $_activeTopicDetails}
+								{#if $_activeTopicDetails.isLoading}
+									<LoadingView />
+								{:else}
+									{#if thumbnailURL && !isImgErrored}
+										<img
+											alt='Topic thumbnail.'
+											on:error={notifyImgError}
+											src={thumbnailURL}
+										/>
+									{/if}
+									<p>
+										{abstract}
+									</p>
 								{/if}
-								<p>
-									{abstract}
-								</p>
 							{/if}
+						</Scroller>
+					</div>
+					<h4>Description</h4>
+					<div class='description'>
+						<Scroller>
+							<HighlightedText
+								regex={surfaceFormRegex}
+								string={description}
+							/>
+						</Scroller>
+					</div>
+				</div>
+				<div slot='footer'>
+					<div class='controls'>
+						{#if currentEntity}
+							<button
+								on:click={() => onVoteClick('keep')}
+								class='keep'
+							>
+								Keep
+							</button>
+							<button
+								on:click={() => onVoteClick('dismiss')}
+								class='dismiss'
+							>
+								Dismiss
+							</button>
+							<button
+								on:click={() => onVoteClick('dunno')}
+								class='dunno'
+							>
+								Not sure
+							</button>
+						{:else}
+							<button on:click={sendOrg}>Next</button>
 						{/if}
 					</div>
 				</div>
-			</div>
-		</LayoutHMF>
+			</LayoutHMF>
+		{/if}
+
 	{/if}
+
 </div>
 
 <style>
+	.eval {
+		width: 100%;
+		height: 100%;
+	}
 	.main {
 		padding: 1em;
+		display: grid;
+		grid-template-areas: 'pill' 'details' 'sep' 'description';
+		grid-template-rows: min-content 1fr min-content 1fr;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.topicPill {
+		grid-area: pill;
+		padding-bottom: 1em;
+	}
+	.topicDetails {
+		grid-area: details;
+		overflow: hidden;
+	}
+	h4 {
+		grid-area: sep;
+	}
+	.description {
+		grid-area: description;
+		overflow: hidden;
 	}
 
 	.controls {
 		align-items: center;
 		display: grid;
+		grid-auto-flow: column;
 		justify-items: center;
-		padding-top: 1em;
+		padding: 0 1em;
 	}
 
-	.small:not(.medium) .controls {
-		grid-template-areas:
-			"topicPill"
-			"topicDetails"
-			"options";
-	}
-
-	.medium .controls {
-		grid-template-areas:
-			"topicPill options"
-			"topicDetails topicDetails";
-	}
-
-	.eval {
-		width: 100%;
-		height: 100%;
-	}
 	.loadPanel {
 		width: 100%;
 		height: 100%;
@@ -183,26 +269,28 @@
 		justify-items: center;
 	}
 
-	.topicPill {
-		grid-area: topicPill;
-	}
-	.topicDetails {
-		grid-area: topicDetails;
-	}
-	.options {
-		padding: 1em;
-		white-space: nowrap;
-		grid-area: options;
-	}
-
-	:global(.eval .main p span) {
-		background: yellow;
-	}
-
 	img {
 		float: right;
 		margin: 0.5em;
 		max-height: 10em;
 		max-width: 50%;
+	}
+
+	.controls button {
+		padding: 0.5em;
+		width: 6em;
+	}
+
+	.keep {
+		background: greenyellow;
+		border: 2px solid green;
+	}
+	.dismiss {
+		background: rgb(255, 88, 88);
+		border: 2px solid red;
+	}
+	.dunno {
+		background: lightyellow;
+		border: 2px solid yellow;
 	}
 </style>
