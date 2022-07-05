@@ -1,5 +1,4 @@
 <script>
-	import {tick} from 'svelte';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
@@ -102,16 +101,6 @@
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
-		tick().then(() => {
-			const targetElement = document.getElementById('highlighted-0');
-			if (targetElement) {
-				if (targetElement.scrollIntoViewIfNeeded) {
-					targetElement.scrollIntoViewIfNeeded(); // Chrome/Safari/Edge
-				} else {
-					targetElement.scrollIntoView(); // FF
-				}
-			}
-		})
 	} else if ($_currentOrg) {
 		clearActiveTopic();
 	}
@@ -185,6 +174,7 @@
 						<Scroller>
 							<HighlightedText
 								regex={surfaceFormRegex}
+								shouldScrollIntoView=true
 								string={description}
 							/>
 						</Scroller>
