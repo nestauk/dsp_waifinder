@@ -83,7 +83,7 @@
 		}
 	}
 
-	$: if (isClientSide && !$_currentOrg) {
+	$: if (isClientSide && !$_currentOrg && $_evaluatorSettings) {
 		isLoading = true;
 		loadNextOrg();
 	}
