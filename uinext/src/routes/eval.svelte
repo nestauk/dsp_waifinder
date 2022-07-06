@@ -112,7 +112,7 @@
 				<div class='main' slot='main'>
 					<h2 class='question start'>
 						{#if currentEntity}
-							Does <span>"{label}",</span>
+							Does "<span>{label}</span>"
 						{/if}
 					</h2>
 
@@ -121,12 +121,13 @@
 					</div>
 
 					<h2 class='question end'>
-						...apply to this text?
+						apply to this text?
 					</h2>
 
 					<div class='description'>
 						<Scroller>
 							<HighlightedText
+								color='aqua'
 								regex={surfaceFormRegex}
 								shouldScrollIntoView=true
 								string={description}
@@ -176,6 +177,7 @@
 	}
 	.question.start span {
 		font-style: italic;
+		background-color: aqua;
 	}
 
 	.details {
