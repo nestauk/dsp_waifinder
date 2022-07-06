@@ -106,19 +106,24 @@
 		{:else}
 			<LayoutHMF>
 				<div slot='header'>
-					e-mail: {$_evaluatorSettings.userEmail}
+					{$_evaluatorSettings.userEmail}
 				</div>
 
 				<div class='main' slot='main'>
-					<h2 class='topicPill'>
+					<h2 class='question start'>
 						{#if currentEntity}
-							Does {label}
+							Does <span>"{label}",</span>
 						{/if}
 					</h2>
-					<div class='topicDetails'>
+
+					<div class='details'>
 						<TopicPanel topicDetails={$_evalTopicDetails} />
 					</div>
-					<h2>apply to this text?</h2>
+
+					<h2 class='question end'>
+						...apply to this text?
+					</h2>
+
 					<div class='description'>
 						<Scroller>
 							<HighlightedText
@@ -129,7 +134,10 @@
 						</Scroller>
 					</div>
 					{#if !$_isSmallScreen}
-						<VoteButtons on:voted={onVoted} isVerticalLayout=true/>
+						<VoteButtons
+							isVerticalLayout=true
+							on:voted={onVoted}
+						/>
 					{/if}
 				</div>
 
@@ -151,25 +159,34 @@
 	.main {
 		padding: 1em;
 		display: grid;
-		grid-template-areas: 'pill' 'details' 'sep' 'description';
+		grid-template-areas: 'questionStart' 'details' 'questionEnd' 'description';
 		grid-template-rows: min-content 1fr min-content 1fr;
 		height: 100%;
 		overflow: hidden;
 	}
 
 	.medium .main {
-		grid-template-areas: 'pill sep' 'details description';
+		grid-template-areas: 'questionStart questionEnd' 'details description';
 		grid-template-columns: 1fr 1fr min-content;
 		grid-template-rows: min-content 1fr;
 	}
-	.topicPill {
-		grid-area: pill;
-		padding-bottom: 1em;
+
+	.question.start {
+		grid-area: questionStart;
 	}
-	.topicDetails {
+	.question.start span {
+		font-style: italic;
+	}
+
+	.details {
 		grid-area: details;
 		overflow: hidden;
 	}
+
+	.question.end {
+		margin-top: 1rem;
+	}
+
 	.description {
 		grid-area: description;
 		overflow: hidden;
