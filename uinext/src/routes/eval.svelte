@@ -4,46 +4,39 @@
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 
-	import Pill from 'app/components/orgs/Pill.svelte';
+	import EmailForm from 'app/components/eval/EmailForm.svelte';
 	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import Scroller from 'app/components/svizzle/Scroller.svelte';
-	// import {_deviceId} from 'app/stores/device';
+	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
+	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
+
 	import {
 		_currentOrg,
 		_evaluatorSettings,
-		defaultEvaluatorSettings,
-		loadNextOrg
-	} from 'app/stores/eval';
-	import {
-		_activeTopicDetails,
+		_evalTopicDetails,
 		asyncUpdateTopicDetails,
-		clearActiveTopic
-	} from 'app/stores/topics';
-	import {getTopicLabel, getFirstPhrases} from 'app/utils/dataUtils';
+		clearActiveTopic,
+		defaultEvaluatorSettings,
+		loadNextOrg,
+	} from 'app/stores/eval';
+	import {_isSmallScreen} from 'app/stores/layout';
+	import {getTopicLabel} from 'app/utils/dataUtils';
 	import {sendEvaluations} from 'app/utils/eval';
 
 	let currentEntity;
 	let description;
 	let entities;
 	let entitiesIterator;
+	let evaluations = {};
 	let id;
+	let isLoading;
 	let label;
-	let score;
 	let source;
 	let surfaceFormRegex;
-	let evaluations = {};
-	let isImgErrored = false;
-	let isLoading;
-	let userEmail = '';
-
-	const notifyImgError = () => {
-		isImgErrored = true;
-	}
 
 	const getNextEntity = () => {
 		const next = entitiesIterator.next();
-		// eslint-disable-next-line prefer-destructuring
 		const value = next.value?.[1];
 		return value;
 	};
@@ -66,22 +59,10 @@
 		await loadNextOrg();
 	};
 
-	const onVoteClick = vote => {
+	const onVoted = ({detail: vote}) => {
 		addEvaluation(currentEntity.URI, vote);
 		currentEntity = getNextEntity();
 	};
-
-	const onSubmitEmail = () => {
-		$_evaluatorSettings = {userEmail};
-		console.log($_evaluatorSettings)
-	}
-
-	const onKeyPress = e => {
-		if (e.keyCode === 13) {
-			e.preventDefault();
-			onSubmitEmail();
-		}
-	}
 
 	$: if (isClientSide && !$_currentOrg && $_evaluatorSettings) {
 		isLoading = true;
@@ -97,18 +78,13 @@
 	}
 	$: if (currentEntity) {
 		surfaceFormRegex = new RegExp(currentEntity.surfaceForm, 'ugi');
-		score = currentEntity.confidence;
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
 	} else if ($_currentOrg) {
 		clearActiveTopic();
+		sendOrg();
 	}
-
-	$: abstract = $_activeTopicDetails?.abstract
-		? getFirstPhrases($_activeTopicDetails.abstract, 300)
-		: 'No info';
-	$: thumbnailURL = $_activeTopicDetails?.thumbnailURL;
 </script>
 
 <StorageIO
@@ -121,13 +97,7 @@
 
 <div class='eval {$_screen?.classes}'>
 	{#if !$_evaluatorSettings}
-		<div class='emailForm'>
-			<p>
-				Please input your email address before evaluating topic extractions.
-			</p>
-			<input type='email' bind:value={userEmail} on:keypress={onKeyPress}/>
-			<button on:click={onSubmitEmail}>Save</button>
-		</div>
+		<EmailForm />
 	{:else}
 		{#if isLoading}
 			<div class='loadPanel'>
@@ -135,41 +105,20 @@
 			</div>
 		{:else}
 			<LayoutHMF>
-
 				<div slot='header'>
 					e-mail: {$_evaluatorSettings.userEmail}
 				</div>
 
 				<div class='main' slot='main'>
-					<div class='topicPill'>
+					<h2 class='topicPill'>
 						{#if currentEntity}
-							<Pill
-								{label}
-								{score}
-							/>
+							Does {label}
 						{/if}
-					</div>
+					</h2>
 					<div class='topicDetails'>
-						<Scroller>
-							{#if $_activeTopicDetails}
-								{#if $_activeTopicDetails.isLoading}
-									<LoadingView />
-								{:else}
-									{#if thumbnailURL && !isImgErrored}
-										<img
-											alt='Topic thumbnail.'
-											on:error={notifyImgError}
-											src={thumbnailURL}
-										/>
-									{/if}
-									<p>
-										{abstract}
-									</p>
-								{/if}
-							{/if}
-						</Scroller>
+						<TopicPanel topicDetails={$_evalTopicDetails} />
 					</div>
-					<h4>Description</h4>
+					<h2>apply to this text?</h2>
 					<div class='description'>
 						<Scroller>
 							<HighlightedText
@@ -179,38 +128,19 @@
 							/>
 						</Scroller>
 					</div>
+					{#if !$_isSmallScreen}
+						<VoteButtons on:voted={onVoted} isVerticalLayout=true/>
+					{/if}
 				</div>
+
 				<div slot='footer'>
-					<div class='controls'>
-						{#if currentEntity}
-							<button
-								on:click={() => onVoteClick('keep')}
-								class='keep'
-							>
-								Keep
-							</button>
-							<button
-								on:click={() => onVoteClick('dismiss')}
-								class='dismiss'
-							>
-								Dismiss
-							</button>
-							<button
-								on:click={() => onVoteClick('dunno')}
-								class='dunno'
-							>
-								Not sure
-							</button>
-						{:else}
-							<button on:click={sendOrg}>Next</button>
-						{/if}
-					</div>
+					{#if $_isSmallScreen}
+						<VoteButtons on:voted={onVoted} />
+					{/if}
 				</div>
 			</LayoutHMF>
 		{/if}
-
 	{/if}
-
 </div>
 
 <style>
@@ -227,6 +157,11 @@
 		overflow: hidden;
 	}
 
+	.medium .main {
+		grid-template-areas: 'pill sep' 'details description';
+		grid-template-columns: 1fr 1fr min-content;
+		grid-template-rows: min-content 1fr;
+	}
 	.topicPill {
 		grid-area: pill;
 		padding-bottom: 1em;
@@ -235,20 +170,9 @@
 		grid-area: details;
 		overflow: hidden;
 	}
-	h4 {
-		grid-area: sep;
-	}
 	.description {
 		grid-area: description;
 		overflow: hidden;
-	}
-
-	.controls {
-		align-items: center;
-		display: grid;
-		grid-auto-flow: column;
-		justify-items: center;
-		padding: 0 1em;
 	}
 
 	.loadPanel {
@@ -257,30 +181,5 @@
 		display: grid;
 		align-items: center;
 		justify-items: center;
-	}
-
-	img {
-		float: right;
-		margin: 0.5em;
-		max-height: 10em;
-		max-width: 50%;
-	}
-
-	.controls button {
-		padding: 0.5em;
-		width: 6em;
-	}
-
-	.keep {
-		background: greenyellow;
-		border: 2px solid green;
-	}
-	.dismiss {
-		background: rgb(255, 88, 88);
-		border: 2px solid red;
-	}
-	.dunno {
-		background: lightyellow;
-		border: 2px solid yellow;
 	}
 </style>
