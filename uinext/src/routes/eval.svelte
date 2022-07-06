@@ -185,10 +185,6 @@
 		overflow: hidden;
 	}
 
-	.question.end {
-		margin-top: 1rem;
-	}
-
 	.description {
 		grid-area: description;
 		overflow: hidden;
