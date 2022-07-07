@@ -175,9 +175,11 @@
 	}
 
 	.medium .main {
+		column-gap: 2em;
 		grid-template-areas: 'questionStart questionEnd controls' 'details description controls';
 		grid-template-columns: 1fr 1fr min-content;
 		grid-template-rows: min-content 1fr;
+		padding: 2em;
 	}
 
 	.question.start {
