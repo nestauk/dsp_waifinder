@@ -23,6 +23,7 @@
 	import {_isSmallScreen} from 'app/stores/layout';
 	import {getTopicLabel} from 'app/utils/dataUtils';
 	import {sendEvaluations} from 'app/utils/eval';
+	import {sanitiseRegexInput} from 'app/utils/svizzle/utils';
 
 	let currentEntity;
 	let description;
@@ -75,9 +76,14 @@
 		entitiesIterator = entities.entries();
 		currentEntity = getNextEntity();
 		({description} = source);
+		// eslint-disable-next-line prefer-regex-literals
+		surfaceFormRegex = new RegExp(sanitiseRegexInput(''),'ugi');
 	}
 	$: if (currentEntity) {
-		surfaceFormRegex = new RegExp(currentEntity.surfaceForm, 'ugi');
+		surfaceFormRegex = new RegExp(
+			sanitiseRegexInput(currentEntity.surfaceForm),
+			'ugi'
+		);
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
@@ -135,10 +141,12 @@
 						</Scroller>
 					</div>
 					{#if !$_isSmallScreen}
-						<VoteButtons
-							isVerticalLayout=true
-							on:voted={onVoted}
-						/>
+						<div class='controls'>
+							<VoteButtons
+								isVerticalLayout=true
+								on:voted={onVoted}
+							/>
+						</div>
 					{/if}
 				</div>
 
@@ -167,7 +175,7 @@
 	}
 
 	.medium .main {
-		grid-template-areas: 'questionStart questionEnd' 'details description';
+		grid-template-areas: 'questionStart questionEnd controls' 'details description controls';
 		grid-template-columns: 1fr 1fr min-content;
 		grid-template-rows: min-content 1fr;
 	}
@@ -183,11 +191,17 @@
 	.details {
 		grid-area: details;
 		overflow: hidden;
+		margin-bottom: 1em;
 	}
 
 	.description {
 		grid-area: description;
 		overflow: hidden;
+	}
+
+	.controls {
+		grid-area: controls;
+		padding-left: 1em;
 	}
 
 	.loadPanel {
