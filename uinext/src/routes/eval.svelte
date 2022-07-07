@@ -118,7 +118,7 @@
 				<div class='main' slot='main'>
 					<h2 class='question start'>
 						{#if currentEntity}
-							Does "<span>{label}</span>"
+							Does "<span class='highlight'><span>{label}</span></span>"
 						{/if}
 					</h2>
 
@@ -183,9 +183,12 @@
 	.question.start {
 		grid-area: questionStart;
 	}
-	.question.start span {
+	.question.start .highlight {
 		font-style: italic;
 		background-color: aqua;
+	}
+	.question.start .highlight > span {
+		position: relative;
 	}
 
 	.details {
