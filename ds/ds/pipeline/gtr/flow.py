@@ -27,10 +27,6 @@ class GtrAI(FlowSpec):
             4. Lat/Lon co-ordinates were found
     """
 
-    # min_ai_prop = config["flows"]["gtr"]["min_ai_prop"]
-    # min_num_proj = config["flows"]["gtr"]["min_num_proj"]
-    gtr_orgs_filename = config["flows"]["gtr"]["gtr_orgs_filename"]
-
     @step
     def start(self):
         """Start flow"""
@@ -49,8 +45,10 @@ class GtrAI(FlowSpec):
             query_ai_topics,
             query_ai_orgs,
             query_ai_orgs_all_topics,
+            query_all_funding_ids,
+            query_all_funding_amounts,
+            clean_end_dates,
             combine_org_data,
-            group_orgs,
         )
         import pandas as pd
 
@@ -64,20 +62,33 @@ class GtrAI(FlowSpec):
         ai_project_ids = ai_project_ids_df["project_id"].unique()
 
         # Get all the organisational info for the AI projects
-        ai_org_ids_df = pd.read_sql(
+        ai_org_info = pd.read_sql(
             query_ai_orgs, conn, params={"l": tuple(ai_project_ids)}
         )
+        ai_org_ids = ai_org_info["org_id"].unique()
 
-        ai_org_ids = ai_org_ids_df["id"].unique()
-
-        # Get all project counts for the AI organisations
-        ai_orgs_all_proj_df = pd.read_sql(
+        # Get all project ids for the AI organisations
+        ai_org_project_ids = pd.read_sql(
             query_ai_orgs_all_topics, conn, params={"l": tuple(ai_org_ids)}
         )
+        all_project_ids = ai_org_project_ids["all_project_id"].unique()
 
-        ai_org_ids_df = combine_org_data(ai_org_ids_df, ai_orgs_all_proj_df)
+        # Get the funding IDs for all these projects
+        ai_org_funding_ids = pd.read_sql(
+            query_all_funding_ids, conn, params={"l": tuple(all_project_ids)}
+        )
+        all_proj_funding_ids = ai_org_funding_ids["funding_id"].unique()
 
-        self.ai_orgs_grouped = group_orgs(ai_org_ids_df)
+        # Get the summary funding information using these funding IDs
+        # It breaks when I try to do gtr_funds.id IN %(l)s
+        funding_info = pd.read_sql(query_all_funding_amounts, conn)
+
+        funding_info = clean_end_dates(funding_info)
+
+        # Combine all these datasets to get project/funding information for each organisation
+        self.ai_orgs_grouped = combine_org_data(
+            ai_org_funding_ids, funding_info, ai_org_info, ai_org_project_ids
+        )
 
         self.next(self.find_cb_org_info)
 
@@ -126,31 +137,51 @@ class GtrAI(FlowSpec):
 
     @step
     def filter_ai_orgs(self):
-        """Filter the AI orgs to just include those with high
-        proportions of AI tags, and with a high total number of projects,
-        and based in the UK"""
+        """Filter the AI orgs according to the metrics:
+        1. org name is in a predefined list
+        2. org received any amount of funding in the last 5 years
+        3. (number projects >= 400) OR (total funding over all time > £50m)
+        """
+        from ds.pipeline.gtr.utils import get_org_name_list, match_clean
 
-        self.ai_orgs_grouped["prop_ai_projects"] = (
-            self.ai_orgs_grouped["n_ai_projects"]
-            / self.ai_orgs_grouped["n_total_projects"]
+        import pandas as pd
+
+        min_num_proj = config["flows"]["gtr"]["min_num_proj"]
+        min_funding = config["flows"]["gtr"]["min_funding"]
+        funding_in_last_years = config["flows"]["gtr"]["funding_in_last_years"]
+        gtr_universities_filename = config["flows"]["gtr"]["gtr_universities_filename"]
+        gtr_rtos_filename = config["flows"]["gtr"]["gtr_rtos_filename"]
+        gtr_eris_filename = config["flows"]["gtr"]["gtr_eris_filename"]
+
+        # Hardcode todays year/month for reproducibility
+        x_years_ago = 2022 + (7 / 12) - funding_in_last_years
+
+        with open(gtr_universities_filename) as f:
+            gtr_universities = set(f.read().splitlines())
+        with open(gtr_eris_filename) as f:
+            gtr_eris = set(f.read().splitlines())
+        gtr_rtos = pd.read_csv(gtr_rtos_filename)
+        gtr_rtos = set(gtr_rtos["ParticipantName"].tolist())
+
+        org_names_keep = gtr_rtos.union(gtr_universities).union(gtr_eris)
+        org_names_keep_enhanced = get_org_name_list(org_names_keep)
+
+        self.ai_orgs_grouped["name_in_list"] = (
+            self.ai_orgs_grouped["Name"]
+            .apply(match_clean)
+            .isin(org_names_keep_enhanced)
         )
-        # self.ai_orgs_grouped_filtered = (
-        #     self.ai_orgs_grouped[
-        #         (self.ai_orgs_grouped["prop_ai_projects"] >= self.min_ai_prop)
-        #         & (self.ai_orgs_grouped["n_total_projects"] >= self.min_num_proj)
-        #         & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
-        #     ]
-        #     .dropna(subset=["Longitude", "Latitude"])
-        #     .reset_index(drop=True)[["Name", "Link", "Longitude", "Latitude"]]
-        # )
 
-        with open(self.gtr_orgs_filename) as f:
-            gtr_orgs_list = set(f.read().splitlines())
-
+        # Filter
         self.ai_orgs_grouped_filtered = (
             self.ai_orgs_grouped[
-                (self.ai_orgs_grouped["Name"].isin(gtr_orgs_list))
+                (self.ai_orgs_grouped["last_funding_year"] >= x_years_ago)
                 & (self.ai_orgs_grouped["country_name"] == "United Kingdom")
+                & (
+                    (self.ai_orgs_grouped["n_total_projects"] >= min_num_proj)
+                    | (self.ai_orgs_grouped["total_funding"] >= min_funding)
+                )
+                & (self.ai_orgs_grouped["name_in_list"])
             ]
             .dropna(subset=["Longitude", "Latitude"])
             .reset_index(drop=True)[

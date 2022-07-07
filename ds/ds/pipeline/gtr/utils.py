@@ -1,4 +1,5 @@
 import random
+import datetime
 
 import pandas as pd
 
@@ -52,7 +53,7 @@ query_ai_topics = (
 
 query_ai_orgs = (
     "SELECT gtr_organisations.name Name, "
-    "gtr_organisations.id, "
+    "gtr_organisations.id org_id, "
     "gtr_link_table.project_id ai_project_id, "
     "gtr_organisations_locations.latitude Latitude, "
     "gtr_organisations_locations.longitude Longitude, "
@@ -65,11 +66,22 @@ query_ai_orgs = (
 )
 
 query_ai_orgs_all_topics = (
-    "SELECT gtr_link_table.id, gtr_link_table.project_id all_project_id "
+    "SELECT gtr_link_table.id org_id, gtr_link_table.project_id all_project_id "
     "FROM gtr_link_table "
     "WHERE gtr_link_table.id IN  %(l)s"
 )
 
+query_all_funding_ids = (
+    "SELECT gtr_link_table.project_id, gtr_link_table.id funding_id "
+    "FROM gtr_link_table "
+    "WHERE gtr_link_table.table_name='gtr_funds' AND gtr_link_table.project_id IN %(l)s"
+)
+
+query_all_funding_amounts = (
+    "SELECT gtr_funds.id funding_id, gtr_funds.id, gtr_funds.amount, gtr_funds.end, gtr_funds.start "
+    "FROM gtr_funds "
+    "WHERE gtr_funds.currencyCode='GBP' "
+)
 
 # Some of the urls can be found in the crunchbase data
 query_cb_urls = (
@@ -85,51 +97,106 @@ query_cb_urls = (
 )
 
 
-def group_orgs(ai_org_ids_df):
-    """There is some duplication in this data where orgs with the same
-    name and lat/long coords are given 2 org IDs.
-    Merge rows where this happens, and count up the distinct project IDs
+def clean_end_dates(df):
     """
-    return (
-        ai_org_ids_df.groupby(
+    Sometimes (approx 0.1% of the time) the end date isn't given, in this case replace it with the start date
+    """
+
+    df["funding_date"] = df[["end", "start"]].apply(
+        lambda x: x["end"] if isinstance(x["end"], datetime.datetime) else x["start"],
+        axis=1,
+    )
+    # Needed so their aren't errors in finding the max date
+    df["funding_date"] = pd.to_datetime(
+        df["funding_date"], infer_datetime_format=True, errors="coerce"
+    )
+
+    return df
+
+
+def combine_org_data(ai_org_funding_ids, funding_info, ai_org_info, ai_org_project_ids):
+    """
+    Parameters:
+            ai_org_funding_ids (DataFrame):
+                    A dataframe of the project id <-> funding id links for all projects from AI organisations only
+            funding_info (DataFrame):
+                    A dataframe of the funding id <-> funding amounts/start and end dates for all funding
+            ai_org_info (DataFrame):
+                    A dataframe of the ai project id -> organisational information for AI projects only
+            ai_org_project_ids (DataFrame):
+                    A dataframe of all project id -> organisation id for AI organisations only
+
+            Where "AI organisations" are those organisations where at least one AI tagged topic project has
+            taken place.
+    Returns:
+            ai_org_info (DataFrame):
+                    Aggregated information about each AI organisation.
+    """
+    # Add the funding info to all the projects from AI organisations
+    ai_org_funding_ids = ai_org_funding_ids.merge(
+        funding_info, how="left", on="funding_id"
+    )
+    # For each project, get the total amount of funding, the latest funding date and the number of funding rounds
+    total_funds_all_proj = (
+        ai_org_funding_ids.groupby("project_id")
+        .aggregate({"amount": "sum", "funding_date": "max", "id": "count"})
+        .reset_index()
+    )
+    total_funds_all_proj.rename(
+        columns={
+            "amount": "total_funding",
+            "funding_date": "last_funding_date",
+            "id": "n_funding_rounds",
+        },
+        inplace=True,
+    )
+    # Add this funding info for each project to the org data
+    ai_org_info = ai_org_info.merge(
+        total_funds_all_proj, how="left", left_on="ai_project_id", right_on="project_id"
+    )
+
+    # Get aggregated information for each organisation.
+    # Combine each org with all the project IDs - this is because we need to use
+    # the org info (name etc) rather than the org id to count unique num projects
+    ai_org_info = ai_org_info.merge(ai_org_project_ids, how="left", on="org_id")
+
+    # There is some duplication in this data where orgs with the same
+    # name and lat/long coords are given 2 org IDs.
+    # Merge rows where this happens, and count up the distinct project IDs
+    ai_org_info = (
+        ai_org_info.groupby(
             ["Name", "Latitude", "Longitude", "country_name"], dropna=False
         )
         .agg(
             {
                 "ai_project_id": lambda x: x.nunique(),
                 "all_project_id": lambda x: x.nunique(),
+                "total_funding": lambda x: x.sum(),
+                "last_funding_date": lambda x: max(x),
+                "n_funding_rounds": lambda x: x.sum(),
             }
         )
         .reset_index()
     ).rename(
-        columns={
-            "ai_project_id": "n_ai_projects",
-            "all_project_id": "n_total_projects",
-        }
+        columns={"ai_project_id": "n_ai_projects", "all_project_id": "n_total_projects"}
+    )
+    ai_org_info["last_funding_year"] = ai_org_info["last_funding_date"].apply(
+        lambda x: x.year + x.month / 12
     )
 
-
-def combine_org_data(df_1, df_2):
-    """Merge two dataframes on 'id' column and rename
-    this column to org_id
-    """
-    return df_1.merge(df_2, how="left", on="id").rename(
-        columns={
-            "id": "org_id",
-        }
-    )
+    return ai_org_info
 
 
 def get_crunchbase_links(cb_org_info):
     """Get extra information for each organisation
 
     Parameters:
-        cb_org_info (DataFrame): Organisation names,
-            and extra information from crunchbase. There can be multiple rows
-            of different urls/countries for each organisation.
+            cb_org_info (DataFrame): Organisation names,
+                    and extra information from crunchbase. There can be multiple rows
+                    of different urls/countries for each organisation.
     Returns:
-        lower_name2org_info (dict): A dictionary of lower case name
-            to organisation information found from crunchbase
+            lower_name2org_info (dict): A dictionary of lower case name
+                    to organisation information found from crunchbase
 
     """
     cb_org_info["Name lower"] = cb_org_info["name"].str.lower()
@@ -151,3 +218,84 @@ def get_crunchbase_links(cb_org_info):
     ].to_dict(orient="index")
 
     return lower_name2org_info
+
+
+def match_clean(name):
+    import re
+
+    name = str(name)
+    name = name.replace("&", "and")
+    name = name.replace("ltd", "limited")
+    name = re.sub(r"[^A-Za-z0-9 ]+", "", name)
+    return name.lower()
+
+
+def get_org_name_list(org_names_keep):
+    """
+    Add some modifications to this list to account for different ways of writing things
+    "The University of Salford" and "University of Salford" and "Salford University"
+    Also there are lots of instances of "The" being at the beginning and sometimes not.
+    Not all of these can be added in a rule based manner, so we need to add in some custom university
+    names which are spelt slightly differently in the GtR data
+
+    """
+
+    # We will also only match on lower case
+    org_names_keep_enhanced = set([name.lower() for name in org_names_keep])
+    for org_name in org_names_keep:
+        org_name = org_name.lower()
+        if "university of" in org_name:
+            org_names_keep_enhanced.add(
+                org_name.replace("the university of", "university of")
+            )
+            org_names_keep_enhanced.add(
+                org_name.replace("the university of ", "") + " university"
+            )
+            org_names_keep_enhanced.add(
+                org_name.replace("university of ", "") + " university"
+            )
+        if org_name[0:4] == "the ":
+            org_names_keep_enhanced.add(org_name[4:])
+        org_names_keep_enhanced.add("the " + org_name)
+
+    # Custom edits (these have only been added if something similar came up in the given list)
+    # e.g. GtR has "Brunel University" but this list has 'Brunel University London'
+    # Other variations include 'Imperial College of Science, Technology and Medicine'
+    # 'London School of Hygiene and Tropical Medicine', 'London School of Economics and Political Science', 'University of Northumbria at Newcastle'
+    # 'The Open University', 'Queen Mary London University', "Queen's University Belfast", 'Royal Holloway and Bedford New College'
+    # 'University of St. Andrews'
+    custom_org_names = {
+        "Brunel University",
+        "Imperial College London",
+        "London Sch of Hygiene and Trop Medicine",
+        "London School of Economics & Pol Sci",
+        "Northumbria University",
+        "Queen Mary, University of London",
+        "Queen's University of Belfast",
+        "Royal Holloway, University of London",
+        "University of St Andrews",
+        "City University London",
+        "Leeds Metropolitan University",
+        "Manchester Metropolitan University",
+        "Nottingham Trent University",
+        "The Robert Gordon University",
+        "University of Abertay Dundee",
+        "University of London",
+        "University of Teesside",
+        "University of Ulster",
+        "University of Wales",
+        "University of the Arts London",
+        "University of the West of England",
+        "Royal Veterinary College",
+        "University of Wales, Newport",
+        "Glyndwr University",
+        "Southampton Solent University",
+        "Courtauld Institute Of Art",
+        "Plymouth College of Art and Design",
+        "Writtle College",
+    }
+
+    org_names_keep_enhanced.update(custom_org_names)
+    org_names_keep_enhanced = {match_clean(name) for name in org_names_keep_enhanced}
+
+    return org_names_keep_enhanced
