@@ -23,7 +23,7 @@
 	import {_isSmallScreen} from 'app/stores/layout';
 	import {getTopicLabel} from 'app/utils/dataUtils';
 	import {sendEvaluations} from 'app/utils/eval';
-	import {sanitiseRegexInput} from 'app/utils/svizzle/utils';
+	import {regexOf} from 'app/utils/svizzle/utils';
 
 	let currentEntity;
 	let description;
@@ -77,13 +77,10 @@
 		currentEntity = getNextEntity();
 		({description} = source);
 		// eslint-disable-next-line prefer-regex-literals
-		surfaceFormRegex = new RegExp(sanitiseRegexInput(''),'ugi');
+		surfaceFormRegex = regexOf('');
 	}
 	$: if (currentEntity) {
-		surfaceFormRegex = new RegExp(
-			sanitiseRegexInput(currentEntity.surfaceForm),
-			'ugi'
-		);
+		surfaceFormRegex = regexOf(currentEntity.surfaceForm);
 		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
