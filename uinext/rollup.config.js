@@ -14,16 +14,28 @@ import config from 'sapper/config/rollup.js';
 import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
 import pkg from './package.json';
 
-const mode = process.env.NODE_ENV;
+const nodeEnv = process.env.NODE_ENV; // set in Netlify: 'dev'|'staging'|'release'
 const isExported = process.env.SAPPER_EXPORT;
-const dev = mode === 'development';
 const legacy = Boolean(process.env.SAPPER_LEGACY_BUILD);
+const isDev = nodeEnv === 'dev';
 
 const onwarn = (warning, warn) => (
 	warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message) ||
 	warning.code === 'CIRCULAR_DEPENDENCY' && (/[/\\]@sapper[/\\]/u).test(warning.message) ||
 	warning.code !== 'CIRCULAR_DEPENDENCY'
 ) && warn(warning);
+
+/* backend */
+
+const BACKEND_BASES = {
+	development: 'http://18.134.134.172',
+	dev: 'https://18.134.134.172',
+	staging: 'https://13.40.210.117',
+	// release: 'TODO',
+}
+
+// eslint-disable-next-line no-process-env
+const BACKEND_BASE = BACKEND_BASES[process.env.NODE_ENV];
 
 export default {
 	client: {
@@ -33,8 +45,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.SAPPER_EXPORT': JSON.stringify(isExported)
+				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
+				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
 			}),
 			svelte({
 				extensions: [
@@ -46,7 +59,7 @@ export default {
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
-					dev,
+					dev: isDev,
 					hydratable: true,
 				},
 				emitCss: true,
@@ -77,7 +90,7 @@ export default {
 				]
 			}),
 
-			!dev && terser({
+			!isDev && terser({
 				module: true
 			})
 		],
@@ -92,8 +105,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.SAPPER_EXPORT': JSON.stringify(isExported)
+				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
+				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
 			}),
 			svelte({
 				extensions: [
@@ -105,8 +119,8 @@ export default {
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
+					dev: isDev,
 					generate: 'ssr',
-					dev,
 				},
 			}),
 			resolve({
@@ -141,14 +155,15 @@ export default {
 			resolve(),
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.SAPPER_EXPORT': JSON.stringify(isExported)
+				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
+				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
 			}),
 			commonjs(),
 			dsv(),
 			json(),
 			yaml(),
-			!dev && terser()
+			!isDev && terser()
 		],
 
 		onwarn,
