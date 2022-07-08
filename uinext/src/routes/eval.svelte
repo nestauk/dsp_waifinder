@@ -4,10 +4,10 @@
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 
-	import EmailWidget from 'app/components/eval/EmailWidget.svelte';
 	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
 	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
 	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
+	import EmailWidget from 'app/components/svizzle/EmailWidget.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import Scroller from 'app/components/svizzle/Scroller.svelte';
 
