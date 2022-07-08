@@ -14,7 +14,7 @@
 	import {
 		_currentOrg,
 		_evalTopicDetails,
-		_evaluatorEmail,
+		_userEmail,
 		asyncUpdateTopicDetails,
 		clearActiveTopic,
 		defaultEvaluatorSettings,
@@ -53,7 +53,7 @@
 	const sendOrg = async () => {
 		isLoading = true;
 		await sendEvaluations(
-			$_evaluatorEmail,
+			$_userEmail,
 			$_currentOrg._id,
 			evaluations
 		);
@@ -67,10 +67,10 @@
 	};
 
 	const onEmailSubmitted = ({detail: userEmail}) => {
-		$_evaluatorEmail = userEmail;
+		$_userEmail = userEmail;
 	}
 
-	$: if (isClientSide && !$_currentOrg && $_evaluatorEmail) {
+	$: if (isClientSide && !$_currentOrg && $_userEmail) {
 		isLoading = true;
 		loadNextOrg();
 	}
@@ -95,15 +95,15 @@
 </script>
 
 <StorageIO
-	_store={_evaluatorEmail}
+	_store={_userEmail}
 	defaultValue={defaultEvaluatorSettings}
 	isReactive={true}
-	key='evaluatorEmail'
+	key='userEmail'
 	type='localStorage'
 />
 
 <div class='eval {$_screen?.classes}'>
-	{#if !$_evaluatorEmail}
+	{#if !$_userEmail}
 		<EmailWidget
 			buttonText='Start'
 			on:emailSubmitted={onEmailSubmitted}
@@ -116,7 +116,7 @@
 		{:else}
 			<LayoutHMF>
 				<div slot='header'>
-					{$_evaluatorEmail}
+					{$_userEmail}
 				</div>
 
 				<div class='main' slot='main'>
