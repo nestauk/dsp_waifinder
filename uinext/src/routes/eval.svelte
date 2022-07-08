@@ -43,13 +43,6 @@
 		return value;
 	};
 
-	const addEvaluation = (URI, value) => {
-		evaluations = {
-			...evaluations,
-			[URI]: value
-		};
-	};
-
 	const sendOrg = async () => {
 		isLoading = true;
 		await sendEvaluations(
@@ -59,6 +52,13 @@
 		);
 		evaluations = {};
 		await loadNextOrg();
+	};
+
+	const addEvaluation = (URI, value) => {
+		evaluations = {
+			...evaluations,
+			[URI]: value
+		};
 	};
 
 	const onVoted = ({detail: vote}) => {
@@ -119,7 +119,10 @@
 					{$_userEmail}
 				</div>
 
-				<div class='main' slot='main'>
+				<div
+					class='main'
+					slot='main'
+				>
 					<h2 class='question start'>
 						{#if currentEntity}
 							Does "<span class='highlight'><span>{label}</span></span>"
@@ -144,6 +147,7 @@
 							/>
 						</Scroller>
 					</div>
+
 					{#if !$_isSmallScreen}
 						<div class='controls'>
 							<VoteButtons
