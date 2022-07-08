@@ -6,21 +6,25 @@ from geopy.extra.rate_limiter import RateLimiter
 
 from tqdm import tqdm
 import re
+import unicodedata
 
 from ds.utils.metaflow import est_conn
 
 
-def clean_long_names(name):
+def clean_dash_names(name):
     """
-    Clean out long names with dashed in like by removing text to the right of the dash
+    Clean out names with dashed in like by removing text to the right of the dash
     "lifesdna - wellness wellbeing healthcare data blockchain, AI powered search engine marketplace"
     but not where the dashes don't have spaces on either side, like 'Hyper-Group'
     """
-    len_threshold = 35
-    if (len(name) > len_threshold) and ("-" in name):
-        name = re.search(r"(.*?)(\s\-|\-\s)", name).group(1).strip()
+    name_clean = name
+    name_extra = ""
+    if (" -" in name) or ("- " in name):
+        found = re.search(r"(.*?)(\s\-|\-\s)", name)
+        name_clean = found.group(1).strip()  # Left of the dash
+        name_extra = name[found.span()[1] :].strip()  # Right of the dash
 
-    return name
+    return name_clean, name_extra
 
 
 def clean_name_for_dedup(name):
@@ -33,6 +37,20 @@ def clean_name_for_dedup(name):
     if name[0:4] == "the ":
         name = name.replace("the ", "")
     return name
+
+
+def convert_unicode(text):
+    if text:
+        # Special conversions
+        replace_char_dict = {"‘": "'", "’": "'", "“": '"', "”": '"', "™": "", "®": ""}
+        for find_char, rep_char in replace_char_dict.items():
+            text = text.replace(find_char, rep_char)
+        text = (
+            unicodedata.normalize("NFKD", text)
+            .encode("utf-8", "ignore")
+            .decode("utf-8")
+        )
+    return text
 
 
 def trust_rating(row):
@@ -397,6 +415,7 @@ def format_organisations(ai_map_data, types_dict):
                     "postcode": organisation["Postcode"],
                 },
                 "name": organisation["Name"],
+                "name_extra": organisation["Name_extra"],
                 "place_id": organisation["place_id"],
                 "types": [
                     type_number
