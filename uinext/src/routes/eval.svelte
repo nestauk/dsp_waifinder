@@ -1,8 +1,10 @@
 <script>
+	import * as _ from 'lamb';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
+	import {getTruthyValuesKeys} from '@svizzle/utils';
 
 	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
 	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
@@ -36,6 +38,9 @@
 	let label;
 	let source;
 	let surfaceFormRegex;
+	let startTimeStamp;
+
+	const {timeZone} = Intl.DateTimeFormat().resolvedOptions();
 
 	const getNextEntity = () => {
 		const next = entitiesIterator.next();
@@ -43,6 +48,11 @@
 		return value;
 	};
 
+	const getNextOrg = async () => {
+		const nextOrg = await loadNextOrg();
+		startTimeStamp = Date.now();
+		return nextOrg;
+	}
 	const sendOrg = async () => {
 		isLoading = true;
 		await sendEvaluations(
@@ -51,7 +61,7 @@
 			evaluations
 		);
 		evaluations = {};
-		await loadNextOrg();
+		await getNextOrg();
 	};
 
 	const addEvaluation = (URI, value) => {
@@ -61,10 +71,43 @@
 		};
 	};
 
-	const onVoted = ({detail: vote}) => {
-		addEvaluation(currentEntity.URI, vote);
+	const orderedSizes = ['xLarge', 'large', 'medium', 'small'];
+	const getScreenType = types => {
+		if (types.xSmall) {
+			return 'xSmall';
+		}
+		return _.pipe([
+			_.mapWith(key => [key, types[key]]),
+			_.filterWith(([_, value]) => value),
+			_.getPath('0.0')
+		])(orderedSizes);
+	};
+	const getOrientation = _.pipe([
+		getTruthyValuesKeys,
+		_.pairs,
+		_.getPath('0.1')
+	])
+
+	const onVoted = (vote, inputType) => {
+		const submitTimestamp = Date.now();
+		const payload = {
+			vote,
+			score: currentEntity.confidence,
+			submitTimestamp,
+			timeZone,
+			judgementDuration: submitTimestamp - startTimeStamp,
+			inputType,
+			screenType: getScreenType($_screen.sizes),
+			screenOrientation: getOrientation($_screen.orientations),
+			screenAspectRatio: $_screen.display.aspectRatio,
+		};
+		console.log(payload);
+		addEvaluation(currentEntity.URI, payload);
 		currentEntity = getNextEntity();
 	};
+
+	const onPointerVoted = ({detail: vote}) => onVoted(vote, 'pointer');
+	const onKeyboardVoted = ({detail: vote}) => onVoted(vote, 'keyboard');
 
 	const onEmailSubmitted = ({detail: userEmail}) => {
 		$_userEmail = userEmail;
@@ -72,7 +115,7 @@
 
 	$: if (isClientSide && !$_currentOrg && $_userEmail) {
 		isLoading = true;
-		loadNextOrg();
+		getNextOrg();
 	}
 	$: if ($_currentOrg) {
 		isLoading = false;
@@ -152,7 +195,7 @@
 						<div class='controls'>
 							<VoteButtons
 								isVerticalLayout=true
-								on:voted={onVoted}
+								on:voted={onPointerVoted}
 							/>
 						</div>
 					{/if}
@@ -160,7 +203,7 @@
 
 				<div slot='footer'>
 					{#if $_isSmallScreen}
-						<VoteButtons on:voted={onVoted} />
+						<VoteButtons on:voted={onKeyboardVoted} />
 					{/if}
 				</div>
 			</LayoutHMF>
