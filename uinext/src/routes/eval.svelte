@@ -4,7 +4,7 @@
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 
-	import EmailForm from 'app/components/eval/EmailForm.svelte';
+	import EmailWidget from 'app/components/eval/EmailWidget.svelte';
 	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import Scroller from 'app/components/svizzle/Scroller.svelte';
@@ -99,7 +99,7 @@
 
 <div class='eval {$_screen?.classes}'>
 	{#if !$_evaluatorSettings}
-		<EmailForm />
+		<EmailWidget />
 	{:else}
 		{#if isLoading}
 			<div class='loadPanel'>
