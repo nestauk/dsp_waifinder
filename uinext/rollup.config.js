@@ -28,9 +28,9 @@ const onwarn = (warning, warn) => (
 /* backend */
 
 const BACKEND_BASES = {
-	development: 'http://18.134.134.172',
-	dev: 'https://18.134.134.172',
-	staging: 'https://13.40.210.117',
+	development: 'http://localhost:4000',
+	dev: 'http://18.134.134.172’',
+	staging: 'http://13.40.210.117',
 	// release: 'TODO',
 }
 
