@@ -17,7 +17,7 @@
 		_userEmail,
 		asyncUpdateTopicDetails,
 		clearActiveTopic,
-		defaultEvaluatorSettings,
+		defaultUserEmail,
 		loadNextOrg,
 	} from 'app/stores/eval';
 	import {_isSmallScreen} from 'app/stores/layout';
@@ -96,7 +96,7 @@
 
 <StorageIO
 	_store={_userEmail}
-	defaultValue={defaultEvaluatorSettings}
+	defaultValue={defaultUserEmail}
 	isReactive={true}
 	key='userEmail'
 	type='localStorage'
