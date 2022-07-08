@@ -103,7 +103,10 @@
 
 <div class='eval {$_screen?.classes}'>
 	{#if !$_evaluatorEmail}
-		<EmailWidget on:emailSubmitted={onEmailSubmitted} />
+		<EmailWidget
+			buttonText='Start'
+			on:emailSubmitted={onEmailSubmitted}
+		/>
 	{:else}
 		{#if isLoading}
 			<div class='loadPanel'>
