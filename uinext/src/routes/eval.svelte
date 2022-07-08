@@ -65,6 +65,10 @@
 		currentEntity = getNextEntity();
 	};
 
+	const onEmailSubmitted = ({detail: userEmail}) => {
+		$_evaluatorEmail = userEmail;
+	}
+
 	$: if (isClientSide && !$_currentOrg && $_evaluatorEmail) {
 		isLoading = true;
 		loadNextOrg();
@@ -99,7 +103,7 @@
 
 <div class='eval {$_screen?.classes}'>
 	{#if !$_evaluatorEmail}
-		<EmailWidget _emailStore={_evaluatorEmail} />
+		<EmailWidget on:emailSubmitted={onEmailSubmitted} />
 	{:else}
 		{#if isLoading}
 			<div class='loadPanel'>
