@@ -22,6 +22,7 @@
 	} from 'app/stores/eval';
 	import {_isSmallScreen} from 'app/stores/layout';
 	import {getTopicLabel} from 'app/utils/dataUtils';
+	import {dbrPrefix} from 'app/utils/dbpedia';
 	import {sendEvaluations} from 'app/utils/eval';
 	import {regexOf} from 'app/utils/svizzle/utils';
 
@@ -84,7 +85,7 @@
 	}
 	$: if (currentEntity) {
 		surfaceFormRegex = regexOf(currentEntity.surfaceForm);
-		id = currentEntity.URI.replace('http://dbpedia.org/resource/', '');
+		id = currentEntity.URI.replace(dbrPrefix, '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
 	} else if ($_currentOrg) {
