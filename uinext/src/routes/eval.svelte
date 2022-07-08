@@ -76,7 +76,6 @@
 		entitiesIterator = entities.entries();
 		currentEntity = getNextEntity();
 		({description} = source);
-		// eslint-disable-next-line prefer-regex-literals
 		surfaceFormRegex = regexOf('');
 	}
 	$: if (currentEntity) {
@@ -186,6 +185,10 @@
 		font-style: italic;
 		background-color: aqua;
 	}
+	/* To keep glyph descenders uncovered on multiline highlights wrap two
+	 * <span>s and set the inner one to relative position to force the
+	 * background to render before the glyphs.
+	 */
 	.question.start .highlight > span {
 		position: relative;
 	}
