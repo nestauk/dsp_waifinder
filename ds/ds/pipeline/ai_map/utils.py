@@ -3,12 +3,32 @@ import numpy as np
 import pgeocode
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
+
 from tqdm import tqdm
+import re
 
 from ds.utils.metaflow import est_conn
 
 
-def clean_name(name):
+def clean_long_names(name):
+    """
+    Clean out long names with dashed in like by removing text to the right of the dash
+    "lifesdna - wellness wellbeing healthcare data blockchain, AI powered search engine marketplace"
+    but not where the dashes don't have spaces on either side, like 'Hyper-Group'
+    """
+    len_threshold = 35
+    if (len(name) > len_threshold) and ("-" in name):
+        name = re.search(r"(.*?)(\s\-|\-\s)", name).group(1).strip()
+
+    return name
+
+
+def clean_name_for_dedup(name):
+    """
+    This is temporary cleaning for the matching process
+    e.g. so "The University of Salford" can be merged with "univeristy of salford"
+    Ultimately the original version of the name is used (so we have it nicely capitalised)
+    """
     name = name.lower()
     if name[0:4] == "the ":
         name = name.replace("the ", "")
@@ -38,7 +58,7 @@ def get_merged_data(merged_data):
         granular location, so the Lat/Long data isn't particularly accurate.
     """
 
-    merged_data["Cleaned name"] = merged_data["Name"].apply(clean_name)
+    merged_data["Cleaned name"] = merged_data["Name"].apply(clean_name_for_dedup)
 
     merged_data["Trust order"] = merged_data.apply(trust_rating, axis=1)
     merged_data_dedupe = merged_data.sort_values(by="Trust order", ascending=True)
@@ -134,6 +154,15 @@ def get_postcode_field(postcode, geopy_postcode, lat_long):
         return address.raw["address"]["postcode"]
 
 
+def clean_place_names(name):
+    """
+    Very specific place name cleaning
+    """
+    if "Upon" in name:
+        name = name.replace("Upon", "upon")
+    return name
+
+
 def get_geo_data():
     query_geodata = (
         "SELECT geographic_data.city, geographic_data.latitude, geographic_data.longitude "
@@ -141,7 +170,9 @@ def get_geo_data():
         "WHERE geographic_data.country='United Kingdom'"
     )
     conn = est_conn()
-    return pd.read_sql(query_geodata, conn)
+    geo_data = pd.read_sql(query_geodata, conn)
+    geo_data["city"] = geo_data["city"].map(clean_place_names)
+    return geo_data
 
 
 def clean_places(ai_map_data):
@@ -241,19 +272,23 @@ def get_final_places(ai_map_data, city_names):
         for t1, (_, t2) in zip(first_pass_place_types, second_pass_places)
     ]
 
-    final_place = [
-        x.replace("City of ", "") if "City of" in str(x) else x for x in final_place
-    ]
+    cleaned_final_place = []
+    for x in final_place:
+        if "City of" in str(x):
+            x = x.replace("City of ", "")
+        x = clean_place_names(str(x))
+        cleaned_final_place.append(x)
+
     place_types = [
         p.lower().replace("_clean", "").replace("geopy_", "") for p in place_types
     ]
 
-    cities = set([a for a, b in zip(final_place, place_types) if b == "city"])
+    cities = set([a for a, b in zip(cleaned_final_place, place_types) if b == "city"])
     place_types = [
-        "city" if a in cities else b for a, b in zip(final_place, place_types)
+        "city" if a in cities else b for a, b in zip(cleaned_final_place, place_types)
     ]
 
-    return final_place, place_types
+    return cleaned_final_place, place_types
 
 
 def merge_place_data(ai_map_data, geo_data):

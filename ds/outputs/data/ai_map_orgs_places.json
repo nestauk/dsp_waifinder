@@ -363,7 +363,7 @@
     {
       "description": "Peptone Ltd. is a privately owned, next generation AI-first synthetic protein biology company registered and incorporated in United Kingdom.",
       "location": { "lat": 51.501645, "lon": -0.189647, "postcode": "W85EH" },
-      "name": "Peptone - The Protein Intelligence Company",
+      "name": "Peptone",
       "place_id": "6994bd4c50d7768e0d61491ede4cd4ec1993f7e5",
       "types": ["0"],
       "url": "https://peptone.io"
@@ -540,7 +540,7 @@
       "description": "Partnerize is a SaaS technology company that helps the world's leading brands build powerful business partnerships that drive extraordinary business growth. The Partnerize Partner Management Platform (PMP) is an end-to-end, SaaS-based solution for forming, managing, analyzing, and predicting the future results of partner marketing programs using artificial intelligence. Hundreds of the world's largest brands leverage our real-time technology to manage more than $6B in partner programs and financial exchanges across 214 countries and territories worldwide.",
       "location": { "lat": 54.965466, "lon": -1.616477, "postcode": "NE13PA" },
       "name": "Partnerize",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://partnerize.com"
     },
@@ -1276,7 +1276,7 @@
       "description": "Our mobile application Petiole measures specific leaf area and total leaf area using a camera of a smartphone less than in a second. It is based on Computer Vision algorithm and makes leaf area measurement more accurate and effective than existing time-wasting methods and expensive equipment. Petiole will be a good tool for any individual or institution interested in agchem candidate development, crop monitoring for health, development and stress, phenotyping applications in both soft fruit and arable sector especially for breeding purposes. Petiole supports ground truth data for Unmanned Aerial Vehicles and satellite imagery.",
       "location": { "lat": 51.391889, "lon": -0.314386, "postcode": "KT65NR" },
       "name": "Petiole",
-      "place_id": "e5919279259ff698d3a5140d1d5e15ab835d6f4c",
+      "place_id": "d890225095517dcd8830ecec3071a798cf0e1bd6",
       "types": ["0"],
       "url": "http://petiole.co.uk"
     },
@@ -1596,7 +1596,7 @@
       "description": "Quantyr specializes in machine learning, data science, software engineering, launchpad analytics, and collaboration solutions.",
       "location": { "lat": 54.973003, "lon": -1.624295, "postcode": "NE45TG" },
       "name": "Quantyr",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://www.quantyr.com"
     },
@@ -1772,7 +1772,7 @@
       "description": "Qubit Health was founded in 2017 by experienced senior leaders and data scientists within the NHS due to a recognised lack of the right tools to deliver elective care management in the NHS. Successfully piloted at Europe\u2019s biggest Hospital, the Qubit Pathway Management platform provides an effective integrated tool for elective care management, that has provided significant improvements in terms of performance, efficiency, safety and user experience. Through partnership with both clinical and non-clinical NHS staff the Qubit Pathway Management system has been developed with NHS staff priorities at the core of its design. By combining effective management tools with pathway visualisation and reporting, it provides a holistic and intuitive approach to managing complex waiting list challenges. Working in partnership with our NHS colleagues is fundamental to everything we do; by adopting an agile approach to product development we are able to listen to their needs and adapt the platform to meet changing requirements through rapid deployments of new functionality. During the Covid-19 pandemic we have added new sector-wide ptl functionality to help providers identify and share capacity across a sector, coordinate clinical prioritisation and model sector demand and capacity. Our Vision: To improve patient outcomes through intelligent software and smart data Our Mission: To innovate powerful software solutions that improve and optimise patient pathway management Core solutions: Patient pathway and data quality management software solution Our approach: We believe in the NHS and want to ensure that our healthcare partners have the best possible tools to meet the ever increasing health challenges of the UK. Our goal is to provide them with powerful, intuitive software solutions that support safe and equitable care, whilst also improving efficiency and integration of services by harnessing the potential of cutting edge machine learning technologies.",
       "location": { "lat": 51.390642, "lon": -0.274417, "postcode": "KT59HT" },
       "name": "Qubit Health",
-      "place_id": "53629a5da76cf79561a34257cb33117d14cedfc9",
+      "place_id": "d890225095517dcd8830ecec3071a798cf0e1bd6",
       "types": ["0"],
       "url": "http://www.qubithealth.com"
     },
@@ -2715,7 +2715,7 @@
     {
       "description": "lifesdna: With a focus on access, security, intelligence and collaboration among the health, wellness and lifestyle ecosystem, lifesdna, an artificial intelligence (AI) search engine and decentralized marketplace, is launching during Blockchain Week NYC. The world's first holistic blockchain, AI search engine will offer a wealth of wellness, healthcare and lifestyle information, data and content. lifesdna was also designed to offer a secure, decentralized marketplace for users, scientists, researchers, industry players and global influencers through a trusted PaaS (Platform as a Service). \"Currently, data on wellness, lifestyle and healthcare is not easily accessible, exchangeable or understandable,\" said Dinis Guarda, CEO and co-founder of lifesdna. \"We hope to transform this paradigm and ultimately solve this challenge with our cutting edge encrypted search engine and holistic marketplace.\" By using big data in an AI-powered search engine and joining key industry players together, lifesdna intends to enhance data access and integrity, while offering secure solutions to improve access to information in the wellness, healthcare and lifestyle sectors. The global wellness and lifestyle economy has reached $3.7 trillion, according to the Global Wellness Institute, but lacks cohesion, presenting an incredible market opportunity. Consumers, patients, researchers, influencers and healthcare organizations often suffer because they lack the information and resources needed to tackle their issues. lifesdna enables users to safely access this information while solving daily challenges in finding relevant content and data. The model is permission-based, anonymized and customizable for all audiences; and it uses advanced reward tokenomics and game theory.",
       "location": { "lat": 51.519458, "lon": -0.153305, "postcode": "W1U4AW" },
-      "name": "lifesdna - wellness wellbeing healthcare data blockchain, AI powered search engine marketplace",
+      "name": "lifesdna",
       "place_id": "6994bd4c50d7768e0d61491ede4cd4ec1993f7e5",
       "types": ["0"],
       "url": "https://www.lifesdna.com"
@@ -3060,7 +3060,7 @@
       "description": "Loopserv, is a B2B sales assistant for pop-up shops which uses big data and machine learning technology to manage inventory, digital menus and card payments while improving the shop's viability and online presence. The Loopserv app also serves as an online community to help pop-up shops registered to us get found from a simple internet search. As new emerging technology, all processes will be done via a mobile application as the Loopserv app will not use any external hardware. The business app is also accompanied with a consumer B2C shopping application which customers will use to purchase items from these popup shops. (CURRENTLY STILL IN DEVELOPMENT) Acting as consultants, we provide recommend marketing and advertising solutions to pop-up shops in the region. As part of our service to our clients we also recommend the use of our Loopserv app as a possible solution to in provide businesses with a boost in online media traffic, repeat business, mobile payments, transparency, social media integration and Geo tagging.",
       "location": { "lat": 54.974639, "lon": -1.601207, "postcode": "NE12SW" },
       "name": "Loopserv LTD.",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://www.loopserv.com/"
     },
@@ -3436,7 +3436,7 @@
       "description": "Jumping Rivers specializes in data analytics, machine learning, data science, big data, data mining, training, and consulting.",
       "location": { "lat": 54.973003, "lon": -1.624295, "postcode": "NE45TG" },
       "name": "Jumping Rivers",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://www.jumpingrivers.com"
     },
@@ -4979,7 +4979,7 @@
     {
       "description": "Midlands Innovation brings together the research, knowledge and capabilities of its eight partner universities, in what is the largest formal collaboration between technology transfer offices (TTOs) in the UK. The MICRA programme is the Commercialisation of Research Accelerator \u2013 we are building a spin-out and start-up ecosystem that will significantly increase the innovation productivity of the region, and will help to accelerate the speed at which the innovations developed by these world-class centres of research can reach markets and make an impact.",
       "location": { "lat": 52.453282, "lon": -1.92789, "postcode": "B152TT" },
-      "name": "MICRA - Midlands Innovation Commercialisation of Research Accelerator",
+      "name": "MICRA",
       "place_id": "5b7c0d667caf0d0bafc9a0b59fd021fc8fb38e9c",
       "types": ["0", "2"],
       "url": "http://www.micragateway.org"
@@ -5284,7 +5284,7 @@
       "description": "traXR leverages the latest mixed reality and artificial intelligence technology to create a hands-free paperless solution for tracking and logging sample location points across a factory. Using our desktop app we provide the ability to Track, link and visualise suspects, mitigate risk and provide insights and alerts with a fully traceable digital audit trail.",
       "location": { "lat": 54.971956, "lon": -1.589578, "postcode": "NE12DF" },
       "name": "traXR",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://traxr.io"
     },
@@ -7956,7 +7956,7 @@
       "description": "At Savitec we are focused on one thing - making your forecourt more efficient. We are the UK company behind Europe's leading AI and deep learning software service - PriceCast. PriceCast maximises the profit potential of your forecourt site by cleverly prompting subtle price changes to optimise margins and /or drive fuel volumes.",
       "location": { "lat": 54.972376, "lon": -1.58553, "postcode": "NE61LR" },
       "name": "Savitec",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://savitec.co.uk"
     },
@@ -8396,7 +8396,7 @@
       "description": "Reveela is a next generation publishing, public relations and marketing platform at the forefront of cognitive computing. Our bleeding edge technology connects publishers, journalists and niche business communities for mutual benefit by applying artificial intelligence to drive efficiencies where there previously were none. Reveela uses its unique patent protected technologies with big data analytics to create profoundly new ways of adding value; generating insights that have previously been hidden in layers of unstructured data, allowing businesses to provide valuable information, content or press releases to publishers and media outlets based solely on the relevance of the content; and journalists and publishers the opportunities needed to generate engaging material and grow new audiences. Reveela is free to use and addresses the unbalanced relationship between the media and its surroundings to provide clarity, visibility and reporting at its very best. So, now you know what Reveela does, why don\u2019t you start by sharing your story.",
       "location": { "lat": 54.972946, "lon": -1.608363, "postcode": "NE16UF" },
       "name": "Reveela Technologies",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://www.reveela.com"
     },
@@ -8452,7 +8452,7 @@
       "description": "Deep learning tools for sales development teams",
       "location": { "lat": 54.972946, "lon": -1.608363, "postcode": "NE16UF" },
       "name": "Ricochet.ai",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://ricochet.ai"
     },
@@ -8620,7 +8620,7 @@
       "description": "To make sales coaching simple, more time-efficient and to amplify the benefits, we built Refract Conversation Intelligence. By highlighting the decisive and defining moments of conversations and using AI to surface coachable insight specific to your business and reps, mistakes and missed opportunities can be remedied. Great moments can be shared amongst the team. Top performers can be replicated, and you can understand what works, and why it works. Making the best made available in a searchable library. We work with a range of global clients, with teams from just a handful to the thousands. And whilst every organization is different, they all have one thing in common. They\u2019re passionate about improving sales conversations, and that\u2019s what we\u2019re here for.",
       "location": { "lat": 54.972382, "lon": -1.623428, "postcode": "NE45TF" },
       "name": "Refract",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://www.refract.ai"
     },
@@ -8763,7 +8763,7 @@
     {
       "description": "S2T builds AI-Driven Cyber Intelligence solutions based on real-world operational experience blended with deep technological expertise. Our tools have applications in intelligence, law enforcement, national security, defense, fraud detection, and cyber threat intelligence among others, and they provide actionable insights, are highly adaptable to customer needs, are highly automated, are driven by AI and deep learning. Real-world operational experience helps our people see the world from a different perspective than pure technologists or software developers. It drives our people to identify practical tools and capabilities that can help operational users in the real world, in realistic time frames and with realistic amount of resources. Our team brings to the table immense real-world operational experience spanning decades and five continents. . S2T's solutions enhance the capabilities of organisations and analysts in areas of web and cyber collection, collation, analysis and generating insights and reports. These solutions leverage powerful collection capabilities spanning web sites, social media networks, darknet, and end-user devices and harness big data analytics, machine learning, and powerful visualisation tools.",
       "location": { "lat": 51.513473, "lon": -0.593101, "postcode": "SL25AG" },
-      "name": "S2T Unlocking Cyberspace - AI-Powered Investigations,WEBINT, OSINT, FUSION",
+      "name": "S2T Unlocking Cyberspace",
       "place_id": "3311d2927ff44490e577d259a14330b8b0069402",
       "types": ["0"],
       "url": "http://www.s2t.ai"
@@ -8956,7 +8956,7 @@
       "description": "Si units is a data science company. We are a high energy group of young researchers, specialising in bespoke projects connecting interdisciplinary expertise. Working with a number of experienced academics, we use machine learning, artificial intelligence and data science on unique and non-pristine data sets. We also consult on distributed ledger technology and provide novel solutions for Fintech and other data driven projects in industry. First we get excited, then we work it out. Curiosity and Integrity.",
       "location": { "lat": 51.423049, "lon": 0.112345, "postcode": "DA144QU" },
       "name": "SI Units Consulting",
-      "place_id": "53629a5da76cf79561a34257cb33117d14cedfc9",
+      "place_id": "1e6e903e847efe1e275c97f0f775b850fe5db4b2",
       "types": ["0"],
       "url": "http://siunits.co.uk"
     },
@@ -9492,7 +9492,7 @@
       "description": "StudyAtlas is a complete one-stop shop for the prospective international students to search, compare, and apply directly onto their course of choice, free and unbiased. It is a tool to support international students to navigate their way through the process of researching, applying, and moving to study abroad. StudyAtlas helps universities to improve international student conversions by providing a platform that utilises AI to enhance the quality and the success rate of the applications process. We utilise machine learning, NLP, OCR and image recognition to significantly improve the workflow efficiency, quick offer turn around times and conversion rates. - AI powered global student recruitment platform - Fully automated application process from the application to enrolment. - Monitoring each and every stage of the application, adding live comments and managing issues - Reduce administration burden and ease all pressure points - In-country student support services - Safe, efficient, and transparent - Cost effective data driven marketing optimisation We screen every application received on our platform, and pick the most adequate applications to be sent to the universities. We work with the prospective students with unfinished applications, and help them improve their applications before sending them over to the university. We are also a convenient online international student recruitment and marketing channel for the universities to maximise the student recruitment numbers, showcase the programmes, and promote the events to a global audience. StudyAtlas will support universities through its marketing, recruitment and placement strategies with easy and effective tools. Partnering with StudyAtlas enables universities to have access to much larger pool of international talent, improve overall student conversions, reduce administration burden and ease all pressure points throughout the process.",
       "location": { "lat": 54.970856, "lon": -1.615895, "postcode": "NE15JE" },
       "name": "StudyAtlas",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://www.studyatlas.com/"
     },
@@ -10076,7 +10076,7 @@
       "description": "Sodaclick is a cloud based platform for creating dynamic digital signage content and intuitive voice activated touch-free solutions. Through the Sodaclick creative cloud application, complex playlist, data and voice campaigns can be made all without a single line of code and deployed through self service kiosks, drive thru systems and digital menu boards. Driving the future of contactless digital signage, Sodaclick uses multilingual neural net voice recognition with computer vision and AI to create immersive consumer experiences across multiple verticals including retail, hospitality, education, public spaces and QSR's.",
       "location": { "lat": 51.434212, "lon": -0.259281, "postcode": "SW153PZ" },
       "name": "Sodaclick",
-      "place_id": "53629a5da76cf79561a34257cb33117d14cedfc9",
+      "place_id": "1e6e903e847efe1e275c97f0f775b850fe5db4b2",
       "types": ["0"],
       "url": "https://sodaclick.com"
     },
@@ -11035,7 +11035,7 @@
     {
       "description": "Make Profitable Pricing Decisions. AI that analyses multiple data sets, so you\u2019re competitive when you need to be, and increase profits when you don\u2019t.",
       "location": { "lat": 51.504575, "lon": -0.098016, "postcode": "SE10HS" },
-      "name": "BlackCurve - Price Management & Optimisation Software",
+      "name": "BlackCurve",
       "place_id": "6994bd4c50d7768e0d61491ede4cd4ec1993f7e5",
       "types": ["0"],
       "url": "https://www.blackcurve.com"
@@ -11603,7 +11603,7 @@
     {
       "description": "Couvenda\u2122 is a real-time intelligent \u2019chatbot\u2019 that enables your business to connect to key messaging platforms creating a real time accessible channel for customer engagement. Chat technology is already established as the channel of choice for key demographic segments. The technology removes friction from the relationship. Customers exchange data for the value of an always on, consistent, responsive and fun way to interact with a brand. Done right, this technology must manage conversational context, customer intent, linguistics, culture and preference; incrementally growing customer engagement through a real ongoing conversation. Done well, chat must feel less like customer service and more personal assistant. \u201dget to know me so you can start to help me\u201d. Loyalty will be reinforced if all these elements are executed flawlessly. Couvenda\u2122 is the only chat technology designed to achieve all these aims \u03ba\u03bf\u03c5\u03b2\u03ad\u03bd\u03c4\u03b1 n. /couvenda/ (Greek) talk, chat, conversation \u039a\u03bf\u03c5\u03b2\u03ad\u03bd\u03c4\u03b1 - \u201cIt is through conversation that personal relationships are developed and maintained. Establishing a social bond through conversation.\u201d - extracted Exploring the Greek Mosaic: A Guide to Intercultural Communication in Greece",
       "location": { "lat": 52.207134, "lon": -0.95796, "postcode": "NN73JH" },
-      "name": "Couvenda\u2122 - the 24/7 concierge for your brand",
+      "name": "Couvenda\u2122",
       "place_id": "3698bdfc1f02df59422d9f289bd3a8b558b87b70",
       "types": ["0"],
       "url": "https://couvenda.com"
@@ -12803,7 +12803,7 @@
     {
       "description": "Beyond Image is the UK's leading AI powered Massage Retreat. At Beyond Image - Experience the new AI Powered Massage Retreat and get the perfect massage consistently, every time.",
       "location": { "lat": 51.538865, "lon": 0.746375, "postcode": "SS13EB" },
-      "name": "Beyond Image - Intelligent Massage Retreat",
+      "name": "Beyond Image",
       "place_id": "243a192c8e566b1e7d2bcb04e7e5966df55e1982",
       "types": ["0"],
       "url": "https://aimassage.co.uk/"
@@ -12883,7 +12883,7 @@
     {
       "description": "MadTech. Aimera is an AI-driven marketing platform where people interact with brands in a gamified and non-intrusive way. Aimera\u2019s built-in interactive marketing model is designed for both Online and Offline engagement. As a business, you can create educational, transactional, and many other types of challenges on Aimera that will be shown to existing and potential clients. Since all the content is interactive, it\u2019s more engaging, more memorable, and more likely to generate the results your business needs. The performance-based pricing model guarantees 100% efficiency and the best ROI. Set up personalised campaigns to meet your marketing goals: - Promote your brand - Educate about products and services - Conduct market research - Collect feedback - Gather consent and personal data - Turn strangers into loyal customers",
       "location": { "lat": 51.498772, "lon": -0.200547, "postcode": "W86ND" },
-      "name": "Aimera - Interactive Marketing Channel",
+      "name": "Aimera",
       "place_id": "6994bd4c50d7768e0d61491ede4cd4ec1993f7e5",
       "types": ["0"],
       "url": "https://business.aimera.io"
@@ -15332,7 +15332,7 @@
       "description": "Full ocean depth survey company providing high quality imaging for industry, research and media. The specialist scientific team have been involved in documentaries such as Blue Planet 2, NHK Deep Ocean: Descent into the Mariana Trench and Discovery Channel's Deep Planet and \u2018Shark Week'. Using proprietary pressure-passive camera hardware Armatus Oceanic can remove the cost, size and weight associated with traditional metal pressure housings. Reduced camera cost allows Armatus Oceanic to utilise multiple camera systems in parallel, reducing expensive vessel and staff time in hazardous offshore environments. Unique proprietary Machine Learning allows for rapid image processing and the ability to modify survey design on the fly, further reducing vessel time. Armatus Oceanic offer bespoke research and development to integrate their low-cost, robust, full ocean depth, neutrally buoyant and implosion risk free cameras into your vehicles/assets. The team also offer expert consultancy/scientific advice from public speaking engagements, scientific consultancy in film and other media, exhibition content and interview.",
       "location": { "lat": 54.974093, "lon": -1.618757, "postcode": "NE14BF" },
       "name": "Armatus Oceanic",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://armatusoceanic.com"
     },
@@ -15732,7 +15732,7 @@
       "description": "Hexis Lab research and develops cosmeceutical active ingredients for use in skincare and dermatology. Our AI approach enables the rapid commercialisation of new technologies and products and provides our clients with a competitive advantage in the $1 Trillion personal care market. It offers a significant advantage compared to conventional in-vitro based screening in a laboratory that could take years and potentially cost millions to get the same level of accuracy and coverage. Our dedicated team of researchers and collaborators are committed to delivering cutting edge products that are safe, effective, and have measurable benefits. Our groundbreaking innovation has identified a diverse range of new components, each delivering skin care benefits that scientifically proven and unique to the market. Hexis Lab Pro.X\u00ae Our discovery platform is built on proprietary deep learning algorithms and big data cloud computing approach that allows us to conduct computer model simulation and Insilco-screening of a large database of natural compounds. Our AI system is integrated with advanced computing power that resolves the high-complexity of biological systems. Using these capabilities, we help our clients to quickly and cheaply design, validate, and virtually prototype, new bio-based products for dermatological, pharmaceutical, nutraceutical, and medical applications. In addition, we use these capabilities to review the alternate functionality of known compounds, so as to repurpose them for new applications. Email: info@hexislab.com",
       "location": { "lat": 54.973003, "lon": -1.624295, "postcode": "NE45TG" },
       "name": "Hexis Lab",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://www.hexislab.com/"
     },
@@ -15980,7 +15980,7 @@
       "description": "Image recognition technology using deep learning, and IoT digital signage and advertising technology.",
       "location": { "lat": 54.970856, "lon": -1.615895, "postcode": "NE15JE" },
       "name": "Hawkr",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://hawkr.io"
     },
@@ -16156,7 +16156,7 @@
       "description": "Fortrex Analytics Ltd is a predictive analytics company that specialises in data analysis using state of the art tools and machine learning technologies. Other specialties include engineering structural design analysis and software development.",
       "location": { "lat": 54.970557, "lon": -1.563929, "postcode": "NE62TB" },
       "name": "Fortrex Analytics",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://www.fortrexanalytics.co.uk"
     },
@@ -16372,7 +16372,7 @@
       "description": "Equipping geoscientists for the future, Geoteric are committed to advancing the path to net-zero. We believe a thorough understanding of the Earth can shape new perspectives and provide solutions to some of the greatest challenges we face today. As our industry heads into a new era of digital exploration, we\u2019re on a journey down from the surface to paint an accurate picture revealing the Earth\u2019s geological stories.",
       "location": { "lat": 54.972262, "lon": -1.605324, "postcode": "NE12LA" },
       "name": "Geoteric",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://www.geoteric.com/"
     },
@@ -16388,7 +16388,7 @@
       "description": "Our vision is to incorporate Generic AI into every system that can benefit from generic artificial intelligence capability. The system was initially developed in 1983 as a music composition tool, where the composer manipulates the paths of counterpoint melodies. The development of the system was inspired by Leonard Bernstein's Harvard Lectures on music theory based on Chomskyan linguistics - titled The Unanswered Question. Chomsky said: \u2018He (Bernstein) was onto something, but I couldn't really judge how significant it was...'. Bernstein's analysis of Mozart's 40th in G Minor showed characteristics corresponding to the physical Principle of Least Action and symmetry over scale analogous to gauge invariance in field theory. This analysis formed the starting point from which Generic AI was ultimately developed. By 1989 the core theoretical problem was solved; this took the form of a general-purpose artificial intelligence system. However, it was apparent that it would be at least 20 years before it could be implemented, due to the rate of improvement in computing power. By 2002 parallel processing was close enough to start developing commercial applications taking into account the development time, and so the company: Generic AI Ltd was incorporated. Our objective is to demonstrate the \u2018Artificial General Intelligence' (AGI) properties of the system by creating as many varied applications as possible. Generic AI has these properties: The core Generic AI system always works in the same way for every application It has no pre-programmed rules The data it processes is in a universal format Customised interfaces convert data into this core universal format Patterns and features exist in a kind of 'common currency' between all possible kinds of data input. This enables meaningful data-fusion between disparate data sources.",
       "location": { "lat": 54.972398, "lon": -1.611337, "postcode": "NE16BX" },
       "name": "Generic Ai",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "http://generic-ai.co.uk/"
     },
@@ -16915,7 +16915,7 @@
     {
       "description": "InScribe is simple and intuitive to use, meaning no development experience is required to use or understand the app. With innovative features, the app enables you to easily create machine learning data specific for handwritten digits and drawings for Create ML or other similar products. Whether your an independent developer or are part of a larger team, this app will ensure you can create written and drawn images to drop into your machine learning classifier as effortlessly and efficiently as possible.",
       "location": { "lat": 51.530785, "lon": -0.093391, "postcode": "N17GU" },
-      "name": "InScribe - ML Handwriting Tool for iPad",
+      "name": "InScribe",
       "place_id": "6994bd4c50d7768e0d61491ede4cd4ec1993f7e5",
       "types": ["0"],
       "url": "https://ml-dataset-preperation-tool.web.app"
@@ -17011,7 +17011,7 @@
     {
       "description": "Inzura is the creator of the iApprove policy onboarding app and service. Brokers and insurers can onboard policies quickly and automatically using the iApprove app. Saves 28 minutes of agent time, helps identify fraud and undercharged premium for more efficient underwriting. Already have an app or document portal? No problem, use our iApprove API to automate the verification of any documents uploaded to your system. We use AI & ML to deliver a best in class robotic process automation solution for insurers.",
       "location": { "lat": 51.240262, "lon": -0.612113, "postcode": "GU27YG" },
-      "name": "Inzura - Creators of the iApprove Digital Insurance App",
+      "name": "Inzura",
       "place_id": "40286d279117d44b45a4823cf80703f46a0d5e5d",
       "types": ["0"],
       "url": "http://www.inzura.ai"
@@ -19852,7 +19852,7 @@
       "description": "EDA believes in the power of data analytics, AI & Intelligent automation solutions and their potential to revolutionize how companies function. As your end-to-end automation solutions partner, we will work with you to develop your automation strategy, be it basic RPA or more advanced Intelligent/cognitive and machine learning solutions. The value we deliver comes from being an independent, pure-play automation consulting, data analytics, custom product building and solutions provider with proprietary tools and frameworks, managed by the largest independent pool of experts and supported by best-in-class partnerships.",
       "location": { "lat": 54.971016, "lon": -1.612535, "postcode": "NE11EE" },
       "name": "European Data Analytics Limited",
-      "place_id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["0"],
       "url": "https://europeandataanalytics.co.uk/"
     },
@@ -20451,7 +20451,7 @@
     {
       "description": "Enrich App Enhancing collaboration, Enabling Productivity Our vision is to help healthcare practitioners, teams and organisations to collaborate more effectively, transform their practice, enable productivity through enhanced communication and facilitate fast and timely information flow across the entire healthcare value chain. Our innovative built-in productivity tools would help practitioners and teams validate their thoughts and ideas amongst their peers and develop more insights, turning everyday data and information into actionable knowledge. The app provides a highly secured platform and communication channel for sharing confidential and patient sensitive information along with offering a range of benefits including effective communication and knowledge sharing tools, using some of the latest artificial intelligence features.",
       "location": { "lat": 52.891399, "lon": -1.525823, "postcode": "DE233YT" },
-      "name": "EnrichApp - Simplifying Healthcare Collaboration",
+      "name": "EnrichApp",
       "place_id": "da71d1ddf6a38e1dbad71e02fdbecde1cfcc3410",
       "types": ["0"],
       "url": "http://www.enrichapp.com"
@@ -20587,7 +20587,7 @@
     {
       "description": null,
       "location": { "lat": 54.0163, "lon": -0.972903, "postcode": "YO411LW" },
-      "name": "Food & Environment Research Agency -FERA",
+      "name": "Food & Environment Research Agency",
       "place_id": "fe19ef51da235457131c323f98e72312650ea06b",
       "types": ["3"],
       "url": null
@@ -20820,7 +20820,7 @@
       "description": "We are one of the largest and most successful universities in the UK with approximately 36,000 students studying programmes at home and overseas. The University has a strong reputation for the quality of its teaching and research activities and offers provision in 29 of the 32 most popular academic disciplines.  We are the largest UK provider of education in Hong Kong, with strong links in Malaysia, Singapore and the Caribbean, as well as having a small base in London. Northumbria is one of the top ten universities in the UK, the fourth largest for international students and the largest in the North East for the number of taught postgraduate students.  Our City Centre campus has benefited from a \u00a3160m investment in recent years. The award-winning City Campus East is home to Law, Design and Business students. City Campus West was completed in 2010 with the opening of the new Students\u2019 Union building and Sport Central.  In the last four years, 200 graduates have been helped to start-up their own companies. More than 600 businesses sponsor Northumbria programmes and many students graduate with professional accreditation. The University has the highest number of employed graduates in the North East.  Research and enterprise is a major priority, with more than 1,000 worldwide clients and a significant number of commercial and professional collaborations and partnerships.",
       "location": { "lat": 54.975737, "lon": -1.607738, "postcode": "NE18ST" },
       "name": "Northumbria University",
-      "place_id": "b365316e38500b7559ecccf10901c71d7f9d2048",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["3"],
       "url": "http://www.northumbria.ac.uk/"
     },
@@ -21228,7 +21228,7 @@
       "description": "Northstar Ventures has been supporting entrepreneurs in the North East of England since 2004. It is looking for strong teams with great ideas \u2013 ideas that will drive high growth, scalable businesses. As the North East\u2019s leading early stage investor, Northstar makes and manage investments into a wide range of innovative ventures, and its investment managers have a wealth of experience supporting new and growing businesses. Northstar was a launch partner to Accelerated Digital Ventures, a \u00a3150m UK-wide venture platform backing digital technology businesses.  Aside from these funds, Northstar Ventures also manages the North East Social Investment Fund, investing in social enterprises working across the North East.",
       "location": { "lat": 54.970856, "lon": -1.615895, "postcode": "NE15JE" },
       "name": "Northstar Ventures",
-      "place_id": "b365316e38500b7559ecccf10901c71d7f9d2048",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["1"],
       "url": "northstarventures.co.uk"
     },
@@ -22604,7 +22604,7 @@
       "description": "Ignite provides accelerator, incubator, and education programs for technology startups.  Ignite is funded primarily through commercial activity, and has also raised investment from Northstar Ventures through the FBNE Accelerator Fund, managed by North East Finance as part of the \u00a3125m FBNE program.  Founded in 2011 by Colin Willis, Jon Bradford, and Paul Smith, Ignite was expected to be a one-off, three month program. Instead, Ignite grew into an independent co-working space and venue that span off as Newcastle's tech centre Campus North.  In 2016, Ignite expanded operations to London and Manchester, running accelerator programmes in both cities.  In May 2016, Ignite MD Tristan Watson took over as CEO.",
       "location": { "lat": 54.972946, "lon": -1.608363, "postcode": "NE16UF" },
       "name": "Ignite Accelerator",
-      "place_id": "b365316e38500b7559ecccf10901c71d7f9d2048",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["1"],
       "url": "ignite.io"
     },
@@ -22852,7 +22852,7 @@
       "description": "NVM Private Equity Limited is an independently-owned firm of venture capital managers with over 20 years experience of investing in UK businesses. They manage five investment funds, four of which are Venture Capital Trusts (VCTs) and their funds under management exceed \u00c2\u00a3175 million. They are a long-established investor focused on the UK regions, primarily targeting small management buy-outs and growth investment in businesses that are led by high quality incumbent management teams. They have a wide range of skills, interests and backgrounds. That means they bring a thorough and rounded approach to the investment process. They live and work in the UK regions, so are entrenched within their local business communities.",
       "location": { "lat": 54.974226, "lon": -1.618115, "postcode": "NE14SN" },
       "name": "NVM Private Equity",
-      "place_id": "b365316e38500b7559ecccf10901c71d7f9d2048",
+      "place_id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "types": ["1"],
       "url": "nvm.co.uk"
     },
@@ -23451,7 +23451,7 @@
     {
       "description": "Powered by Techstars (http://www.crunchbase.com/organization/techstars), this is a 13-week programme run by a full-time, dedicated Techstars team specialising in FinTech. In this time, 10 startups will work intensely on key challenges faced by the banking industry. Successful applicants will get: - A seed investment of $20k from Techstars - $100k optional convertible note from Techstars - A network of high-profile mentors - Office space in New York, London, Tel Aviv and Cape Town - Support from thousands of mentors and a huge global network - Opportunity pitch at Investor Demo Day and join the global Techstars community",
       "location": { "lat": 51.523891, "lon": -0.083802, "postcode": "EC2A4DP" },
-      "name": "Barclays Accelerator, powered by Techstars - London",
+      "name": "Barclays Accelerator, powered by Techstars",
       "place_id": "6994bd4c50d7768e0d61491ede4cd4ec1993f7e5",
       "types": ["1"],
       "url": "techstars.com"
@@ -24595,11 +24595,11 @@
       "type": "village"
     },
     {
-      "centroid": { "lat": 51.41596766666667, "lon": -0.140451 },
-      "id": "53629a5da76cf79561a34257cb33117d14cedfc9",
+      "centroid": { "lat": 51.4286305, "lon": -0.07346799999999999 },
+      "id": "1e6e903e847efe1e275c97f0f775b850fe5db4b2",
       "name": "Greater London",
-      "region_id": "UKI63",
-      "region_name": "Merton, Kingston upon Thames and Sutton",
+      "region_id": "UKI44",
+      "region_name": "Lewisham and Southwark",
       "type": "county"
     },
     {
@@ -24880,6 +24880,14 @@
       "name": "Kings Langley",
       "region_id": "UKH23",
       "region_name": "Hertfordshire",
+      "type": "town"
+    },
+    {
+      "centroid": { "lat": 51.3912655, "lon": -0.2944015 },
+      "id": "d890225095517dcd8830ecec3071a798cf0e1bd6",
+      "name": "Kingston upon Thames",
+      "region_id": "UKI63",
+      "region_name": "Merton, Kingston upon Thames and Sutton",
       "type": "town"
     },
     {
@@ -25307,16 +25315,8 @@
       "type": "town"
     },
     {
-      "centroid": { "lat": 54.97344125, "lon": -1.61252775 },
-      "id": "b365316e38500b7559ecccf10901c71d7f9d2048",
-      "name": "Newcastle Upon Tyne",
-      "region_id": "UKC22",
-      "region_name": "Tyneside",
-      "type": "city"
-    },
-    {
-      "centroid": { "lat": 54.971985764705884, "lon": -1.608794294117647 },
-      "id": "cbea2c8b902908ea9c97332234d036d5a42d7d85",
+      "centroid": { "lat": 54.972263000000005, "lon": -1.6095054285714285 },
+      "id": "b4737f209ccc8578f0f5829d16b7757d8638385f",
       "name": "Newcastle upon Tyne",
       "region_id": "UKC22",
       "region_name": "Tyneside",
@@ -25945,14 +25945,6 @@
       "region_id": "UKJ11",
       "region_name": "Berkshire",
       "type": "village"
-    },
-    {
-      "centroid": { "lat": 51.391889, "lon": -0.314386 },
-      "id": "e5919279259ff698d3a5140d1d5e15ab835d6f4c",
-      "name": "Surbiton",
-      "region_id": "UKI63",
-      "region_name": "Merton, Kingston upon Thames and Sutton",
-      "type": "suburb"
     },
     {
       "centroid": { "lat": 51.637324750000005, "lon": -3.9492512499999997 },

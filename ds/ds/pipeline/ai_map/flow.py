@@ -130,7 +130,9 @@ class merge_map_datasets(FlowSpec):
 
     @step
     def merge_names(self):
-        from ds.pipeline.ai_map.utils import get_merged_data
+        from ds.pipeline.ai_map.utils import get_merged_data, clean_long_names
+
+        self.ai_map_data["Name"] = self.ai_map_data["Name"].map(clean_long_names)
 
         self.ai_map_data = get_merged_data(self.ai_map_data)
 
