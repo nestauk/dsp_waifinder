@@ -5,16 +5,16 @@
 	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 
 	import EmailWidget from 'app/components/eval/EmailWidget.svelte';
+	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
+	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
 	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import Scroller from 'app/components/svizzle/Scroller.svelte';
-	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
-	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
 
 	import {
 		_currentOrg,
-		_evaluatorSettings,
 		_evalTopicDetails,
+		_evaluatorSettings,
 		asyncUpdateTopicDetails,
 		clearActiveTopic,
 		defaultEvaluatorSettings,
@@ -158,16 +158,16 @@
 
 <style>
 	.eval {
-		width: 100%;
 		height: 100%;
+		width: 100%;
 	}
 	.main {
-		padding: 1em;
 		display: grid;
 		grid-template-areas: 'questionStart' 'details' 'questionEnd' 'description';
 		grid-template-rows: min-content 1fr min-content 1fr;
 		height: 100%;
 		overflow: hidden;
+		padding: 1em;
 	}
 
 	.medium .main {
@@ -182,8 +182,8 @@
 		grid-area: questionStart;
 	}
 	.question.start .highlight {
-		font-style: italic;
 		background-color: aqua;
+		font-style: italic;
 	}
 	/* To keep glyph descenders uncovered on multiline highlights wrap two
 	 * <span>s and set the inner one to relative position to force the
@@ -195,8 +195,8 @@
 
 	.details {
 		grid-area: details;
-		overflow: hidden;
 		margin-bottom: 1em;
+		overflow: hidden;
 	}
 
 	.description {
@@ -210,10 +210,10 @@
 	}
 
 	.loadPanel {
-		width: 100%;
-		height: 100%;
-		display: grid;
 		align-items: center;
+		display: grid;
+		height: 100%;
 		justify-items: center;
+		width: 100%;
 	}
 </style>
