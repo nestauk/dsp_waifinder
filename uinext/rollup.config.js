@@ -22,7 +22,7 @@ const nodeEnv = process.env.NODE_ENV;
 const isExported = process.env.SAPPER_EXPORT;
 const legacy = Boolean(process.env.SAPPER_LEGACY_BUILD);
 
-const IS_DEV = ['development', 'dev'].includes(process.env.NODE_ENV);
+const IS_DEV = ['development', 'dev'].includes(nodeEnv);
 
 const onwarn = (warning, warn) => (
 	warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message) ||
@@ -40,7 +40,7 @@ const BACKEND_BASES = {
 }
 
 // eslint-disable-next-line no-process-env
-const BACKEND_BASE = BACKEND_BASES[process.env.NODE_ENV];
+const BACKEND_BASE = BACKEND_BASES[nodeEnv];
 
 export default {
 	client: {
