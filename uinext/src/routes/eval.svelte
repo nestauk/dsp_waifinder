@@ -4,7 +4,6 @@
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
-	import {getTruthyValuesKeys} from '@svizzle/utils';
 
 	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
 	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
@@ -12,6 +11,7 @@
 	import EmailWidget from 'app/components/svizzle/EmailWidget.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import Scroller from 'app/components/svizzle/Scroller.svelte';
+	import {getOrientation, getScreenType} from 'app/utils/svizzle/ui';
 
 	import {
 		_currentOrg,
@@ -76,24 +76,6 @@
 			[URI]: value
 		};
 	};
-
-	const orderedSizes = ['xLarge', 'large', 'medium', 'small'];
-	const getScreenType = types => {
-		if (types.xSmall) {
-			return 'xSmall';
-		}
-		return _.pipe([
-			_.mapWith(key => [key, types[key]]),
-			_.filterWith(([_, value]) => value),
-			_.getPath('0.0')
-		])(orderedSizes);
-	};
-
-	const getOrientation = _.pipe([
-		getTruthyValuesKeys,
-		_.pairs,
-		_.getPath('0.1')
-	])
 
 	const onVoted = (vote, inputType) => {
 		const submitTimestamp = Date.now();
