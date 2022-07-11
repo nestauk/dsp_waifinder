@@ -29,8 +29,8 @@ const onwarn = (warning, warn) => (
 
 const BACKEND_BASES = {
 	development: 'http://localhost:4000',
-	dev: 'http://18.134.134.172',
-	staging: 'http://13.40.210.117',
+	dev: 'https://dev.ai-map.dv.dap-tools.uk',
+	staging: 'https://staging.ai-map.dv.dap-tools.uk',
 	// release: 'TODO',
 }
 
