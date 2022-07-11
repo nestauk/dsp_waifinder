@@ -45,14 +45,16 @@
 	const getNextEntity = () => {
 		const next = entitiesIterator.next();
 		const value = next.value?.[1];
+
 		return value;
 	};
 
 	const getNextOrg = async () => {
 		const nextOrg = await loadNextOrg();
-		startTimeStamp = Date.now();
+
 		return nextOrg;
 	}
+
 	const sendOrg = async () => {
 		isLoading = true;
 		await sendEvaluations(
@@ -82,6 +84,7 @@
 			_.getPath('0.0')
 		])(orderedSizes);
 	};
+
 	const getOrientation = _.pipe([
 		getTruthyValuesKeys,
 		_.pairs,
@@ -91,19 +94,19 @@
 	const onVoted = (vote, inputType) => {
 		const submitTimestamp = Date.now();
 		const payload = {
-			vote,
+			inputType,
+			judgementDuration: submitTimestamp - startTimeStamp,
 			score: currentEntity.confidence,
+			screenAspectRatio: $_screen.display.aspectRatio,
+			screenOrientation: getOrientation($_screen.orientations),
+			screenType: getScreenType($_screen.sizes),
 			submitTimestamp,
 			timeZone,
-			judgementDuration: submitTimestamp - startTimeStamp,
-			inputType,
-			screenType: getScreenType($_screen.sizes),
-			screenOrientation: getOrientation($_screen.orientations),
-			screenAspectRatio: $_screen.display.aspectRatio,
+			vote,
 		};
-		console.log(payload);
 		addEvaluation(currentEntity.URI, payload);
 		currentEntity = getNextEntity();
+		startTimeStamp = Date.now();
 	};
 
 	const onPointerVoted = ({detail: vote}) => onVoted(vote, 'pointer');
