@@ -11,13 +11,18 @@ import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 
-import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
 import pkg from './package.json';
+import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
 
-const nodeEnv = process.env.NODE_ENV; // set in Netlify: 'dev'|'staging'|'release'
+
+// locally: 'development'
+// Netlify: 'dev'|'staging'|'release'
+const nodeEnv = process.env.NODE_ENV;
+
 const isExported = process.env.SAPPER_EXPORT;
 const legacy = Boolean(process.env.SAPPER_LEGACY_BUILD);
-const isDev = nodeEnv === 'dev';
+
+const IS_DEV = ['development', 'dev'].includes(process.env.NODE_ENV);
 
 const onwarn = (warning, warn) => (
 	warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message) ||
@@ -45,9 +50,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
 				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
 				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
+				IS_DEV,
 			}),
 			svelte({
 				extensions: [
@@ -59,7 +64,7 @@ export default {
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
-					dev: isDev,
+					dev: IS_DEV,
 					hydratable: true,
 				},
 				emitCss: true,
@@ -90,7 +95,7 @@ export default {
 				]
 			}),
 
-			!isDev && terser({
+			!IS_DEV && terser({
 				module: true
 			})
 		],
@@ -105,9 +110,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
 				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
 				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
+				IS_DEV,
 			}),
 			svelte({
 				extensions: [
@@ -119,7 +124,7 @@ export default {
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
-					dev: isDev,
+					dev: IS_DEV,
 					generate: 'ssr',
 				},
 			}),
@@ -155,15 +160,15 @@ export default {
 			resolve(),
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
 				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
 				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
+				IS_DEV,
 			}),
 			commonjs(),
 			dsv(),
 			json(),
 			yaml(),
-			!isDev && terser()
+			!IS_DEV && terser()
 		],
 
 		onwarn,
