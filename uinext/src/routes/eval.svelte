@@ -46,6 +46,10 @@
 		const next = entitiesIterator.next();
 		const value = next.value?.[1];
 
+		if (value) {
+			startTimeStamp = Date.now();
+		}
+
 		return value;
 	};
 
@@ -106,7 +110,6 @@
 		};
 		addEvaluation(currentEntity.URI, payload);
 		currentEntity = getNextEntity();
-		startTimeStamp = Date.now();
 	};
 
 	const onPointerVoted = ({detail: vote}) => onVoted(vote, 'pointer');
