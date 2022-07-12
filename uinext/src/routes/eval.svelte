@@ -1,9 +1,8 @@
 <script>
-	import * as _ from 'lamb';
+	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
-	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
 
 	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
 	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
@@ -11,6 +10,7 @@
 	import EmailWidget from 'app/components/svizzle/EmailWidget.svelte';
 	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
 	import Scroller from 'app/components/svizzle/Scroller.svelte';
+	import {toolName} from 'app/config';
 	import {getOrientation, getScreenType} from 'app/utils/svizzle/ui';
 
 	import {
@@ -124,6 +124,14 @@
 		sendOrg();
 	}
 </script>
+
+<svelte:head>
+	<title>Topics evaluation - {toolName}</title>
+	<meta
+		content='A tool to help us validating topics shown in this app'
+		name='description'
+	>
+</svelte:head>
 
 <StorageIO
 	_store={_userEmail}
