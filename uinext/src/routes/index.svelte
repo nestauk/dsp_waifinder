@@ -5,8 +5,9 @@
 	import Small from 'app/components/homeScreen/small/Small.svelte';
 	import View from 'app/components/viewports/View.svelte';
 	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
-	import {updateDataset} from 'app/stores/dataset';
+	import {toolName} from 'app/config';
 	import {_orgs} from 'app/stores/data';
+	import {updateDataset} from 'app/stores/dataset';
 	import {_screenId} from 'app/stores/layout';
 	import {setDefaultActiveView} from 'app/stores/navigation';
 	import {getLonLat} from 'app/utils/dataUtils';
@@ -21,6 +22,14 @@
 	$: isClientSide && loadData();
 	$: $_screenId && setDefaultActiveView();
 </script>
+
+<svelte:head>
+	<title>Home - {toolName}</title>
+	<meta
+		content='A tool to visualise AI orgs in the UK'
+		name='description'
+	>
+</svelte:head>
 
 <ViewsXor viewId={$_screenId}>
 	<View id='medium'>

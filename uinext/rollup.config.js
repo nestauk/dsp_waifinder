@@ -11,19 +11,36 @@ import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 
-import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
 import pkg from './package.json';
+import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
 
-const mode = process.env.NODE_ENV;
+
+// locally: 'development'
+// Netlify: 'dev'|'staging'|'release'
+const nodeEnv = process.env.NODE_ENV;
+
 const isExported = process.env.SAPPER_EXPORT;
-const dev = mode === 'development';
 const legacy = Boolean(process.env.SAPPER_LEGACY_BUILD);
+
+const IS_DEV = ['development', 'dev'].includes(nodeEnv);
 
 const onwarn = (warning, warn) => (
 	warning.code === 'MISSING_EXPORT' && (/'preload'/u).test(warning.message) ||
 	warning.code === 'CIRCULAR_DEPENDENCY' && (/[/\\]@sapper[/\\]/u).test(warning.message) ||
 	warning.code !== 'CIRCULAR_DEPENDENCY'
 ) && warn(warning);
+
+/* backend */
+
+const BACKEND_BASES = {
+	development: 'http://localhost:4000',
+	dev: 'https://dev.ai-map.dv.dap-tools.uk',
+	staging: 'https://staging.ai-map.dv.dap-tools.uk',
+	// release: 'TODO',
+}
+
+// eslint-disable-next-line no-process-env
+const BACKEND_BASE = BACKEND_BASES[nodeEnv];
 
 export default {
 	client: {
@@ -33,8 +50,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.SAPPER_EXPORT': JSON.stringify(isExported)
+				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
+				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
+				IS_DEV,
 			}),
 			svelte({
 				extensions: [
@@ -46,7 +64,7 @@ export default {
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
-					dev,
+					dev: IS_DEV,
 					hydratable: true,
 				},
 				emitCss: true,
@@ -77,7 +95,7 @@ export default {
 				]
 			}),
 
-			!dev && terser({
+			!IS_DEV && terser({
 				module: true
 			})
 		],
@@ -92,8 +110,9 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.SAPPER_EXPORT': JSON.stringify(isExported)
+				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
+				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
+				IS_DEV,
 			}),
 			svelte({
 				extensions: [
@@ -105,8 +124,8 @@ export default {
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
+					dev: IS_DEV,
 					generate: 'ssr',
-					dev,
 				},
 			}),
 			resolve({
@@ -141,14 +160,15 @@ export default {
 			resolve(),
 			replace({
 				'process.browser': true,
-				'process.env.NODE_ENV': JSON.stringify(mode),
-				'process.env.SAPPER_EXPORT': JSON.stringify(isExported)
+				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
+				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
+				IS_DEV,
 			}),
 			commonjs(),
 			dsv(),
 			json(),
 			yaml(),
-			!dev && terser()
+			!IS_DEV && terser()
 		],
 
 		onwarn,
