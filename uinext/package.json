@@ -14,6 +14,8 @@
 		"just-compare": "^2.1.0",
 		"lamb": "^0.60.0",
 		"mapbox-gl": "^2.8.1",
+		"rison-esm": "^0.0.1",
+		"xstate": "^4.32.1",
 		"yootils": "^0.3.1"
 	},
 	"description": "App UI",
