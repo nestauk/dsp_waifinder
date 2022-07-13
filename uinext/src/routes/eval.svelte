@@ -26,7 +26,7 @@
 	import {getTopicLabel} from 'app/utils/dataUtils';
 	import {dbrPrefix} from 'app/utils/dbpedia';
 	import {sendEvaluations} from 'app/utils/eval';
-	import {regexOf} from 'app/utils/svizzle/utils';
+	import {safeRegexOf} from 'app/utils/svizzle/utils';
 
 	let currentEntity;
 	let description;
@@ -112,10 +112,10 @@
 		entitiesIterator = entities.entries();
 		currentEntity = getNextEntity();
 		({description} = source);
-		surfaceFormRegex = regexOf('');
+		surfaceFormRegex = safeRegexOf('');
 	}
 	$: if (currentEntity) {
-		surfaceFormRegex = regexOf(currentEntity.surfaceForm);
+		surfaceFormRegex = safeRegexOf(currentEntity.surfaceForm);
 		id = currentEntity.URI.replace(dbrPrefix, '');
 		label = getTopicLabel(id);
 		asyncUpdateTopicDetails(id);
