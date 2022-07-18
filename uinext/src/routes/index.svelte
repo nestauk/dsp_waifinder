@@ -1,6 +1,8 @@
 <script>
-	import {onMount} from 'svelte';
-	import {stores} from '@sapper/app';
+	// import * as _ from 'lamb';
+	// import {onMount} from 'svelte';
+	// import rison from 'rison-esm';
+	// import {stores} from '@sapper/app';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
 	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
@@ -8,8 +10,8 @@
 	import View from 'app/components/viewports/View.svelte';
 	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
 	import {toolName} from 'app/config';
-	import { createMapMachine } from 'app/machines/map/route';
-	import { parseParams } from 'app/machines/builder/formediting.options';
+	// import { createMapMachine } from 'app/machines/map/route';
+	// import { parseParams } from 'app/machines/builder/formediting.options';
 
 	import {_orgs} from 'app/stores/data';
 	import {updateDataset} from 'app/stores/dataset';
@@ -17,7 +19,7 @@
 	import {setDefaultActiveView} from 'app/stores/navigation';
 	import {getLonLat} from 'app/utils/dataUtils';
 
-
+	/*
 	const { machine: routeMachine, contextStores: {
 		// config
 		runQueryOnSelect,
@@ -35,14 +37,23 @@
 		activeDocs,
 		aggDocText,
 	}} = createMapMachine();
+	*/
 
 	const loadData = async () => {
 		const response = await fetch('/data/ai_map_annotated_orgs.json');
 		const json = await response.json();
 
 		json && updateDataset(json);
-	}
+		/*
+		const urlParams = new URL(document.location.toString()).searchParams;
+			loadPage({
+				params: _.fromPairs(Array.from(urlParams.entries()))
+			});
 
+		// parseParams()
+		*/
+	};
+/*
 	const { page } = stores();
 	let eventType = 'READY';
 	onMount(async () => {
@@ -64,6 +75,7 @@
 		addEventListener('popstate', pageReloader);
 		const unsubscribe = page.subscribe(pageReloader);
 
+		// eslint-disable-next-line no-process-env
 		if (process.env.INSPECT === 'true') {
 			const module = await import('@xstate/inspect');
 			module.inspect({
@@ -77,7 +89,7 @@
 			unsubscribe?.();
 		};
 	});
-
+*/
 	$: isClientSide && loadData();
 	$: $_screenId && setDefaultActiveView();
 </script>
