@@ -23,33 +23,19 @@
 	const {__bus} = createMapMachine();
 	setContext('__bus', __bus)
 
-	const loadData = async () => {
-		const response = await fetch('/data/ai_map_annotated_orgs.json');
-		const json = await response.json();
-
-		json && updateDataset(json);
-		/*
-		const urlParams = new URL(document.location.toString()).searchParams;
-			loadPage({
-				params: _.fromPairs(Array.from(urlParams.entries()))
-			});
-
-		// parseParams()
-		*/
-	};
-
 	const { page } = stores();
 
 	onMount(() => {
-		const updateRoute = () => {
-			__bus.send('ROUTE_CHANGED');
-			console.log('updateRoute')
-
+		const getQuery = () => {
 			const urlParams = new URL(document.location.toString()).searchParams;
 			const params = _.fromPairs(Array.from(urlParams.entries()));
 			const query = params.q && rison.decode(params.q);
-			console.log(query);
-			// processSelection(_routeMachine, query);
+			return query;
+		};
+
+		const updateRoute = () => {
+			const query = getQuery();
+			__bus.send('ROUTE_CHANGED', {query});
 		};
 
 		addEventListener('popstate', updateRoute);
@@ -61,10 +47,10 @@
 		};
 	});
 
-	$: isClientSide && loadData();
 	$: $_screenId && setDefaultActiveView();
 
-	$: console.log($__bus);
+	$: console.log('bus', $__bus);
+	$: console.log('page', $page)
 </script>
 
 <svelte:head>
