@@ -1,8 +1,8 @@
 <script>
 	// import * as _ from 'lamb';
-	// import {onMount} from 'svelte';
+	import {onMount, setContext} from 'svelte';
 	// import rison from 'rison-esm';
-	// import {stores} from '@sapper/app';
+	import {stores} from '@sapper/app';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
 	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
@@ -10,8 +10,8 @@
 	import View from 'app/components/viewports/View.svelte';
 	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
 	import {toolName} from 'app/config';
-	// import { createMapMachine } from 'app/machines/map/route';
-	// import { parseParams } from 'app/machines/builder/formediting.options';
+	import { createMapMachine } from 'app/machines/map/route';
+	// import { processSelection } from 'app/machines/builder/formediting.options';
 
 	import {_orgs} from 'app/stores/data';
 	import {updateDataset} from 'app/stores/dataset';
@@ -19,25 +19,9 @@
 	import {setDefaultActiveView} from 'app/stores/navigation';
 	import {getLonLat} from 'app/utils/dataUtils';
 
-	/*
-	const { machine: routeMachine, contextStores: {
-		// config
-		runQueryOnSelect,
-		hideDisabledForms,
-		hideDisabledAggregations,
-		hideDisabledDatasets,
-		hideDisabledFields,
-		selectedForm,
-		selectedRequestTab,
-		showFullResponse,
-		resultSize,
-		forms,
-		dataset,
-		// docs
-		activeDocs,
-		aggDocText,
-	}} = createMapMachine();
-	*/
+
+	const {__bus} = createMapMachine();
+	setContext('__bus', __bus)
 
 	const loadData = async () => {
 		const response = await fetch('/data/ai_map_annotated_orgs.json');
@@ -53,45 +37,34 @@
 		// parseParams()
 		*/
 	};
-/*
+
 	const { page } = stores();
-	let eventType = 'READY';
-	onMount(async () => {
-		const loadPage = ({params}) => {
-			const event = {
-				query: params.q && rison.decode(params.q),
-			};
-			routeMachine.send(eventType);
-			parseParams(routeMachine, event);
-			eventType = 'ROUTE_CHANGED';
-		};
 
-		const pageReloader = () => {
+	onMount(() => {
+		const updateRoute = () => {
+			__bus.send('ROUTE_CHANGED');
+
+			/*
 			const urlParams = new URL(document.location.toString()).searchParams;
-			loadPage({
-				params: _.fromPairs(Array.from(urlParams.entries()))
-			});
+			const params = _.fromPairs(Array.from(urlParams.entries()));
+			const query = params.q && rison.decode(params.q);
+			processSelection(_routeMachine, query);
+			*/
 		};
-		addEventListener('popstate', pageReloader);
-		const unsubscribe = page.subscribe(pageReloader);
 
-		// eslint-disable-next-line no-process-env
-		if (process.env.INSPECT === 'true') {
-			const module = await import('@xstate/inspect');
-			module.inspect({
-				url: "https://statecharts.io/inspect",
-				iframe: false
-			});
-		}
+		addEventListener('popstate', updateRoute);
+		const unsubscribe = page.subscribe(updateRoute);
 
 		return () => {
-			removeEventListener('popstate', pageReloader);
+			removeEventListener('popstate', updateRoute);
 			unsubscribe?.();
 		};
 	});
-*/
+
 	$: isClientSide && loadData();
 	$: $_screenId && setDefaultActiveView();
+
+	$: console.log($__bus);
 </script>
 
 <svelte:head>
