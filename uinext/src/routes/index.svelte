@@ -3,7 +3,6 @@
 	import {onMount, setContext} from 'svelte';
 	import rison from 'rison';
 	import {stores} from '@sapper/app';
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
 	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
 	import Small from 'app/components/homeScreen/small/Small.svelte';
@@ -11,10 +10,8 @@
 	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
 	import {toolName} from 'app/config';
 	import { createMapMachine } from 'app/machines/map/route';
-	// import { processSelection } from 'app/machines/builder/formediting.options';
 
 	import {_orgs} from 'app/stores/data';
-	import {updateDataset} from 'app/stores/dataset';
 	import {_screenId} from 'app/stores/layout';
 	import {setDefaultActiveView} from 'app/stores/navigation';
 	import {getLonLat} from 'app/utils/dataUtils';
