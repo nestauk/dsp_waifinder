@@ -1,7 +1,7 @@
 <script>
-	// import * as _ from 'lamb';
+	import * as _ from 'lamb';
 	import {onMount, setContext} from 'svelte';
-	// import rison from 'rison-esm';
+	import rison from 'rison';
 	import {stores} from '@sapper/app';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
@@ -43,13 +43,13 @@
 	onMount(() => {
 		const updateRoute = () => {
 			__bus.send('ROUTE_CHANGED');
+			console.log('updateRoute')
 
-			/*
 			const urlParams = new URL(document.location.toString()).searchParams;
 			const params = _.fromPairs(Array.from(urlParams.entries()));
 			const query = params.q && rison.decode(params.q);
-			processSelection(_routeMachine, query);
-			*/
+			console.log(query);
+			// processSelection(_routeMachine, query);
 		};
 
 		addEventListener('popstate', updateRoute);
