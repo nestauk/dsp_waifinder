@@ -50,6 +50,7 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': true,
+				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
 				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
 				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
 				IS_DEV,
@@ -110,6 +111,7 @@ export default {
 		plugins: [
 			replace({
 				'process.browser': false,
+				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
 				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
 				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
 				IS_DEV,
@@ -160,6 +162,7 @@ export default {
 			resolve(),
 			replace({
 				'process.browser': true,
+				'process.env.NODE_ENV': JSON.stringify(nodeEnv),
 				'process.env.SAPPER_EXPORT': JSON.stringify(isExported),
 				BACKEND_BASE: JSON.stringify(BACKEND_BASE),
 				IS_DEV,
