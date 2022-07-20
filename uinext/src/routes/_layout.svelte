@@ -25,6 +25,7 @@
 		fontsInfo,
 		isDev
 	} from 'app/config';
+	import {_isSmallScreen} from 'app/stores/layout';
 	import {
 		_showThemeEditor,
 		_themeName,
@@ -134,17 +135,19 @@
 	>
 		<slot></slot>
 	</main>
-	<footer>
-		<span>
-			Sponsored by:
-			<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
-			<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
-		</span>
-		<span>
-			Developed by:
-			<img src='/sponsors/Nesta.svg' alt='Nesta' />
-		</span>
-	</footer>
+	{#if !$_isSmallScreen}
+		<footer>
+			<span>
+				Sponsored by:
+				<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
+				<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
+			</span>
+			<span>
+				Developed by:
+				<img src='/sponsors/Nesta.svg' alt='Nesta' />
+			</span>
+		</footer>
+	{/if}
 	{#if isDev && $_showThemeEditor}
 		<ThemeEditor />
 	{/if}
