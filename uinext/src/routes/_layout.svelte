@@ -134,6 +134,12 @@
 	>
 		<slot></slot>
 	</main>
+	<footer>
+		Sponsored by:
+		<img src='/sponsors/Nesta.svg' alt='Nesta' />
+		<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
+		<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
+	</footer>
 	{#if isDev && $_showThemeEditor}
 		<ThemeEditor />
 	{/if}
@@ -164,8 +170,9 @@
 		grid-template-areas:
 			'nav'
 			'content'
+			'sponsors'
 			'accessibility';
-		grid-template-rows: min-content 1fr min-content;
+		grid-template-rows: min-content 1fr min-content min-content;
 	}
 	.medium.withThemeEditor {
 		grid-template-areas:
@@ -191,6 +198,16 @@
 		overflow: hidden;
 		position: relative;
 		width: 100%;
+	}
+	.medium footer {
+		grid-area: 'sponsors';
+		text-align: center;
+		border-top: thin solid black;
+	}
+	.medium footer img {
+		height: 3em;
+		padding: 0.5em 1em;
+		vertical-align: middle;
 	}
 	.accessibility {
 		grid-area: accessibility;
