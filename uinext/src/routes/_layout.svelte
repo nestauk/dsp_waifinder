@@ -135,10 +135,15 @@
 		<slot></slot>
 	</main>
 	<footer>
-		Sponsored by:
-		<img src='/sponsors/Nesta.svg' alt='Nesta' />
-		<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
-		<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
+		<span>
+			Sponsored by:
+			<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
+			<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
+		</span>
+		<span>
+			Developed by:
+			<img src='/sponsors/Nesta.svg' alt='Nesta' />
+		</span>
 	</footer>
 	{#if isDev && $_showThemeEditor}
 		<ThemeEditor />
@@ -200,9 +205,11 @@
 		width: 100%;
 	}
 	.medium footer {
-		grid-area: 'sponsors';
-		text-align: center;
 		border-top: thin solid black;
+		display: grid;
+		grid-auto-flow: column;
+		grid-area: "sponsors";
+		text-align: center;
 	}
 	.medium footer img {
 		height: 3em;
