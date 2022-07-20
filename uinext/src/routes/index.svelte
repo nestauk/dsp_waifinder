@@ -16,7 +16,6 @@
 	import {setDefaultActiveView} from 'app/stores/navigation';
 	import {getLonLat} from 'app/utils/dataUtils';
 
-
 	const {__bus} = createMapMachine();
 	setContext('__bus', __bus)
 
