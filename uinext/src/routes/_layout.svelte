@@ -139,12 +139,18 @@
 		<footer>
 			<span>
 				Sponsored by:
-				<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
-				<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
+				<a href='https://www.ukri.org/'>
+					<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
+				</a>
+				<a href='https://www.turing.ac.uk/'>
+					<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
+				</a>
 			</span>
 			<span>
 				Developed by:
-				<img src='/sponsors/Nesta.svg' alt='Nesta' />
+				<a href='https://www.nesta.org.uk/'>
+					<img src='/sponsors/Nesta.svg' alt='Nesta' />
+				</a>
 			</span>
 		</footer>
 	{/if}
