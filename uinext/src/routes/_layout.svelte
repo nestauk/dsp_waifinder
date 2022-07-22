@@ -17,11 +17,16 @@
 
 	import Nav from 'app/components/Nav.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
+	import StyleSensor from 'app/components/svizzle/StyleSensor.svelte';
 	import {
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
 	} from 'app/config';
+	import {
+		_themeName,
+		_themeVars
+	} from 'app/stores/theme'
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -61,7 +66,14 @@
 
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
+	$: console.log('_themeVars', $_themeVars)
 </script>
+
+<StyleSensor
+	href='/css/global.css'
+	selectorRegex={/\.theme.*/u}
+	bind:styleRules={$_themeVars}
+/>
 
 <A11yMenuDriver
 	defaults={{
@@ -96,7 +108,7 @@
 {/if}
 
 <div
-	class='_layout root {$_screen?.classes}'
+	class='_layout root {$_screen?.classes} {$_themeName}'
 	class:hidden={isLayoutUndefined}
 	style='--menu-height: {menuHeight}px;'
 	role='none'

@@ -66,3 +66,48 @@ a {
 	--z-1000: 1000;
 	--z-2000: 2000;
 }
+
+.themeDark {
+	--box-shadow-y: 0px 8px 9px -4px lightgrey;
+	--dim-fontsize-light: 200;
+}
+
+.themeLight {
+	--box-shadow-y: 0px 8px 9px -4px lightgrey;
+	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
+	--color-main-desat-50: #333;
+	--color-main-lighter: #555;
+	--color-main: #333;
+	--color-secondary: #075aa2;
+	--color-selected: lightseagreen;
+	--color-grey-lighter: #f7f7f7;
+	--color-grey-180: rgb(180, 180, 180);
+	--color-grey-70: rgb(70, 70, 70);
+	--color-grey-40: rgb(40, 40, 40);
+	--color-paleyellow: #f9f7dd;
+	--color-link: #0658aa;
+	--color-background: var(--color-main);
+	--color-warning-background: orange;
+	--color-warning-border: darkorange;
+	--color-warning-text: white;
+}
+
+.themeLight {
+	--box-shadow-y: 0px 8px 9px -4px lightgrey;
+	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
+	--color-main-desat-50: #333;
+	--color-main-lighter: #555;
+	--color-main: #333;
+	--color-secondary: #075aa2;
+	--color-selected: lightseagreen;
+	--color-grey-lighter: #f7f7f7;
+	--color-grey-180: rgb(180, 180, 180);
+	--color-grey-70: rgb(70, 70, 70);
+	--color-grey-40: rgb(40, 40, 40);
+	--color-paleyellow: #f9f7dd;
+	--color-link: #0658aa;
+	--color-background: var(--color-main);
+	--color-warning-background: orange;
+	--color-warning-border: darkorange;
+	--color-warning-text: white;
+}
