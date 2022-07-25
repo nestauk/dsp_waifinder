@@ -3,8 +3,8 @@ flows:
     min_num_proj: 400
     min_funding: 50000000
     funding_in_last_years: 5
-    gtr_universities_filename: "ds/utils/HESA_universities_050722.csv"
-    gtr_rtos_filename: "ds/utils/List_of_RTOs_210622.csv"
+    gtr_universities_filename: "ds/utils/HESA_universities_050722.txt"
+    gtr_rtos_filename: "ds/utils/List_of_RTOs_210622.txt"
     gtr_eris_filename: "ds/utils/ukri_eligible_research_institutes_050722.txt"
   crunchbase:
     min_ai_prop: 0.1

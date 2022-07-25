@@ -160,8 +160,8 @@ class GtrAI(FlowSpec):
             gtr_universities = set(f.read().splitlines())
         with open(gtr_eris_filename) as f:
             gtr_eris = set(f.read().splitlines())
-        gtr_rtos = pd.read_csv(gtr_rtos_filename)
-        gtr_rtos = set(gtr_rtos["ParticipantName"].tolist())
+        with open(gtr_rtos_filename) as f:
+            gtr_rtos = set(f.read().splitlines())
 
         org_names_keep = gtr_rtos.union(gtr_universities).union(gtr_eris)
         org_names_keep_enhanced = get_org_name_list(org_names_keep)

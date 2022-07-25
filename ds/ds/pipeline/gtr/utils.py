@@ -225,7 +225,7 @@ def match_clean(name):
 
     name = str(name)
     name = name.replace("&", "and")
-    name = name.replace("ltd", "limited")
+    name = name.replace(" ltd", " limited")
     name = re.sub(r"[^A-Za-z0-9 ]+", "", name)
     return name.lower()
 
