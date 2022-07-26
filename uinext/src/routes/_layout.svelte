@@ -16,12 +16,14 @@
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import Nav from 'app/components/Nav.svelte';
+	import ThemeEditor from 'app/components/ThemeEditor.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
 	import StyleSensor from 'app/components/svizzle/StyleSensor.svelte';
 	import {
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
+		isDev
 	} from 'app/config';
 	import {_themeName, _themeVars} from 'app/stores/theme';
 	import theme from 'app/theme';
@@ -49,10 +51,19 @@
 	let isLayoutUndefined = true;
 	let scriptingActive = false;
 	let showA11yMenu;
+	let showStyleEditor = false;
 
 	onMount(() => {
 		scriptingActive = true;
 		window.nesta_isLayoutUndefined = () => isLayoutUndefined;
+
+		if (isDev) {
+			window.addEventListener('keypress', e => {
+				if (e.ctrlKey && e.shiftKey && e.code === 'KeyE') {
+					showStyleEditor = !showStyleEditor;
+				}
+			})
+		}
 	});
 
 	beforeUpdate(async () => {
@@ -106,6 +117,7 @@
 <div
 	class='_layout root {$_screen?.classes} {$_themeName}'
 	class:hidden={isLayoutUndefined}
+	class:editorEnabled={showStyleEditor}
 	style='--menu-height: {menuHeight}px;'
 	role='none'
 >
@@ -127,6 +139,9 @@
 	>
 		<slot></slot>
 	</main>
+	{#if isDev && showStyleEditor}
+		<ThemeEditor />
+	{/if}
 	{#if showA11yMenu}
 		<section
 			bind:offsetHeight={a11yHeight}
@@ -156,6 +171,13 @@
 			'content'
 			'accessibility';
 		grid-template-rows: min-content 1fr min-content;
+	}
+	.medium.editorEnabled {
+		grid-template-areas:
+			'nav nav'
+			'content editor'
+			'accessibility accessibility';
+		grid-template-columns: 2fr 1fr;
 	}
 	header {
 		border-top: 1px solid var(--color-main-lighter);
