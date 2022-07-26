@@ -104,7 +104,7 @@
 	}
 
 	section {
-		background-color: white;
+		background-color: var(--color-background-main);
 		display: grid;
 		max-width: 900px;
 		overflow-y: auto;
@@ -123,7 +123,7 @@
 	}
 
 	div {
-		background-color: white;
+		background-color: var(--color-background-main);
 		max-width: 900px;
 		overflow-y: auto;
 	}

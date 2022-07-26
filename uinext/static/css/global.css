@@ -40,7 +40,7 @@ a {
 	cursor: pointer;
 }
 
-:root {
+:root { /* FIXME default - Keep? */
 	--box-shadow-y: 0px 8px 9px -4px lightgrey;
 	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
 	--color-main-desat-50: #333;
@@ -69,24 +69,28 @@ a {
 
 .themeDark {
 	--box-shadow-y: 0px 8px 9px -4px lightgrey;
-	--dim-fontsize-light: 200;
-}
-
-.themeLight {
-	--box-shadow-y: 0px 8px 9px -4px lightgrey;
 	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
+	--color-background: #333;
+	--color-background-main: white;
+	--color-eval-highlighted: aqua;
 	--color-main-desat-50: #333;
 	--color-main-lighter: #555;
 	--color-main: #333;
-	--color-secondary: #075aa2;
-	--color-selected: lightseagreen;
 	--color-grey-lighter: #f7f7f7;
 	--color-grey-180: rgb(180, 180, 180);
 	--color-grey-70: rgb(70, 70, 70);
 	--color-grey-40: rgb(40, 40, 40);
-	--color-paleyellow: #f9f7dd;
 	--color-link: #0658aa;
-	--color-background: var(--color-main);
+	--color-org-highlighted: lavender;
+	--color-org-type: aquamarine;
+	--color-org-place: cornsilk;
+	--color-paleyellow: #f9f7dd;
+	--color-pill: white;
+	--color-pill-background: orange;
+	--color-pill-score: black;
+	--color-secondary: #075aa2;
+	--color-selected: lightseagreen;
+	--color-selected-text: white;
 	--color-warning-background: orange;
 	--color-warning-border: darkorange;
 	--color-warning-text: white;
@@ -95,18 +99,27 @@ a {
 .themeLight {
 	--box-shadow-y: 0px 8px 9px -4px lightgrey;
 	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
+	--color-background: #333;
+	--color-background-main: white;
+	--color-eval-highlighted: aqua;
 	--color-main-desat-50: #333;
 	--color-main-lighter: #555;
 	--color-main: #333;
-	--color-secondary: #075aa2;
-	--color-selected: lightseagreen;
 	--color-grey-lighter: #f7f7f7;
 	--color-grey-180: rgb(180, 180, 180);
 	--color-grey-70: rgb(70, 70, 70);
 	--color-grey-40: rgb(40, 40, 40);
-	--color-paleyellow: #f9f7dd;
 	--color-link: #0658aa;
-	--color-background: var(--color-main);
+	--color-org-highlighted: lavender;
+	--color-org-type: aquamarine;
+	--color-org-place: cornsilk;
+	--color-paleyellow: #f9f7dd;
+	--color-pill: white;
+	--color-pill-background: orange;
+	--color-pill-score: black;
+	--color-secondary: #075aa2;
+	--color-selected: lightseagreen;
+	--color-selected-text: white;
 	--color-warning-background: orange;
 	--color-warning-border: darkorange;
 	--color-warning-text: white;
