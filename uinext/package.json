@@ -33,6 +33,7 @@
 		"bowser": "^2.11.0",
 		"browserstack-capabilities": "^0.7.0",
 		"browserstack-local": "^1.4.8",
+		"color-parse": "^1.4.2",
 		"compression": "^1.7.4",
 		"cpy-cli": "^4.1.0",
 		"eslint": "^8.18.0",
