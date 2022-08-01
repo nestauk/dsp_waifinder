@@ -25,7 +25,11 @@
 		fontsInfo,
 		isDev
 	} from 'app/config';
-	import {_themeName, _themeVars} from 'app/stores/theme';
+	import {
+		_showThemeEditor,
+		_themeName,
+		_themeVars
+	} from 'app/stores/theme'
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -51,19 +55,10 @@
 	let isLayoutUndefined = true;
 	let scriptingActive = false;
 	let showA11yMenu;
-	let showStyleEditor = false;
 
 	onMount(() => {
 		scriptingActive = true;
 		window.nesta_isLayoutUndefined = () => isLayoutUndefined;
-
-		if (isDev) {
-			window.addEventListener('keypress', e => {
-				if (e.ctrlKey && e.shiftKey && e.code === 'KeyE') {
-					showStyleEditor = !showStyleEditor;
-				}
-			})
-		}
 	});
 
 	beforeUpdate(async () => {
@@ -117,7 +112,7 @@
 <div
 	class='_layout root {$_screen?.classes} {$_themeName}'
 	class:hidden={isLayoutUndefined}
-	class:editorEnabled={showStyleEditor}
+	class:editorEnabled={$_showThemeEditor}
 	style='--menu-height: {menuHeight}px;'
 	role='none'
 >
@@ -139,7 +134,7 @@
 	>
 		<slot></slot>
 	</main>
-	{#if isDev && showStyleEditor}
+	{#if isDev && $_showThemeEditor}
 		<ThemeEditor />
 	{/if}
 	{#if showA11yMenu}
