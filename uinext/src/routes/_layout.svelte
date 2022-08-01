@@ -138,7 +138,9 @@
 </div>
 
 <style>
-	div {
+	._layout {
+		background: var(--color-background-main) ;
+		color: var(--color-main);
 		display: grid;
 		grid-template-areas:
 			'content'

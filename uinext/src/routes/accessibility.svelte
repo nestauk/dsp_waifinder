@@ -330,7 +330,7 @@
 		grid-template-columns: 1fr min-content min-content;
 	}
 	.tabs button {
-		background: white;
+		background: var(--color-background-main);
 		border: none;
 		border-left: thin solid var(--color-main);
 		height: 2.5rem;

@@ -15,11 +15,9 @@ html, body, #app {
 	For the color correction filters to work properly across browsers,
 	the background must be set to a color.
 	*/
-	background: white;
 }
 
 body {
-	background-color: white;
 	color: #333;
 }
 
