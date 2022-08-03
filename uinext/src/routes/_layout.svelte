@@ -13,7 +13,7 @@
 	import NoScript from '@svizzle/ui/src/NoScript.svelte';
 	import ScreenSensor, {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-	import {onMount, beforeUpdate, tick} from 'svelte';
+	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import Nav from 'app/components/Nav.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
@@ -23,10 +23,7 @@
 		bannersDefaultFooterText,
 		fontsInfo,
 	} from 'app/config';
-	import {
-		_themeName,
-		_themeVars
-	} from 'app/stores/theme'
+	import {_themeName, _themeVars} from 'app/stores/theme';
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -66,7 +63,6 @@
 
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
-	$: console.log('_themeVars', $_themeVars)
 </script>
 
 <StyleSensor
