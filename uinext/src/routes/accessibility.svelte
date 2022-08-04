@@ -253,7 +253,7 @@
 	}
 
 	section {
-		background-color: white;
+		background-color: var(--color-background-main);
 		box-shadow: var(--box-shadow-y);
 		max-width: 900px;
 		overflow-y: auto;
@@ -279,7 +279,7 @@
 	dt {
 		padding: 0.5em 1em;
 		border-top: thin solid white;
-		color: white;
+		color: var(--color-warning-background);
 		background: var(--color-main);
 		text-align: right;
 	}
@@ -321,7 +321,7 @@
 	}
 	.tabs input[type="radio"]:checked + label {
 		background: var(--color-main);
-		color: white;
+		color: var(--color-background-main);
 	}
 
 	.tabs .tab-selector {
@@ -330,7 +330,7 @@
 		grid-template-columns: 1fr min-content min-content;
 	}
 	.tabs button {
-		background: white;
+		background: var(--color-background-main);
 		border: none;
 		border-left: thin solid var(--color-main);
 		height: 2.5rem;

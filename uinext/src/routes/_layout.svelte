@@ -13,15 +13,17 @@
 	import NoScript from '@svizzle/ui/src/NoScript.svelte';
 	import ScreenSensor, {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-	import {onMount, beforeUpdate, tick} from 'svelte';
+	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import Nav from 'app/components/Nav.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
+	import StyleSensor from 'app/components/svizzle/StyleSensor.svelte';
 	import {
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
 	} from 'app/config';
+	import {_themeName, _themeVars} from 'app/stores/theme';
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -63,6 +65,12 @@
 	$: $_screen?.classes && (isLayoutUndefined = false);
 </script>
 
+<StyleSensor
+	href='/css/global.css'
+	selectorRegex={/\.theme.*/u}
+	bind:styleRules={$_themeVars}
+/>
+
 <A11yMenuDriver
 	defaults={{
 		typeface: {
@@ -96,7 +104,7 @@
 {/if}
 
 <div
-	class='_layout root {$_screen?.classes}'
+	class='_layout root {$_screen?.classes} {$_themeName}'
 	class:hidden={isLayoutUndefined}
 	style='--menu-height: {menuHeight}px;'
 	role='none'
@@ -130,7 +138,9 @@
 </div>
 
 <style>
-	div {
+	._layout {
+		background: var(--color-background-main) ;
+		color: var(--color-main);
 		display: grid;
 		grid-template-areas:
 			'content'

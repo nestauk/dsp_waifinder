@@ -29,7 +29,7 @@
 	}
 
 	div {
-		background-color: white;
+		background-color: var(--color-background-main);
 		max-width: 900px;
 		overflow-y: auto;
 		padding: 2rem;

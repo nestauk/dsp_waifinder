@@ -41,7 +41,7 @@
 	}
 
 	div {
-		background-color: white;
+		background-color: var(--color-background-main);
 		box-shadow: var(--box-shadow-y);
 		max-width: 900px;
 		overflow-y: auto;
