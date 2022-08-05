@@ -172,7 +172,7 @@
 			'nav nav'
 			'content editor'
 			'accessibility accessibility';
-		grid-template-columns: 2fr 1fr;
+		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
 		border-top: 1px solid var(--color-main-lighter);
