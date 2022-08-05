@@ -110,11 +110,11 @@
 {/if}
 
 <div
-	class='_layout root {$_screen?.classes} {$_themeName}'
 	class:hidden={isLayoutUndefined}
-	class:editorEnabled={$_showThemeEditor}
-	style='--menu-height: {menuHeight}px;'
+	class:withThemeEditor={$_showThemeEditor}
+	class='_layout root {$_screen?.classes} {$_themeName}'
 	role='none'
+	style='--menu-height: {menuHeight}px;'
 >
 	<header
 		aria-label='Website header'
@@ -167,7 +167,7 @@
 			'accessibility';
 		grid-template-rows: min-content 1fr min-content;
 	}
-	.medium.editorEnabled {
+	.medium.withThemeEditor {
 		grid-template-areas:
 			'nav nav'
 			'content editor'
