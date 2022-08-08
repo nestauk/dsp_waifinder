@@ -124,9 +124,9 @@
 	>
 		<Nav
 			contentHeight={$_contentSize.blockSize}
-			{segment}
 			bind:showA11yMenu
 			isA11yDirty={$_isA11yDirty}
+			{segment}
 		/>
 	</header>
 	<main
@@ -135,15 +135,19 @@
 	>
 		<slot></slot>
 	</main>
+	{#if isDev && $_showThemeEditor}
+		<ThemeEditor />
+	{/if}
 	{#if !$_isSmallScreen}
 		<footer
 			aria-label='Website footer'
 		>
-			<Footer />
+			<Footer
+				bind:showA11yMenu
+				isA11yDirty={$_isA11yDirty}
+				{segment}
+			/>
 		</footer>
-	{/if}
-	{#if isDev && $_showThemeEditor}
-		<ThemeEditor />
 	{/if}
 	{#if showA11yMenu}
 		<section
@@ -180,6 +184,7 @@
 		grid-template-areas:
 			'nav nav'
 			'content editor'
+			'sponsors sponsors'
 			'accessibility accessibility';
 		grid-template-columns: 3.5fr 1fr;
 	}
@@ -202,6 +207,8 @@
 		width: 100%;
 	}
 	footer {
+		grid-area: sponsors;
+		border-top: thin solid var(--color-main-lighter);
 		padding: 0 var(--dim-padding);
 	}
 	.accessibility {
