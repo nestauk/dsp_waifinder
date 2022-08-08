@@ -16,14 +16,20 @@
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import Nav from 'app/components/Nav.svelte';
+	import ThemeEditor from 'app/components/ThemeEditor.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
 	import StyleSensor from 'app/components/svizzle/StyleSensor.svelte';
 	import {
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
+		isDev
 	} from 'app/config';
-	import {_themeName, _themeVars} from 'app/stores/theme';
+	import {
+		_showThemeEditor,
+		_themeName,
+		_themeVars
+	} from 'app/stores/theme'
 	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
@@ -104,10 +110,11 @@
 {/if}
 
 <div
-	class='_layout root {$_screen?.classes} {$_themeName}'
 	class:hidden={isLayoutUndefined}
-	style='--menu-height: {menuHeight}px;'
+	class:withThemeEditor={$_showThemeEditor}
+	class='_layout root {$_screen?.classes} {$_themeName}'
 	role='none'
+	style='--menu-height: {menuHeight}px;'
 >
 	<header
 		aria-label='Website header'
@@ -127,6 +134,9 @@
 	>
 		<slot></slot>
 	</main>
+	{#if isDev && $_showThemeEditor}
+		<ThemeEditor />
+	{/if}
 	{#if showA11yMenu}
 		<section
 			bind:offsetHeight={a11yHeight}
@@ -156,6 +166,13 @@
 			'content'
 			'accessibility';
 		grid-template-rows: min-content 1fr min-content;
+	}
+	.medium.withThemeEditor {
+		grid-template-areas:
+			'nav nav'
+			'content editor'
+			'accessibility accessibility';
+		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
 		border-top: 1px solid var(--color-main-lighter);
