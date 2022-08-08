@@ -15,6 +15,7 @@
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
+	import Footer from 'app/components/homeScreen/medium/Footer.svelte';
 	import Nav from 'app/components/Nav.svelte';
 	import ThemeEditor from 'app/components/ThemeEditor.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
@@ -122,7 +123,6 @@
 		use:headerSizeObserver
 	>
 		<Nav
-			{_screen}
 			contentHeight={$_contentSize.blockSize}
 			{segment}
 			bind:showA11yMenu
@@ -136,22 +136,10 @@
 		<slot></slot>
 	</main>
 	{#if !$_isSmallScreen}
-		<footer>
-			<span>
-				Sponsored by:
-				<a href='https://www.ukri.org/'>
-					<img src='/sponsors/UKResearchAndInnovation.svg' alt='Nesta' />
-				</a>
-				<a href='https://www.turing.ac.uk/'>
-					<img src='/sponsors/AlanTuringInstitute.svg' alt='Nesta' />
-				</a>
-			</span>
-			<span>
-				Developed by:
-				<a href='https://www.nesta.org.uk/'>
-					<img src='/sponsors/Nesta.svg' alt='Nesta' />
-				</a>
-			</span>
+		<footer
+			aria-label='Website footer'
+		>
+			<Footer />
 		</footer>
 	{/if}
 	{#if isDev && $_showThemeEditor}
@@ -213,17 +201,8 @@
 		position: relative;
 		width: 100%;
 	}
-	.medium footer {
-		border-top: thin solid black;
-		display: grid;
-		grid-auto-flow: column;
-		grid-area: "sponsors";
-		text-align: center;
-	}
-	.medium footer img {
-		height: 3em;
-		padding: 0.5em 1em;
-		vertical-align: middle;
+	footer {
+		padding: 0 var(--dim-padding);
 	}
 	.accessibility {
 		grid-area: accessibility;
