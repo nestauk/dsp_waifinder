@@ -19,26 +19,30 @@
 	const {__bus} = createMapMachine();
 	setContext('__bus', __bus)
 
-	const { page } = stores();
+	const {page} = stores();
 
 	onMount(() => {
-		const getQuery = () => {
-			const urlParams = new URL(document.location.toString()).searchParams;
-			const params = _.fromPairs(Array.from(urlParams.entries()));
-			const query = params.q && rison.decode(params.q);
-			return query;
-		};
+		console.log('Route mounted')
 
-		const updateRoute = () => {
-			const query = getQuery();
-			__bus.send('ROUTE_CHANGED', {query});
-		};
+		const updateRoute = () => __bus.send('ROUTE_CHANGED');
 
-		addEventListener('popstate', updateRoute);
-		const unsubscribe = page.subscribe(updateRoute);
+		const statePopped = () => {
+			console.log('popstate');
+			updateRoute();
+		}
+
+		const pageChanged = () => {
+			console.log('pageChanged')
+			updateRoute()
+		}
+
+		addEventListener('popstate', statePopped);
+		const unsubscribe = page.subscribe(pageChanged);
+
+		__bus.send('CLIENT_DETECTED');
 
 		return () => {
-			removeEventListener('popstate', updateRoute);
+			removeEventListener('popstate', statePopped);
 			unsubscribe?.();
 		};
 	});
