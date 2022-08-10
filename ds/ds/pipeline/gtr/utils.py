@@ -1,5 +1,6 @@
 import random
 import datetime
+import ast
 
 import pandas as pd
 
@@ -53,6 +54,7 @@ query_ai_topics = (
 
 query_ai_orgs = (
     "SELECT gtr_organisations.name Name, "
+    "gtr_organisations.addresses, "
     "gtr_organisations.id org_id, "
     "gtr_link_table.project_id ai_project_id, "
     "gtr_organisations_locations.latitude Latitude, "
@@ -88,10 +90,8 @@ query_cb_urls = (
     "SELECT crunchbase_organizations.homepage_url Link, "
     "crunchbase_organizations.name, "
     "crunchbase_organizations.country, "
-    "crunchbase_organizations.city City, "
     "crunchbase_organizations.long_description Description, "
-    "crunchbase_organizations.short_description Description_short, "
-    "crunchbase_organizations.postal_code Postcode "
+    "crunchbase_organizations.short_description Description_short "
     "FROM crunchbase_organizations "
     "WHERE LOWER(crunchbase_organizations.name) IN %(l)s"
 )
@@ -114,6 +114,36 @@ def clean_end_dates(df):
     return df
 
 
+def clean_gtr_address(df):
+    """
+    GtR's address field comes in a dictionary form, so access parts of this to find the postcode
+    and the city (which requires a little cleaning)
+    """
+    df["address"] = df["addresses"].apply(
+        lambda x: x if pd.isnull(x) else ast.literal_eval(x).get("address")
+    )
+
+    df["Postcode"] = df["address"].apply(
+        lambda x: x if pd.isnull(x) else x.get("postCode")
+    )
+    df["City"] = df["address"].apply(lambda x: x if pd.isnull(x) else x.get("city"))
+    df["Region"] = df["address"].apply(lambda x: x if pd.isnull(x) else x.get("region"))
+
+    # The region is too broad for our needs, e.g. 'North East', apart from 'London'
+    # Cities are only given for a small proportion of the data and need cleaning,
+    # Some are all captialised 'SHEFFIELD' and there is a "PO BOX 532" in there
+
+    def clean_city(name):
+        if pd.notnull(name) and "PO BOX" not in name:
+            return name.capitalize()
+        else:
+            return None
+
+    df["City"] = df["City"].apply(clean_city)
+    df.loc[pd.isnull(df["City"]) & (df["Region"] == "London"), "City"] = "London"
+    return df
+
+
 def combine_org_data(ai_org_funding_ids, funding_info, ai_org_info, ai_org_project_ids):
     """
     Parameters:
@@ -132,6 +162,7 @@ def combine_org_data(ai_org_funding_ids, funding_info, ai_org_info, ai_org_proje
             ai_org_info (DataFrame):
                     Aggregated information about each AI organisation.
     """
+
     # Add the funding info to all the projects from AI organisations
     ai_org_funding_ids = ai_org_funding_ids.merge(
         funding_info, how="left", on="funding_id"
@@ -163,9 +194,11 @@ def combine_org_data(ai_org_funding_ids, funding_info, ai_org_info, ai_org_proje
     # There is some duplication in this data where orgs with the same
     # name and lat/long coords are given 2 org IDs.
     # Merge rows where this happens, and count up the distinct project IDs
+
     ai_org_info = (
         ai_org_info.groupby(
-            ["Name", "Latitude", "Longitude", "country_name"], dropna=False
+            ["Name", "Latitude", "Longitude", "country_name", "Postcode", "City"],
+            dropna=False,
         )
         .agg(
             {
@@ -214,7 +247,7 @@ def get_crunchbase_links(cb_org_info):
     cb_org_info.drop_duplicates(["Name lower"], inplace=True)
 
     lower_name2org_info = cb_org_info.set_index("Name lower")[
-        ["Link", "City", "Description", "Description_short", "Postcode"]
+        ["Link", "Description", "Description_short"]
     ].to_dict(orient="index")
 
     return lower_name2org_info

@@ -312,24 +312,6 @@ def get_final_places(ai_map_data, city_names):
 def merge_place_data(ai_map_data, geo_data):
     all_places = set(ai_map_data["Place"])
 
-    ## Trust geodata lat/long primarily
-    # places = geo_data[geo_data["city"].isin(all_places)].reset_index(drop=True)
-    # places.rename(
-    #     columns={"city": "Place", "latitude": "Latitude", "longitude": "Longitude"},
-    #     inplace=True,
-    # )
-
-    # average_latlong_places = (
-    #     ai_map_data.groupby("Place")[["Latitude", "Longitude"]].mean().reset_index()
-    # )
-    # average_latlong_places.rename(
-    #     columns={"Latitude": "Latitude_centroid", "Longitude": "Longitude_centroid"},
-    #     inplace=True,
-    # )
-    # places = pd.merge(
-    #     average_latlong_places, places, how="left", on="Place"
-    # ).reset_index(drop=True)
-
     # Trust average lat/long primarily
     places = (
         ai_map_data.groupby("Place")[["Latitude", "Longitude"]].mean().reset_index()
@@ -359,38 +341,55 @@ def add_nuts(places):
     nf = NutsFinder(year=2021)
 
     def get_nuts_info(lat, lon):
+        nuts_levels = {1: (None, None), 2: (None, None), 3: (None, None)}
         if lat:
             for nuts_info in nf.find(lat=lat, lon=lon):
-                if nuts_info["LEVL_CODE"] == 3:
-                    return (nuts_info["NUTS_ID"], nuts_info["NUTS_NAME"])
-        return (None, None)
+                if nuts_info["LEVL_CODE"] != 0:
+                    nuts_levels[nuts_info["LEVL_CODE"]] = (
+                        nuts_info["NUTS_ID"],
+                        nuts_info["NUTS_NAME"],
+                    )
+
+        return nuts_levels[1] + nuts_levels[2] + nuts_levels[3]
 
     def get_nuts_code(places, lat_col, lon_col):
         nuts_info = places.apply(
             lambda x: get_nuts_info(x[lat_col], x[lon_col]), axis=1
         ).tolist()
-        return [x[0] for x in nuts_info], [x[1] for x in nuts_info]
+        return [[x[i] for x in nuts_info] for i in range(6)]
 
     # The NUTS when using the geo data lat/long
     (
+        places.loc[:, "NUTS1_ID geo_data"],
+        places.loc[:, "NUTS1_NAME geo_data"],
+        places.loc[:, "NUTS2_ID geo_data"],
+        places.loc[:, "NUTS2_NAME geo_data"],
         places.loc[:, "NUTS3_ID geo_data"],
         places.loc[:, "NUTS3_NAME geo_data"],
     ) = get_nuts_code(places, "Latitude geo_data", "Longitude geo_data")
 
     # The NUTS when using the average lat/long
     (
+        places.loc[:, "NUTS1_ID centroid"],
+        places.loc[:, "NUTS1_NAME centroid"],
+        places.loc[:, "NUTS2_ID centroid"],
+        places.loc[:, "NUTS2_NAME centroid"],
         places.loc[:, "NUTS3_ID centroid"],
         places.loc[:, "NUTS3_NAME centroid"],
     ) = get_nuts_code(places, "Latitude", "Longitude")
 
     # For the final output, use the average lat/long unless its not found
     # in which case use the NUTS found using the geodata lat/long
-    places["NUTS3_ID"] = places["NUTS3_ID centroid"]
-    places["NUTS3_NAME"] = places["NUTS3_NAME centroid"]
-    places.loc[places["NUTS3_ID"].isnull(), "NUTS3_ID"] = places["NUTS3_ID geo_data"]
-    places.loc[places["NUTS3_NAME"].isnull(), "NUTS3_NAME"] = places[
-        "NUTS3_NAME geo_data"
-    ]
+
+    for i in [1, 2, 3]:
+        places[f"NUTS{i}_ID"] = places[f"NUTS{i}_ID centroid"]
+        places[f"NUTS{i}_NAME"] = places[f"NUTS{i}_NAME centroid"]
+        places.loc[places[f"NUTS{i}_ID"].isnull(), f"NUTS{i}_ID"] = places[
+            f"NUTS{i}_ID geo_data"
+        ]
+        places.loc[places[f"NUTS{i}_NAME"].isnull(), f"NUTS{i}_NAME"] = places[
+            f"NUTS{i}_NAME geo_data"
+        ]
 
     places["place_id"] = places.apply(
         lambda x: hashlib.sha1(
@@ -440,8 +439,11 @@ def format_places(places):
                 },
                 "id": place["place_id"],
                 "name": place["Place"],
-                "region_id": place["NUTS3_ID"],
-                "region_name": place["NUTS3_NAME"],
+                "region": {
+                    "3": {"id": place["NUTS3_ID"], "name": place["NUTS3_NAME"]},
+                    "2": {"id": place["NUTS2_ID"], "name": place["NUTS2_NAME"]},
+                    "1": {"id": place["NUTS1_ID"], "name": place["NUTS1_NAME"]},
+                },
                 "type": place["place_type"],
             }
         )

@@ -49,6 +49,7 @@ class GtrAI(FlowSpec):
             query_all_funding_amounts,
             clean_end_dates,
             combine_org_data,
+            clean_gtr_address,
         )
         import pandas as pd
 
@@ -66,6 +67,7 @@ class GtrAI(FlowSpec):
             query_ai_orgs, conn, params={"l": tuple(ai_project_ids)}
         )
         ai_org_ids = ai_org_info["org_id"].unique()
+        ai_org_info = clean_gtr_address(ai_org_info)
 
         # Get all project ids for the AI organisations
         ai_org_project_ids = pd.read_sql(
@@ -95,9 +97,9 @@ class GtrAI(FlowSpec):
     @step
     def find_cb_org_info(self):
         """
-        The GtR dataset doesn't include organisational urls, cities or descriptions
+        The GtR dataset doesn't include organisational urls or descriptions
         but some of these can be found in the crunchbase data.
-        Here we create a dict of name: {url, city, description} for each org name.
+        Here we create a dict of name: {url, description} for each org name.
         """
 
         from ds.pipeline.gtr.utils import query_cb_urls, get_crunchbase_links
@@ -125,8 +127,6 @@ class GtrAI(FlowSpec):
             )
 
         self.ai_orgs_grouped["Link"] = get_cb_info("Link")
-        self.ai_orgs_grouped["City"] = get_cb_info("City")
-        self.ai_orgs_grouped["Postcode"] = get_cb_info("Postcode")
         self.ai_orgs_grouped["Description"] = get_cb_info("Description")
         # If there is no description, use the short description
         self.ai_orgs_grouped.loc[
