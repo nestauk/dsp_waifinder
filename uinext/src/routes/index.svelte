@@ -1,37 +1,47 @@
 <script>
-	import {toolName} from 'app/config';
+	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
-	import Content from './_content/Index.svx';
+	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
+	import Small from 'app/components/homeScreen/small/Small.svelte';
+	import View from 'app/components/viewports/View.svelte';
+	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
+	import {toolName} from 'app/config';
+	import {_orgs} from 'app/stores/data';
+	import {updateDataset} from 'app/stores/dataset';
+	import {_screenId} from 'app/stores/layout';
+	import {setDefaultActiveView} from 'app/stores/navigation';
+	import {getLonLat} from 'app/utils/dataUtils';
+
+	const loadData = async () => {
+		const response = await fetch('/data/ai_map_annotated_orgs.json');
+		const json = await response.json();
+
+		json && updateDataset(json);
+	}
+
+	$: isClientSide && loadData();
+	$: $_screenId && setDefaultActiveView();
 </script>
 
 <svelte:head>
-	<title>About - {toolName}</title>
+	<title>Home - {toolName}</title>
 	<meta
-		content='{toolName}: homepage'
+		content='A tool to visualise AI orgs in the UK'
 		name='description'
 	>
 </svelte:head>
 
-<main class='about'>
-	<div>
-		<Content />
-	</div>
-</main>
-
-<style>
-	.about {
-		background-color: var(--color-background);
-		display: flex;
-		font-weight: 200;
-		height: 100%;
-		justify-content: space-around;
-		width: 100%;
-	}
-
-	div {
-		background-color: var(--color-background-main);
-		max-width: 900px;
-		overflow-y: auto;
-		padding: 2rem;
-	}
-</style>
+<ViewsXor viewId={$_screenId}>
+	<View id='medium'>
+		<Medium
+			{getLonLat}
+			items={$_orgs}
+		/>
+	</View>
+	<View id='small'>
+		<Small
+			{getLonLat}
+			items={$_orgs}
+		/>
+	</View>
+</ViewsXor>
