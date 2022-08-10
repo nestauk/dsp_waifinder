@@ -213,6 +213,7 @@
 	}
 	.accessibility {
 		grid-area: accessibility;
+		z-index: var(--z-1000);
 	}
 	.medium .accessibility {
 		bottom: 150px;
