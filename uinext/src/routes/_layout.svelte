@@ -16,8 +16,8 @@
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import Footer from 'app/components/layout/medium/Footer.svelte';
-	import Nav from 'app/components/Nav.svelte';
-	import ThemeEditor from 'app/components/ThemeEditor.svelte';
+	import Nav from 'app/components/layout/Nav.svelte';
+	import ThemeEditor from 'app/components/layout/medium/ThemeEditor.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
 	import StyleSensor from 'app/components/svizzle/StyleSensor.svelte';
 	import {
