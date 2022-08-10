@@ -4,10 +4,7 @@
 		from '@svizzle/ui/src/a11y/menu/A11yMenu.svelte';
 	import A11yMenuDriver
 		from '@svizzle/ui/src/a11y/menu/A11yMenuDriver.svelte';
-	import {
-		_a11ySettings,
-		_isA11yDirty
-	} from '@svizzle/ui/src/a11y/menu/settings';
+	import {_a11ySettings} from '@svizzle/ui/src/a11y/menu/settings';
 	import FontsLoader from '@svizzle/ui/src/drivers/fonts/FontsLoader.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import NoScript from '@svizzle/ui/src/NoScript.svelte';
@@ -125,7 +122,6 @@
 		<Nav
 			contentHeight={$_contentSize.blockSize}
 			bind:showA11yMenu
-			isA11yDirty={$_isA11yDirty}
 			{segment}
 		/>
 	</header>
@@ -144,7 +140,6 @@
 		>
 			<Footer
 				bind:showA11yMenu
-				isA11yDirty={$_isA11yDirty}
 				{segment}
 			/>
 		</footer>
