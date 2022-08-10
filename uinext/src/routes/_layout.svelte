@@ -15,6 +15,7 @@
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
+	import Footer from 'app/components/layout/medium/Footer.svelte';
 	import Nav from 'app/components/Nav.svelte';
 	import ThemeEditor from 'app/components/ThemeEditor.svelte';
 	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
@@ -25,6 +26,7 @@
 		fontsInfo,
 		isDev
 	} from 'app/config';
+	import {_isSmallScreen} from 'app/stores/layout';
 	import {
 		_showThemeEditor,
 		_themeName,
@@ -121,11 +123,10 @@
 		use:headerSizeObserver
 	>
 		<Nav
-			{_screen}
 			contentHeight={$_contentSize.blockSize}
-			{segment}
 			bind:showA11yMenu
 			isA11yDirty={$_isA11yDirty}
+			{segment}
 		/>
 	</header>
 	<main
@@ -136,6 +137,17 @@
 	</main>
 	{#if isDev && $_showThemeEditor}
 		<ThemeEditor />
+	{/if}
+	{#if !$_isSmallScreen}
+		<footer
+			aria-label='Website footer'
+		>
+			<Footer
+				bind:showA11yMenu
+				isA11yDirty={$_isA11yDirty}
+				{segment}
+			/>
+		</footer>
 	{/if}
 	{#if showA11yMenu}
 		<section
@@ -164,13 +176,15 @@
 		grid-template-areas:
 			'nav'
 			'content'
+			'sponsors'
 			'accessibility';
-		grid-template-rows: min-content 1fr min-content;
+		grid-template-rows: min-content 1fr min-content min-content;
 	}
 	.medium.withThemeEditor {
 		grid-template-areas:
 			'nav nav'
 			'content editor'
+			'sponsors sponsors'
 			'accessibility accessibility';
 		grid-template-columns: 3.5fr 1fr;
 	}
@@ -191,6 +205,11 @@
 		overflow: hidden;
 		position: relative;
 		width: 100%;
+	}
+	footer {
+		grid-area: sponsors;
+		border-top: thin solid var(--color-main-lighter);
+		padding: 0 var(--dim-padding);
 	}
 	.accessibility {
 		grid-area: accessibility;
