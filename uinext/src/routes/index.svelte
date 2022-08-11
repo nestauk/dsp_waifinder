@@ -1,7 +1,6 @@
 <script>
 	import * as _ from 'lamb';
 	import {onMount, setContext} from 'svelte';
-	import rison from 'rison';
 	import {stores} from '@sapper/app';
 
 	import Medium from 'app/components/homeScreen/medium/Medium.svelte';
