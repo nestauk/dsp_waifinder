@@ -39,29 +39,34 @@ a {
 }
 
 .theme {
-	--box-shadow-y: 0px 8px 9px -4px lightgrey;
 	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
-	--color-background: #333;
+	--box-shadow-y: 0px 8px 9px -4px lightgrey;
 	--color-background-main: white;
+	--color-background: #333;
 	--color-eval-highlighted: aqua;
+	--color-grey-180: rgb(180, 180, 180);
+	--color-grey-40: rgb(40, 40, 40);
+	--color-grey-70: rgb(70, 70, 70);
+	--color-grey-lighter: #f7f7f7;
+	--color-link: #0658aa;
 	--color-main-desat-50: #333;
 	--color-main-lighter: #555;
 	--color-main: #333;
-	--color-grey-lighter: #f7f7f7;
-	--color-grey-180: rgb(180, 180, 180);
-	--color-grey-70: rgb(70, 70, 70);
-	--color-grey-40: rgb(40, 40, 40);
-	--color-link: #0658aa;
 	--color-org-highlighted: lavender;
-	--color-org-type: aquamarine;
 	--color-org-place: cornsilk;
+	--color-org-type: aquamarine;
 	--color-paleyellow: #f9f7dd;
-	--color-pill: white;
 	--color-pill-background: orange;
 	--color-pill-score: black;
+	--color-pill: white;
 	--color-secondary: #075aa2;
-	--color-selected: lightseagreen;
 	--color-selected-text: white;
+	--color-selected: lightseagreen;
+	--color-tag-blockquote-background: aliceblue;
+	--color-tag-blockquote-leftborder: dodgerblue;
+	--color-tag-code-background: aliceblue;
+	--color-tag-code-border: lightgrey;
+	--color-tag-code-text: black;
 	--color-warning-background: orange;
 	--color-warning-border: darkorange;
 	--color-warning-text: white;
