@@ -9,7 +9,8 @@
 	import Link from '@svizzle/ui/src/Link.svelte';
 
 	import {isNotNil} from '@svizzle/utils';
-	import theme from 'app/theme';
+
+	import {_currThemeVars} from 'app/stores/theme';
 
 	const segments = ['survey', 'add_your_org'];
 	const titles = {
@@ -37,7 +38,9 @@
 							<Link
 								href='/feedback/{id}'
 								theme={{
-									color: segment === id ? 'white' : theme.colorLink,
+									color: segment === id
+										? $_currThemeVars['--color-main-inverted']
+										: $_currThemeVars['--color-link']
 								}}
 							>
 								<span>
@@ -57,7 +60,9 @@
 						<Link
 							href={hasPrevSegment && `/feedback/${prevSegment}`}
 							theme={{
-								color: hasPrevSegment ? theme.colorLink : 'gray',
+								color: hasPrevSegment
+									? $_currThemeVars['--color-link']
+									: $_currThemeVars['--color-disabled']
 							}}
 						>
 							<Icon glyph={ChevronLeft} />
@@ -67,7 +72,9 @@
 						<Link
 							href={hasNextSegment && `/feedback/${nextSegment}`}
 							theme={{
-								color: hasNextSegment ? theme.colorLink : 'gray',
+								color: hasNextSegment
+									? $_currThemeVars['--color-link']
+									: $_currThemeVars['--color-disabled']
 							}}
 						>
 							<Icon glyph={ChevronRight} />

@@ -40,7 +40,7 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"esm": "^3.2.25",
 		"lighthouse": "^7.4.0",
-		"mdsvex": "^0.9.8",
+		"mdsvex": "^0.10.6",
 		"mkdirp": "^1.0.4",
 		"mocha": "^7.1.1",
 		"node-fetch": "^2.6.1",

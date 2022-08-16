@@ -3,7 +3,7 @@
 	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
 
 	import {contactEmail,toolName} from 'app/config';
-	import theme from 'app/theme';
+	import {_currThemeVars} from 'app/stores/theme';
 	// import {zipUrl} from 'app/utils/assets';
 	const zipUrl = '';
 
@@ -14,6 +14,10 @@
 	const screenReadersUrl = 'https://en.wikipedia.org/wiki/List_of_screen_readers';
 	const wcag21Url = 'https://www.w3.org/TR/WCAG21/';
 	const windowsMouseURL = 'https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b';
+
+	const theme = {
+		backgroundColor: $_currThemeVars['--color-link']
+	};
 </script>
 
 # Accessibility
@@ -42,10 +46,10 @@ We follow the recommendations of the [WCAG 2.1 guidelines]({wcag21Url}). Also:
 
 ## WCAG compliance rating
 
-According to automated testing using the 
+According to automated testing using the
 [Pa11y accessibility testing tool]({pa11yUrl}), no accessibility issues were
 detected and this website is reported to have a WCAG 2.0 AAA compliance level.
-This website also passes the accessibility audits checked by 
+This website also passes the accessibility audits checked by
 [Google's Lighthouse tool]({lighthouseUrl}).
 
 ## Limitations
@@ -71,7 +75,7 @@ However, the data is available for [download in CSV format]({zipUrl}).
 ## Feedback
 
 If you see any errors or have other suggestions on how we can further improve
-the accessibility of our site, please contact us at 
+the accessibility of our site, please contact us at
 [{contactEmail}](mailto:{contactEmail}).
 
 ## Resources
@@ -91,13 +95,13 @@ change its appearance so that it contrasts more with the screen content.
 	<LinkButton
 		href={windowsMouseURL}
 		text='Windows'
-		theme={{backgroundColor: theme.colorLink}}
+		{theme}
 		type='external'
 	/>
 	<LinkButton
 		href={osxMouseURL}
 		text='OS X'
-		theme={{backgroundColor: theme.colorLink}}
+		{theme}
 		type='external'
 	/>
 </ResponsiveFlex>

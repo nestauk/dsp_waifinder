@@ -8,7 +8,8 @@
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 
 	import {isNotNil} from '@svizzle/utils';
-	import theme from 'app/theme';
+
+	import {_currThemeVars} from 'app/stores/theme';
 
 	const segments = ['orgs', 'topics'];
 	const titles = {
@@ -38,7 +39,9 @@
 							<Link
 								href='/methodology/{id}'
 								theme={{
-									color: segment === id ? 'white' : theme.colorLink,
+									color: segment === id
+										? $_currThemeVars['--color-main-inverted']
+										: $_currThemeVars['--color-link']
 								}}
 							>
 								<span>
@@ -58,7 +61,9 @@
 						<Link
 							href={hasPrevSegment && `/methodology/${prevSegment}`}
 							theme={{
-								color: hasPrevSegment ? theme.colorLink : 'gray',
+								color: hasPrevSegment
+									? $_currThemeVars['--color-link']
+									: $_currThemeVars['--color-disabled']
 							}}
 						>
 							<Icon glyph={ChevronLeft} />
@@ -68,7 +73,9 @@
 						<Link
 							href={hasNextSegment && `/methodology/${nextSegment}`}
 							theme={{
-								color: hasNextSegment ? theme.colorLink : 'gray',
+								color: hasNextSegment
+									? $_currThemeVars['--color-link']
+									: $_currThemeVars['--color-disabled']
 							}}
 						>
 							<Icon glyph={ChevronRight} />

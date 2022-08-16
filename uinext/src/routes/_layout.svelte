@@ -25,11 +25,11 @@
 	} from 'app/config';
 	import {_isSmallScreen} from 'app/stores/layout';
 	import {
+		_currThemeVars,
 		_showThemeEditor,
 		_themeName,
 		_themeVars
 	} from 'app/stores/theme'
-	import theme from 'app/theme';
 
 	import Privacy from './_content/info/Privacy.svx';
 
@@ -104,7 +104,7 @@
 {#if isLayoutUndefined}
 	<!-- FIXME: See: https://github.com/nestauk/eurito_indicators/pull/212#issuecomment-985176516 -->
 	<div class='spinnerContainer'>
-		<LoadingView stroke={theme.colorMain} />
+		<LoadingView stroke={$_currThemeVars['--color-main']} />
 	</div>
 {/if}
 
