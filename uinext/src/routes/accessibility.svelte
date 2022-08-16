@@ -20,7 +20,7 @@
 		lighthouseUrls,
 		toolName
 	} from 'app/config';
-	import theme from 'app/theme';
+	import {_currThemeVars} from 'app/stores/theme';
 	import {
 		getTest,
 		getTestResultsFilename,
@@ -36,8 +36,8 @@
 	const reportNames = _.keys(lighthouseUrls)
 
 	const linkTheme = {
-		color: theme.colorLink,
-		iconStroke: theme.colorLink
+		color: $_currThemeVars['--color-link'],
+		iconStroke: $_currThemeVars['--color-link']
 	};
 
 	let [currentreport] = reportNames;
@@ -175,7 +175,7 @@
 							<div class='spinner'>
 								<LoadingView
 									size={24}
-									stroke={theme.colorMain}
+									stroke={$_currThemeVars['--color-main']}
 									strokeWidth={1}
 								/>
 							</div>
@@ -190,7 +190,7 @@
 							<div class='spinner'>
 								<LoadingView
 									size={24}
-									stroke={theme.colorMain}
+									stroke={$_currThemeVars['--color-main']}
 									strokeWidth={1}
 								/>
 							</div>

@@ -10,7 +10,8 @@
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 
 	import {isNotNil} from '@svizzle/utils';
-	import theme from 'app/theme';
+
+	import {_currThemeVars} from 'app/stores/theme';
 
 	const segments = ['app', 'a11ymenu'];
 	const titles = {
@@ -40,7 +41,9 @@
 							<Link
 								href='/guides/{id}'
 								theme={{
-									color: segment === id ? 'white' : theme.colorLink,
+									color: segment === id
+										? $_currThemeVars['--color-main-inverted']
+										: $_currThemeVars['--color-link']
 								}}
 							>
 								<span>
@@ -60,7 +63,9 @@
 						<Link
 							href={hasPrevSegment && `/guides/${prevSegment}`}
 							theme={{
-								color: hasPrevSegment ? theme.colorLink : 'gray',
+								color: hasPrevSegment
+									? $_currThemeVars['--color-link']
+									: $_currThemeVars['--color-disabled']
 							}}
 						>
 							<Icon glyph={ChevronLeft} />
@@ -70,7 +75,9 @@
 						<Link
 							href={hasNextSegment && `/guides/${nextSegment}`}
 							theme={{
-								color: hasNextSegment ? theme.colorLink : 'gray',
+								color: hasNextSegment
+									? $_currThemeVars['--color-link']
+									: $_currThemeVars['--color-disabled']
 							}}
 						>
 							<Icon glyph={ChevronRight} />
@@ -86,7 +93,7 @@
 				<LinkButton
 					href='/accessibility'
 					text='Read the accessibility statement'
-					theme={{backgroundColor: theme.colorLink}}
+					theme={{backgroundColor: $_currThemeVars['--color-link']}}
 				/>
 			</ResponsiveFlex>
 		</div>

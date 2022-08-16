@@ -1,4 +1,4 @@
-# Organisation Topics Methods
+## Organisation Topics
 
 The topics for each organisation are provided using the [DBpedia Spotlight
 Tool](https://www.dbpedia-spotlight.org/) with some subsequent data processing
@@ -7,7 +7,7 @@ and filtering.
 To understand how the Spotlight Tool works, a brief overview of DBpedia and
 Linked Open Data / Semantic Web is provided in the Appendix below.
 
-## DBpedia Spotlight Tool
+### DBpedia Spotlight Tool
 
 The Spotlight Tool extracts DBpedia URIs from unstructured data, providing
 high-quality linked data from text sources. It does this using a four step
@@ -33,7 +33,7 @@ following papers:
 - (a) [DBpedia Spotlight: Shedding Light on the Web of Documents](https://www.dbpedia-spotlight.org/docs/spotlight.pdf)
 - (b) [Improving Efficiency and Accuracy in Multilingual Entity Extraction](http://jodaiber.de/doc/entity.pdf)
 
-## Subsequent Data Processing
+### Subsequent Data Processing
 
 The DBpedia Spotlight Tool API provides a number of parameters to tune the
 annotation process, including confidence, support, types and SPARQL filtering.
@@ -67,7 +67,7 @@ which then allows us to filter out lower quality resources.
 Following the recommendation of the paper (a) we filtered out DBpedia
 resources scoring less than 60.
 
-## Missing Organisation Descriptions
+### Missing Organisation Descriptions
 
 A number of organisations were missing their `description` field, which is
 necessary to provide entities using the DBpedia Spotlight tool. To automatically
@@ -78,7 +78,7 @@ results' top result to populate the missing `description` field. The script for
 this process is found at `src/bin/ai_map/fillMissingData.mjs`, and more thorough
 documentation is provided at `src/bin/ai_map/README.md`.
 
-## Source code
+### Source code
 
 The source code for the annotation process is hosted on Github at
 https://github.com/nestauk/dap_dv_backends.
@@ -101,7 +101,7 @@ https://api.dbpedia-spotlight.org/en/annotate. You can also use the [Spotlight
 docker container](https://github.com/dbpedia-spotlight/spotlight-docker) to host
 the API locally and point the script to the localhost port.
 
-## Appendix: Semantic Web and DBpedia
+### Appendix: Semantic Web and DBpedia
 
 The Semantic Web is an extension of the World Wide Web, with the goal of making
 the web machine-readable. It uses a number of standards to formally describe

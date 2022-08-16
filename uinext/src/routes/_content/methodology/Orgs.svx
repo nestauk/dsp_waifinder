@@ -1,4 +1,4 @@
-## Organisation data Methods
+## Organisation Data
 
 The organisations included in the AI map comes from 3 sources; organisations researching AI come from [Gateway to Research](https://gtr.ukri.org/), organisations that fund AI companies come from [Crunchbase](https://www.crunchbase.com/), and AI companies and incubators comes from a proprietary dataset from [Glass AI](https://www.glass.ai/).
 

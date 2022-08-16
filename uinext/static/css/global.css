@@ -43,6 +43,7 @@ a {
 	--box-shadow-y: 0px 8px 9px -4px lightgrey;
 	--color-background-main: white;
 	--color-background: #333;
+	--color-disabled: grey;
 	--color-eval-highlighted: aqua;
 	--color-grey-180: rgb(180, 180, 180);
 	--color-grey-40: rgb(40, 40, 40);
@@ -51,6 +52,7 @@ a {
 	--color-link: #0658aa;
 	--color-main-desat-50: #333;
 	--color-main-lighter: #555;
+	--color-main-inverted: white;
 	--color-main: #333;
 	--color-org-highlighted: lavender;
 	--color-org-place: cornsilk;

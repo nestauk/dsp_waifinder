@@ -22,7 +22,7 @@ The footer is another navigation bar divided in three parts showing:
 	* the list of sponsor logos, linked to their website
 	* the app version, linked to its change log on GitHub
 	* the accessibility section, with:
-		* a link to thne app accessibility statement
+		* a link to the app accessibility statement
 		* a button to toggle the accessibility menu
 
 <A11ymenuIntro />
