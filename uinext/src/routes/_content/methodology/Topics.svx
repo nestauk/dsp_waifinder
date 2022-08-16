@@ -1,1 +1,144 @@
-TODO
+# Organisation Topics Methods
+
+The topics for each organisation are provided using the [DBpedia Spotlight
+Tool](https://www.dbpedia-spotlight.org/) with some subsequent data processing
+and filtering.
+
+To understand how the Spotlight Tool works, a brief overview of DBpedia and
+Linked Open Data / Semantic Web is provided in the Appendix below.
+
+## DBpedia Spotlight Tool
+
+The Spotlight Tool extracts DBpedia URIs from unstructured data, providing
+high-quality linked data from text sources. It does this using a four step
+approach:
+
+- **Spotting**: the process of identifying strings or substrings (known as
+  surface forms in the literature) that may be entity mentions.
+- **Candidate selection**: selecting a set of DBpedia resources that are
+  candidate meanings for the surface forms identified by the Spotting stage.
+- **Disambiguation**: deciding on the candidate resource (i.e. the DBPedia URI
+  representing a Wikipedia page) that is most likely represented by the entity
+  mention.
+- **Filtering**: adjusting the annotations to user input or task specific
+  requirements. For instance, you can use the DBpedia ontology to narrow the set
+  of possible candidate forms to a subset of the DBpedia taxonomy.
+
+The URIs extracted by DBpedia Spotlight Tool are what we define as Topics for
+the Organisation whose `description` was fed as input to the annotation process.
+
+A much more comprehensive explanation of the process can be found in the
+following papers:
+
+- (a) [DBpedia Spotlight: Shedding Light on the Web of Documents](https://www.dbpedia-spotlight.org/docs/spotlight.pdf)
+- (b) [Improving Efficiency and Accuracy in Multilingual Entity Extraction](http://jodaiber.de/doc/entity.pdf)
+
+## Subsequent Data Processing
+
+The DBpedia Spotlight Tool API provides a number of parameters to tune the
+annotation process, including confidence, support, types and SPARQL filtering.
+For this project, we have only used confidence as input for distinguishing
+annotations. The API accepts text as input, and provides an arbitrary number of
+DBPedia resources as output depending on the various inputs provided.
+
+The `confidence` score is a number in the interval `[0, 1]` which controls the
+disambiguation step. The higher this number is, the more likely that the
+annotation for a particular surface form matches its intended candidate. When
+using the annotation API, you can supply the confidence score to increase the
+number of annotations provided for the input text, at the cost of allowing
+potentially erroneous annotations to be included in the final result set. In
+Machine Learning terms, it controls the balance of Precision vs Recall.
+
+In our implementation, we convert the `confidence` to an integer number in the
+range of `[0, 100]`.
+
+For each organisation we annotate its `description` field. To investigate the
+range of different annotations and their associated `confidence` scores, we
+perform the annotation step 11 times on each input, with a stepwise increase of
+confidence from 0 to 100 in 10 increments (e.g. 50, 60 etc). We save each
+resource only once, at the highest possible confidence found for that resource,
+e.g. if `dbr:Brain` was found at confidences 10, 20, 30 and 40 but not at 50,
+then the final output would include `dbr:Brain` with an associated confidence
+value of 40.
+
+In this manner, each DBpedia Resource is saved at its highest confidence level,
+which then allows us to filter out lower quality resources.
+
+Following the recommendation of the paper (a) we filtered out DBpedia
+resources scoring less than 60.
+
+## Missing Organisation Descriptions
+
+A number of organisations were missing their `description` field, which is
+necessary to provide entities using the DBpedia Spotlight tool. To automatically
+extrapolate descriptions for these organisations, we used the free [Bing search
+API](https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/overview).
+We provided the organisation's name as the search query, and used the search
+results' top result to populate the missing `description` field. The script for
+this process is found at `src/bin/ai_map/fillMissingData.mjs`, and more thorough
+documentation is provided at `src/bin/ai_map/README.md`.
+
+## Source code
+
+The source code for the annotation process is hosted on Github at
+https://github.com/nestauk/dap_dv_backends.
+
+The main entry point for the annotation process is the script located at
+`src/bin/es/annotate.mjs`. This script takes as input the location of a
+Spotlight endpoint, an Elasticsearch index and domain which hosts the data to be
+annotated, and the name of the field to annotate (i.e. `description`). The
+script accepts additional parameters, which are fully documented at
+`src/bin/es/README.md`.
+
+Internally, the script makes use of various modules we've written to allow for
+the use of the Spotlight API to annotate an Elasticsearch index using the
+methods we've outlined above. The majority of the logic used is contained in the
+`src/node_modules/dbpedia` and `src/node_modules/es` directories.
+
+We host our own private annotation server on AWS, but there is a publicy
+available endpoint provided by the University of Liepzig at
+https://api.dbpedia-spotlight.org/en/annotate. You can also use the [Spotlight
+docker container](https://github.com/dbpedia-spotlight/spotlight-docker) to host
+the API locally and point the script to the localhost port.
+
+## Appendix: Semantic Web and DBpedia
+
+The Semantic Web is an extension of the World Wide Web, with the goal of making
+the web machine-readable. It uses a number of standards to formally describe
+meta-data about the web and existing data sources. For example, the [Resource
+Description Framework](https://www.w3.org/RDF/) (RDF) is a standard set by W3C
+which can be used to describe ontologies, relationships between data points, and
+graph networks more generally.
+
+W3C gives this definition:
+
+> The Semantic Web is a Web of data — of dates and titles and part numbers and
+> chemical properties and any other data one might conceive of. RDF provides the
+> foundation for publishing and linking your data. Various technologies allow
+> you to embed data in documents (RDFa, GRDDL) or expose what you have in SQL
+> databases, or make it available as RDF files.
+
+[DBpedia](https://www.dbpedia.org/about/) offers a good example of the type of
+problem the Semantic Web intends to solve, and it is also the source of data
+we use in combination with the Spotlight Tool to provide automatic topics for
+the organisations in the project's dataset.
+
+The DBpedia project aims to extract structured content from information
+contained in various Wikimedia projects (primarily Wikipedia). The result of
+this extraction is a Knowledge Graph, where data are stored in machine readable
+format to allow for the collecting, organising, sharing, searching and using of
+the results in an open and transparent manner.
+
+DBpedia data is served as Linked Data, so that it sits as an important part of
+the Semantic Web and allows for complex, graph-like queries, such as ' find
+cities with low criminality, warm weather and open jobs'. DBpedia contains all
+of the information found on Wikipedia (and other Wikimedia projects), whilst
+also connecting Wikipedia articles and the information contained within those
+articles in a machine readable format, so that the example query above is
+actually possible.
+
+Each Wikipedia article is represented using a Uniform Resource Identifier (URI),
+and information on these articles are also represented using URIs. Special
+predicate URIs are used to tie data points together to represent factual
+statements. Standards such as RDF and OWL are used to code these statements into
+machine readable formats.
