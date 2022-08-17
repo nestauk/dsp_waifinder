@@ -68,7 +68,7 @@
 
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
-	$: showThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
+	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
 </script>
 
 <StyleSensor
@@ -111,7 +111,7 @@
 
 <div
 	class:hidden={isLayoutUndefined}
-	class:withThemeEditor={showThemeEditor}
+	class:withThemeEditor
 	class='_layout root {$_screen?.classes} {$_themeName}'
 	role='none'
 	style='--menu-height: {menuHeight}px;'
@@ -142,7 +142,7 @@
 			/>
 		</footer>
 	{/if}
-	{#if showThemeEditor}
+	{#if withThemeEditor}
 		<section class='editor'>
 			<ThemeEditor />
 		</section>
