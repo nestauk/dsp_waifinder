@@ -131,9 +131,6 @@
 	>
 		<slot></slot>
 	</main>
-	{#if isDev && $_showThemeEditor}
-		<ThemeEditor />
-	{/if}
 	{#if !$_isSmallScreen}
 		<footer
 			aria-label='Website footer'
@@ -144,6 +141,12 @@
 			/>
 		</footer>
 	{/if}
+	{#if isDev && $_showThemeEditor}
+		<section class='editor'>
+			<ThemeEditor />
+		</section>
+	{/if}
+
 	{#if showA11yMenu}
 		<section
 			bind:offsetHeight={a11yHeight}
@@ -171,16 +174,14 @@
 		grid-template-areas:
 			'nav'
 			'content'
-			'sponsors'
-			'accessibility';
-		grid-template-rows: min-content 1fr min-content min-content;
+			'sponsors';
+		grid-template-rows: min-content 1fr min-content;
 	}
 	.medium.withThemeEditor {
 		grid-template-areas:
-			'nav nav'
+			'nav editor'
 			'content editor'
-			'sponsors sponsors'
-			'accessibility accessibility';
+			'sponsors editor';
 		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
@@ -205,6 +206,9 @@
 		grid-area: sponsors;
 		border-top: thin solid var(--color-main-lighter);
 		padding: 0 var(--dim-padding);
+	}
+	.editor {
+		grid-area: editor;
 	}
 	.accessibility {
 		grid-area: accessibility;
