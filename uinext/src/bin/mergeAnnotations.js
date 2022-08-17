@@ -1,27 +1,33 @@
 import {tapMessage} from '@svizzle/dev';
 import {readJson, saveObj, saveObjPassthrough} from '@svizzle/file';
-import {getId, isIterableEmpty, transformValues} from '@svizzle/utils';
+import {applyFnMap, getId, isIterableEmpty, transformValues} from '@svizzle/utils';
 import * as _ from 'lamb';
 import fetch from 'node-fetch';
 import hash from 'object-hash';
 
-import {MIN_SCORE} from 'app/config';
 import {getTopics} from 'app/utils/dataUtils';
 import {stripDbrPrefix} from 'app/utils/dbpedia';
 
+/* resources */
+
 const ANNOTATED_ORGS_URL =
-	'https://s3.eu-west-2.amazonaws.com/dap-uk-ai-map.public/ai_map.json';
-const IN_FILE = '../ds/outputs/data/ai_map_orgs_places.json';
+	'https://s3.eu-west-2.amazonaws.com/dap-uk-ai-map.public/ai_map_02.json';
+const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places.json';
 const OUT_FILE_DATA = 'static/data/ai_map_annotated_orgs.json';
 const OUT_FILE_UNTAGGED_ORGS = 'dataQuality/orgsWithNoTopics.json';
+const OUT_FILE_UNPLACED_ORGS = 'dataQuality/orgsWithNoPlace.json';
 
-const getRegionsById = _.pipe([
-	_.indexBy(_.getKey('region_id')),
-	_.mapValuesWith(_.pipe([
-		_.rename({region_id: 'id', region_name: 'name'}),
-		_.pick(['id', 'name']),
-	])),
+/* utils */
+
+const makeGetRegionsByIdAtLevel = level => _.pipe([
+	_.indexBy(_.getPath(`region.${level}.id`)),
+	_.mapValuesWith(_.getPath(`region.${level}`))
 ]);
+const getRegionsByLevelById = applyFnMap({
+	1: makeGetRegionsByIdAtLevel(1),
+	2: makeGetRegionsByIdAtLevel(2),
+	3: makeGetRegionsByIdAtLevel(3),
+});
 
 // from @svizzle/utils@0.17.0 (not released yet)
 // TODO upgrade @svizzle/utils
@@ -31,12 +37,26 @@ const sortObjectKeysAsc = _.pipe([
 	_.fromPairs
 ]);
 
+const filterTopics = _.pipe([
+	_.partitionWith(({confidence}) => confidence >= 60),
+	_.condition(
+		_.pipe([_.head, isIterableEmpty]),
+		_.pipe([
+			_.last,
+			_.groupBy(_.getKey('confidence')),
+			_.pairs,
+			_.sortWith([_.sorterDesc(_.head)]),
+			_.getPath('0.1')
+		]),
+		_.head
+	),
+]);
 const processTopics = _.pipe([
+	filterTopics,
 	_.mapWith(({confidence, URI}) => ({
 		id: stripDbrPrefix(URI),
 		score: confidence,
 	})),
-	_.filterWith(({score}) => score >= MIN_SCORE),
 	_.sortWith([
 		_.sorterDesc(_.getKey('score')),
 		getId
@@ -52,24 +72,29 @@ const processOrg = _.pipe([
 
 const processData = ({org_types, orgs, places}) => {
 	const placesById = _.index(places, getId);
-	const regionsById = getRegionsById(places);
+	const regionsByLevelById = getRegionsByLevelById(places);
 	const processedOrgs = _.map(orgs, processOrg);
 
 	return {
 		org_types,
 		orgs: processedOrgs,
 		placesById,
-		regionsById,
+		regionsByLevelById,
 	}
 }
+
+/* data quality */
 
 const getOrgsWithNoTopics = _.pipe([
 	_.getKey('orgs'),
 	_.filterWith(
 		_.pipe([getTopics, isIterableEmpty])
 	),
-	orgs => ({minScore: MIN_SCORE, orgs})
 ]);
+const getOrgsWithNoPlace = ({orgs, placesById}) =>
+	_.filter(orgs, ({place_id}) => !_.has(placesById, place_id));
+
+/* run */
 
 const main = async () => {
 
@@ -82,17 +107,31 @@ const main = async () => {
 		.then(res => res.json())
 		.catch(err => console.error(err));
 
-	/* process & save */
+	/* process */
 
-	await readJson(IN_FILE)
-	.then(obj => ({...obj, orgs}))
-	.then(tapMessage('Processing...'))
-	.then(processData)
-	.then(saveObjPassthrough(OUT_FILE_DATA))
-	.then(tapMessage(`Saved processed data in ${OUT_FILE_DATA}`))
-	.then(getOrgsWithNoTopics)
-	.then(saveObj(OUT_FILE_UNTAGGED_ORGS, 2))
+	const data =
+		await readJson(IN_FILE_DATA)
+		.then(obj => ({...obj, orgs}))
+		.then(tapMessage('Processing...'))
+		.then(processData)
+		.then(saveObjPassthrough(OUT_FILE_DATA))
+		.then(tapMessage(`Saved processed data in ${OUT_FILE_DATA}`))
+		.catch(err => console.error(err));
+
+	/* dq: topics */
+
+	const orgsWithNoTopics = getOrgsWithNoTopics(data);
+
+	saveObj(OUT_FILE_UNTAGGED_ORGS, 2)(orgsWithNoTopics)
 	.then(tapMessage(`Saved objects with no topics in ${OUT_FILE_UNTAGGED_ORGS}`))
+	.catch(err => console.error(err));
+
+	/* dq: place */
+
+	const orgsWithNoPlace = getOrgsWithNoPlace(data);
+
+	saveObj(OUT_FILE_UNPLACED_ORGS, 2)(orgsWithNoPlace)
+	.then(tapMessage(`Saved objects with no place in ${OUT_FILE_UNPLACED_ORGS}`))
 	.catch(err => console.error(err));
 };
 
