@@ -26,7 +26,7 @@
 	import {_isSmallScreen} from 'app/stores/layout';
 	import {
 		_currThemeVars,
-		_showThemeEditor,
+		_isThemeEditorActive,
 		_themeName,
 		_themeVars
 	} from 'app/stores/theme'
@@ -68,6 +68,7 @@
 
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
+	$: showThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
 </script>
 
 <StyleSensor
@@ -110,7 +111,7 @@
 
 <div
 	class:hidden={isLayoutUndefined}
-	class:withThemeEditor={$_showThemeEditor}
+	class:withThemeEditor={showThemeEditor}
 	class='_layout root {$_screen?.classes} {$_themeName}'
 	role='none'
 	style='--menu-height: {menuHeight}px;'
@@ -141,7 +142,7 @@
 			/>
 		</footer>
 	{/if}
-	{#if isDev && $_showThemeEditor}
+	{#if showThemeEditor}
 		<section class='editor'>
 			<ThemeEditor />
 		</section>
@@ -209,7 +210,6 @@
 	}
 	.editor {
 		grid-area: editor;
-		overflow: auto;
 	}
 	.accessibility {
 		grid-area: accessibility;
