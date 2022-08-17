@@ -209,6 +209,7 @@
 	}
 	.editor {
 		grid-area: editor;
+		overflow: auto;
 	}
 	.accessibility {
 		grid-area: accessibility;
