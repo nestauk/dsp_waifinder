@@ -26,7 +26,7 @@
 	import {_isSmallScreen} from 'app/stores/layout';
 	import {
 		_currThemeVars,
-		_showThemeEditor,
+		_isThemeEditorActive,
 		_themeName,
 		_themeVars
 	} from 'app/stores/theme'
@@ -68,6 +68,7 @@
 
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
+	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
 </script>
 
 <StyleSensor
@@ -110,7 +111,7 @@
 
 <div
 	class:hidden={isLayoutUndefined}
-	class:withThemeEditor={$_showThemeEditor}
+	class:withThemeEditor
 	class='_layout root {$_screen?.classes} {$_themeName}'
 	role='none'
 	style='--menu-height: {menuHeight}px;'
@@ -131,9 +132,6 @@
 	>
 		<slot></slot>
 	</main>
-	{#if isDev && $_showThemeEditor}
-		<ThemeEditor />
-	{/if}
 	{#if !$_isSmallScreen}
 		<footer
 			aria-label='Website footer'
@@ -144,6 +142,12 @@
 			/>
 		</footer>
 	{/if}
+	{#if withThemeEditor}
+		<section class='editor'>
+			<ThemeEditor />
+		</section>
+	{/if}
+
 	{#if showA11yMenu}
 		<section
 			bind:offsetHeight={a11yHeight}
@@ -161,7 +165,7 @@
 		display: grid;
 		grid-template-areas:
 			'content'
-			'nav'
+			'header'
 			'accessibility';
 		grid-template-rows: calc(100% - var(--menu-height)) min-content min-content;
 		height: 100%;
@@ -169,23 +173,21 @@
 	}
 	div.medium {
 		grid-template-areas:
-			'nav'
+			'header'
 			'content'
-			'sponsors'
-			'accessibility';
-		grid-template-rows: min-content 1fr min-content min-content;
+			'sponsors';
+		grid-template-rows: min-content 1fr min-content;
 	}
 	.medium.withThemeEditor {
 		grid-template-areas:
-			'nav nav'
+			'header editor'
 			'content editor'
-			'sponsors sponsors'
-			'accessibility accessibility';
+			'sponsors editor';
 		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
 		border-top: 1px solid var(--color-main-lighter);
-		grid-area: nav;
+		grid-area: header;
 		height: var(--dim-header-height);
 		padding: 0 var(--dim-padding);
 		width: 100%;
@@ -205,6 +207,9 @@
 		grid-area: sponsors;
 		border-top: thin solid var(--color-main-lighter);
 		padding: 0 var(--dim-padding);
+	}
+	.editor {
+		grid-area: editor;
 	}
 	.accessibility {
 		grid-area: accessibility;
