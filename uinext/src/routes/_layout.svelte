@@ -165,7 +165,7 @@
 		display: grid;
 		grid-template-areas:
 			'content'
-			'nav'
+			'header'
 			'accessibility';
 		grid-template-rows: calc(100% - var(--menu-height)) min-content min-content;
 		height: 100%;
@@ -173,21 +173,21 @@
 	}
 	div.medium {
 		grid-template-areas:
-			'nav'
+			'header'
 			'content'
 			'sponsors';
 		grid-template-rows: min-content 1fr min-content;
 	}
 	.medium.withThemeEditor {
 		grid-template-areas:
-			'nav editor'
+			'header editor'
 			'content editor'
 			'sponsors editor';
 		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
 		border-top: 1px solid var(--color-main-lighter);
-		grid-area: nav;
+		grid-area: header;
 		height: var(--dim-header-height);
 		padding: 0 var(--dim-padding);
 		width: 100%;
