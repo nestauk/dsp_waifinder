@@ -175,14 +175,14 @@
 		grid-template-areas:
 			'header'
 			'content'
-			'sponsors';
+			'footer';
 		grid-template-rows: min-content 1fr min-content;
 	}
 	.medium.withThemeEditor {
 		grid-template-areas:
 			'header editor'
 			'content editor'
-			'sponsors editor';
+			'footer editor';
 		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
@@ -204,8 +204,9 @@
 		width: 100%;
 	}
 	footer {
-		grid-area: sponsors;
 		border-top: thin solid var(--color-main-lighter);
+		grid-area: footer;
+		height: var(--dim-header-height);
 		padding: 0 var(--dim-padding);
 	}
 	.editor {
