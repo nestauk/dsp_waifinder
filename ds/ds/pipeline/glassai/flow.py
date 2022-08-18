@@ -40,6 +40,8 @@ class GlassAICompanies(FlowSpec):
 
         import boto3
 
+        from ds.pipeline.glassai.utils import clean_description
+
         client = boto3.client("s3")
 
         bucket_name = config["flows"]["glassai"]["bucket_name"]
@@ -49,6 +51,9 @@ class GlassAICompanies(FlowSpec):
         self.ai_companies_df = pd.DataFrame(
             csv.DictReader(codecs.getreader("utf-8-sig")(s3_data["Body"]))
         )
+        self.ai_companies_df["organization_description"] = self.ai_companies_df[
+            "organization_description"
+        ].map(clean_description)
 
         self.next(self.find_lon_lat)
 

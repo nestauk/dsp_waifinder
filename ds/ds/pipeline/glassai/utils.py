@@ -1,3 +1,6 @@
+import re
+
+
 def get_cleaned_postcode(ai_companies_df):
     """
     There are two postcode columns in the data.
@@ -37,3 +40,15 @@ def get_lat_long(ai_companies_df, nspl_data):
         ai_companies_df["cleaned_postcode"].map(nspl_data["lat"]),
         ai_companies_df["cleaned_postcode"].map(nspl_data["long"]),
     )
+
+
+def clean_description(description):
+    """
+    There is an edge case for cleaning, one of the GlassAI companies has:
+    "[u'Unlisted Ltd. Real-time AI-powered valuations of private companies.. ']"
+    """
+    if description[0] == "[u'":
+        found_match = re.search(r"\[u\'(.*?)\'\]", description)
+        if found_match:
+            description = found_match.group(1)
+    return description

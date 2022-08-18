@@ -130,7 +130,11 @@ class merge_map_datasets(FlowSpec):
 
     @step
     def merge_names(self):
-        from ds.pipeline.ai_map.utils import get_merged_data
+        from ds.pipeline.ai_map.utils import get_merged_data, clean_dash_names
+
+        self.ai_map_data["Name"], self.ai_map_data["Name_extra"] = map(
+            list, zip(*self.ai_map_data["Name"].map(clean_dash_names))
+        )
 
         self.ai_map_data = get_merged_data(self.ai_map_data)
 
@@ -203,10 +207,10 @@ class merge_map_datasets(FlowSpec):
         }
         self.places["place_type"] = self.places["Place"].map(place_type_dict)
 
-        self.next(self.data_clean_up)
+        self.next(self.enrich_postcode)
 
     @step
-    def data_clean_up(self):
+    def enrich_postcode(self):
 
         from ds.pipeline.ai_map.utils import get_postcode_field
 
@@ -221,6 +225,18 @@ class merge_map_datasets(FlowSpec):
         self.ai_map_data["Postcode"] = self.ai_map_data["Postcode"].apply(
             lambda x: x.upper().replace(" ", "") if x else None
         )
+
+        self.next(self.data_clean_up)
+
+    @step
+    def data_clean_up(self):
+
+        from ds.pipeline.ai_map.utils import convert_unicode
+
+        self.ai_map_data["Description"] = self.ai_map_data["Description"].map(
+            convert_unicode
+        )
+
         self.ai_map_data = pd.merge(
             self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
         ).reset_index(drop=True)
@@ -236,6 +252,7 @@ class merge_map_datasets(FlowSpec):
         self.ai_map_data_final = self.ai_map_data[
             [
                 "Name",
+                "Name_extra",
                 "Link",
                 "Longitude",
                 "Latitude",

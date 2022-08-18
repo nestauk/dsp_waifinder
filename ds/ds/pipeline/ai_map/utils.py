@@ -3,16 +3,54 @@ import numpy as np
 import pgeocode
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
+
 from tqdm import tqdm
+import re
+import unicodedata
 
 from ds.utils.metaflow import est_conn
 
 
-def clean_name(name):
+def clean_dash_names(name):
+    """
+    Clean out names with dashed in like by removing text to the right of the dash
+    "lifesdna - wellness wellbeing healthcare data blockchain, AI powered search engine marketplace"
+    but not where the dashes don't have spaces on either side, like 'Hyper-Group'
+    """
+    name_clean = name
+    name_extra = ""
+    if (" -" in name) or ("- " in name):
+        found = re.search(r"(.*?)(\s\-|\-\s)", name)
+        name_clean = found.group(1).strip()  # Left of the dash
+        name_extra = name[found.span()[1] :].strip()  # Right of the dash
+
+    return name_clean, name_extra
+
+
+def clean_name_for_dedup(name):
+    """
+    This is temporary cleaning for the matching process
+    e.g. so "The University of Salford" can be merged with "univeristy of salford"
+    Ultimately the original version of the name is used (so we have it nicely capitalised)
+    """
     name = name.lower()
     if name[0:4] == "the ":
         name = name.replace("the ", "")
     return name
+
+
+def convert_unicode(text):
+    if text:
+        # Special conversions
+        replace_char_dict = {"‘": "'", "’": "'", "“": '"', "”": '"', "™": "", "®": ""}
+        for find_char, rep_char in replace_char_dict.items():
+            text = text.replace(find_char, rep_char)
+        text = (
+            unicodedata.normalize("NFKD", text)
+            .encode("utf-8", "ignore")
+            .decode("utf-8")
+        )
+    return text
 
 
 def trust_rating(row):
@@ -38,7 +76,7 @@ def get_merged_data(merged_data):
         granular location, so the Lat/Long data isn't particularly accurate.
     """
 
-    merged_data["Cleaned name"] = merged_data["Name"].apply(clean_name)
+    merged_data["Cleaned name"] = merged_data["Name"].apply(clean_name_for_dedup)
 
     merged_data["Trust order"] = merged_data.apply(trust_rating, axis=1)
     merged_data_dedupe = merged_data.sort_values(by="Trust order", ascending=True)
@@ -134,6 +172,15 @@ def get_postcode_field(postcode, geopy_postcode, lat_long):
         return address.raw["address"]["postcode"]
 
 
+def clean_place_names(name):
+    """
+    Very specific place name cleaning
+    """
+    if "Upon" in name:
+        name = name.replace("Upon", "upon")
+    return name
+
+
 def get_geo_data():
     query_geodata = (
         "SELECT geographic_data.city, geographic_data.latitude, geographic_data.longitude "
@@ -141,7 +188,9 @@ def get_geo_data():
         "WHERE geographic_data.country='United Kingdom'"
     )
     conn = est_conn()
-    return pd.read_sql(query_geodata, conn)
+    geo_data = pd.read_sql(query_geodata, conn)
+    geo_data["city"] = geo_data["city"].map(clean_place_names)
+    return geo_data
 
 
 def clean_places(ai_map_data):
@@ -241,41 +290,27 @@ def get_final_places(ai_map_data, city_names):
         for t1, (_, t2) in zip(first_pass_place_types, second_pass_places)
     ]
 
-    final_place = [
-        x.replace("City of ", "") if "City of" in str(x) else x for x in final_place
-    ]
+    cleaned_final_place = []
+    for x in final_place:
+        if "City of" in str(x):
+            x = x.replace("City of ", "")
+        x = clean_place_names(str(x))
+        cleaned_final_place.append(x)
+
     place_types = [
         p.lower().replace("_clean", "").replace("geopy_", "") for p in place_types
     ]
 
-    cities = set([a for a, b in zip(final_place, place_types) if b == "city"])
+    cities = set([a for a, b in zip(cleaned_final_place, place_types) if b == "city"])
     place_types = [
-        "city" if a in cities else b for a, b in zip(final_place, place_types)
+        "city" if a in cities else b for a, b in zip(cleaned_final_place, place_types)
     ]
 
-    return final_place, place_types
+    return cleaned_final_place, place_types
 
 
 def merge_place_data(ai_map_data, geo_data):
     all_places = set(ai_map_data["Place"])
-
-    ## Trust geodata lat/long primarily
-    # places = geo_data[geo_data["city"].isin(all_places)].reset_index(drop=True)
-    # places.rename(
-    #     columns={"city": "Place", "latitude": "Latitude", "longitude": "Longitude"},
-    #     inplace=True,
-    # )
-
-    # average_latlong_places = (
-    #     ai_map_data.groupby("Place")[["Latitude", "Longitude"]].mean().reset_index()
-    # )
-    # average_latlong_places.rename(
-    #     columns={"Latitude": "Latitude_centroid", "Longitude": "Longitude_centroid"},
-    #     inplace=True,
-    # )
-    # places = pd.merge(
-    #     average_latlong_places, places, how="left", on="Place"
-    # ).reset_index(drop=True)
 
     # Trust average lat/long primarily
     places = (
@@ -303,41 +338,58 @@ def add_nuts(places):
 
     from nuts_finder import NutsFinder
 
-    nf = NutsFinder(year=2021)
+    nf = NutsFinder(year=2021, scale=1)
 
     def get_nuts_info(lat, lon):
+        nuts_levels = {1: (None, None), 2: (None, None), 3: (None, None)}
         if lat:
             for nuts_info in nf.find(lat=lat, lon=lon):
-                if nuts_info["LEVL_CODE"] == 3:
-                    return (nuts_info["NUTS_ID"], nuts_info["NUTS_NAME"])
-        return (None, None)
+                if nuts_info["LEVL_CODE"] != 0:
+                    nuts_levels[nuts_info["LEVL_CODE"]] = (
+                        nuts_info["NUTS_ID"],
+                        nuts_info["NUTS_NAME"],
+                    )
+
+        return nuts_levels[1] + nuts_levels[2] + nuts_levels[3]
 
     def get_nuts_code(places, lat_col, lon_col):
         nuts_info = places.apply(
             lambda x: get_nuts_info(x[lat_col], x[lon_col]), axis=1
         ).tolist()
-        return [x[0] for x in nuts_info], [x[1] for x in nuts_info]
+        return [[x[i] for x in nuts_info] for i in range(6)]
 
     # The NUTS when using the geo data lat/long
     (
+        places.loc[:, "NUTS1_ID geo_data"],
+        places.loc[:, "NUTS1_NAME geo_data"],
+        places.loc[:, "NUTS2_ID geo_data"],
+        places.loc[:, "NUTS2_NAME geo_data"],
         places.loc[:, "NUTS3_ID geo_data"],
         places.loc[:, "NUTS3_NAME geo_data"],
     ) = get_nuts_code(places, "Latitude geo_data", "Longitude geo_data")
 
     # The NUTS when using the average lat/long
     (
+        places.loc[:, "NUTS1_ID centroid"],
+        places.loc[:, "NUTS1_NAME centroid"],
+        places.loc[:, "NUTS2_ID centroid"],
+        places.loc[:, "NUTS2_NAME centroid"],
         places.loc[:, "NUTS3_ID centroid"],
         places.loc[:, "NUTS3_NAME centroid"],
     ) = get_nuts_code(places, "Latitude", "Longitude")
 
     # For the final output, use the average lat/long unless its not found
     # in which case use the NUTS found using the geodata lat/long
-    places["NUTS3_ID"] = places["NUTS3_ID centroid"]
-    places["NUTS3_NAME"] = places["NUTS3_NAME centroid"]
-    places.loc[places["NUTS3_ID"].isnull(), "NUTS3_ID"] = places["NUTS3_ID geo_data"]
-    places.loc[places["NUTS3_NAME"].isnull(), "NUTS3_NAME"] = places[
-        "NUTS3_NAME geo_data"
-    ]
+
+    for i in [1, 2, 3]:
+        places[f"NUTS{i}_ID"] = places[f"NUTS{i}_ID centroid"]
+        places[f"NUTS{i}_NAME"] = places[f"NUTS{i}_NAME centroid"]
+        places.loc[places[f"NUTS{i}_ID"].isnull(), f"NUTS{i}_ID"] = places[
+            f"NUTS{i}_ID geo_data"
+        ]
+        places.loc[places[f"NUTS{i}_NAME"].isnull(), f"NUTS{i}_NAME"] = places[
+            f"NUTS{i}_NAME geo_data"
+        ]
 
     places["place_id"] = places.apply(
         lambda x: hashlib.sha1(
@@ -362,6 +414,7 @@ def format_organisations(ai_map_data, types_dict):
                     "postcode": organisation["Postcode"],
                 },
                 "name": organisation["Name"],
+                "name_extra": organisation["Name_extra"],
                 "place_id": organisation["place_id"],
                 "types": [
                     type_number
@@ -386,8 +439,11 @@ def format_places(places):
                 },
                 "id": place["place_id"],
                 "name": place["Place"],
-                "region_id": place["NUTS3_ID"],
-                "region_name": place["NUTS3_NAME"],
+                "region": {
+                    "3": {"id": place["NUTS3_ID"], "name": place["NUTS3_NAME"]},
+                    "2": {"id": place["NUTS2_ID"], "name": place["NUTS2_NAME"]},
+                    "1": {"id": place["NUTS1_ID"], "name": place["NUTS1_NAME"]},
+                },
                 "type": place["place_type"],
             }
         )
