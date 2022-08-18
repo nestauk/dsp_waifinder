@@ -27337,8 +27337,11 @@
       "id": "290005742678170a4ac777afbbfed895d56fb8d2",
       "name": "Aldermaston",
       "region": {
-        "3": { "id": "UKJ37", "name": "North Hampshire" },
-        "2": { "id": "UKJ3", "name": "Hampshire and Isle of Wight" },
+        "3": { "id": "UKJ11", "name": "Berkshire" },
+        "2": {
+          "id": "UKJ1",
+          "name": "Berkshire, Buckinghamshire and Oxfordshire"
+        },
         "1": { "id": "UKJ", "name": "South East (England)" }
       },
       "type": "village"
@@ -27655,12 +27658,9 @@
       "id": "5a6770c215025fd0b80052fba56de6c6fb8d45db",
       "name": "Borehamwood",
       "region": {
-        "3": { "id": "UKI71", "name": "Barnet" },
-        "2": {
-          "id": "UKI7",
-          "name": "Outer London \u2014 West and North West"
-        },
-        "1": { "id": "UKI", "name": "London" }
+        "3": { "id": "UKH23", "name": "Hertfordshire" },
+        "2": { "id": "UKH2", "name": "Bedfordshire and Hertfordshire" },
+        "1": { "id": "UKH", "name": "East of England" }
       },
       "type": "town"
     },
@@ -27949,11 +27949,8 @@
       "id": "f733c77509975fcb55d5019510409badba2c7361",
       "name": "Camberley",
       "region": {
-        "3": { "id": "UKJ11", "name": "Berkshire" },
-        "2": {
-          "id": "UKJ1",
-          "name": "Berkshire, Buckinghamshire and Oxfordshire"
-        },
+        "3": { "id": "UKJ37", "name": "North Hampshire" },
+        "2": { "id": "UKJ3", "name": "Hampshire and Isle of Wight" },
         "1": { "id": "UKJ", "name": "South East (England)" }
       },
       "type": "city"
@@ -28029,7 +28026,7 @@
       "id": "563396fd5eb71a3c8430580c205df4a5d5b37b0a",
       "name": "Chandler's Ford",
       "region": {
-        "3": { "id": "UKJ36", "name": "Central Hampshire" },
+        "3": { "id": "UKJ35", "name": "South Hampshire" },
         "2": { "id": "UKJ3", "name": "Hampshire and Isle of Wight" },
         "1": { "id": "UKJ", "name": "South East (England)" }
       },
@@ -28640,12 +28637,9 @@
       "id": "5e7d854ae7efb2d8dbd26c940bf579b0d6a5b724",
       "name": "Epsom and Ewell",
       "region": {
-        "3": {
-          "id": "UKI63",
-          "name": "Merton, Kingston upon Thames and Sutton"
-        },
-        "2": { "id": "UKI6", "name": "Outer London \u2014 South" },
-        "1": { "id": "UKI", "name": "London" }
+        "3": { "id": "UKJ26", "name": "East Surrey" },
+        "2": { "id": "UKJ2", "name": "Surrey, East and West Sussex" },
+        "1": { "id": "UKJ", "name": "South East (England)" }
       },
       "type": "city"
     },
@@ -29455,7 +29449,7 @@
       "id": "a8d9ea706c6e81700593d224a45a0cbd983fdbbc",
       "name": "Linlithgow",
       "region": {
-        "3": { "id": "UKM76", "name": "Falkirk" },
+        "3": { "id": "UKM78", "name": "West Lothian" },
         "2": { "id": "UKM7", "name": "Eastern Scotland" },
         "1": { "id": "UKM", "name": "Scotland" }
       },
@@ -29477,9 +29471,9 @@
       "id": "f5feaef009966ac384ed45eab25c0b6a054cf473",
       "name": "Liverpool",
       "region": {
-        "3": { "id": null, "name": null },
-        "2": { "id": null, "name": null },
-        "1": { "id": null, "name": null }
+        "3": { "id": "UKD72", "name": "Liverpool" },
+        "2": { "id": "UKD7", "name": "Merseyside" },
+        "1": { "id": "UKD", "name": "North West (England)" }
       },
       "type": "city"
     },
@@ -29499,7 +29493,7 @@
       "id": "fe9dd256a87d91f7ce30a7f67a6aa1d222b86f8d",
       "name": "London",
       "region": {
-        "3": { "id": "UKI32", "name": "Westminster" },
+        "3": { "id": "UKI31", "name": "Camden and City of London" },
         "2": { "id": "UKI3", "name": "Inner London \u2014 West" },
         "1": { "id": "UKI", "name": "London" }
       },
@@ -30086,7 +30080,7 @@
       "id": "cc5651cdb1c9a161bda5e9b73684366220d162a8",
       "name": "Norwich",
       "region": {
-        "3": { "id": "UKH17", "name": "Breckland and South Norfolk" },
+        "3": { "id": "UKH15", "name": "Norwich and East Norfolk" },
         "2": { "id": "UKH1", "name": "East Anglia" },
         "1": { "id": "UKH", "name": "East of England" }
       },
@@ -30346,8 +30340,8 @@
       "id": "a46429934b79afc038f02b1f843e86eb96759b88",
       "name": "Ramsbottom",
       "region": {
-        "3": { "id": "UKD46", "name": "East Lancashire" },
-        "2": { "id": "UKD4", "name": "Lancashire" },
+        "3": { "id": "UKD37", "name": "Greater Manchester North East" },
+        "2": { "id": "UKD3", "name": "Greater Manchester" },
         "1": { "id": "UKD", "name": "North West (England)" }
       },
       "type": "town"
@@ -30857,8 +30851,11 @@
       "id": "88c4d12a2064fef4d71ff56d31b4301ae8c52be3",
       "name": "Sunningdale",
       "region": {
-        "3": { "id": "UKJ25", "name": "West Surrey" },
-        "2": { "id": "UKJ2", "name": "Surrey, East and West Sussex" },
+        "3": { "id": "UKJ11", "name": "Berkshire" },
+        "2": {
+          "id": "UKJ1",
+          "name": "Berkshire, Buckinghamshire and Oxfordshire"
+        },
         "1": { "id": "UKJ", "name": "South East (England)" }
       },
       "type": "village"
@@ -30940,7 +30937,7 @@
       "id": "df9451a60353c123590f12d06870fcc96a269334",
       "name": "Taplow",
       "region": {
-        "3": { "id": "UKJ11", "name": "Berkshire" },
+        "3": { "id": "UKJ13", "name": "Buckinghamshire CC" },
         "2": {
           "id": "UKJ1",
           "name": "Berkshire, Buckinghamshire and Oxfordshire"
@@ -30976,7 +30973,7 @@
       "id": "4e3af8e87ca394fcce0c6f43b7b909b3d769aa97",
       "name": "Thame",
       "region": {
-        "3": { "id": "UKJ13", "name": "Buckinghamshire CC" },
+        "3": { "id": "UKJ14", "name": "Oxfordshire" },
         "2": {
           "id": "UKJ1",
           "name": "Berkshire, Buckinghamshire and Oxfordshire"
@@ -31289,8 +31286,8 @@
       "id": "48264741f19b1203fa3bbf2ad95002a68e5a65c6",
       "name": "West Suffolk",
       "region": {
-        "3": { "id": "UKH34", "name": "Essex Haven Gateway" },
-        "2": { "id": "UKH3", "name": "Essex" },
+        "3": { "id": "UKH14", "name": "Suffolk" },
+        "2": { "id": "UKH1", "name": "East Anglia" },
         "1": { "id": "UKH", "name": "East of England" }
       },
       "type": "city"

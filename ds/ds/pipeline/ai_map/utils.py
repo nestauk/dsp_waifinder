@@ -338,7 +338,7 @@ def add_nuts(places):
 
     from nuts_finder import NutsFinder
 
-    nf = NutsFinder(year=2021)
+    nf = NutsFinder(year=2021, scale=1)
 
     def get_nuts_info(lat, lon):
         nuts_levels = {1: (None, None), 2: (None, None), 3: (None, None)}
