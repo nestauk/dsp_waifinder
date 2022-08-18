@@ -76,6 +76,6 @@ a {
 	--dim-header-height: 3rem;
 	--dim-main-height: calc(100% - var(--dim-header-height));
 	--dim-padding-minor: 0.5rem;
-	--dim-padding: 1rem;
+	--dim-padding: 0.5rem;
 	--z-1000: 1000;
 }
