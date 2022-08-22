@@ -62,10 +62,14 @@ const processTopics = _.pipe([
 		getId
 	]),
 ]);
+
 const processOrg = _.pipe([
 	_.skip(['dbpedia_entities_metadata']),
 	_.rename({dbpedia_entities: 'topics'}),
-	transformValues({topics: processTopics}),
+	transformValues({
+		topics: processTopics,
+		types: _.sortWith(),
+	}),
 	obj => ({...obj, id: hash(obj)}),
 	sortObjectKeysAsc,
 ]);

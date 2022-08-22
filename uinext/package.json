@@ -9,11 +9,13 @@
 		"@svizzle/utils": "^0.16.0",
 		"@turf/bbox": "^6.0.1",
 		"d3-color": "^2.0.0",
+		"d3-shape": "^2.1.0",
 		"email-regex": "^4.0.0",
 		"escape-string-regexp": "^4.0.0",
 		"just-compare": "^2.1.0",
 		"lamb": "^0.60.0",
 		"mapbox-gl": "^2.8.1",
+		"supercluster": "^7.1.5",
 		"yootils": "^0.3.1"
 	},
 	"description": "App UI",
