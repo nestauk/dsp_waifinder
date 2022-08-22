@@ -36,8 +36,8 @@
 	const reportNames = _.keys(lighthouseUrls)
 
 	const linkTheme = {
-		color: $_currThemeVars['--color-link'],
-		iconStroke: $_currThemeVars['--color-link']
+		color: $_currThemeVars['--colorLink'],
+		iconStroke: $_currThemeVars['--colorLink']
 	};
 
 	let [currentreport] = reportNames;
@@ -175,7 +175,7 @@
 							<div class='spinner'>
 								<LoadingView
 									size={24}
-									stroke={$_currThemeVars['--color-main']}
+									stroke={$_currThemeVars['--colorMain']}
 									strokeWidth={1}
 								/>
 							</div>
@@ -190,7 +190,7 @@
 							<div class='spinner'>
 								<LoadingView
 									size={24}
-									stroke={$_currThemeVars['--color-main']}
+									stroke={$_currThemeVars['--colorMain']}
 									strokeWidth={1}
 								/>
 							</div>
@@ -244,7 +244,7 @@
 
 <style>
 	.accessibility {
-		background-color: var(--color-background);
+		background-color: var(--colorBackground);
 		display: flex;
 		font-weight: 200;
 		height: 100%;
@@ -253,17 +253,17 @@
 	}
 
 	section {
-		background-color: var(--color-background-main);
-		box-shadow: var(--box-shadow-y);
+		background-color: var(--colorBackgroundMain);
+		box-shadow: var(--boxShadowY);
 		max-width: 900px;
 		overflow-y: auto;
 		padding: 2rem;
 	}
 
 	figure {
-		background: var(--color-warning-background);
-		border: thin solid var(--color-warning-border);
-		color: var(--color-warning-text);
+		background: var(--colorWarningBackground);
+		border: thin solid var(--colorWarningBorder);
+		color: var(--colorWarningText);
 		padding: 0.5em 1em;
 	}
 
@@ -279,22 +279,22 @@
 	dt {
 		padding: 0.5em 1em;
 		border-top: thin solid white;
-		color: var(--color-warning-background);
-		background: var(--color-main);
+		color: var(--colorWarningBackground);
+		background: var(--colorMain);
 		text-align: right;
 	}
 	dt:first-child {
 		border-top: none;
 	}
 	dd {
-		border: thin solid var(--color-main);
+		border: thin solid var(--colorMain);
 		padding: 0.5em 1em;
 	}
 	dd:not(:last-child) {
 		border-bottom: none;
 	}
 	.tabs ul {
-		border-bottom: thin solid var(--color-main);
+		border-bottom: thin solid var(--colorMain);
 		display: flex;
 		flex-direction: row;
 		list-style-type: none;
@@ -308,11 +308,11 @@
 		padding: 0.5em 1em;
 	}
 	.tabs li:first-child {
-		border-left: thin solid var(--color-main);
+		border-left: thin solid var(--colorMain);
 	}
 	.tabs li {
-		border-top: thin solid var(--color-main);
-		border-right: thin solid var(--color-main);
+		border-top: thin solid var(--colorMain);
+		border-right: thin solid var(--colorMain);
 	}
 	.tabs li.meta {
 		align-items: center;
@@ -320,19 +320,19 @@
 		display: flex;
 	}
 	.tabs input[type="radio"]:checked + label {
-		background: var(--color-main);
-		color: var(--color-background-main);
+		background: var(--colorMain);
+		color: var(--colorBackgroundMain);
 	}
 
 	.tabs .tab-selector {
-		border: thin solid var(--color-main);
+		border: thin solid var(--colorMain);
 		display: grid;
 		grid-template-columns: 1fr min-content min-content;
 	}
 	.tabs button {
-		background: var(--color-background-main);
+		background: var(--colorBackgroundMain);
 		border: none;
-		border-left: thin solid var(--color-main);
+		border-left: thin solid var(--colorMain);
 		height: 2.5rem;
 		width: 2.5rem;
 	}

@@ -16,7 +16,7 @@
 	const windowsMouseURL = 'https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b';
 
 	const theme = {
-		backgroundColor: $_currThemeVars['--color-link']
+		backgroundColor: $_currThemeVars['--colorLink']
 	};
 </script>
 

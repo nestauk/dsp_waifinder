@@ -233,7 +233,7 @@
 		grid-area: questionStart;
 	}
 	.question.start .highlight {
-		background-color: var(--color-eval-highlighted);
+		background-color: var(--colorEvalHighlighted);
 		font-style: italic;
 	}
 	/* To keep glyph descenders uncovered on multiline highlights wrap two

@@ -38,44 +38,38 @@ a {
 	cursor: pointer;
 }
 
+:root {
+	--z-1000: 1000; /* FIXME svizzle's A11yMenu depends on this */
+	--z1000: 1000;
+}
+
 .theme {
-	--box-shadow-xy: 2px 8px 9px -4px lightgrey;
-	--box-shadow-y: 0px 8px 9px -4px lightgrey;
-	--color-background-main: white;
-	--color-background: #333;
-	--color-disabled: grey;
-	--color-eval-highlighted: aqua;
-	--color-grey-180: rgb(180, 180, 180);
-	--color-grey-40: rgb(40, 40, 40);
-	--color-grey-70: rgb(70, 70, 70);
-	--color-grey-lighter: #f7f7f7;
-	--color-link: #0658aa;
-	--color-main-desat-50: #333;
-	--color-main-lighter: #555;
-	--color-main-inverted: white;
-	--color-main: #333;
-	--color-org-highlighted: lavender;
-	--color-org-place: cornsilk;
-	--color-org-type: aquamarine;
-	--color-paleyellow: #f9f7dd;
-	--color-pill-background: orange;
-	--color-pill-score: black;
-	--color-pill: white;
-	--color-secondary: #075aa2;
-	--color-selected-text: white;
-	--color-selected: lightseagreen;
-	--color-tag-blockquote-background: aliceblue;
-	--color-tag-blockquote-leftborder: dodgerblue;
-	--color-tag-code-background: aliceblue;
-	--color-tag-code-border: lightgrey;
-	--color-tag-code-text: black;
-	--color-warning-background: orange;
-	--color-warning-border: darkorange;
-	--color-warning-text: white;
-	--dim-fontsize-light: 200;
-	--dim-header-height: 3rem;
-	--dim-main-height: calc(100% - var(--dim-header-height));
-	--dim-padding-minor: 0.5rem;
-	--dim-padding: 0.5rem;
-	--z-1000: 1000;
+	--boxShadowY: 0px 8px 9px -4px lightgrey;
+	--colorBackgroundMain: white;
+	--colorBackground: #333;
+	--colorDisabled: grey;
+	--colorEvalHighlighted: aqua;
+	--colorLink: #0658aa;
+	--colorMainLighter: #555;
+	--colorMainInverted: white;
+	--colorMain: #333;
+	--colorOrgHighlighted: lavender;
+	--colorOrgPlace: cornsilk;
+	--colorOrgType: aquamarine;
+	--colorPillBackground: orange;
+	--colorPillScore: black;
+	--colorPill: white;
+	--colorSecondary: #075aa2;
+	--colorSelectedText: white;
+	--colorSelected: lightseagreen;
+	--colorTagBlockquoteBackground: aliceblue;
+	--colorTagBlockquoteLeftborder: dodgerblue;
+	--colorTagCodeBackground: aliceblue;
+	--colorTagCodeBorder: lightgrey;
+	--colorTagCodeText: black;
+	--colorWarningBackground: orange;
+	--colorWarningBorder: darkorange;
+	--colorWarningText: white;
+	--dimHeaderHeight: 3rem;
+	--dimPadding: 0.5rem;
 }

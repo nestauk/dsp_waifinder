@@ -105,7 +105,7 @@
 {#if isLayoutUndefined}
 	<!-- FIXME: See: https://github.com/nestauk/eurito_indicators/pull/212#issuecomment-985176516 -->
 	<div class='spinnerContainer'>
-		<LoadingView stroke={$_currThemeVars['--color-main']} />
+		<LoadingView stroke={$_currThemeVars['--colorMain']} />
 	</div>
 {/if}
 
@@ -160,8 +160,8 @@
 
 <style>
 	._layout {
-		background: var(--color-background-main) ;
-		color: var(--color-main);
+		background: var(--colorBackgroundMain) ;
+		color: var(--colorMain);
 		display: grid;
 		grid-template-areas:
 			'content'
@@ -186,14 +186,14 @@
 		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
-		border-top: 1px solid var(--color-main-lighter);
+		border-top: 1px solid var(--colorMainLighter);
 		grid-area: header;
-		height: var(--dim-header-height);
-		padding: 0 var(--dim-padding);
+		height: var(--dimHeaderHeight);
+		padding: 0 var(--dimPadding);
 		width: 100%;
 	}
 	.medium header {
-		border-bottom: 1px solid var(--color-main-lighter);
+		border-bottom: 1px solid var(--colorMainLighter);
 		border-top: none;
 	}
 	main {
@@ -204,17 +204,17 @@
 		width: 100%;
 	}
 	footer {
-		border-top: thin solid var(--color-main-lighter);
+		border-top: thin solid var(--colorMainLighter);
 		grid-area: footer;
-		height: var(--dim-header-height);
-		padding: 0 var(--dim-padding);
+		height: var(--dimHeaderHeight);
+		padding: 0 var(--dimPadding);
 	}
 	.editor {
 		grid-area: editor;
 	}
 	.accessibility {
 		grid-area: accessibility;
-		z-index: var(--z-1000);
+		z-index: var(--z1000);
 	}
 	.medium .accessibility {
 		bottom: 150px;
