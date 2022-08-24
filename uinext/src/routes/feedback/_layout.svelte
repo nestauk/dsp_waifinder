@@ -6,10 +6,10 @@
 	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
 	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
 	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Link from '@svizzle/ui/src/Link.svelte';
 
 	import {isNotNil} from '@svizzle/utils';
 
+	import Link from 'app/components/svizzle/Link.svelte';
 	import {_currThemeVars} from 'app/stores/theme';
 
 	const segments = ['survey', 'add_your_org'];
@@ -58,6 +58,7 @@
 
 					<div>
 						<Link
+							ariaLabel={hasPrevSegment ? 'Previous tab' : null}
 							href={hasPrevSegment && `/feedback/${prevSegment}`}
 							theme={{
 								color: hasPrevSegment
@@ -70,6 +71,7 @@
 					</div>
 					<div>
 						<Link
+							ariaLabel={hasNextSegment ? 'Next tab' : null}
 							href={hasNextSegment && `/feedback/${nextSegment}`}
 							theme={{
 								color: hasNextSegment
