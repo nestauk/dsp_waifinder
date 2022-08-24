@@ -30,7 +30,7 @@ const auditURL = async (id, url) => {
 	// `.lhr` is the Lighthouse Result as a JS object
 	console.log(
 		'Report is done for',
-			runnerResult.pageUrl
+		runnerResult.pageUrl
 	);
 	console.log(
 		'Issues found:',
