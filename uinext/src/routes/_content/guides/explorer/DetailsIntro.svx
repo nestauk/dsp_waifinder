@@ -1,0 +1,10 @@
+Here you have a scrollable list of "org cards".
+
+Each card shows:
+	* the org name and a link to its website
+	* the org description, possibly shortened
+	* a button to copy the description to your clipboard
+	* depending on the length of the description, a button to expand/collapse the description
+	* a place tag, with the place postcode and name
+	* a list of org type tags
+	* a list of topics derived from the org description, shown as "pills"

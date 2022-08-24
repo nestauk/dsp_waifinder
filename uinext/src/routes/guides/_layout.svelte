@@ -1,22 +1,21 @@
 <script>
-	import * as _ from 'lamb';
-
 	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
 	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
 	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
 	import LinkButton from '@svizzle/ui/src/LinkButton.svelte';
 	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-
 	import {isNotNil} from '@svizzle/utils';
+	import * as _ from 'lamb';
 
 	import Link from 'app/components/svizzle/Link.svelte';
 	import {_currThemeVars} from 'app/stores/theme';
 
-	const segments = ['app', 'a11ymenu'];
+	const segments = ['app', 'explorer', 'a11ymenu'];
 	const titles = {
-		app:'App',
 		a11ymenu: 'Accessibility menu',
+		app:'App',
+		explorer:'Explorer',
 	};
 
 	export let segment;

@@ -1,0 +1,17 @@
+#### Search panel
+
+Here you can find:
+	* the amount of organisations satisfying the current filters
+	* an input box to search text in organisations' name and description
+	* an input box to search text in organisations' place name
+
+#### Org types panel
+
+Here you have a bar chart displaying the amount of orgs per type.
+
+You can (de)select each type by clicking on the type bar.
+
+You can set the logic for the selection by type by using the switch below the
+bar chart:
+	* `OR` means selecting all orgs of ANY of the active types;
+	* `AND` means selecting all orgs of ALL the active types.

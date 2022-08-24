@@ -1,0 +1,2 @@
+Here you can find a bar chart showing the region names for the selected orgs.
+For each region, you can read how many orgs are found in that place.

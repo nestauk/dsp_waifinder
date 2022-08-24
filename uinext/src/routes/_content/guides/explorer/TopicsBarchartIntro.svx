@@ -1,0 +1,2 @@
+Here you can find a bar chart showing the top topics for the selected orgs.
+For each topic, you can read how many orgs have been tagged with that topic.

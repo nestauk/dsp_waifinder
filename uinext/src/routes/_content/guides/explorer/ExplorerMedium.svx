@@ -1,0 +1,68 @@
+<script>
+	import DetailsIntro from './DetailsIntro.svx';
+	import MapIntro from './MapIntro.svx';
+	import PlacesBarchart from './PlacesBarchart.svx';
+	import RegionsBarchart from './RegionsBarchart.svx';
+	import Settings from './Settings.svx';
+	import TopicsBarchartIntro from './TopicsBarchartIntro.svx';
+</script>
+
+## Navigating the explorer
+
+### Left sidebar
+
+On the left there is a sidebar hosting various panels to control filtering
+criteria.
+
+<Settings />
+
+### Map
+
+<MapIntro />
+
+To select an area of the map, you can:
+	* pan by clicking and dragging the map around
+	* zoom by:
+		* using the mouse wheel, or
+		* scrolling or pinching with the touch pad, or
+		* clicking on the +/- buttons on the map
+	* select a specific area directly, by pressing the shift-key, dragging a
+rectangle with the pointer and then end dragging.
+
+Hovering a single org on the map shows a pop-up with the same info displayed in
+the org card (see below). Clicking a single org will pin it, so that the pop-up
+above will persist even when you remove the pointer from the red dot, so that
+you can click on the org's website link or interact with its pills.
+
+To un-pin an org, you can click anywhere in the map or on the pop-up background.
+
+### Right sidebar
+
+On the right there is a sidebar hosting various tabs.
+
+#### Details tab
+
+<DetailsIntro />
+
+Clicking a topic pill should navigate to the correspondent Wikipedia page.
+
+Hovering a topic pill should show a pop-up with:
+	* the topic abstract, taken from Wikipedia
+	* the topic thumbnail, also taken from Wikipedia, if available.
+
+Hovering an org card should show a red dot on the card itself and a correspondent
+red dot on the map, to help you visually identifying that org on the map.
+
+#### Topics tab
+
+<TopicsBarchartIntro />
+
+Hovering a topic will show the same pop-up described in the section above.
+
+#### Places tab
+
+<PlacesBarchart />
+
+#### Region tab
+
+<RegionsBarchart />

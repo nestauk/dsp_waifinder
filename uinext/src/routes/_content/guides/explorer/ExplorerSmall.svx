@@ -1,0 +1,62 @@
+<script>
+	import DetailsIntro from './DetailsIntro.svx';
+	import MapIntro from './MapIntro.svx';
+	import PlacesBarchart from './PlacesBarchart.svx';
+	import RegionsBarchart from './RegionsBarchart.svx';
+	import Settings from './Settings.svx';
+	import TopicsBarchartIntro from './TopicsBarchartIntro.svx';
+</script>
+
+## Navigating the explorer
+
+On the lower part of the screen you have a list of tabs to navigate the explorer.
+
+### Settings tab
+
+Here you have various panels to control filtering criteria.
+
+<Settings />
+
+### Map tab
+
+<MapIntro />
+
+To select an area of the map, you can:
+	* pan by touching and dragging the map around
+	* zoom by:
+		* pinching the screen, or
+		* clicking on the +/- buttons on the map
+
+Clicking a single org on the map:
+	* shows a pop-up with the same info displayed in the org card (see below).
+	* pin it, so that the pop-up above will persist and that you can click on the
+		org's website link or pills.
+
+To un-pin an org, you can click on the pop-up background.
+
+### Details tab
+
+<DetailsIntro />
+
+Clicking a topic pill should should show a pop-up with:
+	* the topic abstract, taken from Wikipedia
+	* the topic thumbnail, also taken from Wikipedia, if available.
+
+Clicking the wikipedia logo on that pop-up should navigate to the correspondent
+Wikipedia page.
+
+To dismiss the topic, you can click on the pop-up background.
+
+#### Topics tab
+
+<TopicsBarchartIntro />
+
+Clicking a topic will show the same pop-up described in the section above.
+
+#### Places tab
+
+<PlacesBarchart />
+
+#### Region tab
+
+<RegionsBarchart />
