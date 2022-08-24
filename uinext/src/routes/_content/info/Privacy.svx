@@ -1,12 +1,12 @@
 ## Cookies and data privacy policy
 
 Cookies are files saved on your phone, tablet or computer when you visit a
-websiteee.
+website.
 
 We only use essential cookies on this website:
 
 * the tool itself does not collect any personal data.
-* the feedback form is using 
+* the feedback form is using
   [Google Forms](https://www.google.com/forms/about/),
   which installs cookies in your browser.
 
