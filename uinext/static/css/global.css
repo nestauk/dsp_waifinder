@@ -57,7 +57,7 @@ a {
 	--colorOrgAddress: aquamarine;
 	--colorOrgHighlighted: lavender;
 	--colorOrgPlace: aliceblue;
-	--colorOrgtype0: cornflowerblue;
+	--colorOrgtype0: #2455ad;
 	--colorOrgtype0Text: white;
 	--colorOrgtype1: yellowgreen;
 	--colorOrgtype1Text: white;
@@ -69,7 +69,7 @@ a {
 	--colorPillBackground: black;
 	--colorPillScore: white;
 	--colorSecondary: #075aa2;
-	--colorSelected: lightseagreen;
+	--colorSelected: #00645f;
 	--colorSelectedText: white;
 	--colorTagBlockquoteBackground: aliceblue;
 	--colorTagBlockquoteLeftborder: dodgerblue;

@@ -48,7 +48,7 @@ We follow the recommendations of the [WCAG 2.1 guidelines]({wcag21Url}). Also:
 
 According to automated testing using the
 [Pa11y accessibility testing tool]({pa11yUrl}), no accessibility issues were
-detected and this website is reported to have a WCAG 2.0 AAA compliance level.
+detected and this website is reported to have a WCAG 2.0 AA compliance level.
 This website also passes the accessibility audits checked by
 [Google's Lighthouse tool]({lighthouseUrl}).
 

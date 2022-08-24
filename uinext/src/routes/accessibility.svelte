@@ -198,6 +198,7 @@
 					</label>
 
 					<button
+						aria-label={hasPrevValue ? 'Previous Result' : null}
 						class:clickable={hasPrevValue}
 						disabled={!hasPrevValue}
 						on:click={clickedPrev}
@@ -205,6 +206,7 @@
 						<Icon glyph={ChevronLeft} />
 					</button>
 					<button
+						aria-label={hasNextValue ? 'Next Result' : null}
 						class:clickable={hasNextValue}
 						disabled={!hasNextValue}
 						on:click={clickedNext}

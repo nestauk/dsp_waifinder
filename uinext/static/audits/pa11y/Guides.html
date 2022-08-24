@@ -3,7 +3,7 @@
 <head>
 
 	<meta charset="utf-8"/>
-	<title>Accessibility Report For "http://localhost:5000/guide" (Thu Jul 15 2021 12:02:24 GMT-0300 (Argentina Standard Time))</title>
+	<title>Accessibility Report For "http://localhost:3000/guides/app" (Wed Aug 24 2022 14:10:58 GMT-0300 (Argentina Standard Time))</title>
 
 	<style>
 
@@ -87,16 +87,26 @@
 
 	<div class="page">
 
-		<h1>Accessibility Report For "http://localhost:5000/guide"</h1>
-		<p>Generated at: Thu Jul 15 2021 12:02:24 GMT-0300 (Argentina Standard Time)</p>
+		<h1>Accessibility Report For "http://localhost:3000/guides/app"</h1>
+		<p>Generated at: Wed Aug 24 2022 14:10:58 GMT-0300 (Argentina Standard Time)</p>
 
 		<p class="counts">
-			<span class="count error">0 errors</span>
+			<span class="count error">2 errors</span>
 			<span class="count warning">0 warnings</span>
 			<span class="count notice">0 notices</span>
 		</p>
 
 		<ul class="clean-list results-list">
+			<li class="result error">
+				<h2>Error: The heading structure is not logically nested. This h2 element appears to be the primary document heading, so should be an h1 element.</h2>
+				<p>WCAG2AAA.Principle1.Guideline1_3.1_3_1_AAA.G141</p>
+				<pre>&lt;h2 class=&quot;svelte-xjji35&quot;&gt;Cookies and data privacy policy&lt;/h2&gt; (select with "#app &gt; div:nth-child(3) &gt; div &gt; div &gt; main &gt; div &gt; div &gt; section &gt; h2")</pre>
+			</li>
+			<li class="result error">
+				<h2>Error: The heading structure is not logically nested. This h2 element should be an h1 to be properly nested.</h2>
+				<p>WCAG2AAA.Principle1.Guideline1_3.1_3_1_AAA.G141</p>
+				<pre>&lt;h2 class=&quot;svelte-xjji35&quot;&gt;Cookies and data privacy policy&lt;/h2&gt; (select with "#app &gt; div:nth-child(3) &gt; div &gt; div &gt; main &gt; div &gt; div &gt; section &gt; h2")</pre>
+			</li>
 		</ul>
 
 	</div>
