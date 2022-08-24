@@ -95,6 +95,11 @@
 
 {#if scriptingActive && fontLoadStatus.isFirstLoaded}
 	<ScreenSensor />
+	<MultiBanner
+		{_screen}
+		components={bannerComponents}
+		footerText={bannersDefaultFooterText}
+	/>
 {/if}
 
 {#if isLayoutUndefined}
@@ -152,14 +157,6 @@
 		</section>
 	{/if}
 </div>
-
-{#if scriptingActive && fontLoadStatus.isFirstLoaded}
-	<MultiBanner
-		{_screen}
-		components={bannerComponents}
-		footerText={bannersDefaultFooterText}
-	/>
-{/if}
 
 <style>
 	._layout {
