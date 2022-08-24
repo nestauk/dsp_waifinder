@@ -54,6 +54,7 @@ a {
 	--colorMain: #333;
 	--colorMainInverted: white;
 	--colorMainLighter: #555;
+	--colorMarkerFocused: red;
 	--colorOrgAddress: aquamarine;
 	--colorOrgHighlighted: lavender;
 	--colorOrgPlace: aliceblue;

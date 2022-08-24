@@ -20,6 +20,8 @@ criteria.
 
 <MapIntro />
 
+#### Navigating the map
+
 To select an area of the map, you can:
 	* pan by clicking and dragging the map around
 	* zoom by:
@@ -29,10 +31,14 @@ To select an area of the map, you can:
 	* select a specific area directly, by pressing the shift-key, dragging a
 rectangle with the pointer and then end dragging.
 
-Hovering a single org on the map shows a pop-up with the same info displayed in
-the org card (see below). Clicking a single org will pin it, so that the pop-up
-above will persist even when you remove the pointer from the red dot, so that
-you can click on the org's website link or interact with its pills.
+#### Interacting with markers
+
+Hovering a single org or a star ray shows a pop-up with the same info displayed
+in the org card (see below).
+
+Clicking a single org or a star ray will pin it, so that the pop-up will
+persist even when you remove the pointer from the red dot, so that you can click
+on the org's website link or interact with its pills.
 
 To un-pin an org, you can click anywhere in the map or on the pop-up background.
 

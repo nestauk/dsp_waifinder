@@ -1,8 +1,9 @@
 <script>
-	import {noop} from '@svizzle/utils';
+	import {isIterableLongerThan1, noop} from '@svizzle/utils';
 	import {arc, pie} from 'd3-shape';
 	import * as _ from 'lamb';
 
+	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
 	import {
 		_hero,
 		_isHeroInBounds,
@@ -10,8 +11,8 @@
 		setHero
 	} from '$lib/stores/interaction';
 	import {_isSmallScreen} from '$lib/stores/layout';
-	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
 	import {_orgTypeToColorFn} from '$lib/stores/theme';
+	import {radToDeg} from '$lib/utils/svizzle/geometry';
 
 	/* props */
 
@@ -22,9 +23,75 @@
 
 	/* groups */
 
-	$: groups = _.partition(items, _.getPath('properties.cluster'));
+	const makeGroups = _.pipe([
+		_.partitionWith(_.getPath('properties.cluster')),
+		_.collect([
+			_.head,
+			_.pipe([
+				_.last,
+				_.groupBy(x => x.geometry.coordinates.toString()),
+				_.pairs,
+				_.partitionWith(_.pipe([_.last, isIterableLongerThan1])),
+				_.collect([
+					_.pipe([
+						_.head,
+						_.mapWith(([, features]) => ({
+							coordinates: features[0].geometry.coordinates,
+							count: features.length,
+							features,
+						}))
+					]),
+					_.pipe([_.last, _.mapWith(_.getPath('1.0'))])
+				])
+			])
+		]),
+		([cluster, [multi, single]]) => [cluster, multi, single]
+	]);
 
-	/* markers */
+	$: groups = makeGroups(items);
+
+	/* multi */
+
+	const multiCenterRadius = 4;
+	const rayHeight = 6;
+	$: rayWidth = $_isSmallScreen ? 15 : 12;
+	$: getRays = ({count, features}) => {
+		const stepAngle = 2 * Math.PI / count;
+		const radius = 0.5 * rayHeight / Math.sin(Math.PI / count);
+		const rays = _.map(features, ({properties}, index) => {
+			const {types} = properties;
+			const originAngle = index * stepAngle;
+			const angleDeg = radToDeg(originAngle + stepAngle / 2);
+			const X = radius * Math.cos(originAngle);
+			const Y = radius * Math.sin(originAngle);
+			const typeRectWidth = rayWidth / types.length;
+
+			return {
+				angleDeg,
+				properties,
+				typeRects: _.map(types, (orgType, idx) => ({
+					dx: idx * typeRectWidth,
+					fill: $_orgTypeToColorFn(orgType),
+					width: typeRectWidth,
+				})),
+				X,
+				Y,
+			}
+		});
+
+		return rays;
+	};
+	$: unprojectedMultis = _.map(groups[1], item => ({
+		...item,
+		rays: getRays(item)
+	}));
+	$: projectMulti = item => ({
+		...item,
+		...projectFn(item.coordinates),
+	});
+	$: multiMarkers = _.map(unprojectedMultis, projectMulti);
+
+	/* single */
 
 	const onMarkerClick = id => {
 		// if incoming id === existing id and already pinned, it should unpin
@@ -58,14 +125,14 @@
 		...item,
 		sectors: getMarkerPieSectors(item.properties.types)
 	});
-	$: unprojectedMarkers = _.map(groups[1], makeUnprojectedMarker) || [];
+	$: unprojectedMarkers = _.map(groups[2], makeUnprojectedMarker);
 	$: projectMarker = item => ({
 		...item,
 		...projectFn(getLonLat(item.properties)),
 	});
-	$: markers = _.map(unprojectedMarkers, projectMarker) || [];
+	$: markers = _.map(unprojectedMarkers, projectMarker);
 
-	/* clusters */
+	/* cluster */
 
 	const onClusterClick = (coordinates, id) => {
 		if (map) {
@@ -123,10 +190,10 @@
 
 	/* hero */
 
+	const heroRadius = 6;
 	$: hero =
 		$_hero?.org && projectFn && getLonLat &&
 		projectFn(getLonLat($_hero?.org));
-	$: r = $_isSmallScreen ? 5 : 3;
 	$: onMouseEnterMarker = $_isSmallScreen
 		? noop
 		: id => !$_hero?.isPinned && setHero({
@@ -143,6 +210,46 @@
 <svelte:options namespace='svg' />
 
 <g class='SvgMarkers'>
+
+	<!-- multi-markers -->
+
+	{#each multiMarkers as {rays, x, y}}
+		<g
+			class='multiMarker'
+			transform='translate({x},{y})'
+		>
+			{#each rays as {angleDeg, properties: {id}, typeRects, X, Y}}
+				<g
+					class='ray'
+					on:click|stopPropagation={() => onMarkerClick(id)}
+					on:dblclick|stopPropagation
+					on:mouseenter={() => onMouseEnterMarker(id)}
+					on:mouseleave={onMouseLeaveMarker}
+					transform='translate({X},{Y}) rotate({angleDeg})'
+				>
+					{#each typeRects as {dx, fill, width}}
+						<rect
+							{fill}
+							{width}
+							height={rayHeight}
+							x={dx}
+						/>
+					{/each}
+					{#if $_hero && id === $_hero.org.id}
+						<rect
+							class='hero'
+							height={rayHeight}
+							width={rayWidth}
+						/>
+					{/if}
+				</g>
+			{/each}
+			<circle
+				class='center'
+				r={multiCenterRadius}
+			/>
+		</g>
+	{/each}
 
 	<!-- markers -->
 
@@ -199,13 +306,13 @@
 			class='marker focused'
 			cx={hero.x}
 			cy={hero.y}
-			r=6
+			r={heroRadius}
 		/>
 	{/if}
 </g>
 
 <style>
-	.marker, .cluster {
+	.cluster, .marker, .ray {
 		cursor: pointer;
 	}
 	.cluster text {
@@ -220,7 +327,15 @@
 	}
 
 	.focused {
-		fill: red;
+		fill: var(--colorMarkerFocused);
 		pointer-events: none;
+	}
+
+	.multiMarker .center {
+		fill: var(--colorClusterTextBkgStroke);
+		stroke: var(--colorMain);
+	}
+	.ray .hero {
+		fill: var(--colorMarkerFocused);
 	}
 </style>

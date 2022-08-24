@@ -1,9 +1,13 @@
 The map shows organisations in their location.
 
+#### Types of markers
+
 Single organisations are rendered as pie charts showing their types.
 
-Depending on their distribution in the visible area, orgs can be
+Depending on their distribution in the visible area, organisations can be
 clustered to avoid cluttering.
-
 Clusters of organisations are rendered as a pie chart of all the types in that
-cluster and a label with the amount of orgs in that cluster.
+cluster and a label showing the amount of organisations in that cluster.
+
+Groups of organisations sharing the same location are rendered as stars where
+each ray represents the types of a single organisation.

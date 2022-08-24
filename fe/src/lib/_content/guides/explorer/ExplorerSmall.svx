@@ -21,18 +21,19 @@ Here you have various panels to control filtering criteria.
 
 <MapIntro />
 
+#### Navigating the map
+
 To select an area of the map, you can:
 	* pan by touching and dragging the map around
 	* zoom by:
 		* pinching the screen, or
 		* clicking on the +/- buttons on the map
 
-Clicking a single org on the map:
-	* shows a pop-up with the same info displayed in the org card (see below).
-	* pin it, so that the pop-up above will persist and that you can click on the
-		org's website link or pills.
+#### Interacting with markers
 
-To un-pin an org, you can click on the pop-up background.
+Clicking a single org or a star ray shows a pop-up with the same info displayed
+in the org card and pins it, so that you can click on the org's website link or
+pills. To dismiss it, click on the background.
 
 ### Details tab
 
