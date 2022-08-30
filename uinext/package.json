@@ -15,6 +15,7 @@
 		"just-compare": "^2.1.0",
 		"lamb": "^0.60.0",
 		"mapbox-gl": "^2.8.1",
+		"mapbox.js": "^3.3.1",
 		"supercluster": "^7.1.5",
 		"yootils": "^0.3.1"
 	},
@@ -68,7 +69,8 @@
 	"scripts": {
 		"build": "npm run rmsappers && sapper build --legacy",
 		"chmod": "chmod u+x src/bin/*",
-		"copymapboxcss": "cpy --flat ./node_modules/mapbox-gl/dist/mapbox-gl.css ./static/css/",
+		"copyMapboxGlCss": "cpy --flat ./node_modules/mapbox-gl/dist/mapbox-gl.css ./static/css/",
+		"copyMapboxJsCss": "cpy --flat ./node_modules/mapbox.js/dist/mapbox.css ./static/css/",
 		"deploy": "npm run makedata && npm run export",
 		"dev": "npm run rmsappers && sapper dev",
 		"export": "npm run rmsappers && export SAPPER_EXPORT=true && sapper export --legacy",
@@ -79,7 +81,7 @@
 		"makedata": "npm run makedatadir && npm run mergeAnnotations",
 		"mergeAnnotations": "node -r esm src/bin/mergeAnnotations.js",
 		"pa11y": "node -r esm test/pa11y/validate.js",
-		"postinstall": "npm run copymapboxcss",
+		"postinstall": "npm run copyMapboxGlCss && npm run copyMapboxJsCss",
 		"reportToCSV": "npm run chmod && node -r esm src/bin/reportToCSV.js",
 		"rmdata": "rimraf static/data",
 		"rmsappers": "rimraf __sapper__ src/node_modules/@sapper",
