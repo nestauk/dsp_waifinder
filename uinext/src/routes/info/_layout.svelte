@@ -1,4 +1,5 @@
 <script>
+	import {stores} from '@sapper/app';
 	import * as _ from 'lamb';
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
@@ -6,11 +7,14 @@
 	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
 	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
 	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
+	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
 	import {isNotNil} from '@svizzle/utils';
 
 	import Link from 'app/components/svizzle/Link.svelte';
 	import {_currThemeVars} from 'app/stores/theme';
+
+	const {page: _page} = stores();
 
 	const segments = ['privacy', 'disclaimer'];
 	const titles = {
@@ -20,11 +24,19 @@
 
 	export let segment;
 
+	let contentElement;
+
 	$: currentValueIndex = _.findIndex(segments, _.is(segment));
 	$: prevSegment = segments[currentValueIndex - 1];
 	$: nextSegment = segments[currentValueIndex + 1];
 	$: hasPrevSegment = isNotNil(prevSegment);
 	$: hasNextSegment = isNotNil(nextSegment);
+
+	$: {
+		// eslint-disable-next-line no-unused-expressions
+		$_page;
+		isClientSide && contentElement?.scrollTo(0, 0);
+	}
 </script>
 
 <main class='_layout info {$_screen?.classes}'>
@@ -85,7 +97,9 @@
 				</div>
 			{/if}
 		</menu>
-		<slot />
+		<div bind:this={contentElement}>
+			<slot />
+		</div>
 	</section>
 </main>
 
@@ -116,6 +130,12 @@
 	.medium section {
 		grid-template-areas: 'header' 'menu' 'slot';
 		grid-template-rows: auto auto 1fr;
+	}
+
+	div {
+		background-color: var(--colorBackgroundMain);
+		max-width: 900px;
+		overflow-y: auto;
 	}
 
 	h1 {

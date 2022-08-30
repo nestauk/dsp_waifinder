@@ -1,5 +1,5 @@
 <script>
-	import { stores } from '@sapper/app';
+	import {stores} from '@sapper/app';
 	import * as _ from 'lamb';
 
 	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
@@ -23,7 +23,7 @@
 
 	export let segment;
 
-	let content;
+	let contentElement;
 
 	$: currentValueIndex = _.findIndex(segments, _.is(segment));
 	$: prevSegment = segments[currentValueIndex - 1];
@@ -32,8 +32,9 @@
 	$: hasNextSegment = isNotNil(nextSegment);
 
 	$: {
+		// eslint-disable-next-line no-unused-expressions
 		$_page;
-		isClientSide && content?.scrollTo(0, 0);
+		isClientSide && contentElement?.scrollTo(0, 0);
 	}
 </script>
 
@@ -97,7 +98,7 @@
 				</div>
 			{/if}
 		</menu>
-		<div bind:this={content}>
+		<div bind:this={contentElement}>
 			<slot />
 		</div>
 	</section>
