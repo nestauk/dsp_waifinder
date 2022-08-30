@@ -66,7 +66,6 @@ const processTopics = _.pipe([
 
 const schemaRegex = /^([a-z0-9]+):\/\//u;
 const getSchema = url => (url.match(schemaRegex) || [])[1];
-
 const condAddSchema = url => schemaRegex.test(url) ? url : `//${url}`;
 
 const processOrg = _.pipe([
@@ -158,7 +157,7 @@ const main = async () => {
 	const orgsCountsByUrlSchema = getOrgsCountsByUrlSchema(data);
 
 	saveObj(OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA, 2)(orgsCountsByUrlSchema)
-	.then(tapMessage(`Saved objects with schema counts in ${OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA}`))
+	.then(tapMessage(`Saved schema counts in ${OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA}`))
 	.catch(err => console.error(err));
 };
 
