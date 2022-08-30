@@ -16,6 +16,7 @@ const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places.json';
 const OUT_FILE_DATA = 'static/data/ai_map_annotated_orgs.json';
 const OUT_FILE_UNTAGGED_ORGS = 'dataQuality/orgsWithNoTopics.json';
 const OUT_FILE_UNPLACED_ORGS = 'dataQuality/orgsWithNoPlace.json';
+const OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA = 'dataQuality/orgsCountsByUrlSchema.json';
 
 /* utils */
 
@@ -63,12 +64,17 @@ const processTopics = _.pipe([
 	]),
 ]);
 
+const schemaRegex = /^([a-z0-9]+):\/\//u;
+const getSchema = url => (url.match(schemaRegex) || [])[1];
+const condAddSchema = url => schemaRegex.test(url) ? url : `//${url}`;
+
 const processOrg = _.pipe([
 	_.skip(['dbpedia_entities_metadata']),
 	_.rename({dbpedia_entities: 'topics'}),
 	transformValues({
 		topics: processTopics,
 		types: _.sortWith(),
+		url: condAddSchema
 	}),
 	obj => ({...obj, id: hash(obj)}),
 	sortObjectKeysAsc,
@@ -97,6 +103,14 @@ const getOrgsWithNoTopics = _.pipe([
 ]);
 const getOrgsWithNoPlace = ({orgs, placesById}) =>
 	_.filter(orgs, ({place_id}) => !_.has(placesById, place_id));
+
+const getOrgsCountsByUrlSchema = _.pipe([
+	_.getKey('orgs'),
+	_.countBy(_.pipe([
+		_.getKey('url'),
+		getSchema
+	]))
+]);
 
 /* run */
 
@@ -136,6 +150,14 @@ const main = async () => {
 
 	saveObj(OUT_FILE_UNPLACED_ORGS, 2)(orgsWithNoPlace)
 	.then(tapMessage(`Saved objects with no place in ${OUT_FILE_UNPLACED_ORGS}`))
+	.catch(err => console.error(err));
+
+	/* dq: url schema */
+
+	const orgsCountsByUrlSchema = getOrgsCountsByUrlSchema(data);
+
+	saveObj(OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA, 2)(orgsCountsByUrlSchema)
+	.then(tapMessage(`Saved schema counts in ${OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA}`))
 	.catch(err => console.error(err));
 };
 
