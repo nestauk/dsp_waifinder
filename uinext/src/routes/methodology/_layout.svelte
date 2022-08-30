@@ -1,15 +1,19 @@
 <script>
+	import { stores } from '@sapper/app';
 	import * as _ from 'lamb';
 
 	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
 	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
 	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
 	import {isNotNil} from '@svizzle/utils';
 
 	import Link from 'app/components/svizzle/Link.svelte';
 	import {_currThemeVars} from 'app/stores/theme';
+
+	const {page: _page} = stores();
 
 	const segments = ['orgs', 'topics'];
 	const titles = {
@@ -19,11 +23,18 @@
 
 	export let segment;
 
+	let content;
+
 	$: currentValueIndex = _.findIndex(segments, _.is(segment));
 	$: prevSegment = segments[currentValueIndex - 1];
 	$: nextSegment = segments[currentValueIndex + 1];
 	$: hasPrevSegment = isNotNil(prevSegment);
 	$: hasNextSegment = isNotNil(nextSegment);
+
+	$: {
+		$_page;
+		isClientSide && content?.scrollTo(0, 0);
+	}
 </script>
 
 <main class='_layout methodology {$_screen?.classes}'>
@@ -86,7 +97,7 @@
 				</div>
 			{/if}
 		</menu>
-		<div>
+		<div bind:this={content}>
 			<slot />
 		</div>
 	</section>
