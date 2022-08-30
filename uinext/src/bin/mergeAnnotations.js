@@ -63,12 +63,16 @@ const processTopics = _.pipe([
 	]),
 ]);
 
+const schemaRegex = /^([a-z0-9]+):\/\//u;
+const condAddSchema = url => schemaRegex.test(url) ? url : `//${url}`;
+
 const processOrg = _.pipe([
 	_.skip(['dbpedia_entities_metadata']),
 	_.rename({dbpedia_entities: 'topics'}),
 	transformValues({
 		topics: processTopics,
 		types: _.sortWith(),
+		url: condAddSchema
 	}),
 	obj => ({...obj, id: hash(obj)}),
 	sortObjectKeysAsc,
