@@ -1,14 +1,14 @@
 <script>
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
-	import ExplorerMedium from 'app/components/explorer/medium/ExplorerMedium.svelte';
-	import ExplorerSmall from 'app/components/explorer/small/ExplorerSmall.svelte';
-	import View from 'app/components/viewports/View.svelte';
-	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
-	import {toolName} from 'app/config';
-	import {updateDataset} from 'app/stores/dataset';
-	import {_screenId} from 'app/stores/layout';
-	import {setDefaultActiveView} from 'app/stores/navigation';
+	import ExplorerMedium from '$lib/components/explorer/medium/ExplorerMedium.svelte';
+	import ExplorerSmall from '$lib/components/explorer/small/ExplorerSmall.svelte';
+	import View from '$lib/components/viewports/View.svelte';
+	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
+	import {toolName} from '$lib/config';
+	import {updateDataset} from '$lib/stores/dataset';
+	import {_screenId} from '$lib/stores/layout';
+	import {setDefaultActiveView} from '$lib/stores/navigation';
 
 	const loadData = async () => {
 		const response = await fetch('/data/ai_map_annotated_orgs.json');

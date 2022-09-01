@@ -1,7 +1,7 @@
 <script>
 	import MethodologyTopics from '../_content/methodology/Topics.svx';
 
-	import {toolName} from 'app/config';
+	import {toolName} from '$lib/config';
 </script>
 
 <svelte:head>

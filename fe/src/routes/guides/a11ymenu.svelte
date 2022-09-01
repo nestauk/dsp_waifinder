@@ -1,5 +1,5 @@
 <script>
-	import {toolName} from 'app/config';
+	import {toolName} from '$lib/config';
 
 	import A11ymenu from '../_content/guides/A11ymenu.svx';
 </script>

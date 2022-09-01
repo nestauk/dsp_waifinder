@@ -10,8 +10,8 @@
 	import {isNotNil} from '@svizzle/utils';
 	import * as _ from 'lamb';
 
-	import Link from 'app/components/svizzle/Link.svelte';
-	import {_currThemeVars} from 'app/stores/theme';
+	import Link from '$lib/components/svizzle/Link.svelte';
+	import {_currThemeVars} from '$lib/stores/theme';
 
 	const {page: _page} = stores();
 

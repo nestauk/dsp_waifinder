@@ -1,5 +1,5 @@
 <script>
-	import {toolName, addOrgFormUrl} from 'app/config';
+	import {toolName, addOrgFormUrl} from '$lib/config';
 </script>
 
 <svelte:head>

@@ -4,14 +4,14 @@
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
-	import TopicPanel from 'app/components/eval/TopicPanel.svelte';
-	import VoteButtons from 'app/components/eval/VoteButtons.svelte';
-	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
-	import EmailWidget from 'app/components/svizzle/EmailWidget.svelte';
-	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
-	import Scroller from 'app/components/svizzle/Scroller.svelte';
-	import {toolName} from 'app/config';
-	import {getOrientation, getScreenType} from 'app/utils/svizzle/ui';
+	import TopicPanel from '$lib/components/eval/TopicPanel.svelte';
+	import VoteButtons from '$lib/components/eval/VoteButtons.svelte';
+	import HighlightedText from '$lib/components/svizzle/HighlightedText.svelte';
+	import EmailWidget from '$lib/components/svizzle/EmailWidget.svelte';
+	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
+	import Scroller from '$lib/components/svizzle/Scroller.svelte';
+	import {toolName} from '$lib/config';
+	import {getOrientation, getScreenType} from '$lib/utils/svizzle/ui';
 
 	import {
 		_currentOrg,
@@ -21,12 +21,12 @@
 		clearActiveTopic,
 		defaultUserEmail,
 		loadNextOrg,
-	} from 'app/stores/eval';
-	import {_isSmallScreen} from 'app/stores/layout';
-	import {getTopicLabel} from 'app/utils/dataUtils';
-	import {dbrPrefix} from 'app/utils/dbpedia';
-	import {sendEvaluations} from 'app/utils/eval';
-	import {safeRegexOf} from 'app/utils/svizzle/utils';
+	} from '$lib/stores/eval';
+	import {_isSmallScreen} from '$lib/stores/layout';
+	import {getTopicLabel} from '$lib/utils/dataUtils';
+	import {dbrPrefix} from '$lib/utils/dbpedia';
+	import {sendEvaluations} from '$lib/utils/eval';
+	import {safeRegexOf} from '$lib/utils/svizzle/utils';
 
 	let currentEntity;
 	let description;
