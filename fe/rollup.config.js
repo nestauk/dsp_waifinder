@@ -24,8 +24,6 @@ const aliasConfig = alias({
 	]
 });
 
-console.log('appRoot', appRoot)
-
 // locally: 'development'
 // Netlify: 'dev'|'staging'|'release'
 const nodeEnv = process.env.NODE_ENV;
