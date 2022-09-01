@@ -1,7 +1,7 @@
 import {get, writable} from 'svelte/store';
 
-import {getNextOrg} from 'app/utils/eval';
-import {makeTopicDetailsStoreUpdaters} from 'app/utils/topics';
+import {getNextOrg} from '$lib/utils/eval';
+import {makeTopicDetailsStoreUpdaters} from '$lib/utils/topics';
 
 export const _currentOrg = writable();
 export const _userEmail = writable();

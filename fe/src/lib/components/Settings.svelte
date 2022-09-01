@@ -2,9 +2,9 @@
 	import * as _ from 'lamb';
 	import Switch from '@svizzle/ui/src/Switch.svelte';
 
-	import BarchartVDiv from 'app/components/svizzle/BarchartVDiv.svelte';
-	import Input from 'app/components/svizzle/Input.svelte';
-	import {_keyOrgTypeValueOrgsCount, _orgsCount} from 'app/stores/data';
+	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
+	import Input from '$lib/components/svizzle/Input.svelte';
+	import {_keyOrgTypeValueOrgsCount, _orgsCount} from '$lib/stores/data';
 	import {
 		_orgSearchValue,
 		_orgTypesSelectionMode,
@@ -13,8 +13,8 @@
 		orgTypesSelectionModes,
 		toggleOrgType,
 		toggleOrgTypesSelectionMode,
-	} from 'app/stores/selection';
-	import {_currThemeVars, _orgTypeToColorFn} from 'app/stores/theme';
+	} from '$lib/stores/selection';
+	import {_currThemeVars, _orgTypeToColorFn} from '$lib/stores/theme';
 
 	const toggledOrgType = ({detail: {id}}) => toggleOrgType(id);
 </script>

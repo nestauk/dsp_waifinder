@@ -2,7 +2,7 @@ import {toggleItem} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, get, writable} from 'svelte/store';
 
-import {safeRegexOf} from 'app/utils/svizzle/utils';
+import {safeRegexOf} from '$lib/utils/svizzle/utils';
 
 /* bounding box, zoom */
 

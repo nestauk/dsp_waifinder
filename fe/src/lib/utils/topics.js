@@ -1,7 +1,7 @@
 import {get} from 'svelte/store';
 
-import {fetchEntityDetail} from 'app/utils/dbpedia';
-import {getTopicLabel} from 'app/utils/dataUtils';
+import {fetchEntityDetail} from '$lib/utils/dbpedia';
+import {getTopicLabel} from '$lib/utils/dataUtils';
 
 const topicsCache = {};
 

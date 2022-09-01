@@ -3,7 +3,7 @@
 	import ExplorerMedium from '../_content/guides/explorer/ExplorerMedium.svx';
 	import ExplorerSmall from '../_content/guides/explorer/ExplorerSmall.svx';
 
-	import {toolName} from 'app/config';
+	import {toolName} from '$lib/config';
 </script>
 
 <svelte:head>

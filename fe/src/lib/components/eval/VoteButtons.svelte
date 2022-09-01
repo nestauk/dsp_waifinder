@@ -6,7 +6,7 @@
 	import {noop} from '@svizzle/utils';
 	import {createEventDispatcher} from 'svelte';
 
-	import {_isSmallScreen} from 'app/stores/layout';
+	import {_isSmallScreen} from '$lib/stores/layout';
 
 	export let isVerticalLayout = false;
 

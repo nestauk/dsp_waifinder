@@ -12,24 +12,24 @@
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
-	import Footer from 'app/components/layout/medium/Footer.svelte';
-	import Nav from 'app/components/layout/Nav.svelte';
-	import ThemeEditor from 'app/components/layout/medium/ThemeEditor.svelte';
-	import MultiBanner from 'app/components/svizzle/MultiBanner.svelte';
-	import StyleSensor from 'app/components/svizzle/StyleSensor.svelte';
+	import Footer from '$lib/components/layout/medium/Footer.svelte';
+	import Nav from '$lib/components/layout/Nav.svelte';
+	import ThemeEditor from '$lib/components/layout/medium/ThemeEditor.svelte';
+	import MultiBanner from '$lib/components/svizzle/MultiBanner.svelte';
+	import StyleSensor from '$lib/components/svizzle/StyleSensor.svelte';
 	import {
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
 		isDev
-	} from 'app/config';
-	import {_isSmallScreen} from 'app/stores/layout';
+	} from '$lib/config';
+	import {_isSmallScreen} from '$lib/stores/layout';
 	import {
 		_currThemeVars,
 		_isThemeEditorActive,
 		_themeName,
 		_themeVars
-	} from 'app/stores/theme'
+	} from '$lib/stores/theme'
 
 	import Privacy from './_content/info/Privacy.svx';
 

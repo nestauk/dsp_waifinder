@@ -1,22 +1,22 @@
 <script>
-	import OrgsList from 'app/components/orgs/OrgsList.svelte';
-	import BarchartVDiv from 'app/components/svizzle/BarchartVDiv.svelte';
-	import MessageView from 'app/components/svizzle/MessageView.svelte';
-	import View from 'app/components/viewports/View.svelte';
-	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
-	import {noOrgsMessage} from 'app/config';
+	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
+	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
+	import MessageView from '$lib/components/svizzle/MessageView.svelte';
+	import View from '$lib/components/viewports/View.svelte';
+	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
+	import {noOrgsMessage} from '$lib/config';
 	import {
 		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
 		_orgs,
-	} from 'app/stores/data';
-	import {_activeViewId, setActiveView} from 'app/stores/navigation';
+	} from '$lib/stores/data';
+	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
-	} from 'app/stores/topics';
-	import {getTopicLabel} from 'app/utils/dataUtils';
+	} from '$lib/stores/topics';
+	import {getTopicLabel} from '$lib/utils/dataUtils';
 
 	import MultiviewSelector from './MultiviewSelector.svelte';
 </script>

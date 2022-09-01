@@ -6,9 +6,9 @@
 	import Tag from '@svizzle/ui/src/icons/feather/Tag.svelte';
 	import {noop} from '@svizzle/utils';
 
-	import {getStrokeColor} from 'app/components/explorer/utils';
-	import City from 'app/components/icons/City.svelte';
-	import Region from 'app/components/icons/Region.svelte';
+	import {getStrokeColor} from '$lib/components/explorer/utils';
+	import City from '$lib/components/icons/City.svelte';
+	import Region from '$lib/components/icons/Region.svelte';
 
 	export let activeViewId;
 	export let setView = noop;

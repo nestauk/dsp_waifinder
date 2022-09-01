@@ -1,5 +1,5 @@
 <script>
-	import {toolName} from 'app/config';
+	import {toolName} from '$lib/config';
 
 	import Content from './_content/Index.svx';
 </script>

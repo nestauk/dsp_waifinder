@@ -5,8 +5,8 @@
 	import Send from '@svizzle/ui/src/icons/feather/Send.svelte';
 	import Link from '@svizzle/ui/src/Link.svelte';
 
-	import {jsonUrl} from 'app/config';
-	import {_currThemeVars} from 'app/stores/theme';
+	import {jsonUrl} from '$lib/config';
+	import {_currThemeVars} from '$lib/stores/theme';
 
 	export let segment;
 

@@ -1,23 +1,23 @@
 <script>
-	import OrgBanner from 'app/components/banners/OrgBanner.svelte';
-	import TopicBanner from 'app/components/banners/TopicBanner.svelte';
-	import Mapbox from 'app/components/map/Mapbox.svelte';
-	import SvgLayers from 'app/components/map/SvgLayers.svelte';
-	import Settings from 'app/components/Settings.svelte';
+	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
+	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import Mapbox from '$lib/components/map/Mapbox.svelte';
+	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
+	import Settings from '$lib/components/Settings.svelte';
 
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL
-	} from 'app/config';
-	import {_clusters} from 'app/stores/data';
-	import {getLonLat} from 'app/utils/dataUtils';
+	} from '$lib/config';
+	import {_clusters} from '$lib/stores/data';
+	import {getLonLat} from '$lib/utils/dataUtils';
 	import {
 		_hero,
 		clearInteractionStores,
 		clearIsCursorOnMap,
 		setIsCursorOnMap
-	} from 'app/stores/interaction';
-	import {_activeTopicDetails} from 'app/stores/topics';
+	} from '$lib/stores/interaction';
+	import {_activeTopicDetails} from '$lib/stores/topics';
 
 	import Multiview from './Multiview.svelte';
 </script>

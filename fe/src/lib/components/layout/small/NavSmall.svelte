@@ -10,13 +10,13 @@
 	import Link from '@svizzle/ui/src/Link.svelte';
 	import {isServerSide} from '@svizzle/ui/src/utils/env';
 
-	import {changelogUrl, jsonUrl} from 'app/config';
+	import {changelogUrl, jsonUrl} from '$lib/config';
 	import {
 		_a11yFillColor,
 		_a11yStrokeColor,
 		_currThemeVars
-	} from 'app/stores/theme';
-	import {version} from 'app/utils/version';
+	} from '$lib/stores/theme';
+	import {version} from '$lib/utils/version';
 
 	export let contentHeight;
 	export let segment;

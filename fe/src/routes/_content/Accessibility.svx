@@ -2,9 +2,9 @@
 	import LinkButton from '@svizzle/ui/src/LinkButton.svelte';
 	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
 
-	import {contactEmail,toolName} from 'app/config';
-	import {_currThemeVars} from 'app/stores/theme';
-	// import {zipUrl} from 'app/utils/assets';
+	import {contactEmail,toolName} from '$lib/config';
+	import {_currThemeVars} from '$lib/stores/theme';
+	// import {zipUrl} from '$lib/utils/assets';
 	const zipUrl = '';
 
 	const lighthouseUrl = 'https://developers.google.com/web/tools/lighthouse';

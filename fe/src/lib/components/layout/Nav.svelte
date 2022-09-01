@@ -1,9 +1,9 @@
 <script>
 	import {isServerSide} from '@svizzle/ui/src/utils/env';
 
-	import NavMedium from 'app/components/layout/medium/NavMedium.svelte';
-	import NavSmall from 'app/components/layout/small/NavSmall.svelte';
-	import {_isSmallScreen} from 'app/stores/layout';
+	import NavMedium from '$lib/components/layout/medium/NavMedium.svelte';
+	import NavSmall from '$lib/components/layout/small/NavSmall.svelte';
+	import {_isSmallScreen} from '$lib/stores/layout';
 
 	export let contentHeight;
 	export let segment;

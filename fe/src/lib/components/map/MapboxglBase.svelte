@@ -4,8 +4,8 @@
 	import mapboxgl from 'mapbox-gl';
 	import {beforeUpdate, onMount} from 'svelte';
 
-	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from 'app/stores/selection';
-	import {clearHero} from 'app/stores/interaction';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
+	import {clearHero} from '$lib/stores/interaction';
 
 	import {
 		FIT_PADDING,

@@ -4,14 +4,14 @@
 	import A11yPerson from '@svizzle/ui/src/icons/svizzle/A11yPerson.svelte';
 	import Link from '@svizzle/ui/src/Link.svelte';
 
-	import {changelogUrl, isDev} from 'app/config';
+	import {changelogUrl, isDev} from '$lib/config';
 	import {
 		_a11yFillColor,
 		_a11yStrokeColor,
 		_currThemeVars,
 		_isThemeEditorActive
-	} from 'app/stores/theme';
-	import {version} from 'app/utils/version';
+	} from '$lib/stores/theme';
+	import {version} from '$lib/utils/version';
 
 	export let segment;
 	export let showA11yMenu = false;

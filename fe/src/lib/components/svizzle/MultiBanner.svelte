@@ -1,6 +1,6 @@
 <script>
-	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
-	import Scroller from 'app/components/svizzle/Scroller.svelte';
+	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
+	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 
 	import Banner from './Banner.svelte';
 

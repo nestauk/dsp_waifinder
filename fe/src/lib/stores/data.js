@@ -13,7 +13,7 @@ import * as _ from 'lamb';
 import Supercluster from 'supercluster';
 import {derived, get} from 'svelte/store';
 
-import {_dataset} from 'app/stores/dataset';
+import {_dataset} from '$lib/stores/dataset';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
@@ -22,9 +22,9 @@ import {
 	_placesSearchRegex,
 	_selectedOrgTypes,
 	_zoom,
-} from 'app/stores/selection';
-import {countOrgTypes, getLonLat, getTopics} from 'app/utils/dataUtils';
-import {isRegexpNotEmpty} from 'app/utils/svizzle/utils';
+} from '$lib/stores/selection';
+import {countOrgTypes, getLonLat, getTopics} from '$lib/utils/dataUtils';
+import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
 /* filtered orgs */
 

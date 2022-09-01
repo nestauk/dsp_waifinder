@@ -4,17 +4,17 @@
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 
-	import Banner from 'app/components/svizzle/Banner.svelte';
-	import LayoutHMF from 'app/components/svizzle/LayoutHMF.svelte';
-	import Scroller from 'app/components/svizzle/Scroller.svelte';
-	import WikipediaLogo from 'app/components/icons/WikipediaLogo.svelte';
-	import {bannersDefaultFooterText} from 'app/config';
+	import Banner from '$lib/components/svizzle/Banner.svelte';
+	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
+	import Scroller from '$lib/components/svizzle/Scroller.svelte';
+	import WikipediaLogo from '$lib/components/icons/WikipediaLogo.svelte';
+	import {bannersDefaultFooterText} from '$lib/config';
 	import {
 		_activeTopicDetails,
 		clearActiveTopic
-	} from 'app/stores/topics';
-	import {getFirstPhrases} from 'app/utils/dataUtils';
-	import {getWikipediaURL} from 'app/utils/dbpedia';
+	} from '$lib/stores/topics';
+	import {getFirstPhrases} from '$lib/utils/dataUtils';
+	import {getWikipediaURL} from '$lib/utils/dbpedia';
 
 	export let hasBackground = false;
 	export let isPinned;

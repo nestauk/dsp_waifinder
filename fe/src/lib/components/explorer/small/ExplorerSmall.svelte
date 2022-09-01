@@ -1,33 +1,33 @@
 <script>
-	import OrgBanner from 'app/components/banners/OrgBanner.svelte';
-	import TopicBanner from 'app/components/banners/TopicBanner.svelte';
-	import Mapbox from 'app/components/map/Mapbox.svelte';
-	import SvgLayers from 'app/components/map/SvgLayers.svelte';
-	import OrgsList from 'app/components/orgs/OrgsList.svelte';
-	import Settings from 'app/components/Settings.svelte';
-	import BarchartVDiv from 'app/components/svizzle/BarchartVDiv.svelte';
-	import MessageView from 'app/components/svizzle/MessageView.svelte';
-	import View from 'app/components/viewports/View.svelte';
-	import ViewsXor from 'app/components/viewports/ViewsXor.svelte';
+	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
+	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import Mapbox from '$lib/components/map/Mapbox.svelte';
+	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
+	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
+	import Settings from '$lib/components/Settings.svelte';
+	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
+	import MessageView from '$lib/components/svizzle/MessageView.svelte';
+	import View from '$lib/components/viewports/View.svelte';
+	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL,
 		noOrgsMessage
-	} from 'app/config';
+	} from '$lib/config';
 	import {
 		_clusters,
 		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
 		_orgs,
-	} from 'app/stores/data';
-	import {_hero} from 'app/stores/interaction';
-	import {_activeViewId, setActiveView} from 'app/stores/navigation';
+	} from '$lib/stores/data';
+	import {_hero} from '$lib/stores/interaction';
+	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
 	import {
 		_activeTopicDetails,
 		asyncUpdateTopicDetails,
-	} from 'app/stores/topics';
-	import {getLonLat, getTopicLabel} from 'app/utils/dataUtils';
+	} from '$lib/stores/topics';
+	import {getLonLat, getTopicLabel} from '$lib/utils/dataUtils';
 
 	import ViewSelector from './ViewSelector.svelte';
 </script>

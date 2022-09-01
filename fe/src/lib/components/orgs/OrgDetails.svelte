@@ -6,24 +6,24 @@
 	import * as _ from 'lamb';
 	import {createEventDispatcher} from 'svelte';
 
-	import CopyToClipboardButton from 'app/components/svizzle/CopyToClipboard.svelte';
-	import HighlightedText from 'app/components/svizzle/HighlightedText.svelte';
-	import Link from 'app/components/svizzle/Link.svelte';
-	import Scroller from 'app/components/svizzle/Scroller.svelte';
-	import {_hero, setHero, clearHero} from 'app/stores/interaction';
-	import {_isSmallScreen} from 'app/stores/layout';
-	import {_orgSearchRegex} from 'app/stores/selection';
+	import CopyToClipboardButton from '$lib/components/svizzle/CopyToClipboard.svelte';
+	import HighlightedText from '$lib/components/svizzle/HighlightedText.svelte';
+	import Link from '$lib/components/svizzle/Link.svelte';
+	import Scroller from '$lib/components/svizzle/Scroller.svelte';
+	import {_hero, setHero, clearHero} from '$lib/stores/interaction';
+	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_orgSearchRegex} from '$lib/stores/selection';
 	import {
 		_currThemeVars,
 		_orgTypeToColorFn,
 		_orgTypeToTextColorFn
-	} from 'app/stores/theme';
+	} from '$lib/stores/theme';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
-	} from 'app/stores/topics';
-	import {getTopicLabel} from 'app/utils/dataUtils';
-	import {getWikipediaURL} from 'app/utils/dbpedia';
+	} from '$lib/stores/topics';
+	import {getTopicLabel} from '$lib/utils/dataUtils';
+	import {getWikipediaURL} from '$lib/utils/dbpedia';
 
 	import Pill from './Pill.svelte';
 

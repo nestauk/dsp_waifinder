@@ -8,10 +8,10 @@
 		_isHeroInBounds,
 		clearHero,
 		setHero
-	} from 'app/stores/interaction';
-	import {_isSmallScreen} from 'app/stores/layout';
-	import {getClusterExpansionZoom, getClusterLeaves} from 'app/stores/data';
-	import {_orgTypeToColorFn} from 'app/stores/theme';
+	} from '$lib/stores/interaction';
+	import {_isSmallScreen} from '$lib/stores/layout';
+	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
+	import {_orgTypeToColorFn} from '$lib/stores/theme';
 
 	/* props */
 

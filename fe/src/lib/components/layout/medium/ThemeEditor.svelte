@@ -2,15 +2,15 @@
 	import * as _ from 'lamb';
 	import {containsOneOf} from '@svizzle/utils';
 
-	import StyleDriver from 'app/components/svizzle/StyleDriver.svelte';
-	import CopyToClipboardButton from 'app/components/svizzle/CopyToClipboard.svelte';
+	import StyleDriver from '$lib/components/svizzle/StyleDriver.svelte';
+	import CopyToClipboardButton from '$lib/components/svizzle/CopyToClipboard.svelte';
 	import {
 		_currThemeVars,
 		_themeName,
 		_themeNames,
 		_themeVars
-	} from 'app/stores/theme';
-	import {getHexColor, getThemeClassDefsText} from 'app/utils/svizzle/style';
+	} from '$lib/stores/theme';
+	import {getHexColor, getThemeClassDefsText} from '$lib/utils/svizzle/style';
 
 	const getVarNames = _.pipe([
 		_.keys,

@@ -1,7 +1,7 @@
 <script>
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 
-	import VirtualList from 'app/components/VirtualList/VirtualList.svelte';
+	import VirtualList from '$lib/components/VirtualList/VirtualList.svelte';
 
 	import OrgDetails from './OrgDetails.svelte';
 

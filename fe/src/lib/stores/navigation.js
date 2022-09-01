@@ -1,7 +1,7 @@
 import * as _ from 'lamb';
 import {get, writable} from 'svelte/store';
 
-import {_isSmallScreen, _screenId} from 'app/stores/layout';
+import {_isSmallScreen, _screenId} from '$lib/stores/layout';
 
 const availableViewIds = {
 	medium: ['details', 'places', 'regions', 'topics']

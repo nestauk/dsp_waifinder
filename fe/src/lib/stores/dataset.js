@@ -2,7 +2,7 @@ import {getId, swapKeyValue} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {writable} from 'svelte/store';
 
-import {_selectedOrgTypes} from 'app/stores/selection';
+import {_selectedOrgTypes} from '$lib/stores/selection';
 
 export const _dataset = writable({
 	orgs: [],

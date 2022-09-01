@@ -1,8 +1,8 @@
 <script>
 	import {isClientSide} from '@svizzle/ui/src/utils/env';
 
-	import {getStylesheet, makeGetStyleRulesObj} from 'app/utils/svizzle/style';
-	import {getURL} from 'app/utils/svizzle/url';
+	import {getStylesheet, makeGetStyleRulesObj} from '$lib/utils/svizzle/style';
+	import {getURL} from '$lib/utils/svizzle/url';
 
 	export let href;
 	export let selectorRegex;

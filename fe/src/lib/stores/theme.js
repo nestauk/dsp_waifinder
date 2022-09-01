@@ -2,7 +2,7 @@ import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
 import {_isA11yDirty} from '@svizzle/ui/src/a11y/menu/settings';
 
-import {_dataset} from 'app/stores/dataset';
+import {_dataset} from '$lib/stores/dataset';
 
 export const _isThemeEditorActive = writable(false);
 

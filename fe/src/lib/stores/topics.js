@@ -1,6 +1,6 @@
 import {writable} from 'svelte/store';
 
-import {makeTopicDetailsStoreUpdaters} from 'app/utils/topics';
+import {makeTopicDetailsStoreUpdaters} from '$lib/utils/topics';
 
 export const _activeTopicDetails = writable();
 

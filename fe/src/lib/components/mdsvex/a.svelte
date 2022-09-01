@@ -1,7 +1,7 @@
 <script>
 	import Link from '@svizzle/ui/src/Link.svelte';
 
-	import {_currThemeVars} from 'app/stores/theme';
+	import {_currThemeVars} from '$lib/stores/theme';
 
 	export let href;
 

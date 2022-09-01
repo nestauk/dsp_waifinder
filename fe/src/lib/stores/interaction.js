@@ -1,7 +1,7 @@
 import {derived, writable, get} from 'svelte/store';
 
-import {_dataset} from 'app/stores/dataset';
-import {_isOrgWithinBbox} from 'app/stores/selection';
+import {_dataset} from '$lib/stores/dataset';
+import {_isOrgWithinBbox} from '$lib/stores/selection';
 /* hero */
 
 export const _hero = writable(null);

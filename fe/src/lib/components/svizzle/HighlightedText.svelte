@@ -2,7 +2,7 @@
 	import * as _ from 'lamb';
 	import {tick} from 'svelte';
 
-	import {isRegexpNotEmpty} from 'app/utils/svizzle/utils';
+	import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
 	const defaultColor = 'yellow';
 	const defaultString = '';

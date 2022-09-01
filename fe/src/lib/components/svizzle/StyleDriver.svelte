@@ -5,8 +5,8 @@
 		getAllStylesBySelector,
 		getStylesheet,
 		setStyleRules
-	} from 'app/utils/svizzle/style';
-	import {getURL} from 'app/utils/svizzle/url';
+	} from '$lib/utils/svizzle/style';
+	import {getURL} from '$lib/utils/svizzle/url';
 
 	export let href;
 	export let styleRules;

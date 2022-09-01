@@ -12,22 +12,22 @@
 	import Link from '@svizzle/ui/src/Link.svelte';
 	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 
-	import H2 from 'app/components/mdsvex/h2.svelte';
-	import P from 'app/components/mdsvex/p.svelte';
+	import H2 from '$lib/components/mdsvex/h2.svelte';
+	import P from '$lib/components/mdsvex/p.svelte';
 
 	import {
 		failingA11yAudit,
 		lighthouseUrls,
 		toolName
-	} from 'app/config';
-	import {_currThemeVars} from 'app/stores/theme';
+	} from '$lib/config';
+	import {_currThemeVars} from '$lib/stores/theme';
 	import {
 		getTest,
 		getTestResultsFilename,
 		groupTests,
 		testResultsBaseURL,
 		summarizeResults
-	} from 'app/utils/tests';
+	} from '$lib/utils/tests';
 
 	import Accessibility from './_content/Accessibility.svx';
 

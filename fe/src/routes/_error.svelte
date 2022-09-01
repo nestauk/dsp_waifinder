@@ -1,5 +1,5 @@
 <script>
-	import {isDev, toolName} from 'app/config';
+	import {isDev, toolName} from '$lib/config';
 
 	export let error;
 	export let status;
