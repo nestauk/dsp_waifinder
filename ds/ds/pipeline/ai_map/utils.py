@@ -134,6 +134,7 @@ def get_pgeocode_cities(postcode_list):
         "Bristol",
         "Birmingham",
         "Sheffield",
+        "York",
     ]
     pgeocode_cities = [
         q if q in city_names else None
