@@ -1,5 +1,5 @@
 <script>
-	import MethodologyTopics from '../_content/methodology/Topics.svx';
+	import MethodologyTopics from '$lib/_content/methodology/Topics.svx';
 
 	import {toolName} from '$lib/config';
 </script>

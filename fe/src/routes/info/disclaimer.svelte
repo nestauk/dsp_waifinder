@@ -1,7 +1,7 @@
 <script>
 	import {toolName} from '$lib/config';
 
-	import Disclaimer from '../_content/info/Disclaimer.svx';
+	import Disclaimer from '$lib/_content/info/Disclaimer.svx';
 </script>
 
 <svelte:head>

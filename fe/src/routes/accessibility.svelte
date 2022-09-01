@@ -29,7 +29,7 @@
 		summarizeResults
 	} from '$lib/utils/tests';
 
-	import Accessibility from './_content/Accessibility.svx';
+	import Accessibility from '$lib/_content/Accessibility.svx';
 
 	const lighthouseIssueUrl = 'https://github.com/GoogleChrome/lighthouse/issues/12039';
 

@@ -1,7 +1,7 @@
 <script>
 	import {toolName} from '$lib/config';
 
-	import Content from './_content/Index.svx';
+	import Content from '$lib/_content/Index.svx';
 </script>
 
 <svelte:head>

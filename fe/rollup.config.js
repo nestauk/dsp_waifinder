@@ -18,7 +18,7 @@ import {unescape_code} from './src/lib/utils/unescape-inlineCode';
 
 const appRoot = path.join(__dirname, 'src/lib');
 const aliasConfig = alias({
-	resolve: ['.js', 'svelte'],
+	resolve: ['.js', '.svelte', '.svx'],
 	entries: [
 		{find: '$lib', replacement: appRoot}
 	]
