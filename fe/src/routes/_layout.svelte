@@ -31,7 +31,7 @@
 		_themeVars
 	} from '$lib/stores/theme'
 
-	import Privacy from './_content/info/Privacy.svx';
+	import Privacy from '$lib/_content/info/Privacy.svx';
 
 	const bannerComponents = [
 		Privacy

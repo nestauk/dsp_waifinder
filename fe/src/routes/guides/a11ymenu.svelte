@@ -1,7 +1,7 @@
 <script>
 	import {toolName} from '$lib/config';
 
-	import A11ymenu from '../_content/guides/A11ymenu.svx';
+	import A11ymenu from '$lib/_content/guides/A11ymenu.svx';
 </script>
 
 <svelte:head>

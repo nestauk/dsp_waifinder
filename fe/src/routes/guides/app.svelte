@@ -1,7 +1,7 @@
 <script>
 	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-	import AppMedium from '../_content/guides/AppMedium.svx';
-	import AppSmall from '../_content/guides/AppSmall.svx';
+	import AppMedium from '$lib/_content/guides/AppMedium.svx';
+	import AppSmall from '$lib/_content/guides/AppSmall.svx';
 
 	import {toolName} from '$lib/config';
 </script>
