@@ -1,4 +1,4 @@
 .DS_Store
 .git
 node_modules
-!uinext/src/node_modules
+!fe/src/node_modules
