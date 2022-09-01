@@ -1,4 +1,5 @@
 /* eslint-disable no-process-env */
+import path from 'path';
 import commonjs from '@rollup/plugin-commonjs';
 import dsv from '@rollup/plugin-dsv';
 import json from '@rollup/plugin-json';
@@ -6,14 +7,24 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import yaml from '@rollup/plugin-yaml';
 import {mdsvex} from 'mdsvex';
+import alias from 'rollup-plugin-alias';
 import babel from 'rollup-plugin-babel';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 
 import pkg from './package.json';
-import {unescape_code} from './src/node_modules/app/utils/unescape-inlineCode';
+import {unescape_code} from './src/lib/utils/unescape-inlineCode';
 
+const appRoot = path.join(__dirname, 'src/lib');
+const aliasConfig = alias({
+	resolve: ['.js', 'svelte'],
+	entries: [
+		{find: '$lib', replacement: appRoot}
+	]
+});
+
+console.log('appRoot', appRoot)
 
 // locally: 'development'
 // Netlify: 'dev'|'staging'|'release'
@@ -60,7 +71,7 @@ export default {
 					'.svx'
 				],
 				preprocess: mdsvex({
-					layout:'./src/node_modules/app/components/mdsvex/_layout.svelte',
+					layout:'./src/lib/components/mdsvex/_layout.svelte',
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
@@ -77,6 +88,7 @@ export default {
 			dsv(),
 			json(),
 			yaml(),
+			aliasConfig,
 
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
@@ -120,7 +132,7 @@ export default {
 					'.svx'
 				],
 				preprocess: mdsvex({
-					layout:'./src/node_modules/app/components/mdsvex/_layout.svelte',
+					layout:'./src/lib/components/mdsvex/_layout.svelte',
 					remarkPlugins: [unescape_code]
 				}),
 				compilerOptions: {
@@ -135,6 +147,7 @@ export default {
 			dsv(),
 			json(),
 			yaml(),
+			aliasConfig
 		],
 		external:
 			Object.keys(pkg.dependencies)
