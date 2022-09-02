@@ -12,6 +12,7 @@
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
+	import {page as _page} from '$app/stores';
 	import Footer from '$lib/components/layout/medium/Footer.svelte';
 	import Nav from '$lib/components/layout/Nav.svelte';
 	import ThemeEditor from '$lib/components/layout/medium/ThemeEditor.svelte';
@@ -36,8 +37,6 @@
 	const bannerComponents = [
 		Privacy
 	];
-
-	export let segment;
 
 	// actions
 	const {
@@ -66,6 +65,7 @@
 		}
 	});
 
+	$: segment = $_page.url.pathname.split('/')[1];
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
 	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;

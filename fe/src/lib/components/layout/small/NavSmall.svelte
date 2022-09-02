@@ -201,7 +201,7 @@
 				>
 					<Link
 						href='/'
-						theme={{color: makeColor('.')}}
+						theme={{color: makeColor('')}}
 					>
 						Home
 					</Link>
