@@ -45,7 +45,7 @@ export const MAPBOXGL_ACCESSTOKEN = 'pk.eyJ1IjoibmVzdGEtdWsiLCJhIjoiY2ozbjUzY2dr
 /* testing */
 
 export const urlBases = {
-	development: 'http://localhost:3000',
+	development: 'http://localhost:5173',
 	preview: 'https://uk-ai-map-dev.netlify.app',
 	// production: '',
 };
