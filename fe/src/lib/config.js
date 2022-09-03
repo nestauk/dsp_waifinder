@@ -67,13 +67,6 @@ export const failingA11yAudit = [
 //	'Geo'
 ];
 
-
-// eslint-disable-next-line no-undef
-export const isDev = IS_DEV; // `IS_DEV` replaced by rollup
-
-// eslint-disable-next-line no-undef
-export const backendBase = BACKEND_BASE; // `BACKEND_BASE` replaced by rollup
-
 export const fontsInfo = [
 	{
 		family: 'Avenir Next Variable',

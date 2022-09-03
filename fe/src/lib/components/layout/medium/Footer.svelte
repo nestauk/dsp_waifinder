@@ -4,7 +4,8 @@
 	import A11yPerson from '@svizzle/ui/src/icons/svizzle/A11yPerson.svelte';
 	import Link from '@svizzle/ui/src/Link.svelte';
 
-	import {changelogUrl, isDev} from '$lib/config';
+	import {changelogUrl} from '$lib/config';
+	import {isDev} from '$lib/env';
 	import {
 		_a11yFillColor,
 		_a11yStrokeColor,

@@ -21,8 +21,8 @@
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
-		isDev
 	} from '$lib/config';
+	import {isDev} from '$lib/env';
 	import {_isSmallScreen} from '$lib/stores/layout';
 	import {
 		_currThemeVars,

@@ -1,5 +1,5 @@
 
-import {backendBase} from '$lib/config';
+import {backendBase} from '$lib/env';
 
 export async function request (
 	method,

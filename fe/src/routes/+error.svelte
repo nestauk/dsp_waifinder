@@ -1,5 +1,6 @@
 <script>
-	import {isDev, toolName} from '$lib/config';
+	import {toolName} from '$lib/config';
+	import {isDev} from '$lib/env';
 
 	export let error;
 	export let status;
