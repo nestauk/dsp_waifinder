@@ -104,7 +104,7 @@
 				role='none'
 			>
 				<Link
-					href='accessibility'
+					href='/accessibility'
 					theme={{color: makeColor('accessibility')}}
 				>
 					Accessibility

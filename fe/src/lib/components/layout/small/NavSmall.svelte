@@ -108,7 +108,7 @@
 					role='none'
 				>
 					<Link
-						href='info'
+						href='/info'
 						rel='prefetch'
 						theme={{color: makeColor('info')}}
 					>
@@ -125,7 +125,7 @@
 					role='none'
 				>
 					<Link
-						href='feedback'
+						href='/feedback'
 						rel='prefetch'
 						theme={{color: makeColor('feedback')}}
 					>
@@ -156,7 +156,7 @@
 					role='none'
 				>
 					<Link
-						href='accessibility'
+						href='/accessibility'
 						theme={{color: makeColor('accessibility')}}
 					>
 						Accessibility
@@ -167,7 +167,7 @@
 					role='none'
 				>
 					<Link
-						href='guides'
+						href='/guides'
 						theme={{color: makeColor('guides')}}
 					>
 						Guides
@@ -178,7 +178,7 @@
 					role='none'
 				>
 					<Link
-						href='methodology'
+						href='/methodology'
 						theme={{color: makeColor('methodology')}}
 					>
 						Methodology
@@ -189,7 +189,7 @@
 					role='none'
 				>
 					<Link
-						href='explorer'
+						href='/explorer'
 						theme={{color: makeColor('explorer')}}
 					>
 						Explorer
