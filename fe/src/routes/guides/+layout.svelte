@@ -1,5 +1,5 @@
 <script>
-	import {stores} from '@sapper/app';
+	import {page as _page} from '$app/stores';
 	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
 	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
 	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
@@ -12,8 +12,6 @@
 
 	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
-
-	const {page: _page} = stores();
 
 	const segments = ['app', 'explorer', 'a11ymenu'];
 	const titles = {

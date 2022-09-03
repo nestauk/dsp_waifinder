@@ -1,5 +1,5 @@
 <script>
-	import {stores} from '@sapper/app';
+	import {page as _page} from '$app/stores';
 	import * as _ from 'lamb';
 	import {_screen}
 		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
@@ -13,8 +13,6 @@
 
 	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
-
-	const {page: _page} = stores();
 
 	const segments = ['privacy', 'disclaimer'];
 	const titles = {
