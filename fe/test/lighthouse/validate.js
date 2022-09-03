@@ -4,7 +4,7 @@ import lighthouse from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
 import Queue from 'queue-promise';
 
-import {lighthouseUrls, urlBases} from '../../src/node_modules/app/config';
+import {lighthouseUrls, urlBases} from '../../src/lib/config.js';
 
 const queue = new Queue({
 	concurrent: 1
