@@ -16,7 +16,7 @@
 
 <h1>{status}</h1>
 
-<p>{error.message}</p>
+<p>{error?.message || 'Message not defined'}</p>
 
 {#if isDev && error.stack}
 	<pre>{error.stack}</pre>
