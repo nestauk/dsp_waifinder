@@ -20,6 +20,7 @@
 	"description": "App UI",
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.76",
 		"@sveltejs/kit": "next",
 		"@svizzle/dev": "^0.5.0",
 		"@svizzle/file": "^0.13.0",
