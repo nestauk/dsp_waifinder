@@ -1,5 +1,5 @@
 <script>
-	import {Icon, List, Tag} from '@svizzle/ui';
+	import {_screen, Icon, List, setupResizeObserver,Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
 	import {getStrokeColor} from '$lib/components/explorer/utils';
@@ -8,9 +8,19 @@
 
 	export let activeViewId;
 	export let setView = noop;
+
+	const {
+		_writable: _size,
+		resizeObserver
+	} = setupResizeObserver('multiviewselector');
+
+	$: console.log($_size)
+	$: console.log($_screen)
+	$: charsAvailable = $_size.inlineSize / ($_screen?.glyph.width || 9);
+	$: console.log('chars', charsAvailable);
 </script>
 
-<nav class='MultiviewSelector'>
+<nav class='MultiviewSelector' use:resizeObserver>
 
 	<!-- details -->
 	<div
@@ -18,7 +28,9 @@
 		class='button'
 		on:click={setView('details')}
 	>
-		<span>Details</span>
+		{#if charsAvailable > 43}
+			<span>Details</span>
+		{/if}
 		<Icon
 			glyph={List}
 			stroke={getStrokeColor('details', activeViewId)}
@@ -31,7 +43,9 @@
 		class='button'
 		on:click={setView('topics')}
 	>
-		<span>Topics</span>
+		{#if charsAvailable > 43}
+			<span>Topics</span>
+		{/if}
 		<span>
 			<Icon
 				glyph={Tag}
@@ -46,7 +60,9 @@
 		class='button'
 		on:click={setView('places')}
 	>
-		<span>Places</span>
+		{#if charsAvailable > 43}
+			<span>Places</span>
+		{/if}
 		<span>
 			<Icon
 				fill={getStrokeColor('places', activeViewId)}
@@ -62,7 +78,9 @@
 		class='button'
 		on:click={setView('regions')}
 	>
-		<span>Regions</span>
+		{#if charsAvailable > 43}
+			<span>Regions</span>
+		{/if}
 		<span>
 			<Icon
 				glyph={Region}
