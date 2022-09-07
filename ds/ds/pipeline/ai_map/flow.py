@@ -11,6 +11,8 @@ from metaflow import (
 import pandas as pd
 import numpy as np
 
+import json
+
 """
     Read in the data provided from GtR, Crunchbase and GlassAI
     and merge and reformat for outputs.
@@ -231,7 +233,7 @@ class merge_map_datasets(FlowSpec):
     @step
     def data_clean_up(self):
 
-        from ds.pipeline.ai_map.utils import convert_unicode
+        from ds.pipeline.ai_map.utils import convert_unicode, format_url
 
         self.ai_map_data["Description"] = self.ai_map_data["Description"].map(
             convert_unicode
@@ -240,6 +242,8 @@ class merge_map_datasets(FlowSpec):
         self.ai_map_data = pd.merge(
             self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
         ).reset_index(drop=True)
+
+        self.ai_map_data["Link"] = self.ai_map_data["Link"].apply(format_url)
 
         self.next(self.save_tsv)
 
