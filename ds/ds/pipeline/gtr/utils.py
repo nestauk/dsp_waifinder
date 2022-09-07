@@ -253,6 +253,101 @@ def get_crunchbase_links(cb_org_info):
     return lower_name2org_info
 
 
+def enhance_crunchbase_links(name2orginfo, conn, org_names):
+    """
+    Add to the dictionary of lower case org name to link/description inormation
+    using manually curated fixes
+    1. Query crunchbase using alternative names for organisations (which are used in crunchbase)
+        Using the 'gtr_cb_name_mapper' dictionary
+    2. Add links manually for select sample of organisations not found in crunchbase
+        Using the 'gtr_url_dict' dictionary
+    """
+
+    # GtR org name to Crunchbase naming conventions, this data has been checked manually
+    gtr_cb_name_mapper = {
+        "London School of Economics & Pol Sci": "London School of Economics and Political Science (LSE)",
+        "London Sch of Hygiene and Trop Medicine": "London School of Hygiene & Tropical Medicine",
+        "Leeds Metropolitan University": "Leeds Beckett University",
+        "Institute of Food Research": "Quadram Institute",
+        "LGC Limited": "LGC",
+        "Open University": "The Open University",
+        "NERC British Geological Survey": "The British Geological Survey",
+        "NERC British Antarctic Survey": "British Antarctic Survey",
+        "Moredun Research Institute": "Moredun Foundation",
+        "Health and Safety Executive": "HSE - Health and Safety Executive",
+        "Centre for Process Innovation Limited": "Centre for Process Innovation",
+        "Brunel University London": "Brunel University",
+        "Birkbeck College": "Birkbeck, University of London",
+        "Quadram Institute Bioscience": "Quadram Institute",
+        "Guildhall School of Music and Drama": "Guildhall School of Music & Drama",
+        "Goldsmiths College": "Goldsmiths, University of London",
+        "Food & Environment Research Agency": "Fera Science Ltd",
+        "Diamond Light Source": "DIAMOND LIGHT SOURCE LIMITED",
+        "Rothamsted Research": "Rothamsted Research Ltd.",
+        "University of Huddersfield": "The University of Huddersfield",
+        "University of Ulster": "Ulster University",
+        "University of Teesside": "Teesside University",
+        "Queen's University of Belfast": "Queen's University Belfast",
+        "The Robert Gordon University": "Robert Gordon University",
+        "The Alan Turing Institute": "Alan Turing Institute",
+        "STFC": "STFC",
+        "Salvation Army": "Salvation Army Red Shield Appeal",
+        "University College London": "University College London (UCL)",
+    }
+
+    # GtR urls manually found for a sample of those not found using crunchbase
+    gtr_url_dict = {
+        "Offshore Renewable Energy Catapult": {"Link": "https://ore.catapult.org.uk/"},
+        "MRC London Institute of Medical Sciences": {"Link": "https://lms.mrc.ac.uk/"},
+        "High Value Manufacturing Catapult": {"Link": "https://hvm.catapult.org.uk/"},
+        "Culham Centre for Fusion Energy": {"Link": "https://ccfe.ukaea.uk/"},
+        "Aircraft Research Association Limited": {"Link": "https://www.ara.co.uk/"},
+        "The Pirbright Institute": {"Link": "https://www.pirbright.ac.uk/"},
+        "UK Astronomy Technology Centre": {
+            "Link": "https://www.ukri.org/about-us/stfc/locations/royal-observatory-edinburgh/uk-astronomy-technology-centre/"
+        },
+    }
+
+    # Make sure to just use orgs we filtered for
+    gtr_cb_name_mapper = {k: v for k, v in gtr_cb_name_mapper.items() if k in org_names}
+    gtr_url_dict = {k: v for k, v in gtr_url_dict.items() if k in org_names}
+
+    # Get the crunchbase data for the alternative naming conventions used in crunchbase
+    org_names_url_df_alt_query = pd.read_sql(
+        query_cb_urls,
+        conn,
+        params={"l": tuple([s.lower() for s in gtr_cb_name_mapper.values()])},
+    )
+
+    org_names_url_df_alt = pd.DataFrame()
+    for orig_name, query_name in gtr_cb_name_mapper.items():
+        new_rows = org_names_url_df_alt_query[
+            org_names_url_df_alt_query["name"] == query_name
+        ].copy()
+        new_rows["name"] = [orig_name] * len(new_rows)
+        org_names_url_df_alt = pd.concat([org_names_url_df_alt, new_rows], axis=0)
+    org_names_url_df_alt.reset_index(inplace=True)
+
+    org_names_url_df_alt["name_lower"] = org_names_url_df_alt["name"].str.lower()
+
+    name2orginfo_alt = org_names_url_df_alt.set_index("name_lower")[
+        ["Link", "Description", "Description_short"]
+    ].to_dict(orient="index")
+
+    # Only update with unseen organisation information
+    name2orginfo_alt = {
+        k.lower(): v for k, v in name2orginfo_alt.items() if k not in name2orginfo
+    }
+    gtr_url_dict = {
+        k.lower(): v for k, v in gtr_url_dict.items() if k not in name2orginfo
+    }
+
+    name2orginfo.update(name2orginfo_alt)
+    name2orginfo.update(gtr_url_dict)
+
+    return name2orginfo
+
+
 def match_clean(name):
     import re
 

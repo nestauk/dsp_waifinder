@@ -102,7 +102,11 @@ class GtrAI(FlowSpec):
         Here we create a dict of name: {url, description} for each org name.
         """
 
-        from ds.pipeline.gtr.utils import query_cb_urls, get_crunchbase_links
+        from ds.pipeline.gtr.utils import (
+            query_cb_urls,
+            get_crunchbase_links,
+            enhance_crunchbase_links,
+        )
         import pandas as pd
 
         # Establish the connection to the SQL database
@@ -115,12 +119,14 @@ class GtrAI(FlowSpec):
 
         self.name2orginfo = get_crunchbase_links(self.org_names_url_df)
 
+        self.name2orginfo = enhance_crunchbase_links(self.name2orginfo, conn, org_names)
+
         def get_cb_info(col_name):
             return (
                 self.ai_orgs_grouped["Name"]
                 .str.lower()
                 .apply(
-                    lambda x: self.name2orginfo[x][col_name]
+                    lambda x: self.name2orginfo[x].get(col_name, None)
                     if self.name2orginfo.get(x)
                     else None
                 )
