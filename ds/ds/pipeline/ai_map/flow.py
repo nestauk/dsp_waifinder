@@ -6,6 +6,8 @@ from metaflow import (
     Parameter,
     project,
     step,
+    conda,
+    batch,
 )
 
 import pandas as pd
@@ -233,7 +235,9 @@ class merge_map_datasets(FlowSpec):
     @step
     def data_clean_up(self):
 
-        from ds.pipeline.ai_map.utils import convert_unicode, format_url
+        from toolz.itertoolz import partition
+
+        from ds.pipeline.ai_map.utils import convert_unicode
 
         self.ai_map_data["Description"] = self.ai_map_data["Description"].map(
             convert_unicode
@@ -243,7 +247,45 @@ class merge_map_datasets(FlowSpec):
             self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
         ).reset_index(drop=True)
 
-        self.ai_map_data["Link"] = self.ai_map_data["Link"].apply(format_url)
+        # Chunk up for Batch
+        all_links = self.ai_map_data["Links"].tolist()
+        self.links_chunked = list(partition(20, all_links))
+
+        # # For loop through each data path
+        print(
+            f"Running predictions on {len(all_links)} data files in {len(self.links_chunked)} batches ..."
+        )
+
+        # Get batching ready
+        self.next(self.format_links, foreach="links_chunked")
+
+    @batch(
+        memory=60000,
+        cpu=8,
+    )
+    @step
+    def format_links(self):
+        """
+        Create dicts of {original url: formatted url}
+        """
+
+        from ds.pipeline.ai_map.utils import format_url
+
+        self.url_format_dict = {}
+        for url in self.input:
+            self.url_format_dict[url] = format_url(url)
+
+        self.next(self.join_data)
+
+    @step
+    def join_data(self, inputs):
+        self.all_url_format_dict = {}
+        for batch_i in inputs:
+            self.all_url_format_dict.update(batch_i.url_format_dict)
+
+        self.ai_map_data["Link"] = self.ai_map_data["Link"].apply(
+            self.all_url_format_dict
+        )
 
         self.next(self.save_tsv)
 
