@@ -1,4 +1,4 @@
-import {getFamilies} from '@svizzle/ui/src/drivers/fonts/utils.js';
+import {getFamilies} from '@svizzle/ui';
 
 /* tool */
 
