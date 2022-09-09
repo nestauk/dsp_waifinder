@@ -18,9 +18,75 @@
 # # Data Analysis
 #
 # Descriptive analysis of the final AI map dataset.
-# - How big is it?
-# - Which organisations come from the different sources?
-# - What is the coverage for the different fields?
+#
+# ### Data size
+#
+# - There are 3029 organisations in the dataset
+#
+# ### Which organisations come from the different sources?
+#
+# - 2558 organisations were included from the GlassAI dataset in the Company category
+# - 329 organisations were included from the Crunchbase dataset in the Funder category
+# - 73 organisations were included from the GlassAI dataset in the Incubator / accelerator category
+# - 152 organisations were included from the GtR dataset in the University / RTO category
+#
+# Number of organisations from the different sources:
+#
+# |Company|Funder|Incubator / accelerator|University / RTO|n|
+# |--|--|--|--|--|
+# |x||||2484|
+# |x||x||65|
+# |x|x|x||8|
+# |x|x|||1|
+# ||||x|151|
+# ||x||x|1|
+# ||x|||319|
+#
+#
+# ### What is the coverage for the different fields?
+#
+# - 99.9% of the organisations have urls
+# - 99.7% of the organisations have descriptions
+#
+# - Orgs with no url: ['Food & Environment Research Agency', 'STFC']
+#
+# - Orgs with no description: ['Offshore Renewable Energy Catapult',
+#  'MRC London Institute of Medical Sciences',
+#  'High Value Manufacturing Catapult',
+#  'Food & Environment Research Agency',
+#  'Culham Centre for Fusion Energy',
+#  'Aircraft Research Association Limited',
+#  'The Pirbright Institute',
+#  'STFC',
+#  'UK Astronomy Technology Centre']
+#
+#
+#
+# |Dataset |GtR | Crunchbase | GlassAI |
+# |---|---|---|---|
+# |Number of data points|158|329|2558|
+# |% with the Postcode field|100%|100%|100%|
+# |% with the Longitude/Latitude fields|100%|100%|100%|
+# |% with the Link field|98.73%|100%|100%|
+# |% with the Description field|94.3%|100%|100%|
+# |% with the City field|29.11%|100%|0%|
+#
+#
+# ### Places
+#
+# - There are 355 places
+# - The place 'types' are from.. Counter({'village': 48, 'city': 107, 'town': 153, 'suburb': 39, 'county': 8})
+# - The most common places:
+# [('London', 1821),
+#  ('Cambridgeshire', 114),
+#  ('Edinburgh', 63),
+#  ('Oxford', 50),
+#  ('Manchester', 46),
+#  ('Bristol', 40),
+#  ('Glasgow', 34),
+#  ('Leeds', 30),
+#  ('Birmingham', 30),
+#  ('Guildford', 24)]
 
 # %%
 import pandas as pd
@@ -41,8 +107,6 @@ data.keys()
 # %%
 orgs = data["orgs"]
 print(f"There are {len(orgs)} organisations in the dataset")
-
-# %%
 org_urls = [org["url"] for org in orgs]
 print(
     f"{len([i for i in org_urls if i])*100/len(orgs)}% of the organisations have urls"
@@ -123,17 +187,13 @@ def get_coverage(df):
 
 
 # %%
-print("For the GtR dataset: ")
+print("\nFor the GtR dataset: ")
 get_coverage(gtr_output)
 
-# %%
-print("For the Crunchbase dataset: ")
+print("\nFor the Crunchbase dataset: ")
 get_coverage(cb_output)
 
-# %%
-print("For the GlassAI dataset: ")
+print("\nFor the GlassAI dataset: ")
 get_coverage(glassai_output)
-
-# %%
 
 # %%
