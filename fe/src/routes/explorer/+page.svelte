@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - {toolName}</title>
+	<title>Organisation Explorer - {toolName}</title>
 	<meta
 		content='A tool to visualise AI orgs in the UK'
 		name='description'
