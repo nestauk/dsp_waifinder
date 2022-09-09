@@ -16,3 +16,4 @@ webdriver_manager
 geopy
 pgeocode
 nuts-finder
+metaflow_extensions@git+https://github.com/nestauk/metaflow_extensions

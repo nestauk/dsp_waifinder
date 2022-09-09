@@ -10,9 +10,6 @@ from metaflow import (
     batch,
 )
 
-import pandas as pd
-import numpy as np
-
 import json
 
 """
@@ -78,6 +75,7 @@ class merge_map_datasets(FlowSpec):
     def merge_datasets(self):
 
         """Merging datasets (crunchbase, glassai, gtr)"""
+        import pandas as pd
 
         self.ai_map_data = pd.concat(
             [self.glass_output, self.cb_output, self.gtr_output]
@@ -152,6 +150,8 @@ class merge_map_datasets(FlowSpec):
         """
 
         from ds.pipeline.ai_map.utils import get_pgeocode_cities, get_geopy_addresses
+
+        import pandas as pd
 
         self.ai_map_data.reset_index(inplace=True)
 
@@ -236,6 +236,7 @@ class merge_map_datasets(FlowSpec):
     def data_clean_up(self):
 
         from toolz.itertoolz import partition
+        import pandas as pd
 
         from ds.pipeline.ai_map.utils import convert_unicode
 
@@ -248,8 +249,8 @@ class merge_map_datasets(FlowSpec):
         ).reset_index(drop=True)
 
         # Chunk up for Batch
-        all_links = self.ai_map_data["Links"].tolist()
-        self.links_chunked = list(partition(20, all_links))
+        all_links = self.ai_map_data["Link"].tolist()
+        self.links_chunked = list(partition(50, all_links))
 
         # # For loop through each data path
         print(
@@ -260,6 +261,8 @@ class merge_map_datasets(FlowSpec):
         self.next(self.format_links, foreach="links_chunked")
 
     @batch(
+        queue="job-queue-GPU-nesta-metaflow",
+        image="metaflow-pytorch",
         memory=60000,
         cpu=8,
     )
@@ -268,22 +271,59 @@ class merge_map_datasets(FlowSpec):
         """
         Create dicts of {original url: formatted url}
         """
+        import requests
 
-        from ds.pipeline.ai_map.utils import format_url
+        def is_url_ok(url):
+            # From https://pytutorial.com/check-url-is-reachable
+            try:
+                get = requests.get(url)
+                if get.status_code == 200:
+                    return True
+                else:
+                    return False
+            except requests.exceptions.RequestException as e:
+                return False
+
+        def format_url(url):
+            """
+            url: raw url from the dataset
+            """
+            if url:
+                if url[0:5] == "https":
+                    return url
+                elif url[0:5] == "http:":
+                    https_version = url.replace("http", "https")
+                    if is_url_ok(https_version):
+                        return https_version
+                    else:
+                        return url
+                else:
+                    https_version = "https://" + url
+                    if is_url_ok(https_version):
+                        return https_version
+                    else:
+                        return "http://" + url
+            else:
+                return None
 
         self.url_format_dict = {}
-        for url in self.input:
+        for i, url in enumerate(self.input):
+            if i % 10 == 0:
+                print(f"{i}th url")
             self.url_format_dict[url] = format_url(url)
 
         self.next(self.join_data)
 
     @step
     def join_data(self, inputs):
+
+        self.merge_artifacts(inputs, include=["ai_map_data", "places"])
+
         self.all_url_format_dict = {}
         for batch_i in inputs:
             self.all_url_format_dict.update(batch_i.url_format_dict)
 
-        self.ai_map_data["Link"] = self.ai_map_data["Link"].apply(
+        self.ai_map_data["Link"] = self.ai_map_data["Link"].map(
             self.all_url_format_dict
         )
 

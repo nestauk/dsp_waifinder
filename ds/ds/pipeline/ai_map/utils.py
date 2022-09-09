@@ -7,7 +7,6 @@ from geopy.extra.rate_limiter import RateLimiter
 from tqdm import tqdm
 import re
 import unicodedata
-import requests
 
 from ds.utils.metaflow import est_conn
 
@@ -52,42 +51,6 @@ def convert_unicode(text):
             .decode("utf-8")
         )
     return text
-
-
-def is_url_ok(url):
-    # From https://pytutorial.com/check-url-is-reachable
-    try:
-        get = requests.get(url)
-        if get.status_code == 200:
-            return True
-        else:
-            return False
-    except requests.exceptions.RequestException as e:
-        return False
-
-
-def format_url(url):
-    """
-    url: raw url from the dataset
-    """
-    if url:
-        if url[0:5] == "https":
-            return url
-        elif url[0:5] == "http:":
-            https_version = url.replace("http", "https")
-            if is_url_ok(https_version):
-                return https_version
-            else:
-                return url
-        else:
-            https_version = "https://" + url
-            if is_url_ok(https_version):
-                return https_version
-            else:
-                http_version = "http://" + url
-                return http_version
-    else:
-        return None
 
 
 def trust_rating(row):
@@ -287,6 +250,10 @@ def get_final_places(ai_map_data, city_names):
         "geopy_village",
         "geopy_county",
         "geopy_neighbourhood",
+    ]
+
+    trust_order = [
+        col_name for col_name in trust_order if col_name in ai_map_data.columns
     ]
 
     # First pass - try to find these locations in the geographic_data
