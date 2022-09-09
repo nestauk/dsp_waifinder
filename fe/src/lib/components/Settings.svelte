@@ -1,6 +1,6 @@
 <script>
 	import * as _ from 'lamb';
-	import Switch from '@svizzle/ui/src/Switch.svelte';
+	import {Switch} from '@svizzle/ui';
 
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';

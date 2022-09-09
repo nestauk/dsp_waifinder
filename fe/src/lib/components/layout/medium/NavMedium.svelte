@@ -1,9 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Download from '@svizzle/ui/src/icons/feather/Download.svelte';
-	import Info from '@svizzle/ui/src/icons/feather/Info.svelte';
-	import Send from '@svizzle/ui/src/icons/feather/Send.svelte';
-	import Link from '@svizzle/ui/src/Link.svelte';
+	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
 
 	import {jsonUrl} from '$lib/config';
 	import {_currThemeVars} from '$lib/stores/theme';

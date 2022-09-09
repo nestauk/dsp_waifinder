@@ -1,7 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Clipboard from '@svizzle/ui/src/icons/feather/Clipboard.svelte';
-	import Copy from '@svizzle/ui/src/icons/feather/Copy.svelte';
+	import {Clipboard, Copy, Icon} from '@svizzle/ui';
 
 	export let getText = () => '';
 

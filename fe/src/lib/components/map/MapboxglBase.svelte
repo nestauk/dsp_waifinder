@@ -1,6 +1,6 @@
 <script>
 	import geoViewport from '@mapbox/geo-viewport';
-	import {setupResizeObserver} from '@svizzle/ui/src/actions/resizeObserver';
+	import {setupResizeObserver} from '@svizzle/ui';
 	import mapboxgl from 'mapbox-gl';
 	import {beforeUpdate, onMount} from 'svelte';
 

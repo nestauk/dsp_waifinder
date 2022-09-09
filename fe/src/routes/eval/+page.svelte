@@ -1,8 +1,5 @@
 <script>
-	import StorageIO from '@svizzle/ui/src/io/storage/StorageIO.svelte';
-	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {_screen, isClientSide, LoadingView, StorageIO} from '@svizzle/ui';
 
 	import TopicPanel from '$lib/components/eval/TopicPanel.svelte';
 	import VoteButtons from '$lib/components/eval/VoteButtons.svelte';

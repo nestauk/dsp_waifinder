@@ -1,5 +1,5 @@
 <script>
-	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
+	import {LoadingView} from '@svizzle/ui';
 
 	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import {getFirstPhrases} from '$lib/utils/dataUtils';

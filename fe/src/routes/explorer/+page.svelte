@@ -1,5 +1,5 @@
 <script>
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {isClientSide} from '@svizzle/ui';
 
 	import ExplorerMedium from '$lib/components/explorer/medium/ExplorerMedium.svelte';
 	import ExplorerSmall from '$lib/components/explorer/small/ExplorerSmall.svelte';

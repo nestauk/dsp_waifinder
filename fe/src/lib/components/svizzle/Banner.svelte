@@ -1,5 +1,5 @@
 <script>
-	import { makeStyleVars } from '@svizzle/dom';
+	import {makeStyleVars} from '@svizzle/dom';
 
 	import {createEventDispatcher} from 'svelte';
 

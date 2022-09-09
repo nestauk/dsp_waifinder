@@ -1,5 +1,5 @@
 <script context='module'>
-	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+	import {_screen} from '@svizzle/ui';
 
 	import a from './a.svelte';
 	import blockquote from './blockquote.svelte';

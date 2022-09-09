@@ -1,14 +1,16 @@
 <script>
 	import {capitalize} from '@svizzle/utils';
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Download from '@svizzle/ui/src/icons/feather/Download.svelte';
-	import Info from '@svizzle/ui/src/icons/feather/Info.svelte';
-	import Menu from '@svizzle/ui/src/icons/feather/Menu.svelte';
-	import Send from '@svizzle/ui/src/icons/feather/Send.svelte';
-	import X from '@svizzle/ui/src/icons/feather/X.svelte';
-	import A11yPerson from '@svizzle/ui/src/icons/svizzle/A11yPerson.svelte';
-	import Link from '@svizzle/ui/src/Link.svelte';
-	import {isServerSide} from '@svizzle/ui/src/utils/env';
+	import {
+		A11yPerson,
+		Download,
+		Icon,
+		Info,
+		isServerSide,
+		Link,
+		Menu,
+		Send,
+		X
+	} from '@svizzle/ui';
 
 	import {changelogUrl, jsonUrl} from '$lib/config';
 	import {

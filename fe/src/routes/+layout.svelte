@@ -1,15 +1,15 @@
 <script>
-	import {setupResizeObserver} from '@svizzle/ui/src/actions/resizeObserver';
-	import A11yMenu
-		from '@svizzle/ui/src/a11y/menu/A11yMenu.svelte';
-	import A11yMenuDriver
-		from '@svizzle/ui/src/a11y/menu/A11yMenuDriver.svelte';
-	import {_a11ySettings} from '@svizzle/ui/src/a11y/menu/settings';
-	import FontsLoader from '@svizzle/ui/src/drivers/fonts/FontsLoader.svelte';
-	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
-	import NoScript from '@svizzle/ui/src/NoScript.svelte';
-	import ScreenSensor, {_screen}
-		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+	import {
+		_a11ySettings,
+		_screen,
+		A11yMenu,
+		A11yMenuDriver,
+		FontsLoader,
+		LoadingView,
+		NoScript,
+		ScreenSensor,
+		setupResizeObserver
+	} from '@svizzle/ui';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import {page as _page} from '$app/stores';

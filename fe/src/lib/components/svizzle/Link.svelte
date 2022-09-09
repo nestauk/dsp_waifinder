@@ -1,6 +1,5 @@
 <script>
-	import ExternalLink from '@svizzle/ui/src/icons/feather/ExternalLink.svelte';
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
+	import {ExternalLink, Icon} from '@svizzle/ui';
 	import {defaultRel} from './utils/shared';
 
 	const defaultIconSize = 14;

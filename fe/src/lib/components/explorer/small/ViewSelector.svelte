@@ -1,9 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import List from '@svizzle/ui/src/icons/feather/List.svelte';
-	import MapPin from '@svizzle/ui/src/icons/feather/MapPin.svelte';
-	import Sliders from '@svizzle/ui/src/icons/feather/Sliders.svelte';
-	import Tag from '@svizzle/ui/src/icons/feather/Tag.svelte';
+	import {Icon, List, MapPin, Sliders, Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
 	import {getStrokeColor} from '$lib/components/explorer/utils';
