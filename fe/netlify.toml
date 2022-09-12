@@ -1,4 +1,5 @@
 [build]
+	# don't provide `base`
 	command = "npm run build"
 	environment = { NODE_VERSION = "16.3.0" }
 	publish = ".svelte-kit/netlify"

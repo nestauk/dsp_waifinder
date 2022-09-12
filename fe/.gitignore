@@ -1,4 +1,3 @@
-/cypress/screenshots/
 /static/font/unused/
 /test/browserstack/.config.mjs
 /.svelte-kit
