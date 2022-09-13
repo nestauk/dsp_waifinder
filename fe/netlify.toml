@@ -3,3 +3,7 @@
 	command = "npm run build"
 	environment = { NODE_VERSION = "17.9.1" }
 	publish = ".svelte-kit/netlify"
+
+[functions]
+	# temporary workaround for https://github.com/sveltejs/kit/issues/6462
+	node_bundler = "esbuild"
