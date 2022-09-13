@@ -40,12 +40,11 @@
 		"pa11y-reporter-html": "^2.0.0",
 		"queue-promise": "^2.2.1",
 		"selenium-webdriver": "^4.4.0",
-		"svelte": "^3.49.0",
+		"svelte": "^3.50.1",
 		"unist-util-visit": "^4.1.1",
-		"vite": "^3.1.0-beta.1"
+		"vite": "^3.1.0"
 	},
 	"license": "MIT",
-	"main": "index.js",
 	"name": "ai_map_ui",
 	"scripts": {
 		"build": "vite build",
