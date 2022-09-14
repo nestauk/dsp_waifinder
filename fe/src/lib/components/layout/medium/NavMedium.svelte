@@ -65,12 +65,16 @@
 		</div>
 		<div role='none'>
 			<ul role='none'>
-				<li role='none'>
+				<li
+					aria-label='Download the full dataset'
+					role='none'
+					title='Download the full dataset'
+				>
 					<Link
 						download
 						href={jsonUrl}
 					>
-						Download
+						Dataset
 						<Icon
 							glyph={Download}
 							size=20

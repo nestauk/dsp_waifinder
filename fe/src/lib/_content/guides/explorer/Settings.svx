@@ -2,8 +2,13 @@
 
 Here you can find:
 	* the amount of organisations satisfying the current filters
+	* a button to download the current search results (see note below)
 	* an input box to search text in organisations' name and description
 	* an input box to search text in organisations' place name
+
+Note that in order to be able to download search results multiple times, you
+might have to enable multiple file downloads in your browser settings, to avoid
+it silently fails to download the results after the first download.
 
 #### Org types panel
 

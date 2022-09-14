@@ -1,6 +1,5 @@
 <script>
-	import * as _ from 'lamb';
-	import {Switch} from '@svizzle/ui';
+	import {Download, Icon, Switch} from '@svizzle/ui';
 
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
@@ -15,24 +14,63 @@
 		toggleOrgTypesSelectionMode,
 	} from '$lib/stores/selection';
 	import {_currThemeVars, _orgTypeToColorFn} from '$lib/stores/theme';
+	import {
+		getResultsCsv,
+		getResultsMetadata,
+		initiateZippedDownload,
+	} from '$lib/utils/download';
 
 	const toggledOrgType = ({detail: {id}}) => toggleOrgType(id);
+
+	/* download results */
+
+	const onClickDownload = () => {
+		const {filename, filtersString} = getResultsMetadata();
+		const resultsCsv = getResultsCsv();
+
+		initiateZippedDownload(filename, {
+			'results.csv': resultsCsv,
+			'filters.json': filtersString,
+		});
+	}
 </script>
 
 <div class='Settings'>
 
-	<!-- Search -->
+	<!-- Results / Search -->
 
 	<div class='panel'>
-		<h3>{$_orgsCount} organisations </h3>
+
+		<!-- Results -->
+
+		<header>
+			<h3>{$_orgsCount} organisations </h3>
+			<button
+				aria-label='Download selected results'
+				title='Download selected results'
+				on:click={onClickDownload}
+			>
+				<Icon
+					glyph={Download}
+					size=16
+					stroke={$_currThemeVars['--colorLink']}
+				/>
+			</button>
+		</header>
+
 
 		<div class='group'>
+
+			<!-- Text Search -->
+
 			<div class='item'>
 				<Input
 					bind:value={$_orgSearchValue}
 					placeholder='search in name or description'
 				/>
 			</div>
+
+			<!-- Place Search -->
 
 			<div class='item'>
 				<Input
@@ -46,7 +84,9 @@
 	<!-- Org types -->
 
 	<div class='panel'>
-		<h3>Org types</h3>
+		<header>
+			<h3>Org types</h3>
+		</header>
 
 		<div class='group'>
 			<div class='item'>
@@ -77,15 +117,33 @@
 
 <style>
 	.Settings {
-		width: 100%;
 		height: 100%;
 		padding: 1em;
+		width: 100%;
 	}
 
 	.panel:not(:last-child) {
 		border-bottom: 1px solid lightgrey;
 		margin-bottom: 1em;
 		padding-bottom: 1em;
+	}
+
+	.panel header {
+		align-items: center;
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-columns: 1fr;
+		margin-bottom: 0.7em;
+	}
+
+	h3 {
+		margin: 0;
+	}
+
+	.panel header button {
+		background: none;
+		border: none;
+		cursor: pointer;
 	}
 
 	.group {

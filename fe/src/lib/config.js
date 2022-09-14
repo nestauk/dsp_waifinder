@@ -2,7 +2,7 @@ import {getFamilies} from '@svizzle/ui';
 
 /* tool */
 
-export const toolName = 'UK AI map';
+export const toolName = 'WAIFinder';
 export const toolLongName = 'UK AI Landscape map';
 export const contactEmail = 'dataanalytics@nesta.org.uk';
 export const changelogUrl = 'https://github.com/nestauk/dap_uk_ai_map/blob/staging/CHANGELOG.md';
