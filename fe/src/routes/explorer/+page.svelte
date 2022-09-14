@@ -1,5 +1,5 @@
 <script>
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {isClientSide} from '@svizzle/ui';
 
 	import ExplorerMedium from '$lib/components/explorer/medium/ExplorerMedium.svelte';
 	import ExplorerSmall from '$lib/components/explorer/small/ExplorerSmall.svelte';
@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - {toolName}</title>
+	<title>Explorer - {toolName}</title>
 	<meta
 		content='A tool to visualise AI orgs in the UK'
 		name='description'

@@ -5,8 +5,8 @@ import * as _ from 'lamb';
 import fetch from 'node-fetch';
 import hash from 'object-hash';
 
-import {getTopics} from '../lib/utils/dataUtils';
-import {stripDbrPrefix} from '../lib/utils/dbpedia';
+import {getTopics} from '../lib/utils/dataUtils.js';
+import {stripDbrPrefix} from '../lib/utils/dbpedia.js';
 
 /* resources */
 

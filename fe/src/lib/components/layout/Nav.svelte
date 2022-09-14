@@ -1,5 +1,5 @@
 <script>
-	import {isServerSide} from '@svizzle/ui/src/utils/env';
+	import {isServerSide} from '@svizzle/ui';
 
 	import NavMedium from '$lib/components/layout/medium/NavMedium.svelte';
 	import NavSmall from '$lib/components/layout/small/NavSmall.svelte';

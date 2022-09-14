@@ -4,7 +4,7 @@ import pa11y from 'pa11y';
 import htmlReporter from 'pa11y-reporter-html';
 import Queue from 'queue-promise';
 
-import {lighthouseUrls, urlBases} from '../../src/node_modules/app/config';
+import {lighthouseUrls, urlBases} from '../../src/lib/config.js';
 
 const queue = new Queue({
 	concurrent: 1

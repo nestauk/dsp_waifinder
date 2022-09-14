@@ -1,20 +1,17 @@
 <script>
-	import {stores} from '@sapper/app';
 	import * as _ from 'lamb';
-	import {_screen}
-		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-
-	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
-	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
-
+	import {
+		_screen,
+		ChevronLeft,
+		ChevronRight,
+		Icon,
+		isClientSide
+	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 
+	import {page as _page} from '$app/stores';
 	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
-
-	const {page: _page} = stores();
 
 	const segments = ['privacy', 'disclaimer'];
 	const titles = {

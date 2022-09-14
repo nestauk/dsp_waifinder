@@ -1,7 +1,6 @@
 <script>
 	import {makeStyleVars} from '@svizzle/dom';
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import X from '@svizzle/ui/src/icons/feather/X.svelte';
+	import {Icon, X} from '@svizzle/ui';
 	import {createEventDispatcher, onMount} from 'svelte';
 
 	export let ariaLabel = 'Clear text';

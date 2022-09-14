@@ -1,6 +1,6 @@
 import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
-import {_isA11yDirty} from '@svizzle/ui/src/a11y/menu/settings';
+import {_isA11yDirty} from '@svizzle/ui';
 
 import {_dataset} from '$lib/stores/dataset';
 

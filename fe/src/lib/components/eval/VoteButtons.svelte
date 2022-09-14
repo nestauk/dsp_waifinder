@@ -1,8 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import SkipForward from '@svizzle/ui/src/icons/feather/SkipForward.svelte';
-	import ThumbsDown from '@svizzle/ui/src/icons/feather/ThumbsDown.svelte';
-	import ThumbsUp from '@svizzle/ui/src/icons/feather/ThumbsUp.svelte';
+	import {Icon, SkipForward, ThumbsDown, ThumbsUp} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 	import {createEventDispatcher} from 'svelte';
 

@@ -1,4 +1,4 @@
-import {getFamilies} from '@svizzle/ui/src/drivers/fonts/utils';
+import {getFamilies} from '@svizzle/ui';
 
 /* tool */
 
@@ -45,9 +45,9 @@ export const MAPBOXGL_ACCESSTOKEN = 'pk.eyJ1IjoibmVzdGEtdWsiLCJhIjoiY2ozbjUzY2dr
 /* testing */
 
 export const urlBases = {
-	development: 'http://localhost:3000',
+	development: 'http://localhost:5173',
 	preview: 'https://uk-ai-map-dev.netlify.app',
-	// production: '',
+	production: 'https://uk-ai-map.temp-domain', // TODO netlify
 };
 
 export const lighthouseUrls = {
@@ -66,13 +66,6 @@ export const failingA11yAudit = [
 //	'Trends',
 //	'Geo'
 ];
-
-
-// eslint-disable-next-line no-undef
-export const isDev = IS_DEV; // `IS_DEV` replaced by rollup
-
-// eslint-disable-next-line no-undef
-export const backendBase = BACKEND_BASE; // `BACKEND_BASE` replaced by rollup
 
 export const fontsInfo = [
 	{

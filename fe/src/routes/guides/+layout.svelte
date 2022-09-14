@@ -1,19 +1,19 @@
 <script>
-	import {stores} from '@sapper/app';
-	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
-	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import LinkButton from '@svizzle/ui/src/LinkButton.svelte';
-	import ResponsiveFlex from '@svizzle/ui/src/ResponsiveFlex.svelte';
-	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {
+		_screen,
+		ChevronLeft,
+		ChevronRight,
+		Icon,
+		isClientSide,
+		LinkButton,
+		ResponsiveFlex
+	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 	import * as _ from 'lamb';
 
+	import {page as _page} from '$app/stores';
 	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
-
-	const {page: _page} = stores();
 
 	const segments = ['app', 'explorer', 'a11ymenu'];
 	const titles = {

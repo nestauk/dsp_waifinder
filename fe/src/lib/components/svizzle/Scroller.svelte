@@ -1,6 +1,6 @@
 <script>
 	import {makeStyleVars} from '@svizzle/dom';
-	import {setupResizeObserver} from '@svizzle/ui/src/actions/resizeObserver';
+	import {setupResizeObserver} from '@svizzle/ui';
 
 	let hasBottomShadow;
 	let hasTopShadow;

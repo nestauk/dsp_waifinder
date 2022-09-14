@@ -1,5 +1,5 @@
 <script>
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {isClientSide} from '@svizzle/ui';
 
 	import {
 		getAllStylesBySelector,

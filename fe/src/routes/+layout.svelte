@@ -1,17 +1,18 @@
 <script>
-	import {setupResizeObserver} from '@svizzle/ui/src/actions/resizeObserver';
-	import A11yMenu
-		from '@svizzle/ui/src/a11y/menu/A11yMenu.svelte';
-	import A11yMenuDriver
-		from '@svizzle/ui/src/a11y/menu/A11yMenuDriver.svelte';
-	import {_a11ySettings} from '@svizzle/ui/src/a11y/menu/settings';
-	import FontsLoader from '@svizzle/ui/src/drivers/fonts/FontsLoader.svelte';
-	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
-	import NoScript from '@svizzle/ui/src/NoScript.svelte';
-	import ScreenSensor, {_screen}
-		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+	import {
+		_a11ySettings,
+		_screen,
+		A11yMenu,
+		A11yMenuDriver,
+		FontsLoader,
+		LoadingView,
+		NoScript,
+		ScreenSensor,
+		setupResizeObserver
+	} from '@svizzle/ui';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
+	import {page as _page} from '$app/stores';
 	import Footer from '$lib/components/layout/medium/Footer.svelte';
 	import Nav from '$lib/components/layout/Nav.svelte';
 	import ThemeEditor from '$lib/components/layout/medium/ThemeEditor.svelte';
@@ -21,8 +22,8 @@
 		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
-		isDev
 	} from '$lib/config';
+	import {isDev} from '$lib/env';
 	import {_isSmallScreen} from '$lib/stores/layout';
 	import {
 		_currThemeVars,
@@ -36,8 +37,6 @@
 	const bannerComponents = [
 		Privacy
 	];
-
-	export let segment;
 
 	// actions
 	const {
@@ -66,6 +65,7 @@
 		}
 	});
 
+	$: segment = $_page.url.pathname.split('/')[1];
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
 	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;

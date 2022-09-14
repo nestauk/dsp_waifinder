@@ -1,5 +1,6 @@
 <script>
-	import {isDev, toolName} from '$lib/config';
+	import {toolName} from '$lib/config';
+	import {isDev} from '$lib/env';
 
 	export let error;
 	export let status;
@@ -15,7 +16,7 @@
 
 <h1>{status}</h1>
 
-<p>{error.message}</p>
+<p>{error?.message || 'Message not defined'}</p>
 
 {#if isDev && error.stack}
 	<pre>{error.stack}</pre>

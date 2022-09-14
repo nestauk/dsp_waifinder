@@ -1,9 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Download from '@svizzle/ui/src/icons/feather/Download.svelte';
-	import Info from '@svizzle/ui/src/icons/feather/Info.svelte';
-	import Send from '@svizzle/ui/src/icons/feather/Send.svelte';
-	import Link from '@svizzle/ui/src/Link.svelte';
+	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
 
 	import {jsonUrl} from '$lib/config';
 	import {_currThemeVars} from '$lib/stores/theme';
@@ -26,8 +22,8 @@
 					role='none'
 				>
 					<Link
-						href='.'
-						theme={{color: makeColor('.')}}
+						href='/'
+						theme={{color: makeColor('')}}
 					>
 						Home
 					</Link>
@@ -37,7 +33,7 @@
 					role='none'
 				>
 					<Link
-						href='methodology'
+						href='/methodology'
 						theme={{color: makeColor('methodology')}}
 					>
 						Methodology
@@ -48,7 +44,7 @@
 					role='none'
 				>
 					<Link
-						href='guides'
+						href='/guides'
 						theme={{color: makeColor('guides')}}
 					>
 						Guides
@@ -59,7 +55,7 @@
 					role='none'
 				>
 					<Link
-						href='explorer'
+						href='/explorer'
 						theme={{color: makeColor('explorer')}}
 					>
 						Explorer
@@ -87,7 +83,7 @@
 					role='none'
 				>
 					<Link
-						href='feedback'
+						href='/feedback'
 						rel='prefetch'
 						theme={{color: makeColor('feedback')}}
 					>
@@ -104,7 +100,7 @@
 					role='none'
 				>
 					<Link
-						href='info'
+						href='/info'
 						rel='prefetch'
 						theme={{color: makeColor('info')}}
 					>

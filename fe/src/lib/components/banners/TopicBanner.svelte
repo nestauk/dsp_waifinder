@@ -1,8 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Link from '@svizzle/ui/src/Link.svelte';
-	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
-	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+	import {_screen, Icon, Link, LoadingView} from '@svizzle/ui';
 
 	import Banner from '$lib/components/svizzle/Banner.svelte';
 	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';

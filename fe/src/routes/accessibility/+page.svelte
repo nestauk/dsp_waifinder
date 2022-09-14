@@ -1,16 +1,16 @@
 <script>
+	import {
+		_screen,
+		ChevronLeft,
+		ChevronRight,
+		Icon,
+		Link,
+		LoadingView
+	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
-	import {_screen}
-		from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
 	import Bowser from 'bowser';
 	import * as _ from 'lamb';
 	import {onMount} from 'svelte';
-
-	import ChevronLeft from '@svizzle/ui/src/icons/feather/ChevronLeft.svelte';
-	import ChevronRight from '@svizzle/ui/src/icons/feather/ChevronRight.svelte';
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Link from '@svizzle/ui/src/Link.svelte';
-	import LoadingView from '@svizzle/ui/src/LoadingView.svelte';
 
 	import H2 from '$lib/components/mdsvex/h2.svelte';
 	import P from '$lib/components/mdsvex/p.svelte';

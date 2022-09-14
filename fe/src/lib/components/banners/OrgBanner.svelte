@@ -1,5 +1,5 @@
 <script>
-	import {_screen} from '@svizzle/ui/src/sensors/screen/ScreenSensor.svelte';
+	import {_screen} from '@svizzle/ui';
 
 	import OrgDetails from '$lib/components/orgs/OrgDetails.svelte';
 	import Banner from '$lib/components/svizzle/Banner.svelte';

@@ -1,5 +1,5 @@
 <script>
-	import {isClientSide} from '@svizzle/ui/src/utils/env';
+	import {isClientSide} from '@svizzle/ui';
 
 	import {getStylesheet, makeGetStyleRulesObj} from '$lib/utils/svizzle/style';
 	import {getURL} from '$lib/utils/svizzle/url';

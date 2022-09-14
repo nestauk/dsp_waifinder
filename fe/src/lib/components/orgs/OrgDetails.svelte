@@ -1,8 +1,5 @@
 <script>
-	import Icon from '@svizzle/ui/src/icons/Icon.svelte';
-	import Link2 from '@svizzle/ui/src/icons/feather/Link2.svelte';
-	import MinusCircle from '@svizzle/ui/src/icons/feather/MinusCircle.svelte';
-	import PlusCircle from '@svizzle/ui/src/icons/feather/PlusCircle.svelte';
+	import {Icon, Link2, MinusCircle, PlusCircle} from '@svizzle/ui';
 	import * as _ from 'lamb';
 	import {createEventDispatcher} from 'svelte';
 
