@@ -24,20 +24,20 @@
 
 	$: labels = labels || alphabetArray;
 	$: enabled = enabled || [];
-	$: theme = {
-		...defaultTheme,
-		...theme
-	}
+	$: theme = {...defaultTheme, ...theme};
 	$: style = makeStyleVars(theme);
 </script>
 
-<nav {style}>
+<nav
+	{style}
+	class='AlphabetPicker'
+>
 	{#each labels as label}
 		<input
+			disabled={!enabled.includes(label)}
 			on:click={() => dispatch('letterSelected', label)}
 			type='button'
 			value={label}
-			disabled={!enabled.includes(label)}
 		/>
 	{/each}
 </nav>
@@ -51,8 +51,8 @@
 		border: none;
 		color: var(--textColor);
 		cursor: pointer;
-		text-align: center;
 		padding: 0 0.5em;
+		text-align: center;
 	}
 	input:disabled {
 		background-color: var(--backgroundColorDisabled);
