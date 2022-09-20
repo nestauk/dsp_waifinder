@@ -1,6 +1,12 @@
 import {tapMessage} from '@svizzle/dev';
 import {readJson, saveObj, saveObjPassthrough} from '@svizzle/file';
-import {applyFnMap, getId, isIterableEmpty, transformValues} from '@svizzle/utils';
+import {
+	applyFnMap,
+	getId,
+	isIterableEmpty,
+	sortObjectKeysAsc,
+	transformValues,
+} from '@svizzle/utils';
 import * as _ from 'lamb';
 import fetch from 'node-fetch';
 import hash from 'object-hash';
@@ -16,6 +22,7 @@ const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places.json';
 const OUT_FILE_DATA = 'static/data/ai_map_annotated_orgs.json';
 const OUT_FILE_UNTAGGED_ORGS = 'dataQuality/orgsWithNoTopics.json';
 const OUT_FILE_UNPLACED_ORGS = 'dataQuality/orgsWithNoPlace.json';
+const OUT_FILE_UNLINKED_ORGS = 'dataQuality/orgsWithNoURL.json';
 const OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA = 'dataQuality/orgsCountsByUrlSchema.json';
 
 /* utils */
@@ -29,14 +36,6 @@ const getRegionsByLevelById = applyFnMap({
 	2: makeGetRegionsByIdAtLevel(2),
 	3: makeGetRegionsByIdAtLevel(3),
 });
-
-// from @svizzle/utils@0.17.0 (not released yet)
-// TODO upgrade @svizzle/utils
-const sortObjectKeysAsc = _.pipe([
-	_.pairs,
-	_.sortWith([_.head]),
-	_.fromPairs
-]);
 
 const filterTopics = _.pipe([
 	_.partitionWith(({confidence}) => confidence >= 60),
@@ -103,7 +102,10 @@ const getOrgsWithNoTopics = _.pipe([
 ]);
 const getOrgsWithNoPlace = ({orgs, placesById}) =>
 	_.filter(orgs, ({place_id}) => !_.has(placesById, place_id));
-
+const getOrgsWithNoURL = _.pipe([
+	_.getKey('orgs'),
+	_.filterWith(_.not(_.hasKey('url'))),
+]);
 const getOrgsCountsByUrlSchema = _.pipe([
 	_.getKey('orgs'),
 	_.countBy(_.pipe([
@@ -136,7 +138,7 @@ const main = async () => {
 		.then(tapMessage(`Saved processed data in ${OUT_FILE_DATA}`))
 		.catch(err => console.error(err));
 
-	/* dq: topics */
+	/* dq: no topics */
 
 	const orgsWithNoTopics = getOrgsWithNoTopics(data);
 
@@ -144,12 +146,20 @@ const main = async () => {
 	.then(tapMessage(`Saved objects with no topics in ${OUT_FILE_UNTAGGED_ORGS}`))
 	.catch(err => console.error(err));
 
-	/* dq: place */
+	/* dq: no place */
 
 	const orgsWithNoPlace = getOrgsWithNoPlace(data);
 
 	saveObj(OUT_FILE_UNPLACED_ORGS, 2)(orgsWithNoPlace)
 	.then(tapMessage(`Saved objects with no place in ${OUT_FILE_UNPLACED_ORGS}`))
+	.catch(err => console.error(err));
+
+	/* dq: no URL */
+
+	const orgsWithNoURL = getOrgsWithNoURL(data);
+
+	saveObj(OUT_FILE_UNLINKED_ORGS, 2)(orgsWithNoURL)
+	.then(tapMessage(`Saved objects with no URL in ${OUT_FILE_UNLINKED_ORGS}`))
 	.catch(err => console.error(err));
 
 	/* dq: url schema */
