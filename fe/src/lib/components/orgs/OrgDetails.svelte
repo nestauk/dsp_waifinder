@@ -165,19 +165,16 @@
 
 			<div class='flex wrap topics'>
 				{#if $_isSmallScreen}
-					{#each topics as {id, score}}
+					{#each topics as {id}}
 						<div
 							class='topic'
 							on:click={() => asyncUpdateTopicDetails(id)}
 						>
-							<Pill
-								{score}
-								label={getTopicLabel(id)}
-							/>
+							<Pill label={getTopicLabel(id)} />
 						</div>
 					{/each}
 				{:else}
-					{#each topics as {id, score}}
+					{#each topics as {id}}
 						<div class='topic'>
 							<Link
 								href={getWikipediaURL(id)}
@@ -187,10 +184,7 @@
 									on:mouseenter={() => asyncUpdateTopicDetails(id)}
 									on:mouseleave={clearActiveTopic}
 								>
-									<Pill
-										{score}
-										label={getTopicLabel(id)}
-									/>
+									<Pill label={getTopicLabel(id)} />
 								</div>
 							</Link>
 						</div>
