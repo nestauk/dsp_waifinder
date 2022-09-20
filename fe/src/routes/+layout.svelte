@@ -65,7 +65,7 @@
 		}
 	});
 
-	$: segment = $_page.url.pathname.split('/')[1];
+	$: [,segment] = $_page.url.pathname.split('/');
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
 	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;

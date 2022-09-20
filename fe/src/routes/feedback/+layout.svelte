@@ -14,7 +14,6 @@
 	};
 
 	$: [,,segment] = $_page.url.pathname.split('/');
-	$: console.log(segment);
 	$: currentValueIndex = _.findIndex(segments, _.is(segment));
 	$: prevSegment = segments[currentValueIndex - 1];
 	$: nextSegment = segments[currentValueIndex + 1];
