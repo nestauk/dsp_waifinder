@@ -37,8 +37,8 @@
 		enabledChars={$_orgsChar}
 		on:charSelected={onCharSelected}
 		theme={{
-			backgroundColor: $_currThemeVars['--colorLink'],
-			backgroundColorDisabled: $_currThemeVars['--colorLink'],
+			backgroundColor: $_currThemeVars['--colorMain'],
+			backgroundColorDisabled: $_currThemeVars['--colorMain'],
 			textColor: $_currThemeVars['--colorMainInverted'],
 			textColorDisabled: $_currThemeVars['--colorDisabled']
 		}}

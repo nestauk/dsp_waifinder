@@ -15,8 +15,8 @@
 	const dispatch = createEventDispatcher();
 
 	const defaultTheme = {
-		backgroundColor: 'darkblue',
-		backgroundColorDisabled: 'darkblue',
+		backgroundColor: '#333',
+		backgroundColorDisabled: '#333',
 		textColor: 'white',
 		textColorDisabled: 'silver'
 	};
@@ -55,7 +55,7 @@
 	}
 	input:disabled {
 		background-color: var(--backgroundColorDisabled);
-		color: var(--textDisabledColor);
+		color: var(--textColorDisabled);
 		cursor: inherit;
 	}
 </style>
