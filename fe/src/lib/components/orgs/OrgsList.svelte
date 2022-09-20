@@ -16,8 +16,7 @@
 
 	const onCharSelected = ({detail: char}) => {
 		const itemIndex = items.findIndex(item => char <= item.name[0]);
-		virtualList.scrollTo(itemIndex)
-		console.log(char)
+		virtualList.scrollTo(itemIndex);
 	}
 
 	$: $_screen && refreshList();

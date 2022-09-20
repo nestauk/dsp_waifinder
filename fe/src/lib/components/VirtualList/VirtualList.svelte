@@ -133,7 +133,6 @@
 	}
 	export const refreshAction = () => refresh(items, viewportHeight, itemHeight);
 	export const scrollTo = item => {
-		console.log('scrollTo', item);
 		let y = 0;
 		for (let i = 0; i < items.length; i += 1) {
 			if (i === item) {
