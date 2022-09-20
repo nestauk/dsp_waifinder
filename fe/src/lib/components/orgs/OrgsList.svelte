@@ -3,11 +3,10 @@
 
 	import AlphabetPicker from '$lib/components/svizzle/AlphabetPicker.svelte';
 	import VirtualList from '$lib/components/VirtualList/VirtualList.svelte';
-
-	import OrgDetails from './OrgDetails.svelte';
-
 	import {_orgsChar} from '$lib/stores/data';
 	import {_currThemeVars} from '$lib/stores/theme';
+
+	import OrgDetails from './OrgDetails.svelte';
 
 	export let items = [];
 
