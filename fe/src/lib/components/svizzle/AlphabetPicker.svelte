@@ -1,6 +1,5 @@
 <script context='module'>
-	// create alphabet array
-	const alphabetArray = Object.freeze(
+	const allChars = Object.freeze(
 		'#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 	);
 </script>
@@ -22,7 +21,7 @@
 		textColorDisabled: 'silver'
 	};
 
-	$: chars = chars || alphabetArray;
+	$: chars = chars || allChars;
 	$: enabledChars = enabledChars || [];
 	$: theme = {...defaultTheme, ...theme};
 	$: style = makeStyleVars(theme);
