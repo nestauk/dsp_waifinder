@@ -20,7 +20,8 @@ export const updateDataset = ({
 	placesById,
 	regionsByLevelById
 }) => {
-	const augmentedOrgs = _.map(orgs,
+	const sortedOrgs = _.sort(orgs, [_.getKey('name')]);
+	const augmentedOrgs = _.map(sortedOrgs,
 		({place_id, types, ...others}) => ({
 			place_id,
 			place: placesById[place_id],

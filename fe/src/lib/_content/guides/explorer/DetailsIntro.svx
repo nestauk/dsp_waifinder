@@ -1,4 +1,6 @@
-Here you have a scrollable list of "org cards".
+Here you have a scrollable list of "org cards" sorted aplhpabetically. You can
+click on the alphabet to the right to quickly scroll to organisations starting
+with that letter.
 
 Each card shows:
 	* the org name and a link to its website

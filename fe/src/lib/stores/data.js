@@ -105,6 +105,20 @@ export const _orgs = derived(
 
 export const _orgsCount = derived(_orgs, getLength);
 
+/* org chars */
+
+const getOrgNameFirstChar = _.pipe([
+	_.getKey('name'),
+	_.head,
+	_.invoke('toUpperCase'),
+	char => (/[A-Z]/ug).test(char) ? char : '#'
+]);
+
+export const _orgsChar = derived(_orgs, _.pipe([
+	_.mapWith(getOrgNameFirstChar),
+	_.uniques
+]));
+
 /* clustering */
 
 const toGeoPoints = makeToGeoPoints(getLonLat);
