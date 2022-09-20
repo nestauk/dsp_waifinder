@@ -19,10 +19,9 @@
 		disclaimer: 'Disclaimer'
 	}
 
-	export let segment;
-
 	let contentElement;
 
+	$: [,,segment] = $_page.url.pathname.split('/');
 	$: currentValueIndex = _.findIndex(segments, _.is(segment));
 	$: prevSegment = segments[currentValueIndex - 1];
 	$: nextSegment = segments[currentValueIndex + 1];

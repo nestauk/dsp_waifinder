@@ -3,6 +3,7 @@
 	import {isNotNil} from '@svizzle/utils';
 	import * as _ from 'lamb';
 
+	import {page as _page} from '$app/stores';
 	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
 
@@ -12,8 +13,8 @@
 		survey: 'Survey'
 	};
 
-	export let segment;
-
+	$: [,,segment] = $_page.url.pathname.split('/');
+	$: console.log(segment);
 	$: currentValueIndex = _.findIndex(segments, _.is(segment));
 	$: prevSegment = segments[currentValueIndex - 1];
 	$: nextSegment = segments[currentValueIndex + 1];
