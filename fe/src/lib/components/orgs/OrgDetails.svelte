@@ -170,9 +170,7 @@
 							class='topic'
 							on:click={() => asyncUpdateTopicDetails(id)}
 						>
-							<Pill
-								label={getTopicLabel(id)}
-							/>
+							<Pill label={getTopicLabel(id)} />
 						</div>
 					{/each}
 				{:else}
@@ -186,9 +184,7 @@
 									on:mouseenter={() => asyncUpdateTopicDetails(id)}
 									on:mouseleave={clearActiveTopic}
 								>
-									<Pill
-										label={getTopicLabel(id)}
-									/>
+									<Pill label={getTopicLabel(id)} />
 								</div>
 							</Link>
 						</div>

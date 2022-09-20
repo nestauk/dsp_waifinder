@@ -24,10 +24,4 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
-	.score {
-		color: var(--colorPillScore);
-		font-size: 0.75em;
-		font-style: italic;
-		margin: 0 0.3em;
-	}
 </style>
