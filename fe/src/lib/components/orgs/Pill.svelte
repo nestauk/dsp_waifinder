@@ -1,11 +1,9 @@
 <script>
 	export let label = null;
-	export let score = null;
 </script>
 
 <div class='Pill'>
 	<span class='label'>{label}</span>
-	<span class='score'>{score}</span>
 </div>
 
 <style>
