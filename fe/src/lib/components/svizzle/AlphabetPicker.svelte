@@ -9,7 +9,7 @@
 	import {makeStyleVars} from '@svizzle/dom';
 	import {createEventDispatcher} from 'svelte';
 
-	export let labels;
+	export let chars;
 	export let enabled;
 	export let theme;
 
@@ -22,7 +22,7 @@
 		textColorDisabled: 'silver'
 	};
 
-	$: labels = labels || alphabetArray;
+	$: chars = chars || alphabetArray;
 	$: enabled = enabled || [];
 	$: theme = {...defaultTheme, ...theme};
 	$: style = makeStyleVars(theme);
@@ -32,12 +32,12 @@
 	{style}
 	class='AlphabetPicker'
 >
-	{#each labels as label}
+	{#each chars as char}
 		<input
-			disabled={!enabled.includes(label)}
-			on:click={() => dispatch('letterSelected', label)}
+			disabled={!enabled.includes(char)}
+			on:click={() => dispatch('charSelected', char)}
 			type='button'
-			value={label}
+			value={char}
 		/>
 	{/each}
 </nav>

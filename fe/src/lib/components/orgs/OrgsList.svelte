@@ -15,10 +15,10 @@
 
 	const refreshList = () => virtualList?.refreshAction();
 
-	const onLetterSelected = ({detail: letter}) => {
-		const itemIndex = items.findIndex(item => letter <= item.name[0]);
+	const onCharSelected = ({detail: char}) => {
+		const itemIndex = items.findIndex(item => char <= item.name[0]);
 		virtualList.scrollTo(itemIndex)
-		console.log(letter)
+		console.log(char)
 	}
 
 	$: $_screen && refreshList();
@@ -37,7 +37,7 @@
 	</VirtualList>
 	<AlphabetPicker
 		enabled={$_orgsLetters}
-		on:letterSelected={onLetterSelected}
+		on:charSelected={onCharSelected}
 		theme={{
 			backgroundColor: $_currThemeVars['--colorLink'],
 			backgroundColorDisabled: $_currThemeVars['--colorLink'],
