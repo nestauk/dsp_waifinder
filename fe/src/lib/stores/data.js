@@ -105,13 +105,17 @@ export const _orgs = derived(
 
 export const _orgsCount = derived(_orgs, getLength);
 
-/* org letters */
+/* org chars */
 
-export const _orgsLetters = derived(_orgs, _.pipe([
-	_.mapWith(_.getKey('name')),
-	_.mapWith(_.head),
-	_.mapWith(_.invoke('toUpperCase')),
-	_.mapWith(item => '0123456789@'.includes(item) ? '0' : item),
+const getOrgNameFirstChar = _.pipe([
+	_.getKey('name'),
+	_.head,
+	_.invoke('toUpperCase'),
+	char => (/[A-Z]/ug).test(char) ? char : '#'
+]);
+
+export const _orgsChar = derived(_orgs, _.pipe([
+	_.mapWith(getOrgNameFirstChar),
 	_.uniques
 ]));
 

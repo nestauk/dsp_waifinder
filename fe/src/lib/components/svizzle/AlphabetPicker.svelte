@@ -1,7 +1,7 @@
 <script context='module'>
 	// create alphabet array
 	const alphabetArray = Object.freeze(
-		'0ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+		'#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 	);
 </script>
 
@@ -10,7 +10,7 @@
 	import {createEventDispatcher} from 'svelte';
 
 	export let chars;
-	export let enabled;
+	export let enabledChars;
 	export let theme;
 
 	const dispatch = createEventDispatcher();
@@ -23,7 +23,7 @@
 	};
 
 	$: chars = chars || alphabetArray;
-	$: enabled = enabled || [];
+	$: enabledChars = enabledChars || [];
 	$: theme = {...defaultTheme, ...theme};
 	$: style = makeStyleVars(theme);
 </script>
@@ -34,7 +34,7 @@
 >
 	{#each chars as char}
 		<input
-			disabled={!enabled.includes(char)}
+			disabled={!enabledChars.includes(char)}
 			on:click={() => dispatch('charSelected', char)}
 			type='button'
 			value={char}

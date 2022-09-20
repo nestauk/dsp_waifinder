@@ -6,7 +6,7 @@
 
 	import OrgDetails from './OrgDetails.svelte';
 
-	import {_orgsLetters} from '$lib/stores/data';
+	import {_orgsChar} from '$lib/stores/data';
 	import {_currThemeVars} from '$lib/stores/theme';
 
 	export let items = [];
@@ -36,7 +36,7 @@
 		/>
 	</VirtualList>
 	<AlphabetPicker
-		enabled={$_orgsLetters}
+		enabledChars={$_orgsChar}
 		on:charSelected={onCharSelected}
 		theme={{
 			backgroundColor: $_currThemeVars['--colorLink'],
