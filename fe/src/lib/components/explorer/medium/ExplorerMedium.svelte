@@ -9,7 +9,7 @@
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL
 	} from '$lib/config';
-	import {_clusters} from '$lib/stores/data';
+	import {_clusters, _mapBounds, _autoZoom} from '$lib/stores/data';
 	import {getLonLat} from '$lib/utils/dataUtils';
 	import {
 		_hero,
@@ -33,6 +33,7 @@
 		on:mouseleave={clearIsCursorOnMap}
 	>
 		<Mapbox
+			bounds={$_mapBounds}
 			{accessToken}
 			{getLonLat}
 			{styleURL}
@@ -40,6 +41,7 @@
 			items={$_clusters}
 			withScaleControl={true}
 			withZoomControl={true}
+			isMoveEnabled={!$_autoZoom}
 		/>
 		{#if $_activeTopicDetails}
 			<TopicBanner isPinned={false} />

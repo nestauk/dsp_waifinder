@@ -3,7 +3,13 @@
 
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
-	import {_keyOrgTypeValueOrgsCount, _orgsCount} from '$lib/stores/data';
+	import {
+		_allOrgsBBox,
+		_autoZoom,
+		_mapBounds,
+		_keyOrgTypeValueOrgsCount,
+		_orgsCount,
+	} from '$lib/stores/data';
 	import {
 		_orgSearchValue,
 		_orgTypesSelectionMode,
@@ -33,6 +39,8 @@
 			'filters.json': filtersString,
 		});
 	}
+	// $: console.log($_mapBounds)
+	$: $_autoZoom && ($_mapBounds = $_allOrgsBBox);
 </script>
 
 <div class='Settings'>
@@ -113,6 +121,19 @@
 		</div>
 	</div>
 
+		<!-- Org types -->
+
+		<div class='panel'>
+			<header>
+				<h3>Auto Zoom</h3>
+			</header>
+
+			<div class='group'>
+				<div class='item'>
+					<input type='checkbox' bind:checked={$_autoZoom} /> auto zoom
+				</div>
+			</div>
+		</div>
 </div>
 
 <style>

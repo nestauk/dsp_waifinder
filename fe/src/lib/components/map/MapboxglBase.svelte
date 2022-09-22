@@ -13,6 +13,7 @@
 		MAPBOXGL_MIN_ZOOM,
 		MAPBOXGL_TILE_SIZE
 	} from './consts';
+    import { isIn } from 'lamb';
 
 	export let accessToken = null;
 	export let CustomLayers = null;
@@ -21,6 +22,8 @@
 	export let styleURL;
 	export let withScaleControl = true;
 	export let withZoomControl = true;
+	export let bounds;
+	export let isMoveEnabled = true;
 
 	/* props */
 
@@ -56,7 +59,6 @@
 		});
 
 	/* controls */
-
 	const addAttributionControl = () => {
 		map.addControl(
 			new mapboxgl.AttributionControl({
@@ -75,14 +77,17 @@
 		);
 	};
 
+	const zoomControl = new mapboxgl.NavigationControl({showCompass: false});
+
 	const addZoomControl = () => {
-		map.addControl(
-			new mapboxgl.NavigationControl({
-				showCompass: false
-			}),
-			'bottom-left'
-		);
+		map?.addControl(zoomControl, 'bottom-left');
 	};
+
+	/*
+	const removeZoomControl = () => {
+		map?.removeControl(zoomControl);
+	};
+	*/
 
 	const addControls = () => {
 		addAttributionControl();
@@ -161,6 +166,19 @@
 		});
 	}
 
+	const enableMoving = () => {
+		map?.dragPan.enable();
+		map?.scrollZoom.enable();
+		map?.touchZoomRotate.enable();
+		map?.doubleClickZoom.enable();
+	}
+	const disableMoving = () => {
+		map?.dragPan.disable();
+		map?.scrollZoom.disable();
+		map?.touchZoomRotate.disable();
+		map?.doubleClickZoom.disable();
+	}
+
 	const {
 		_writable: _size,
 		resizeObserver
@@ -194,12 +212,13 @@
 
 			// interactions
 			attributionControl: false, // we add this later to have it compact
-			dragPan: isInteractive,
+			doubleClickZoom: isMoveEnabled && isInteractive,
+			dragPan: isMoveEnabled && isInteractive,
 			dragRotate: false,
 			pitchWithRotate: false, // don't render dots in perspective
-			scrollZoom: isInteractive,
+			scrollZoom: isMoveEnabled && isInteractive,
 			touchPitch: false,
-			touchZoomRotate: true
+			touchZoomRotate: isMoveEnabled && isInteractive,
 		})
 		.on('load', () => {
 			addCustomLayers();
@@ -234,6 +253,14 @@
 
 	// eslint-disable-next-line no-unused-expressions, no-sequences
 	$: $_size, map?.resize()
+
+	$: bounds && map?.fitBounds(bounds);
+	$: isMoveEnabled && withZoomControl && isInteractive
+		? map?.addControl(zoomControl, 'bottom-left')
+		: map?.removeControl(zoomControl);
+	$: isMoveEnabled && isInteractive
+		? enableMoving()
+		: disableMoving();
 </script>
 
 <svelte:head>

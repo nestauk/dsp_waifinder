@@ -3,16 +3,16 @@
 
 	import {createEventDispatcher} from 'svelte';
 
-	export let _screen;
-	export let isNarrow = true;
-	export let hasBackground = true;
-	export let theme;
-
 	const defaultTheme = {
 		backgroundColor: 'white',
 		boxShadowColor: 'lightgrey',
 		borderColor: 'rgb(70, 70, 70)',
 	};
+
+	export let _screen;
+	export let isNarrow = true;
+	export let hasBackground = true;
+	export let theme = defaultTheme;
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');

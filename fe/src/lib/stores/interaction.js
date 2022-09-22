@@ -40,3 +40,5 @@ export const _isCursorOnMap = writable(false);
 
 export const setIsCursorOnMap = () => _isCursorOnMap.set(true);
 export const clearIsCursorOnMap = () => _isCursorOnMap.set(false);
+
+export const _isZoomBannerVisible = writable(false);

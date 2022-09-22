@@ -7,8 +7,10 @@
 	const isMapboxGLSupported = mapboxgl.supported();
 
 	export let accessToken;
+	export let bounds;
 	export let CustomLayers;
 	export let getLonLat;
+	export let isMoveEnabled;
 	export let items = [];
 	export let styleURL;
 	export let withScaleControl = true;
@@ -18,8 +20,10 @@
 {#if isMapboxGLSupported}
 	<MapboxglBase
 		{accessToken}
+		{bounds}
 		{CustomLayers}
 		{getLonLat}
+		{isMoveEnabled}
 		{items}
 		{styleURL}
 		{withScaleControl}
