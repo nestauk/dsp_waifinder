@@ -217,7 +217,7 @@
 		.on('load', () => {
 			addCustomLayers();
 			setMapEvents();
-			fitToBbox($_bbox_WSEN);
+			fitToBbox(bounds || $_bbox_WSEN);
 
 			setGeometry(); // ipad FIXME: initial svg is 100x100
 		})
