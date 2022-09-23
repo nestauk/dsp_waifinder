@@ -16,6 +16,7 @@
 		noOrgsMessage
 	} from '$lib/config';
 	import {
+		_allOrgsBBox,
 		_clusters,
 		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
@@ -36,6 +37,8 @@
 	const disableAutoZoom = () => {
 		$_autoZoom = false;
 	}
+
+	$: $_autoZoom && ($_mapBounds = $_allOrgsBBox);
 </script>
 
 <div class='ExplorerSmall'>

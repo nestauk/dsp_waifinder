@@ -248,6 +248,7 @@
 	// eslint-disable-next-line no-unused-expressions, no-sequences
 	$: $_size, map?.resize()
 
+	$: console.log(bounds);
 	$: bounds && fitToBbox(bounds);
 </script>
 
