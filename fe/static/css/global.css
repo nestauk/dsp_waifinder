@@ -67,7 +67,7 @@ a {
 	--colorOrgtype3: gold;
 	--colorOrgtype3Text: var(--colorMain);
 	--colorPill: white;
-	--colorPillBackground: black;
+	--colorPillBackground: #333;
 	--colorPillScore: white;
 	--colorSecondary: #075aa2;
 	--colorSelected: #00645f;
@@ -76,7 +76,7 @@ a {
 	--colorTagBlockquoteLeftborder: dodgerblue;
 	--colorTagCodeBackground: aliceblue;
 	--colorTagCodeBorder: lightgrey;
-	--colorTagCodeText: black;
+	--colorTagCodeText: #333;
 	--colorWarningBackground: orange;
 	--colorWarningBorder: darkorange;
 	--colorWarningText: white;
