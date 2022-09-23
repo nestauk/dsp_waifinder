@@ -4,6 +4,7 @@
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
 	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
+	import Pill from '$lib/components/orgs/Pill.svelte';
 	import Settings from '$lib/components/Settings.svelte';
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import MessageView from '$lib/components/svizzle/MessageView.svelte';
@@ -48,6 +49,11 @@
 					withScaleControl={true}
 					withZoomControl={true}
 				/>
+				{#if $_orgs.length === 0}
+					<div class='noOrgsMessage'>
+						<Pill label={noOrgsMessage} />
+					</div>
+				{/if}
 			</View>
 			<View id='details'>
 				{#if $_orgs.length > 0}
@@ -125,5 +131,15 @@
 	.scrollable {
 		height: 100%;
 		overflow: auto;
+	}
+	.noOrgsMessage {
+		align-content: center;
+		display: grid;
+		height: 100%;
+		justify-content: center;
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		width: 100%;
 	}
 </style>
