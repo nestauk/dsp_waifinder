@@ -5,7 +5,6 @@
 
 	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
 	import {
-		_autoZoom,
 		_hero,
 		_isHeroInBounds,
 		clearHero,
@@ -136,7 +135,7 @@
 	/* cluster */
 
 	const onClusterClick = (coordinates, id) => {
-		if (map && !$_autoZoom) {
+		if (map) {
 			map.flyTo({
 				center: coordinates,
 				zoom: getClusterExpansionZoom(id),
