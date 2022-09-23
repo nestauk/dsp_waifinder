@@ -4,12 +4,9 @@
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
 	import {
-		_allOrgsBBox,
-		_mapBounds,
 		_keyOrgTypeValueOrgsCount,
 		_orgsCount,
 	} from '$lib/stores/data';
-	import {_autoZoom} from '$lib/stores/interaction';
 	import {
 		_orgSearchValue,
 		_orgTypesSelectionMode,
@@ -39,8 +36,6 @@
 			'filters.json': filtersString,
 		});
 	}
-
-	$: $_autoZoom && ($_mapBounds = $_allOrgsBBox);
 </script>
 
 <div class='Settings'>
