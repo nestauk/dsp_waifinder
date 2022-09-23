@@ -27,7 +27,7 @@
 		$_autoZoom = false;
 	}
 
-	$: $_autoZoom && ($_mapBounds = $_allOrgsBBox);
+	$: $_mapBounds = $_autoZoom ? $_allOrgsBBox : null;
 </script>
 
 <svelte:body on:mouseleave={clearInteractionStores} />
