@@ -6,7 +6,7 @@
 
 <div class='AutoZoomControl'>
 	<input id='autozoom' type='checkbox' bind:checked={$_autoZoom} />
-	<label for='autozoom'>auto-zoom</label>
+	<label for='autozoom'>Auto-zoom</label>
 </div>
 
 <style>
@@ -17,6 +17,6 @@
 		display: grid;
 		align-items: center;
 		grid-auto-flow: column;
-		column-gap: 0.25em;
+		column-gap: 0.5em;
 	}
 </style>
