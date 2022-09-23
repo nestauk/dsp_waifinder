@@ -8,6 +8,7 @@
 
 	export let accessToken;
 	export let bounds;
+	export let customControl;
 	export let CustomLayers;
 	export let getLonLat;
 	export let isMoveEnabled;
@@ -15,12 +16,14 @@
 	export let styleURL;
 	export let withScaleControl = true;
 	export let withZoomControl = true;
+
 </script>
 
 {#if isMapboxGLSupported}
 	<MapboxglBase
 		{accessToken}
 		{bounds}
+		{customControl}
 		{CustomLayers}
 		{getLonLat}
 		{isMoveEnabled}
@@ -28,6 +31,7 @@
 		{styleURL}
 		{withScaleControl}
 		{withZoomControl}
+		on:bboxChanged
 	/>
 {:else}
 	<MapboxglUnsupported />

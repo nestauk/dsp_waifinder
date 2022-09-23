@@ -2,7 +2,7 @@
 	import geoViewport from '@mapbox/geo-viewport';
 	import {setupResizeObserver} from '@svizzle/ui';
 	import mapboxgl from 'mapbox-gl';
-	import {beforeUpdate, onMount} from 'svelte';
+	import {beforeUpdate, onMount, createEventDispatcher} from 'svelte';
 
 	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 	import {clearHero} from '$lib/stores/interaction';
@@ -13,7 +13,9 @@
 		MAPBOXGL_MIN_ZOOM,
 		MAPBOXGL_TILE_SIZE
 	} from './consts';
-    import { isIn } from 'lamb';
+	import {CustomControl} from './util';
+
+	const dispatch = createEventDispatcher();
 
 	export let accessToken = null;
 	export let CustomLayers = null;
@@ -23,7 +25,7 @@
 	export let withScaleControl = true;
 	export let withZoomControl = true;
 	export let bounds;
-	export let isMoveEnabled = true;
+	export let customControl;
 
 	/* props */
 
@@ -77,17 +79,14 @@
 		);
 	};
 
-	const zoomControl = new mapboxgl.NavigationControl({showCompass: false});
-
 	const addZoomControl = () => {
-		map?.addControl(zoomControl, 'bottom-left');
+		map?.addControl(
+			new mapboxgl.NavigationControl({
+				showCompass: false
+			}),
+			'bottom-left'
+		);
 	};
-
-	/*
-	const removeZoomControl = () => {
-		map?.removeControl(zoomControl);
-	};
-	*/
 
 	const addControls = () => {
 		addAttributionControl();
@@ -99,12 +98,17 @@
 		if (withZoomControl) {
 			addZoomControl();
 		}
+
+		if (customControl) {
+			const control = new CustomControl(customControl.control);
+			map?.addControl(control, customControl.position);
+		}
 	};
 
 	/* bbox */
 
-	const fitToBbox = () => {
-		map.fitBounds($_bbox_WSEN, {
+	const fitToBbox = bbox_WSEN => {
+		map?.fitBounds(bbox_WSEN, {
 			linear: true,
 			padding: {
 				bottom: FIT_PADDING,
@@ -160,23 +164,11 @@
 		map.on('move', () => {
 			updateProjection();
 			updateBbox();
+			dispatch('bboxChanged');
 		});
 		map.on('zoom', () => {
 			updateZoom();
 		});
-	}
-
-	const enableMoving = () => {
-		map?.dragPan.enable();
-		map?.scrollZoom.enable();
-		map?.touchZoomRotate.enable();
-		map?.doubleClickZoom.enable();
-	}
-	const disableMoving = () => {
-		map?.dragPan.disable();
-		map?.scrollZoom.disable();
-		map?.touchZoomRotate.disable();
-		map?.doubleClickZoom.disable();
 	}
 
 	const {
@@ -212,18 +204,18 @@
 
 			// interactions
 			attributionControl: false, // we add this later to have it compact
-			doubleClickZoom: isMoveEnabled && isInteractive,
-			dragPan: isMoveEnabled && isInteractive,
+			doubleClickZoom: isInteractive,
+			dragPan: isInteractive,
 			dragRotate: false,
 			pitchWithRotate: false, // don't render dots in perspective
-			scrollZoom: isMoveEnabled && isInteractive,
+			scrollZoom: isInteractive,
 			touchPitch: false,
-			touchZoomRotate: isMoveEnabled && isInteractive,
+			touchZoomRotate: isInteractive,
 		})
 		.on('load', () => {
 			addCustomLayers();
 			setMapEvents();
-			fitToBbox();
+			fitToBbox($_bbox_WSEN);
 
 			setGeometry(); // ipad FIXME: initial svg is 100x100
 		})
@@ -254,13 +246,7 @@
 	// eslint-disable-next-line no-unused-expressions, no-sequences
 	$: $_size, map?.resize()
 
-	$: bounds && map?.fitBounds(bounds);
-	$: isMoveEnabled && withZoomControl && isInteractive
-		? map?.addControl(zoomControl, 'bottom-left')
-		: map?.removeControl(zoomControl);
-	$: isMoveEnabled && isInteractive
-		? enableMoving()
-		: disableMoving();
+	$: bounds && fitToBbox(bounds);
 </script>
 
 <svelte:head>

@@ -5,11 +5,11 @@
 	import Input from '$lib/components/svizzle/Input.svelte';
 	import {
 		_allOrgsBBox,
-		_autoZoom,
 		_mapBounds,
 		_keyOrgTypeValueOrgsCount,
 		_orgsCount,
 	} from '$lib/stores/data';
+	import {_autoZoom} from '$lib/stores/interaction';
 	import {
 		_orgSearchValue,
 		_orgTypesSelectionMode,
@@ -39,7 +39,7 @@
 			'filters.json': filtersString,
 		});
 	}
-	// $: console.log($_mapBounds)
+
 	$: $_autoZoom && ($_mapBounds = $_allOrgsBBox);
 </script>
 
@@ -120,20 +120,6 @@
 			</div>
 		</div>
 	</div>
-
-		<!-- Org types -->
-
-		<div class='panel'>
-			<header>
-				<h3>Auto Zoom</h3>
-			</header>
-
-			<div class='group'>
-				<div class='item'>
-					<input type='checkbox' bind:checked={$_autoZoom} /> auto zoom
-				</div>
-			</div>
-		</div>
 </div>
 
 <style>

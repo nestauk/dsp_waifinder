@@ -1,14 +1,12 @@
 <script>
 	import {isClientSide} from '@svizzle/ui';
 
-	import ZoomBanner from '$lib/components/banners/ZoomBanner.svelte';
 	import ExplorerMedium from '$lib/components/explorer/medium/ExplorerMedium.svelte';
 	import ExplorerSmall from '$lib/components/explorer/small/ExplorerSmall.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {toolName} from '$lib/config';
 	import {updateDataset} from '$lib/stores/dataset';
-	import {_isZoomBannerVisible} from '$lib/stores/interaction';
 	import {_screenId} from '$lib/stores/layout';
 	import {setDefaultActiveView} from '$lib/stores/navigation';
 
@@ -39,9 +37,3 @@
 		<ExplorerSmall />
 	</View>
 </ViewsXor>
-
-{#if $_isZoomBannerVisible}
-	<ZoomBanner on:close={() => {
-		$_isZoomBannerVisible = false
-	}} />
-{/if}

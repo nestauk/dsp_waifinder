@@ -1,6 +1,7 @@
 <script>
 	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
 	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
@@ -43,6 +44,10 @@
 					{accessToken}
 					{getLonLat}
 					{styleURL}
+					customControl={{
+						control: AutoZoomControl,
+						position: 'top-left'
+					}}
 					CustomLayers={SvgLayers}
 					items={$_clusters}
 					withScaleControl={true}

@@ -14,6 +14,7 @@ import Supercluster from 'supercluster';
 import {derived, get, writable} from 'svelte/store';
 
 import {_dataset} from '$lib/stores/dataset';
+import {_autoZoom} from '$lib/stores/interaction';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
@@ -97,7 +98,6 @@ export const _allOrgs = derived(
 		return _.filter(orgs, _.allOf(predicates));
 	});
 
-export const _autoZoom = writable(false);
 export const _mapBounds = writable();
 
 export const _allOrgsBBox = derived(
@@ -135,7 +135,7 @@ const getOrgNameFirstChar = _.pipe([
 	char => (/[A-Z]/ug).test(char) ? char : '#'
 ]);
 
-export const _orgsChar = derived(_orgs, _.pipe([
+export const _orgsChar = derived(_orgs,_.pipe([
 	_.mapWith(getOrgNameFirstChar),
 	_.uniques
 ]));

@@ -3,12 +3,9 @@
 	import {arc, pie} from 'd3-shape';
 	import * as _ from 'lamb';
 
+	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
 	import {
 		_autoZoom,
-		getClusterExpansionZoom,
-		getClusterLeaves
-	} from '$lib/stores/data';
-	import {
 		_hero,
 		_isHeroInBounds,
 		clearHero,
