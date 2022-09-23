@@ -1,9 +1,12 @@
 <script>
 	export let label = null;
+	export let nowrap;
+
+	$: nowrap = nowrap ?? true;
 </script>
 
 <div class='Pill'>
-	<span class='label'>{label}</span>
+	<span class='label' class:nowrap>{label}</span>
 </div>
 
 <style>
@@ -14,6 +17,7 @@
 		color: var(--colorPill);
 		display: flex;
 		padding: 0.2em 0.4em;
+		text-align: center;
 	}
 
 	.label {
@@ -21,6 +25,8 @@
 		font-weight: bold;
 		margin: 0 0.3em;
 		overflow: hidden;
+	}
+	.nowrap {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}

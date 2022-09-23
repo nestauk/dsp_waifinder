@@ -14,7 +14,7 @@ export const bannersDefaultFooterText = 'Click on background to dismiss';
 
 /* orgs selection */
 
-export const noOrgsMessage = 'No organisations selected with current filtering criteria.';
+export const noOrgsMessage = 'No results with current filters';
 
 /* feedback forms */
 
