@@ -161,10 +161,12 @@
 	}
 
 	const setMapEvents = () => {
-		map.on('move', () => {
+		map.on('move', event => {
 			updateProjection();
 			updateBbox();
-			dispatch('bboxChanged');
+			if (event.originalEvent) {
+				dispatch('bboxChanged');
+			}
 		});
 		map.on('zoom', () => {
 			updateZoom();

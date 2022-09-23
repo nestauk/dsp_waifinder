@@ -24,7 +24,7 @@
 	import Multiview from './Multiview.svelte';
 
 	const disableAutoZoom = () => {
-		// $_autoZoom = false;
+		$_autoZoom = false;
 	}
 </script>
 
