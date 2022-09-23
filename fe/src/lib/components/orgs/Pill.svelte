@@ -1,9 +1,12 @@
 <script>
 	export let label = null;
+	export let nowrap;
+
+	$: nowrap = nowrap ?? true;
 </script>
 
 <div class='Pill'>
-	<span class='label'>{label}</span>
+	<span class='label' class:nowrap>{label}</span>
 </div>
 
 <style>
@@ -21,6 +24,8 @@
 		font-weight: bold;
 		margin: 0 0.3em;
 		overflow: hidden;
+	}
+	.nowrap {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}

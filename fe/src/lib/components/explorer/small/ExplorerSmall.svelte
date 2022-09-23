@@ -7,7 +7,6 @@
 	import Pill from '$lib/components/orgs/Pill.svelte';
 	import Settings from '$lib/components/Settings.svelte';
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
-	import MessageView from '$lib/components/svizzle/MessageView.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
@@ -59,39 +58,52 @@
 				{#if $_orgs.length > 0}
 					<OrgsList items={$_orgs} />
 				{:else}
-					<MessageView
-						fontSize='1rem'
-						padding='10px'
-						text={noOrgsMessage}
-						textAlign='center'
-					/>
+					<div class='noOrgsMessage'>
+						<Pill label={noOrgsMessage} />
+					</div>
 				{/if}
 			</View>
 			<View id='topics'>
 				<div class='scrollable'>
-					<BarchartVDiv
-						isInteractive={true}
-						items={$_keyTopicIdValueOrgsCount}
-						keyToLabelFn={getTopicLabel}
-						message={noOrgsMessage}
-						on:clicked={({detail: {id}}) => asyncUpdateTopicDetails(id)}
-					/>
+					{#if $_orgs.length > 0}
+						<BarchartVDiv
+							isInteractive={true}
+							items={$_keyTopicIdValueOrgsCount}
+							keyToLabelFn={getTopicLabel}
+							message={noOrgsMessage}
+							on:clicked={({detail: {id}}) => asyncUpdateTopicDetails(id)}
+						/>
+					{:else}
+						<div class='noOrgsMessage'>
+							<Pill label={noOrgsMessage} />
+						</div>
+					{/if}
 				</div>
 			</View>
 			<View id='places'>
 				<div class='scrollable'>
-					<BarchartVDiv
-						items={$_keyPlaceLabelValueOrgsCount}
-						message={noOrgsMessage}
-					/>
+					{#if $_orgs.length > 0}
+						<BarchartVDiv
+							items={$_keyPlaceLabelValueOrgsCount}
+						/>
+					{:else}
+						<div class='noOrgsMessage'>
+							<Pill label={noOrgsMessage} />
+						</div>
+					{/if}
 				</div>
 			</View>
 			<View id='regions'>
 				<div class='scrollable'>
-					<BarchartVDiv
-						items={$_keyRegionLabelValueOrgsCount}
-						message={noOrgsMessage}
-					/>
+					{#if $_orgs.length > 0}
+						<BarchartVDiv
+							items={$_keyRegionLabelValueOrgsCount}
+						/>
+					{:else}
+						<div class='noOrgsMessage'>
+							<Pill label={noOrgsMessage} />
+						</div>
+					{/if}
 				</div>
 			</View>
 		</ViewsXor>
@@ -137,6 +149,7 @@
 		display: grid;
 		height: 100%;
 		justify-content: center;
+		padding: 0.5em;
 		pointer-events: none;
 		position: absolute;
 		top: 0;
