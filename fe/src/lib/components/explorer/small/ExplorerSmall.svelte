@@ -55,7 +55,7 @@
 					{styleURL}
 					customControl={{
 						control: AutoZoomControl,
-						position: 'top-left'
+						position: 'bottom-left'
 					}}
 					CustomLayers={SvgLayers}
 					items={$_clusters}

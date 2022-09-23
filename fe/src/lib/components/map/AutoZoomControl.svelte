@@ -5,7 +5,8 @@
 </script>
 
 <div class='AutoZoomControl'>
-	<input type='checkbox' bind:checked={$_autoZoom} /> auto zoom
+	<input id='autozoom' type='checkbox' bind:checked={$_autoZoom} />
+	<label for='autozoom'>auto-zoom</label>
 </div>
 
 <style>

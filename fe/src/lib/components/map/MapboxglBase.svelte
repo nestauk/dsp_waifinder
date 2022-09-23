@@ -75,7 +75,7 @@
 				maxWidth: 80,
 				unit: 'metric'
 			}),
-			'bottom-right'
+			'top-right'
 		);
 	};
 
@@ -84,7 +84,7 @@
 			new mapboxgl.NavigationControl({
 				showCompass: false
 			}),
-			'bottom-left'
+			'bottom-right'
 		);
 	};
 
