@@ -203,6 +203,7 @@
 			renderWorldCopies: false,
 			style: styleURL,
 			zoom,
+			maxZoom: 18,
 
 			// interactions
 			attributionControl: false, // we add this later to have it compact
