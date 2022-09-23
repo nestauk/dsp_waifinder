@@ -20,9 +20,10 @@
 		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
+		_mapBounds,
 		_orgs,
 	} from '$lib/stores/data';
-	import {_hero} from '$lib/stores/interaction';
+	import {_autoZoom, _hero} from '$lib/stores/interaction';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
 	import {
 		_activeTopicDetails,
@@ -31,6 +32,10 @@
 	import {getLonLat, getTopicLabel} from '$lib/utils/dataUtils';
 
 	import ViewSelector from './ViewSelector.svelte';
+
+	const disableAutoZoom = () => {
+		$_autoZoom = false;
+	}
 </script>
 
 <div class='ExplorerSmall'>
@@ -41,6 +46,7 @@
 			</View>
 			<View id='map'>
 				<Mapbox
+					bounds={$_mapBounds}
 					{accessToken}
 					{getLonLat}
 					{styleURL}
@@ -50,6 +56,7 @@
 					}}
 					CustomLayers={SvgLayers}
 					items={$_clusters}
+					on:bboxChanged={disableAutoZoom}
 					withScaleControl={true}
 					withZoomControl={true}
 				/>

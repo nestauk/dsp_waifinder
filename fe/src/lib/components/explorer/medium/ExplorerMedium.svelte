@@ -49,9 +49,9 @@
 			}}
 			CustomLayers={SvgLayers}
 			items={$_clusters}
+			on:bboxChanged={disableAutoZoom}
 			withScaleControl={true}
 			withZoomControl={true}
-			on:bboxChanged={disableAutoZoom}
 		/>
 		{#if $_activeTopicDetails}
 			<TopicBanner isPinned={false} />
