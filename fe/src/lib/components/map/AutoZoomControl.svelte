@@ -19,4 +19,7 @@
 		grid-auto-flow: column;
 		column-gap: 0.5em;
 	}
+	div * {
+		cursor: pointer;
+	}
 </style>
