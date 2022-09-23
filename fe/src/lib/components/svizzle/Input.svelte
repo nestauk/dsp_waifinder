@@ -46,6 +46,7 @@
 
 	$: theme = theme ? {...defaultTheme, ...theme} : defaultTheme;
 	$: style = makeStyleVars(theme);
+	$: input && (input.value = value);
 </script>
 
 <div
