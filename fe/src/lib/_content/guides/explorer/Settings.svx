@@ -20,3 +20,6 @@ You can set the logic for the selection by type by using the switch below the
 bar chart:
 	* `OR` means selecting all orgs of ANY of the active types;
 	* `AND` means selecting all orgs of ALL the active types.
+
+You may also enable the auto-zoom feature on the map to automatically scale the
+map to the region encompassing the markers selected by the search parameters.

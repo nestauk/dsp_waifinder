@@ -10,7 +10,7 @@
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL
 	} from '$lib/config';
-	import {_allOrgsBBox, _clusters, _mapBounds} from '$lib/stores/data';
+	import {_allOrgsBBox, _clusters} from '$lib/stores/data';
 	import {getLonLat} from '$lib/utils/dataUtils';
 	import {
 		_autoZoom,
@@ -26,8 +26,6 @@
 	const disableAutoZoom = () => {
 		$_autoZoom = false;
 	}
-
-	$: $_mapBounds = $_autoZoom ? $_allOrgsBBox : null;
 </script>
 
 <svelte:body on:mouseleave={clearInteractionStores} />
@@ -41,7 +39,7 @@
 		on:mouseleave={clearIsCursorOnMap}
 	>
 		<Mapbox
-			bounds={$_mapBounds}
+			bounds={$_allOrgsBBox}
 			{accessToken}
 			{getLonLat}
 			{styleURL}

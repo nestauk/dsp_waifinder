@@ -171,6 +171,10 @@
 		map.on('zoom', () => {
 			updateZoom();
 		});
+		map.on('boxzoomend', () => {
+			console.log('boxzoom')
+			dispatch('bboxChanged');
+		});
 	}
 
 	const {
@@ -183,7 +187,7 @@
 	// FIXME TBD: bind instead?
 	const setGeometry = () => {
 		if (!mapcontainer) {
-			return
+			return;
 		}
 
 		const elementGeometry = getComputedStyle(mapcontainer);

@@ -98,23 +98,23 @@ export const _allOrgs = derived(
 		return _.filter(orgs, _.allOf(predicates));
 	});
 
-export const _mapBounds = writable();
-
 export const _allOrgsBBox = derived(
 	[_allOrgs, _autoZoom],
 	([allOrgs, autoZoom]) => autoZoom
-		? _.reduce(
-			allOrgs,
-			([[w, s], [e, n]], {location: {lat, lon}}) => [
-				[Math.min(w, lon), Math.min(s, lat)],
-				[Math.max(e, lon), Math.max(n, lat)],
-			],
-			[
-				[bbox_WS_EN_UK[1][0], bbox_WS_EN_UK[1][1]],
-				[bbox_WS_EN_UK[0][0], bbox_WS_EN_UK[0][1]],
-			]
-		)
-		: bbox_WS_EN_UK
+		? allOrgs.length > 0
+			? _.reduce(
+				allOrgs,
+				([[w, s], [e, n]], {location: {lat, lon}}) => [
+					[Math.min(w, lon), Math.min(s, lat)],
+					[Math.max(e, lon), Math.max(n, lat)],
+				],
+				[
+					[bbox_WS_EN_UK[1][0], bbox_WS_EN_UK[1][1]],
+					[bbox_WS_EN_UK[0][0], bbox_WS_EN_UK[0][1]],
+				]
+			)
+			: bbox_WS_EN_UK
+		: null
 );
 
 export const _orgs = derived(

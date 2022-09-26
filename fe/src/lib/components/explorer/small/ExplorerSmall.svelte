@@ -21,7 +21,6 @@
 		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
-		_mapBounds,
 		_orgs,
 	} from '$lib/stores/data';
 	import {_autoZoom, _hero} from '$lib/stores/interaction';
@@ -37,8 +36,6 @@
 	const disableAutoZoom = () => {
 		$_autoZoom = false;
 	}
-
-	$: $_mapBounds = $_autoZoom ? $_allOrgsBBox : null;
 </script>
 
 <div class='ExplorerSmall'>
@@ -49,7 +46,7 @@
 			</View>
 			<View id='map'>
 				<Mapbox
-					bounds={$_mapBounds}
+					bounds={$_allOrgsBBox}
 					{accessToken}
 					{getLonLat}
 					{styleURL}
