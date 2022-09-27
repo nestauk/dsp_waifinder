@@ -8,7 +8,7 @@
 
 	const {
 		_writable: _expandedSize,
-		resizeObserver: expandedSizeObserver
+		resizeObserver: sensorSizeObserver
 	} = setupResizeObserver();
 
 	export let active;
@@ -19,8 +19,8 @@
 </script>
 
 <div
-	class='button'
 	class:active
+	class='ResponsiveButton nowrap'
 	on:click
 	use:buttonSizeObserver
 >
@@ -31,21 +31,16 @@
 </div>
 
 <div
-	class='ghost'
-	on:click
-	use:expandedSizeObserver
+	class='ResponsiveButtonSensor nowrap'
 	role='none'
+	use:sensorSizeObserver
 >
 	<slot name='optional' />
 	<slot name='always' />
 </div>
 
 <style>
-	div {
-		white-space: nowrap;
-	}
-
-	.button {
+	.ResponsiveButton {
 		align-items: center;
 		border: 1px solid lightgrey; /* FIXME temp solution */
 		cursor: pointer;
@@ -55,14 +50,17 @@
 		padding: 0.5em 0;
 		width: 100%;
 	}
-
 	.active {
 		background: var(--colorSelected);
 		color: var(--colorSelectedText);
 	}
 
-	.ghost {
+	.ResponsiveButtonSensor {
 		position: absolute;
 		visibility: hidden;
+	}
+
+	.nowrap {
+		white-space: nowrap;
 	}
 </style>
