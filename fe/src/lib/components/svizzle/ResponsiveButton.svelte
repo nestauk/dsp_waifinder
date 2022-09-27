@@ -2,8 +2,8 @@
 	import {setupResizeObserver} from '@svizzle/ui';
 
 	const {
-		_writable: _buttonSize,
-		resizeObserver: buttonSizeObserver
+		_writable: _contentSize,
+		resizeObserver: contentSizeObserver
 	} = setupResizeObserver();
 
 	const {
@@ -15,19 +15,23 @@
 	export let isActive;
 	export let isOptionalHidden;
 
-	$: doesOverflow = $_buttonSize.inlineSize < $_sensorSize.inlineSize;
+	$: doesOverflow = $_contentSize.inlineSize < $_sensorSize.inlineSize;
 </script>
 
 <div
 	class:active={isActive}
 	class='ResponsiveButton nowrap'
 	on:click
-	use:buttonSizeObserver
 >
-	{#if !doesOverflow && !isOptionalHidden}
-		<slot name='optional' />
-	{/if}
-	<slot name='always' />
+	<div
+		class='content'
+		use:contentSizeObserver
+	>
+		{#if !doesOverflow && !isOptionalHidden}
+			<slot name='optional' />
+		{/if}
+		<slot name='always' />
+	</div>
 </div>
 
 <div
@@ -41,14 +45,16 @@
 
 <style>
 	.ResponsiveButton {
-		align-items: center;
+		height: 100%;
+		width: 100%;
 		border: 1px solid lightgrey; /* FIXME temp solution */
 		cursor: pointer;
+		padding: 0.5em;
+	}
+	.content {
+		align-items: center;
 		display: flex;
-		height: 100%;
 		justify-content: center;
-		padding: 0.5em 0;
-		width: 100%;
 	}
 	.active {
 		background: var(--colorSelected);
