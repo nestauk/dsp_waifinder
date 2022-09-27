@@ -7,7 +7,7 @@
 	} = setupResizeObserver();
 
 	const {
-		_writable: _expandedSize,
+		_writable: _sensorSize,
 		resizeObserver: sensorSizeObserver
 	} = setupResizeObserver();
 
@@ -15,7 +15,7 @@
 	export let isActive;
 	export let isOptionalHidden;
 
-	$: doesOverflow = $_buttonSize.inlineSize < $_expandedSize.inlineSize
+	$: doesOverflow = $_buttonSize.inlineSize < $_sensorSize.inlineSize;
 </script>
 
 <div
