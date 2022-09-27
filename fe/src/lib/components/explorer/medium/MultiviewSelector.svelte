@@ -1,94 +1,92 @@
 <script>
-	import {_screen, Icon, List, setupResizeObserver,Tag} from '@svizzle/ui';
+	import {Icon, List, Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
 	import {getStrokeColor} from '$lib/components/explorer/utils';
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
+	import ResponsiveButton from '$lib/components/svizzle/ResponsiveButton.svelte';
 
 	export let activeViewId;
 	export let setView = noop;
 
-	const {
-		_writable: _size,
-		resizeObserver
-	} = setupResizeObserver('multiviewselector');
+	let detailsOverflows;
+	let topicsOverflows;
+	let placesOverflows;
+	let regionsOverflows;
 
-	$: console.log($_size)
-	$: console.log($_screen)
-	$: charsAvailable = $_size.inlineSize / ($_screen?.glyph.width || 9);
-	$: console.log('chars', charsAvailable);
+	$: isOptionalHidden =
+		detailsOverflows
+		|| topicsOverflows
+		|| placesOverflows
+		|| regionsOverflows;
 </script>
 
-<nav class='MultiviewSelector' use:resizeObserver>
+<nav class='MultiviewSelector'>
+
 
 	<!-- details -->
-	<div
-		class:active={activeViewId === 'details'}
-		class='button'
+	<ResponsiveButton
+		active={activeViewId === 'details'}
 		on:click={setView('details')}
+		bind:doesOverflow={detailsOverflows}
+		{isOptionalHidden}
 	>
-		{#if charsAvailable > 43}
-			<span>Details</span>
-		{/if}
+		<span slot='optional'>Details</span>
 		<Icon
 			glyph={List}
+			slot='always'
 			stroke={getStrokeColor('details', activeViewId)}
 		/>
-	</div>
+	</ResponsiveButton>
+
 
 	<!-- topics -->
-	<div
-		class:active={activeViewId === 'topics'}
-		class='button'
+	<ResponsiveButton
+		active={activeViewId === 'topics'}
 		on:click={setView('topics')}
+		bind:doesOverflow={topicsOverflows}
+		{isOptionalHidden}
 	>
-		{#if charsAvailable > 43}
-			<span>Topics</span>
-		{/if}
-		<span>
-			<Icon
-				glyph={Tag}
-				stroke={getStrokeColor('topics', activeViewId)}
-			/>
-		</span>
-	</div>
+		<span slot='optional'>Topics</span>
+		<Icon
+			glyph={Tag}
+			slot='always'
+			stroke={getStrokeColor('topics', activeViewId)}
+		/>
+	</ResponsiveButton>
 
 	<!-- places -->
-	<div
-		class:active={activeViewId === 'places'}
-		class='button'
+	<ResponsiveButton
+		active={activeViewId === 'places'}
 		on:click={setView('places')}
+		bind:doesOverflow={placesOverflows}
+		{isOptionalHidden}
 	>
-		{#if charsAvailable > 43}
-			<span>Places</span>
-		{/if}
-		<span>
-			<Icon
-				fill={getStrokeColor('places', activeViewId)}
-				glyph={City}
-				stroke='none'
-			/>
-		</span>
-	</div>
+		<span slot='optional'>Places</span>
+		<Icon
+			fill={getStrokeColor('places', activeViewId)}
+			glyph={City}
+			slot='always'
+			stroke='none'
+		/>
+	</ResponsiveButton>
 
 	<!-- regions -->
-	<div
-		class:active={activeViewId === 'regions'}
-		class='button'
+	<ResponsiveButton
+		active={activeViewId === 'regions'}
 		on:click={setView('regions')}
+		bind:doesOverflow={regionsOverflows}
+		{isOptionalHidden}
 	>
-		{#if charsAvailable > 43}
-			<span>Regions</span>
-		{/if}
-		<span>
-			<Icon
-				glyph={Region}
-				stroke={getStrokeColor('regions', activeViewId)}
-				strokeWidth=1.25
-			/>
-		</span>
-	</div>
+		<span slot='optional'>Regions</span>
+		<Icon
+			glyph={Region}
+			slot='always'
+			stroke={getStrokeColor('regions', activeViewId)}
+			strokeWidth=1.25
+		/>
+	</ResponsiveButton>
 </nav>
 
 <style>
@@ -100,21 +98,7 @@
 		height: 100%;
 		width: 100%;
 	}
-	.active {
-		background: var(--colorSelected);
-		color: var(--colorSelectedText);
-	}
 
-	.button {
-		align-items: center;
-		border: 1px solid lightgrey; /* FIXME temp solution */
-		cursor: pointer;
-		display: flex;
-		height: 100%;
-		justify-content: center;
-		padding: 0.5em 0;
-		width: 100%;
-	}
 	/* .rotated {
 		transform: scaleX(-1) rotate(-90deg);
 	} */
