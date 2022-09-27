@@ -23,3 +23,4 @@ bar chart:
 
 You may also enable the auto-zoom feature on the map to automatically scale the
 map to the region encompassing the markers selected by the search parameters.
+See below for more information.
