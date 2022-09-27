@@ -31,11 +31,11 @@
 </script>
 
 <div
+	{style}
 	{title}
 	class:active={isActive}
 	class='ResponsiveButton nowrap'
 	on:click
-	{style}
 >
 	<div
 		class='content'
