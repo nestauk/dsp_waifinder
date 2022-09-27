@@ -31,6 +31,7 @@
 		bind:doesOverflow={detailsOverflows}
 		isActive={activeViewId === 'details'}
 		on:click={setView('details')}
+		title='List of organisations'
 	>
 		<span slot='optional'>Details</span>
 		<Icon
@@ -47,6 +48,7 @@
 		bind:doesOverflow={topicsOverflows}
 		isActive={activeViewId === 'topics'}
 		on:click={setView('topics')}
+		title='Amount of organisations by topic'
 	>
 		<span slot='optional'>Topics</span>
 		<Icon
@@ -63,6 +65,7 @@
 		bind:doesOverflow={placesOverflows}
 		isActive={activeViewId === 'places'}
 		on:click={setView('places')}
+		title='Amount of organisations by place'
 	>
 		<span slot='optional'>Places</span>
 		<Icon
@@ -80,6 +83,7 @@
 		bind:doesOverflow={regionsOverflows}
 		isActive={activeViewId === 'regions'}
 		on:click={setView('regions')}
+		title='Amount of organisations by region (NUTS3)'
 	>
 		<span slot='optional'>Regions</span>
 		<Icon

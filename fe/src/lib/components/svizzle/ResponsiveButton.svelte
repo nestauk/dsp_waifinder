@@ -14,11 +14,13 @@
 	export let doesOverflow;
 	export let isActive;
 	export let isOptionalHidden;
+	export let title='';
 
 	$: doesOverflow = $_contentSize.inlineSize < $_sensorSize.inlineSize;
 </script>
 
 <div
+	{title}
 	class:active={isActive}
 	class='ResponsiveButton nowrap'
 	on:click
