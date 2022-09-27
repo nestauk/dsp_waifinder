@@ -24,13 +24,13 @@
 
 <nav class='MultiviewSelector'>
 
-
 	<!-- details -->
+
 	<ResponsiveButton
-		active={activeViewId === 'details'}
-		on:click={setView('details')}
-		bind:doesOverflow={detailsOverflows}
 		{isOptionalHidden}
+		bind:doesOverflow={detailsOverflows}
+		isActive={activeViewId === 'details'}
+		on:click={setView('details')}
 	>
 		<span slot='optional'>Details</span>
 		<Icon
@@ -40,13 +40,13 @@
 		/>
 	</ResponsiveButton>
 
-
 	<!-- topics -->
+
 	<ResponsiveButton
-		active={activeViewId === 'topics'}
-		on:click={setView('topics')}
-		bind:doesOverflow={topicsOverflows}
 		{isOptionalHidden}
+		bind:doesOverflow={topicsOverflows}
+		isActive={activeViewId === 'topics'}
+		on:click={setView('topics')}
 	>
 		<span slot='optional'>Topics</span>
 		<Icon
@@ -57,11 +57,12 @@
 	</ResponsiveButton>
 
 	<!-- places -->
+
 	<ResponsiveButton
-		active={activeViewId === 'places'}
-		on:click={setView('places')}
-		bind:doesOverflow={placesOverflows}
 		{isOptionalHidden}
+		bind:doesOverflow={placesOverflows}
+		isActive={activeViewId === 'places'}
+		on:click={setView('places')}
 	>
 		<span slot='optional'>Places</span>
 		<Icon
@@ -73,11 +74,12 @@
 	</ResponsiveButton>
 
 	<!-- regions -->
+
 	<ResponsiveButton
-		active={activeViewId === 'regions'}
-		on:click={setView('regions')}
-		bind:doesOverflow={regionsOverflows}
 		{isOptionalHidden}
+		bind:doesOverflow={regionsOverflows}
+		isActive={activeViewId === 'regions'}
+		on:click={setView('regions')}
 	>
 		<span slot='optional'>Regions</span>
 		<Icon
@@ -98,10 +100,6 @@
 		height: 100%;
 		width: 100%;
 	}
-
-	/* .rotated {
-		transform: scaleX(-1) rotate(-90deg);
-	} */
 
 	span {
 		margin-right: 1em;

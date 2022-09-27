@@ -11,15 +11,15 @@
 		resizeObserver: sensorSizeObserver
 	} = setupResizeObserver();
 
-	export let active;
 	export let doesOverflow;
+	export let isActive;
 	export let isOptionalHidden;
 
 	$: doesOverflow = $_buttonSize.inlineSize < $_expandedSize.inlineSize
 </script>
 
 <div
-	class:active
+	class:active={isActive}
 	class='ResponsiveButton nowrap'
 	on:click
 	use:buttonSizeObserver
