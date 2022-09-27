@@ -1,4 +1,5 @@
 <script>
+	import {makeStyleVars} from '@svizzle/dom';
 	import {setupResizeObserver} from '@svizzle/ui';
 
 	const {
@@ -15,8 +16,18 @@
 	export let isActive;
 	export let isOptionalHidden;
 	export let title='';
+	export let theme;
+
+	const defaultTheme = {
+		activeColorBackground: '#333',
+		activeColorText: 'white',
+		colorBackground: 'initial',
+		colorText: 'initial'
+	};
 
 	$: doesOverflow = $_contentSize.inlineSize < $_sensorSize.inlineSize;
+	$: theme = {...defaultTheme, ...theme};
+	$: style = makeStyleVars(theme);
 </script>
 
 <div
@@ -24,6 +35,7 @@
 	class:active={isActive}
 	class='ResponsiveButton nowrap'
 	on:click
+	{style}
 >
 	<div
 		class='content'
@@ -47,20 +59,23 @@
 
 <style>
 	.ResponsiveButton {
-		height: 100%;
-		width: 100%;
-		border: 1px solid lightgrey; /* FIXME temp solution */
+		border: 1px solid lightgrey;
+		border-bottom: none;
 		cursor: pointer;
+		height: 100%;
 		padding: 0.5em;
+		width: 100%;
 	}
 	.content {
 		align-items: center;
+		background: var(--colorBackground);
+		color: var(--colorText);
 		display: flex;
 		justify-content: center;
 	}
 	.active {
-		background: var(--colorSelected);
-		color: var(--colorSelectedText);
+		background: var(--activeColorBackground);
+		color: var(--activeColorText);
 	}
 
 	.ResponsiveButtonSensor {

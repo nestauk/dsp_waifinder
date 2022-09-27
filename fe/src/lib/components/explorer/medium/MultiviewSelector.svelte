@@ -6,6 +6,7 @@
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
 	import ResponsiveButton from '$lib/components/svizzle/ResponsiveButton.svelte';
+	import {_currThemeVars} from '$lib/stores/theme';
 
 	export let activeViewId;
 	export let setView = noop;
@@ -14,6 +15,11 @@
 	let topicsOverflows;
 	let placesOverflows;
 	let regionsOverflows;
+
+	const theme = {
+		activeColorBackground: $_currThemeVars['--colorSelected'],
+		activeColorText:  $_currThemeVars['--colorSelectedText'],
+	}
 
 	$: isOptionalHidden =
 		detailsOverflows
@@ -31,6 +37,7 @@
 		bind:doesOverflow={detailsOverflows}
 		isActive={activeViewId === 'details'}
 		on:click={setView('details')}
+		{theme}
 		title='List of organisations'
 	>
 		<span slot='optional'>Details</span>
@@ -48,6 +55,7 @@
 		bind:doesOverflow={topicsOverflows}
 		isActive={activeViewId === 'topics'}
 		on:click={setView('topics')}
+		{theme}
 		title='Amount of organisations by topic'
 	>
 		<span slot='optional'>Topics</span>
@@ -65,6 +73,7 @@
 		bind:doesOverflow={placesOverflows}
 		isActive={activeViewId === 'places'}
 		on:click={setView('places')}
+		{theme}
 		title='Amount of organisations by place'
 	>
 		<span slot='optional'>Places</span>
@@ -83,6 +92,7 @@
 		bind:doesOverflow={regionsOverflows}
 		isActive={activeViewId === 'regions'}
 		on:click={setView('regions')}
+		{theme}
 		title='Amount of organisations by region (NUTS3)'
 	>
 		<span slot='optional'>Regions</span>
