@@ -11,15 +11,3 @@ cluster and a label showing the amount of organisations in that cluster.
 
 Groups of organisations sharing the same location are rendered as stars where
 each ray represents the types of a single organisation.
-
-#### Controls
-
-You can scale the map using the mouse wheel and pan by holding the mouse button
-down while dragging the mouse. You can also use the zoom controls found in the
-bottom-right corner of the map.
-
-Additionally, in the top-left corner the auto-zoom checkbox will ensure that the
-map zooms to fit the selected orgs according to the current filtering criteria.
-
-Finally, in the top-right corner there's a map scale indicating the current
-level of zoom.
