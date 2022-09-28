@@ -18,14 +18,14 @@
 	const dispatch = createEventDispatcher();
 
 	export let accessToken = null;
+	export let bounds;
+	export let customControl;
 	export let CustomLayers = null;
 	export let getLonLat;
 	export let items = [];
 	export let styleURL;
 	export let withScaleControl = true;
 	export let withZoomControl = true;
-	export let bounds;
-	export let customControl;
 
 	/* props */
 
@@ -61,6 +61,7 @@
 		});
 
 	/* controls */
+
 	const addAttributionControl = () => {
 		map.addControl(
 			new mapboxgl.AttributionControl({
@@ -172,7 +173,6 @@
 			updateZoom();
 		});
 		map.on('boxzoomend', () => {
-			console.log('boxzoom')
 			dispatch('bboxChanged');
 		});
 	}
@@ -201,13 +201,12 @@
 		mapboxgl.accessToken = accessToken;
 
 		map = new mapboxgl.Map({
-			container: mapcontainer,
 			center,
-			// projection: 'equalEarth',
+			container: mapcontainer,
+			maxZoom: 18,
 			renderWorldCopies: false,
 			style: styleURL,
 			zoom,
-			maxZoom: 18,
 
 			// interactions
 			attributionControl: false, // we add this later to have it compact

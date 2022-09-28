@@ -1,8 +1,8 @@
 <script>
 	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
-	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
+	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
 	import Settings from '$lib/components/Settings.svelte';
 
@@ -39,10 +39,10 @@
 		on:mouseleave={clearIsCursorOnMap}
 	>
 		<Mapbox
-			bounds={$_allOrgsBBox}
 			{accessToken}
 			{getLonLat}
 			{styleURL}
+			bounds={$_allOrgsBBox}
 			customControl={{
 				control: AutoZoomControl,
 				position: 'top-left'

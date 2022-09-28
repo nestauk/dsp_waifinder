@@ -1,5 +1,4 @@
 export class CustomControl {
-
 	constructor (component) {
 		this.Component = component;
 	}

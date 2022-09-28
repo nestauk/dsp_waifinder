@@ -46,10 +46,10 @@
 			</View>
 			<View id='map'>
 				<Mapbox
-					bounds={$_allOrgsBBox}
 					{accessToken}
 					{getLonLat}
 					{styleURL}
+					bounds={$_allOrgsBBox}
 					customControl={{
 						control: AutoZoomControl,
 						position: 'bottom-left'

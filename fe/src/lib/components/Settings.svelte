@@ -3,10 +3,7 @@
 
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
-	import {
-		_keyOrgTypeValueOrgsCount,
-		_orgsCount,
-	} from '$lib/stores/data';
+	import {_keyOrgTypeValueOrgsCount, _orgsCount} from '$lib/stores/data';
 	import {
 		_orgSearchValue,
 		_orgTypesSelectionMode,

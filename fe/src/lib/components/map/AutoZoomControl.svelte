@@ -5,19 +5,23 @@
 </script>
 
 <div class='AutoZoomControl'>
-	<input id='autozoom' type='checkbox' bind:checked={$_autoZoom} />
+	<input
+		id='autozoom'
+		type='checkbox'
+		bind:checked={$_autoZoom}
+	/>
 	<label for='autozoom'>Auto-zoom</label>
 </div>
 
 <style>
 	div {
+		align-items: center;
 		background: white;
 		border-radius: 4px;
-		padding: 0.25em 0.5em;
-		display: grid;
-		align-items: center;
-		grid-auto-flow: column;
 		column-gap: 0.5em;
+		display: grid;
+		grid-auto-flow: column;
+		padding: 0.25em 0.5em;
 	}
 	div * {
 		cursor: pointer;

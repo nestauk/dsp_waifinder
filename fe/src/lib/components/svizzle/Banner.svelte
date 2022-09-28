@@ -1,6 +1,5 @@
 <script>
 	import {makeStyleVars} from '@svizzle/dom';
-
 	import {createEventDispatcher} from 'svelte';
 
 	const defaultTheme = {
@@ -10,8 +9,8 @@
 	};
 
 	export let _screen;
-	export let isNarrow = true;
 	export let hasBackground = true;
+	export let isNarrow = true;
 	export let theme = defaultTheme;
 
 	const dispatch = createEventDispatcher();

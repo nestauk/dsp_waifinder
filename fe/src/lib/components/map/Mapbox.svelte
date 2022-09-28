@@ -11,7 +11,6 @@
 	export let customControl;
 	export let CustomLayers;
 	export let getLonLat;
-	export let isMoveEnabled;
 	export let items = [];
 	export let styleURL;
 	export let withScaleControl = true;
@@ -26,7 +25,6 @@
 		{customControl}
 		{CustomLayers}
 		{getLonLat}
-		{isMoveEnabled}
 		{items}
 		{styleURL}
 		{withScaleControl}
