@@ -4,8 +4,8 @@
 	import mapboxgl from 'mapbox-gl';
 	import {beforeUpdate, onMount, createEventDispatcher} from 'svelte';
 
-	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 	import {clearHero} from '$lib/stores/interaction';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 
 	import {
 		FIT_PADDING,
@@ -144,8 +144,8 @@
 
 	const updateBbox = () => {
 		if (map) {
-			const bounds = map.getBounds().toArray();
-			_bbox_WS_EN.set(bounds);
+			const mapBounds = map.getBounds().toArray();
+			_bbox_WS_EN.set(mapBounds);
 		}
 	}
 
