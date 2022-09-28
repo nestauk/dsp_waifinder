@@ -11,9 +11,10 @@ import {
 import isEqual from 'just-compare';
 import * as _ from 'lamb';
 import Supercluster from 'supercluster';
-import {derived, get} from 'svelte/store';
+import {derived, get, writable} from 'svelte/store';
 
 import {_dataset} from '$lib/stores/dataset';
+import {_autoZoom} from '$lib/stores/interaction';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
@@ -22,6 +23,7 @@ import {
 	_placesSearchRegex,
 	_selectedOrgTypes,
 	_zoom,
+	bbox_WS_EN_UK
 } from '$lib/stores/selection';
 import {countOrgTypes, getLonLat, getTopics} from '$lib/utils/dataUtils';
 import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
@@ -96,6 +98,25 @@ export const _allOrgs = derived(
 		return _.filter(orgs, _.allOf(predicates));
 	});
 
+export const _allOrgsBBox = derived(
+	[_allOrgs, _autoZoom],
+	([allOrgs, autoZoom]) => autoZoom
+		? allOrgs.length > 0
+			? _.reduce(
+				allOrgs,
+				([[w, s], [e, n]], {location: {lat, lon}}) => [
+					[Math.min(w, lon), Math.min(s, lat)],
+					[Math.max(e, lon), Math.max(n, lat)],
+				],
+				[
+					[bbox_WS_EN_UK[1][0], bbox_WS_EN_UK[1][1]],
+					[bbox_WS_EN_UK[0][0], bbox_WS_EN_UK[0][1]],
+				]
+			)
+			: bbox_WS_EN_UK
+		: null
+);
+
 export const _orgs = derived(
 	[_allOrgs, _isOrgWithinBbox],
 	([allOrgs, isOrgWithinBbox]) => _.filter(allOrgs, isOrgWithinBbox)
@@ -114,7 +135,7 @@ const getOrgNameFirstChar = _.pipe([
 	char => (/[A-Z]/ug).test(char) ? char : '#'
 ]);
 
-export const _orgsChar = derived(_orgs, _.pipe([
+export const _orgsChar = derived(_orgs,_.pipe([
 	_.mapWith(getOrgNameFirstChar),
 	_.uniques
 ]));

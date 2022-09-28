@@ -314,6 +314,7 @@
 <style>
 	.cluster, .marker, .ray {
 		cursor: pointer;
+		pointer-events: fill;
 	}
 	.cluster text {
 		dominant-baseline: hanging;

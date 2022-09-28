@@ -1,6 +1,7 @@
 <script>
 	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
 	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
@@ -15,13 +16,14 @@
 		noOrgsMessage
 	} from '$lib/config';
 	import {
+		_allOrgsBBox,
 		_clusters,
 		_keyPlaceLabelValueOrgsCount,
 		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
 		_orgs,
 	} from '$lib/stores/data';
-	import {_hero} from '$lib/stores/interaction';
+	import {_autoZoom, _hero} from '$lib/stores/interaction';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
 	import {
 		_activeTopicDetails,
@@ -30,6 +32,10 @@
 	import {getLonLat, getTopicLabel} from '$lib/utils/dataUtils';
 
 	import ViewSelector from './ViewSelector.svelte';
+
+	const disableAutoZoom = () => {
+		$_autoZoom = false;
+	}
 </script>
 
 <div class='ExplorerSmall'>
@@ -43,8 +49,14 @@
 					{accessToken}
 					{getLonLat}
 					{styleURL}
+					bounds={$_allOrgsBBox}
+					customControl={{
+						control: AutoZoomControl,
+						position: 'bottom-left'
+					}}
 					CustomLayers={SvgLayers}
 					items={$_clusters}
+					on:bboxChanged={disableAutoZoom}
 					withScaleControl={true}
 					withZoomControl={true}
 				/>

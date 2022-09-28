@@ -2,10 +2,10 @@
 	import geoViewport from '@mapbox/geo-viewport';
 	import {setupResizeObserver} from '@svizzle/ui';
 	import mapboxgl from 'mapbox-gl';
-	import {beforeUpdate, onMount} from 'svelte';
+	import {beforeUpdate, onMount, createEventDispatcher} from 'svelte';
 
-	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 	import {clearHero} from '$lib/stores/interaction';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 
 	import {
 		FIT_PADDING,
@@ -13,8 +13,13 @@
 		MAPBOXGL_MIN_ZOOM,
 		MAPBOXGL_TILE_SIZE
 	} from './consts';
+	import {CustomControl} from './util';
+
+	const dispatch = createEventDispatcher();
 
 	export let accessToken = null;
+	export let bounds;
+	export let customControl;
 	export let CustomLayers = null;
 	export let getLonLat;
 	export let items = [];
@@ -71,16 +76,16 @@
 				maxWidth: 80,
 				unit: 'metric'
 			}),
-			'bottom-right'
+			'top-right'
 		);
 	};
 
 	const addZoomControl = () => {
-		map.addControl(
+		map?.addControl(
 			new mapboxgl.NavigationControl({
 				showCompass: false
 			}),
-			'bottom-left'
+			'bottom-right'
 		);
 	};
 
@@ -94,12 +99,17 @@
 		if (withZoomControl) {
 			addZoomControl();
 		}
+
+		if (customControl) {
+			const control = new CustomControl(customControl.control);
+			map?.addControl(control, customControl.position);
+		}
 	};
 
 	/* bbox */
 
-	const fitToBbox = () => {
-		map.fitBounds($_bbox_WSEN, {
+	const fitToBbox = bbox_WSEN => {
+		map?.fitBounds(bbox_WSEN, {
 			linear: true,
 			padding: {
 				bottom: FIT_PADDING,
@@ -134,8 +144,8 @@
 
 	const updateBbox = () => {
 		if (map) {
-			const bounds = map.getBounds().toArray();
-			_bbox_WS_EN.set(bounds);
+			const mapBounds = map.getBounds().toArray();
+			_bbox_WS_EN.set(mapBounds);
 		}
 	}
 
@@ -152,12 +162,18 @@
 	}
 
 	const setMapEvents = () => {
-		map.on('move', () => {
+		map.on('move', event => {
 			updateProjection();
 			updateBbox();
+			if (event.originalEvent) {
+				dispatch('bboxChanged');
+			}
 		});
 		map.on('zoom', () => {
 			updateZoom();
+		});
+		map.on('boxzoomend', () => {
+			dispatch('bboxChanged');
 		});
 	}
 
@@ -171,7 +187,7 @@
 	// FIXME TBD: bind instead?
 	const setGeometry = () => {
 		if (!mapcontainer) {
-			return
+			return;
 		}
 
 		const elementGeometry = getComputedStyle(mapcontainer);
@@ -185,26 +201,27 @@
 		mapboxgl.accessToken = accessToken;
 
 		map = new mapboxgl.Map({
-			container: mapcontainer,
 			center,
-			// projection: 'equalEarth',
+			container: mapcontainer,
+			maxZoom: 18,
 			renderWorldCopies: false,
 			style: styleURL,
 			zoom,
 
 			// interactions
 			attributionControl: false, // we add this later to have it compact
+			doubleClickZoom: isInteractive,
 			dragPan: isInteractive,
 			dragRotate: false,
 			pitchWithRotate: false, // don't render dots in perspective
 			scrollZoom: isInteractive,
 			touchPitch: false,
-			touchZoomRotate: true
+			touchZoomRotate: isInteractive,
 		})
 		.on('load', () => {
 			addCustomLayers();
 			setMapEvents();
-			fitToBbox();
+			fitToBbox(bounds || $_bbox_WSEN);
 
 			setGeometry(); // ipad FIXME: initial svg is 100x100
 		})
@@ -234,6 +251,8 @@
 
 	// eslint-disable-next-line no-unused-expressions, no-sequences
 	$: $_size, map?.resize()
+
+	$: bounds && fitToBbox(bounds);
 </script>
 
 <svelte:head>

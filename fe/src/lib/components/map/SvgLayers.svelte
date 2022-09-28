@@ -19,7 +19,9 @@
 </svg>
 
 <style>
-	svg {
+	.SvgLayers {
 		position: absolute;
+		width: 100%;
+		height: 100%;
 	}
 </style>

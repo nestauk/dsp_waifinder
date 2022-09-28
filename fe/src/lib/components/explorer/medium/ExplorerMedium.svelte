@@ -1,6 +1,7 @@
 <script>
 	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
 	import Settings from '$lib/components/Settings.svelte';
@@ -9,9 +10,10 @@
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURL as styleURL
 	} from '$lib/config';
-	import {_clusters} from '$lib/stores/data';
+	import {_allOrgsBBox, _clusters} from '$lib/stores/data';
 	import {getLonLat} from '$lib/utils/dataUtils';
 	import {
+		_autoZoom,
 		_hero,
 		clearInteractionStores,
 		clearIsCursorOnMap,
@@ -20,6 +22,10 @@
 	import {_activeTopicDetails} from '$lib/stores/topics';
 
 	import Multiview from './Multiview.svelte';
+
+	const disableAutoZoom = () => {
+		$_autoZoom = false;
+	}
 </script>
 
 <svelte:body on:mouseleave={clearInteractionStores} />
@@ -36,8 +42,14 @@
 			{accessToken}
 			{getLonLat}
 			{styleURL}
+			bounds={$_allOrgsBBox}
+			customControl={{
+				control: AutoZoomControl,
+				position: 'top-left'
+			}}
 			CustomLayers={SvgLayers}
 			items={$_clusters}
+			on:bboxChanged={disableAutoZoom}
 			withScaleControl={true}
 			withZoomControl={true}
 		/>

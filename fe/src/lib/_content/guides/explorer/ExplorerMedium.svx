@@ -31,6 +31,11 @@ To select an area of the map, you can:
 	* select a specific area directly, by pressing the shift-key, dragging a
 rectangle with the pointer and then end dragging.
 
+Enabling the auto-zoom checkbox in the top-left corner, zooms the map to fit the
+selected orgs according to the current filtering criteria.
+
+The scale in the top-right corner indicates the current level of zoom.
+
 #### Interacting with markers
 
 Hovering a single org or a star ray shows a pop-up with the same info displayed

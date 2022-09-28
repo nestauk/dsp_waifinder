@@ -6,7 +6,7 @@ import {safeRegexOf} from '$lib/utils/svizzle/utils';
 
 /* bounding box, zoom */
 
-const bbox_WS_EN_UK = [
+export const bbox_WS_EN_UK = [
 	[-7.57216793459, 49.959999905],
 	[1.68153079591, 58.6350001085],
 ];
