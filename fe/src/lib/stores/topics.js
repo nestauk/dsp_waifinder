@@ -8,3 +8,5 @@ export const {
 	asyncUpdateTopicDetails,
 	clearActiveTopic
 } = makeTopicDetailsStoreUpdaters(_activeTopicDetails);
+
+// todo move to interaction.js

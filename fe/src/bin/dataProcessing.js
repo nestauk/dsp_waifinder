@@ -4,6 +4,7 @@ import {
 	applyFnMap,
 	getId,
 	isIterableEmpty,
+	makeMergeAppliedFnMap,
 	sortObjectKeysAsc,
 	transformValues,
 } from '@svizzle/utils';
@@ -74,6 +75,9 @@ const processOrg = _.pipe([
 		topics: processTopics,
 		types: _.sortWith(),
 		url: condAddSchema
+	}),
+	makeMergeAppliedFnMap({
+		topicIds: _.pipe([getTopics, _.pluck('id')])
 	}),
 	obj => ({...obj, id: hash(obj)}),
 	sortObjectKeysAsc,

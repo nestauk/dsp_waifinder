@@ -1,19 +1,14 @@
 <script>
 	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
 	import Pill from '$lib/components/orgs/Pill.svelte';
-	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
+	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {noOrgsMessage} from '$lib/config';
-	import {_keyTopicIdValueOrgsCount, _orgs} from '$lib/stores/data';
+	import {_orgs} from '$lib/stores/data';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
-	import {
-		asyncUpdateTopicDetails,
-		clearActiveTopic
-	} from '$lib/stores/topics';
-	import {getTopicLabel} from '$lib/utils/dataUtils';
 
 	import MultiviewSelector from './MultiviewSelector.svelte';
 </script>
@@ -36,13 +31,7 @@
 			<View id='topics'>
 				<div class='scrollable'>
 					{#if $_orgs.length > 0}
-						<BarchartVDiv
-							isInteractive={true}
-							items={$_keyTopicIdValueOrgsCount}
-							keyToLabelFn={getTopicLabel}
-							on:entered={({detail: {id}}) => asyncUpdateTopicDetails(id)}
-							on:exited={clearActiveTopic}
-						/>
+						<TopicsBar />
 					{:else}
 						<div class='noOrgsMessage'>
 							<Pill

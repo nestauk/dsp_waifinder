@@ -30,7 +30,7 @@ export const updateDataset = ({
 			...others
 		})
 	);
-	const orgsById = _.index(augmentedOrgs, getId)
+	const orgsById = _.index(augmentedOrgs, getId);
 	const orgTypes = _.sort(_.values(org_types));
 	const orgTypeIndexByType = swapKeyValue(org_types);
 

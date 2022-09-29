@@ -116,3 +116,32 @@ export const enterRegionsEditMode = () => {
 export const exitRegionsEditMode = () => {
 	_isRegionsEditMode.set(false);
 }
+
+/* topics selection */
+
+export const _isTopicsEditMode = writable(false);
+export const _selectedTopicIds = writable([]);
+
+export const _hasSelectedTopics =
+	derived(_selectedTopicIds, isIterableNotEmpty);
+
+export const deselectTopic = id => {
+	_selectedTopicIds.update(
+		ids => _.pullFrom(ids, [id])
+	);
+}
+export const deselectAllTopics = () => {
+	_selectedTopicIds.set([]);
+}
+export const toggleTopicId = id => {
+	_selectedTopicIds.update(
+		ids => toggleItem(ids, id)
+	);
+}
+
+export const enterTopicsEditMode = () => {
+	_isTopicsEditMode.set(true);
+}
+export const exitTopicsEditMode = () => {
+	_isTopicsEditMode.set(false);
+}

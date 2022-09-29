@@ -6,7 +6,10 @@
 </script>
 
 <div class='Pill'>
-	<span class='label' class:nowrap>{label}</span>
+	<span
+		class:nowrap
+		class='label'
+	>{label}</span>
 </div>
 
 <style>

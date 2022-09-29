@@ -3,6 +3,7 @@
 		Download,
 		Icon,
 		Switch,
+		Tag,
 		XCircle,
 	} from '@svizzle/ui';
 
@@ -19,19 +20,24 @@
 	import {
 		_hasSelectedPlaces,
 		_hasSelectedRegions,
+		_hasSelectedTopics,
 		_orgSearchValue,
 		_orgTypesSelectionMode,
 		_placesSearchValue,
 		_selectedOrgTypes,
+		_selectedTopicIds,
 		deselectAllPlaces,
 		deselectAllRegions,
+		deselectAllTopics,
 		deselectPlace,
 		deselectRegion,
+		deselectTopic,
 		orgTypesSelectionModes,
 		toggleOrgType,
 		toggleOrgTypesSelectionMode,
 	} from '$lib/stores/selection';
 	import {_currThemeVars, _orgTypeToColorFn} from '$lib/stores/theme';
+	import {getTopicLabel} from '$lib/utils/dataUtils';
 	import {
 		getResultsCsv,
 		getResultsMetadata,
@@ -59,6 +65,10 @@
 	$: multipleSelectedRegions = $_selectedRegions.length > 1;
 	$: regionsHeaderEnd = multipleSelectedRegions ? 's' : '';
 	$: regionsHeaderStart = $_selectedRegions.length || 'No';
+
+	$: multipleSelectedTopics = $_selectedTopicIds.length > 1;
+	$: topicsHeaderEnd = multipleSelectedTopics ? 's' : '';
+	$: topicsHeaderStart = $_selectedTopicIds.length || 'No';
 </script>
 
 <div class='Settings'>
@@ -139,6 +149,67 @@
 		</div>
 	</div>
 
+	<!-- Selected topics -->
+
+	<div class='panel'>
+		<header>
+			<h3>{topicsHeaderStart} selected topic{topicsHeaderEnd}</h3>
+		</header>
+
+		{#if $_hasSelectedTopics}
+
+			<!-- selected topics -->
+
+			<div class='item'>
+				<div class='stack'>
+					{#each $_selectedTopicIds as id}
+						<div
+							class='clickable row selectedItem'
+							on:click={() => deselectTopic(id)}
+						>
+							<span class='label'>{getTopicLabel(id)}</span>
+							<span>
+								<Icon
+									glyph={XCircle}
+									strokeWidth=1.25
+								/>
+							</span>
+						</div>
+					{/each}
+				</div>
+			</div>
+
+			<!-- deselect all -->
+
+			{#if multipleSelectedTopics}
+				<div class='item'>
+					<div class='row deselectAll'>
+						<span>Deselect all</span>
+						<span
+							class='clickable'
+							on:click={deselectAllTopics}
+						>
+							<Icon glyph={XCircle} />
+						</span>
+					</div>
+				</div>
+			{/if}
+
+		{:else}
+
+			<!-- tip -->
+
+			<div class='item'>
+				<span>
+					<Icon glyph={Tag} />
+				</span>
+				<span class='tip'>To select topics, please head to the Topics bar, enter edit mode and click on items</span>
+			</div>
+
+		{/if}
+
+	</div>
+
 	<!-- Selected places -->
 
 	<div class='panel'>
@@ -198,9 +269,8 @@
 						stroke='none'
 					/>
 				</span>
-				<span class='tip'>To select some places, please head to the Places bar, enter edit mode and click on items</span>
+				<span class='tip'>To select places, please head to the Places bar, enter edit mode and click on items</span>
 			</div>
-
 		{/if}
 
 	</div>

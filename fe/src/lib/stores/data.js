@@ -1,13 +1,12 @@
 import {makeToGeoPoints} from '@svizzle/geo';
 import {
-	getId,
-	getLength,
 	getKey,
+	getLength,
 	getValue,
+	isIterableNotEmpty,
 	isNotNil,
 	objectToKeyValueArray,
 	sortValueDescKeyAsc,
-	isIterableNotEmpty,
 } from '@svizzle/utils';
 import isEqual from 'just-compare';
 import * as _ from 'lamb';
@@ -22,12 +21,14 @@ import {
 	_isOrgWithinBbox,
 	_isPlacesEditMode,
 	_isRegionsEditMode,
+	_isTopicsEditMode,
 	_orgSearchRegex,
 	_orgTypesSelectionMode,
 	_placesSearchRegex,
 	_selectedOrgTypes,
 	_selectedPlaceIds,
 	_selectedRegionIds,
+	_selectedTopicIds,
 	_zoom,
 	bbox_WS_EN_UK
 } from '$lib/stores/selection';
@@ -35,7 +36,7 @@ import {
 	countOrgTypes,
 	getLonLat,
 	getPlaceId,
-	getTopics,
+	getTopicIds,
 } from '$lib/utils/dataUtils';
 import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
@@ -85,23 +86,27 @@ export const _allOrgs = derived(
 		_dataset,
 		_isPlacesEditMode,
 		_isRegionsEditMode,
+		_isTopicsEditMode,
 		_orgSearchRegex,
 		_orgTypesSelectionMode,
 		_placesSearchRegex,
 		_selectedOrgTypes,
 		_selectedPlaceIds,
 		_selectedRegionIds,
+		_selectedTopicIds,
 	],
 	([
 		{orgs},
 		isPlacesEditMode,
 		isRegionsEditMode,
+		isTopicsEditMode,
 		orgSearchRegex,
 		orgTypesSelectionMode,
 		placesSearchRegex,
 		selectedOrgTypes,
 		selectedPlaceIds,
 		selectedRegionIds,
+		selectedTopicIds,
 	]) => {
 		const predicates = [
 			makeIsOrgOfTypes(selectedOrgTypes, orgTypesSelectionMode)
@@ -116,6 +121,21 @@ export const _allOrgs = derived(
 			predicates.push(
 				({place}) => _.isIn(selectedRegionIds, place.region[nutsLevel].id)
 			);
+		}
+
+		if (!isTopicsEditMode && isIterableNotEmpty(selectedTopicIds)) {
+			predicates.push(
+				({topicIds}) => {
+					const intersection = _.intersection(selectedTopicIds, topicIds);
+					const pass = isIterableNotEmpty(intersection);
+
+					// AND
+					// const hasAllSelectedTopics = _.every(makeIsIncluded(topicIds));
+					// const pass = hasAllSelectedTopics(selectedTopicIds);
+
+					return pass;
+				}
+			)
 		}
 
 		if (isRegexpNotEmpty(orgSearchRegex)) {
@@ -220,8 +240,9 @@ export const _keyOrgTypeValueOrgsCount = derived(
 export const _keyTopicIdValueOrgsCount = derived(
 	_orgs,
 	_.pipe([
-		_.flatMapWith(getTopics),
-		_.countBy(getId),
+		_.flatMapWith(getTopicIds),
+		_.countBy(_.identity),
+		// TODO ^ use a reduce
 		objectToKeyValueArray,
 		_.sortWith([
 			_.sorterDesc(getValue),

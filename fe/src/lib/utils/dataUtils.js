@@ -12,6 +12,7 @@ export const getLonLat = _.collect([
 export const getName = _.getKey('name');
 export const getPlaceId = _.getKey('place_id');
 export const getTopics = _.getKey('topics');
+export const getTopicIds = _.getKey('topicIds');
 export const getURL = _.getKey('url');
 
 export const getTopicLabel = _.replace(/_/ug, ' ');
