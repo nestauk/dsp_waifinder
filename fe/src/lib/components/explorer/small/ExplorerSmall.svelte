@@ -2,6 +2,7 @@
 	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
+	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
@@ -19,7 +20,6 @@
 	import {
 		_allOrgsBBox,
 		_clusters,
-		_keyRegionLabelValueOrgsCount,
 		_keyTopicIdValueOrgsCount,
 		_orgs,
 	} from '$lib/stores/data';
@@ -106,9 +106,7 @@
 			<View id='regions'>
 				<div class='scrollable'>
 					{#if $_orgs.length > 0}
-						<BarchartVDiv
-							items={$_keyRegionLabelValueOrgsCount}
-						/>
+						<RegionsBar />
 					{:else}
 						<div class='noOrgsMessage'>
 							<Pill label={noOrgsMessage} />

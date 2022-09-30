@@ -2,6 +2,7 @@ import {getId, swapKeyValue} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
 
+import {nutsLevel} from '$lib/config';
 import {_selectedOrgTypes} from '$lib/stores/selection';
 
 export const _dataset = writable({
@@ -48,5 +49,10 @@ export const updateDataset = ({
 
 export const _placeIdToLabel = derived(
 	_dataset,
-	({placesById}) => id => `${placesById[id].name} (${placesById[id].type})`
+	({placesById}) => id => placesById[id].name
+);
+
+export const _regionIdToLabel = derived(
+	_dataset,
+	({regionsByLevelById}) => id => regionsByLevelById[nutsLevel][id].name
 );

@@ -6,6 +6,7 @@ import {safeRegexOf} from '$lib/utils/svizzle/utils';
 
 /* bounding box, zoom */
 
+// TODO move to config
 export const bbox_WS_EN_UK = [
 	[-7.57216793459, 49.959999905],
 	[1.68153079591, 58.6350001085],
@@ -85,4 +86,33 @@ export const enterPlacesEditMode = () => {
 }
 export const exitPlacesEditMode = () => {
 	_isPlacesEditMode.set(false);
+}
+
+/* regions selection */
+
+export const _isRegionsEditMode = writable(false);
+export const _selectedRegionIds = writable([]);
+
+export const _hasSelectedRegions =
+	derived(_selectedRegionIds, isIterableNotEmpty);
+
+export const deselectRegion = id => {
+	_selectedRegionIds.update(
+		ids => _.pullFrom(ids, [id])
+	);
+}
+export const deselectAllRegions = () => {
+	_selectedRegionIds.set([]);
+}
+export const toggleRegionId = id => {
+	_selectedRegionIds.update(
+		ids => toggleItem(ids, id)
+	);
+}
+
+export const enterRegionsEditMode = () => {
+	_isRegionsEditMode.set(true);
+}
+export const exitRegionsEditMode = () => {
+	_isRegionsEditMode.set(false);
 }

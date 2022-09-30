@@ -12,19 +12,22 @@ import {
 import isEqual from 'just-compare';
 import * as _ from 'lamb';
 import Supercluster from 'supercluster';
-import {derived, get, writable} from 'svelte/store';
+import {derived, get} from 'svelte/store';
 
+import {nutsLevel} from '$lib/config';
 import {_dataset} from '$lib/stores/dataset';
 import {_autoZoom} from '$lib/stores/interaction';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
 	_isPlacesEditMode,
+	_isRegionsEditMode,
 	_orgSearchRegex,
 	_orgTypesSelectionMode,
 	_placesSearchRegex,
 	_selectedOrgTypes,
 	_selectedPlaceIds,
+	_selectedRegionIds,
 	_zoom,
 	bbox_WS_EN_UK
 } from '$lib/stores/selection';
@@ -81,34 +84,45 @@ export const _allOrgs = derived(
 	[
 		_dataset,
 		_isPlacesEditMode,
+		_isRegionsEditMode,
 		_orgSearchRegex,
 		_orgTypesSelectionMode,
 		_placesSearchRegex,
 		_selectedOrgTypes,
 		_selectedPlaceIds,
+		_selectedRegionIds,
 	],
 	([
 		{orgs},
 		isPlacesEditMode,
+		isRegionsEditMode,
 		orgSearchRegex,
 		orgTypesSelectionMode,
 		placesSearchRegex,
 		selectedOrgTypes,
 		selectedPlaceIds,
+		selectedRegionIds,
 	]) => {
 		const predicates = [
 			makeIsOrgOfTypes(selectedOrgTypes, orgTypesSelectionMode)
 		];
 
 		if (!isPlacesEditMode && isIterableNotEmpty(selectedPlaceIds)) {
-			predicates.push(({place_id}) => _.isIn(selectedPlaceIds, place_id))
+			predicates.push(
+				({place_id}) => _.isIn(selectedPlaceIds, place_id)
+			);
+		}
+		if (!isRegionsEditMode && isIterableNotEmpty(selectedRegionIds)) {
+			predicates.push(
+				({place}) => _.isIn(selectedRegionIds, place.region[nutsLevel].id)
+			);
 		}
 
 		if (isRegexpNotEmpty(orgSearchRegex)) {
-			predicates.push(makeIsTextInOrg(orgSearchRegex))
+			predicates.push(makeIsTextInOrg(orgSearchRegex));
 		}
 		if (isRegexpNotEmpty(placesSearchRegex)) {
-			predicates.push(makeIsOrgInPlace(placesSearchRegex))
+			predicates.push(makeIsOrgInPlace(placesSearchRegex));
 		}
 
 		return _.filter(orgs, _.allOf(predicates));
@@ -201,16 +215,6 @@ export const _keyOrgTypeValueOrgsCount = derived(
 	}
 );
 
-/* places */
-
-export const _selectedPlaces = derived(
-	[_dataset, _selectedPlaceIds],
-	([{placesById}, selectedPlaceIds]) => _.map(
-		selectedPlaceIds,
-		id => placesById[id]
-	)
-);
-
 /* barchart of topics */
 
 export const _keyTopicIdValueOrgsCount = derived(
@@ -227,7 +231,19 @@ export const _keyTopicIdValueOrgsCount = derived(
 	])
 );
 
-/* barchart of places */
+/* places */
+
+// selected
+
+export const _selectedPlaces = derived(
+	[_dataset, _selectedPlaceIds],
+	([{placesById}, selectedPlaceIds]) => _.map(
+		selectedPlaceIds,
+		id => placesById[id]
+	)
+);
+
+// barchart of places
 
 export const _keyPlaceIdValueOrgsCount = derived(
 	_orgs,
@@ -238,21 +254,25 @@ export const _keyPlaceIdValueOrgsCount = derived(
 	])
 );
 
-/* barchart by region */
+/* regions */
 
-const makeKeyRegionIdValueOrgsCount = _.pipe([
-	_.countBy(_.getPath('place.region.3.id')),
-	objectToKeyValueArray,
-]);
-export const _keyRegionLabelValueOrgsCount = derived(
-	[_orgs, _dataset],
-	([orgs, {regionsByLevelById}]) => sortValueDescKeyAsc(
-		_.map(
-			makeKeyRegionIdValueOrgsCount(orgs),
-			({key, value}) => ({
-				key: `${regionsByLevelById[3][key].name} (${key})`,
-				value
-			})
-		)
+// selected
+
+export const _selectedRegions = derived(
+	[_dataset, _selectedRegionIds],
+	([{regionsByLevelById}, selectedRegionIds]) => _.map(
+		selectedRegionIds,
+		id => regionsByLevelById[nutsLevel][id]
 	)
+);
+
+// barchart by region
+
+export const _keyRegionIdValueOrgsCount = derived(
+	_orgs,
+	_.pipe([
+		_.countBy(_.getPath(`place.region.${nutsLevel}.id`)),
+		objectToKeyValueArray,
+		sortValueDescKeyAsc,
+	])
 );

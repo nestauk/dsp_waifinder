@@ -7,21 +7,26 @@
 	} from '@svizzle/ui';
 
 	import City from '$lib/components/icons/City.svelte';
+	import Region from '$lib/components/icons/Region.svelte';
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
 	import {
 		_keyOrgTypeValueOrgsCount,
 		_orgsCount,
 		_selectedPlaces,
+		_selectedRegions,
 	} from '$lib/stores/data';
 	import {
 		_hasSelectedPlaces,
+		_hasSelectedRegions,
 		_orgSearchValue,
 		_orgTypesSelectionMode,
 		_placesSearchValue,
 		_selectedOrgTypes,
 		deselectAllPlaces,
+		deselectAllRegions,
 		deselectPlace,
+		deselectRegion,
 		orgTypesSelectionModes,
 		toggleOrgType,
 		toggleOrgTypesSelectionMode,
@@ -46,6 +51,14 @@
 			'filters.json': filtersString,
 		});
 	}
+
+	$: multipleSelectedPlaces = $_selectedPlaces.length > 1;
+	$: placesHeaderEnd = multipleSelectedPlaces ? 's' : '';
+	$: placesHeaderStart = $_selectedPlaces.length || 'No';
+
+	$: multipleSelectedRegions = $_selectedRegions.length > 1;
+	$: regionsHeaderEnd = multipleSelectedRegions ? 's' : '';
+	$: regionsHeaderStart = $_selectedRegions.length || 'No';
 </script>
 
 <div class='Settings'>
@@ -129,8 +142,9 @@
 	<!-- Selected places -->
 
 	<div class='panel'>
+
 		<header>
-			<h3>{$_selectedPlaces.length || 'No'} selected places</h3>
+			<h3>{placesHeaderStart} selected place{placesHeaderEnd}</h3>
 		</header>
 
 		{#if $_hasSelectedPlaces}
@@ -158,18 +172,24 @@
 
 			<!-- deselect all -->
 
-			<div class='item'>
-				<div class='row deselectAll'>
-					<span>Deselect all</span>
-					<span
-						class='clickable'
-						on:click={deselectAllPlaces}
-					>
-						<Icon glyph={XCircle} />
-					</span>
+			{#if multipleSelectedPlaces}
+				<div class='item'>
+					<div class='row deselectAll'>
+						<span>Deselect all</span>
+						<span
+							class='clickable'
+							on:click={deselectAllPlaces}
+						>
+							<Icon glyph={XCircle} />
+						</span>
+					</div>
 				</div>
-			</div>
+			{/if}
+
 		{:else}
+
+			<!-- tip -->
+
 			<div class='item'>
 				<span>
 					<Icon
@@ -179,6 +199,68 @@
 					/>
 				</span>
 				<span class='tip'>To select some places, please head to the Places bar, enter edit mode and click on items</span>
+			</div>
+
+		{/if}
+
+	</div>
+
+	<!-- Selected regions -->
+
+	<div class='panel'>
+
+		<header>
+			<h3>{regionsHeaderStart} selected region{regionsHeaderEnd}</h3>
+		</header>
+
+		{#if $_hasSelectedRegions}
+
+			<!-- selected regions -->
+
+			<div class='item'>
+				<div class='stack'>
+					{#each $_selectedRegions as {id, name}}
+						<div
+							class='clickable row selectedItem'
+							on:click={() => deselectRegion(id)}
+						>
+							<span class='label'>{name}</span>
+							<span>
+								<Icon
+									glyph={XCircle}
+									strokeWidth=1.25
+								/>
+							</span>
+						</div>
+					{/each}
+				</div>
+			</div>
+
+			<!-- deselect all -->
+
+			{#if multipleSelectedRegions}
+				<div class='item'>
+					<div class='row deselectAll'>
+						<span>Deselect all</span>
+						<span
+							class='clickable'
+							on:click={deselectAllRegions}
+						>
+							<Icon glyph={XCircle} />
+						</span>
+					</div>
+				</div>
+			{/if}
+
+		{:else}
+
+			<!-- tip -->
+
+			<div class='item'>
+				<span>
+					<Icon glyph={Region} />
+				</span>
+				<span class='tip'>To select some regions, please head to the Regions bar, enter edit mode and click on items</span>
 			</div>
 		{/if}
 

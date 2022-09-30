@@ -16,6 +16,10 @@ export const bannersDefaultFooterText = 'Click on background to dismiss';
 
 export const noOrgsMessage = 'No results with current filters';
 
+/* regions level */
+
+export const nutsLevel = 3;
+
 /* feedback forms */
 
 // survey
