@@ -3,13 +3,15 @@
 	import {createEventDispatcher} from 'svelte';
 
 	const defaultTheme = {
-		backgroundColor: 'white',
-		boxShadowColor: 'lightgrey',
-		borderColor: 'rgb(70, 70, 70)',
+		border: 'thin solid rgb(70, 70, 70)',
+		colorBackdropSensor: 'rgba(0, 0, 0, 0.25)',
+		colorBackground: 'white',
+		colorBoxShadow: 'lightgrey',
+		colorText: 'black',
 	};
 
 	export let _screen;
-	export let hasBackground = true;
+	export let hasBackdrop = true;
 	export let isNarrow = true;
 	export let theme = defaultTheme;
 
@@ -23,7 +25,7 @@
 <div
 	{style}
 	aria-label="Banner"
-	class:bkg={hasBackground}
+	class:backdrop={hasBackdrop}
 	class='Banner clickable {$_screen?.classes}'
 	on:click={close}
 	role='alert'
@@ -39,7 +41,7 @@
 
 <style>
 	.Banner {
-		box-shadow: 2px 8px 9px -4px var(--boxShadowColor);
+		box-shadow: 2px 8px 9px -4px var(--colorBoxShadow);
 		height: 100%;
 		left: 0;
 		position: absolute;
@@ -48,14 +50,15 @@
 		width: 100%;
 		z-index: 2000;
 	}
-	.Banner.bkg {
-		background-color: rgba(0, 0, 0, 0.25);
+	.Banner.backdrop {
+		background-color: var(--colorBackdropSensor);
 	}
 	.inner {
-		background: var(--backgroundColor);
-		border: thin solid var(--borderColor);
+		background: var(--colorBackground);
+		border: var(--border);
 		border-radius: 1rem;
-		box-shadow: 2px 8px 9px -4px var(--boxShadowColor);
+		box-shadow: 2px 8px 9px -4px var(--colorBoxShadow);
+		color: var(--colorText);
 		cursor: initial;
 		display: grid;
 		grid-template-rows: 1fr;

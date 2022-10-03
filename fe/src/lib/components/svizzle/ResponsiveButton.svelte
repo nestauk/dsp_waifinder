@@ -19,10 +19,11 @@
 	export let theme;
 
 	const defaultTheme = {
-		activeColorBackground: '#333',
-		activeColorText: 'white',
 		colorBackground: 'initial',
-		colorText: 'initial'
+		colorBackgroundActive: '#333',
+		colorBorder: 'initial',
+		colorText: 'initial',
+		colorTextActive: 'white',
 	};
 
 	$: doesOverflow = $_contentSize.inlineSize < $_sensorSize.inlineSize;
@@ -59,7 +60,7 @@
 
 <style>
 	.ResponsiveButton {
-		border: 1px solid lightgrey;
+		border: var(--border);
 		border-bottom: none;
 		cursor: pointer;
 		height: 100%;
@@ -74,8 +75,8 @@
 		justify-content: center;
 	}
 	.active {
-		background: var(--activeColorBackground);
-		color: var(--activeColorText);
+		background: var(--colorActiveBackground);
+		color: var(--colorActiveText);
 	}
 
 	.ResponsiveButtonSensor {

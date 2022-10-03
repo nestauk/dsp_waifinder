@@ -50,7 +50,7 @@
 								href='/guides/{id}'
 								theme={{
 									color: segment === id
-										? $_currThemeVars['--colorMainInverted']
+										? $_currThemeVars['--colorTextInverted']
 										: $_currThemeVars['--colorLink']
 								}}
 							>
@@ -74,7 +74,7 @@
 							theme={{
 								color: hasPrevSegment
 									? $_currThemeVars['--colorLink']
-									: $_currThemeVars['--colorDisabled']
+									: $_currThemeVars['--colorTextDisabled']
 							}}
 						>
 							<Icon glyph={ChevronLeft} />
@@ -87,7 +87,7 @@
 							theme={{
 								color: hasNextSegment
 									? $_currThemeVars['--colorLink']
-									: $_currThemeVars['--colorDisabled']
+									: $_currThemeVars['--colorTextDisabled']
 							}}
 						>
 							<Icon glyph={ChevronRight} />
@@ -104,7 +104,7 @@
 
 <style>
 	main {
-		background-color: var(--colorBackground);
+		background-color: var(--colorPageBackground);
 		display: flex;
 		font-weight: 200;
 		height: 100%;
@@ -113,7 +113,7 @@
 	}
 
 	section {
-		background-color: var(--colorBackgroundMain);
+		background-color: var(--colorBackground);
 		display: grid;
 		max-width: 900px;
 		overflow-y: auto;
@@ -132,7 +132,7 @@
 	}
 
 	div {
-		background-color: var(--colorBackgroundMain);
+		background-color: var(--colorBackground);
 		max-width: 900px;
 		overflow-y: auto;
 	}
@@ -171,18 +171,18 @@
 	}
 	.tab-selector div {
 		padding: 0.5em 0.5em;
-		border-left: thin solid var(--colorMain);
+		border-left: var(--border);
 	}
 	.tabs li {
-		border-bottom: thin solid var(--colorMain);
-		border-top: thin solid var(--colorMain);
-		border-right: thin solid var(--colorMain);
+		border-bottom: var(--border);
+		border-top: var(--border);
+		border-right: var(--border);
 	}
 	.tabs li:first-child {
-		border-left: thin solid var(--colorMain);
+		border-left: var(--border);
 	}
 	.tabs li.selected {
-		background: var(--colorMain);
+		background: var(--colorActiveBackground);
 	}
 
 	.tabs li span {
@@ -191,7 +191,7 @@
 	}
 
 	.tabs .tab-selector {
-		border: thin solid var(--colorMain);
+		border: var(--border);
 		display: grid;
 		grid-template-columns: 1fr min-content min-content;
 	}

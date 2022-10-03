@@ -75,6 +75,10 @@
 		})
 	);
 	$: shouldFocusOrg && (isFocused = item.id === $_hero?.org.id);
+	$: highlightedTheme = {
+		colorHighlightedBackground: $_currThemeVars['--colorHighlightedTextBackground'],
+		colorHighlightedText: $_currThemeVars['--colorHighlightedText'],
+	};
 </script>
 
 <div
@@ -93,6 +97,7 @@
 					<HighlightedText
 						regex={$_orgSearchRegex}
 						string={item.name}
+						theme={highlightedTheme}
 					/>
 				</span>
 				<Link
@@ -139,6 +144,7 @@
 					<HighlightedText
 						regex={$_orgSearchRegex}
 						string={item.description}
+						theme={highlightedTheme}
 					/>
 				</p>
 			</div>

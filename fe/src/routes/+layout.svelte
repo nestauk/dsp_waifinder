@@ -10,6 +10,7 @@
 		ScreenSensor,
 		setupResizeObserver
 	} from '@svizzle/ui';
+	import Bowser from 'bowser';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import {page as _page} from '$app/stores';
@@ -26,6 +27,7 @@
 	import {isDev} from '$lib/env';
 	import {_isSmallScreen} from '$lib/stores/layout';
 	import {
+		_bannersTheme,
 		_currThemeVars,
 		_isThemeEditorActive,
 		_themeName,
@@ -53,10 +55,19 @@
 	let isLayoutUndefined = true;
 	let scriptingActive = false;
 	let showA11yMenu;
+	let ScrollBarStyler
 
-	onMount(() => {
+	onMount(async () => {
 		scriptingActive = true;
 		window.nesta_isLayoutUndefined = () => isLayoutUndefined;
+
+		const agentObj = Bowser.parse(window.navigator.userAgent);
+		const environment = `${agentObj?.os?.name}/${agentObj?.browser.name}`;
+		if (environment === 'Windows/Chrome') {
+			// No need to instance component as CSS is already loaded on the
+			// page after this point!
+			ScrollBarStyler = await import('$lib/components/svizzle/ScrollbarStyler.svelte');
+		}
 	});
 
 	beforeUpdate(async () => {
@@ -69,6 +80,13 @@
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
 	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
+	$: a11yMenuTheme = {
+		colorBackground: $_currThemeVars['--colorBackground'],
+		colorBorder: $_currThemeVars['--colorBorderAux'],
+		colorKnob: $_currThemeVars['--colorSwitchKnob'],
+		colorDisabled: $_currThemeVars['--colorTextDisabled'],
+		colorText: $_currThemeVars['--colorText']
+	}
 </script>
 
 <StyleSensor
@@ -99,13 +117,14 @@
 		{_screen}
 		components={bannerComponents}
 		footerText={bannersDefaultFooterText}
+		theme={$_bannersTheme}
 	/>
 {/if}
 
 {#if isLayoutUndefined}
 	<!-- FIXME: See: https://github.com/nestauk/eurito_indicators/pull/212#issuecomment-985176516 -->
 	<div class='spinnerContainer'>
-		<LoadingView stroke={$_currThemeVars['--colorMain']} />
+		<LoadingView stroke={$_currThemeVars['--colorIcon']} />
 	</div>
 {/if}
 
@@ -153,15 +172,18 @@
 			bind:offsetHeight={a11yHeight}
 			class='accessibility'
 		>
-			<A11yMenu {_screen} />
+			<A11yMenu
+				{_screen}
+				theme={a11yMenuTheme}
+			/>
 		</section>
 	{/if}
 </div>
 
 <style>
 	._layout {
-		background: var(--colorBackgroundMain) ;
-		color: var(--colorMain);
+		background: var(--colorBackground) ;
+		color: var(--colorText);
 		display: grid;
 		grid-template-areas:
 			'content'
@@ -186,14 +208,14 @@
 		grid-template-columns: 3.5fr 1fr;
 	}
 	header {
-		border-top: 1px solid var(--colorMainLighter);
+		border-top: var(--border);
 		grid-area: header;
 		height: var(--dimHeaderHeight);
 		padding: 0 var(--dimPadding);
 		width: 100%;
 	}
 	.medium header {
-		border-bottom: 1px solid var(--colorMainLighter);
+		border-bottom: var(--border);
 		border-top: none;
 	}
 	main {
@@ -204,7 +226,7 @@
 		width: 100%;
 	}
 	footer {
-		border-top: thin solid var(--colorMainLighter);
+		border-top: var(--border);
 		grid-area: footer;
 		height: var(--dimHeaderHeight);
 		padding: 0 var(--dimPadding);

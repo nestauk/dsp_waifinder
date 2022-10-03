@@ -6,6 +6,7 @@
 	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import WikipediaLogo from '$lib/components/icons/WikipediaLogo.svelte';
 	import {bannersDefaultFooterText} from '$lib/config';
+	import {_bannersTheme} from '$lib/stores/theme';
 	import {
 		_activeTopicDetails,
 		clearActiveTopic
@@ -13,7 +14,7 @@
 	import {getFirstPhrases} from '$lib/utils/dataUtils';
 	import {getWikipediaURL} from '$lib/utils/dbpedia';
 
-	export let hasBackground = false;
+	export let hasBackdrop = false;
 	export let isPinned;
 
 	let isImgErrored = false;
@@ -35,9 +36,10 @@
 
 <Banner
 	{_screen}
-	{hasBackground}
+	{hasBackdrop}
 	isNarrow={isPinned}
 	on:close={clearActiveTopic}
+	theme={$_bannersTheme}
 >
 	<LayoutHMF>
 		<h2 slot='header'>{title}</h2>
@@ -93,6 +95,7 @@
 		hyphens: auto;
 	}
 	img {
+		background-color: white;
 		float: right;
 		margin: 0.5em;
 		max-height: 10em;

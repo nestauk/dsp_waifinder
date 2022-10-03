@@ -36,7 +36,11 @@
 		toggleOrgType,
 		toggleOrgTypesSelectionMode,
 	} from '$lib/stores/selection';
-	import {_currThemeVars, _orgTypeToColorFn} from '$lib/stores/theme';
+	import {
+		_barchartsTheme,
+		_currThemeVars,
+		_orgTypeToColorFn,
+	} from '$lib/stores/theme';
 	import {getTopicLabel} from '$lib/utils/dataUtils';
 	import {
 		getResultsCsv,
@@ -69,6 +73,24 @@
 	$: multipleSelectedTopics = $_selectedTopicIds.length > 1;
 	$: topicsHeaderEnd = multipleSelectedTopics ? 's' : '';
 	$: topicsHeaderStart = $_selectedTopicIds.length || 'No';
+
+	$: switchTheme = {
+		color: $_currThemeVars['--colorText'],
+		backgroundColor: $_currThemeVars['--colorBackground'],
+		knobColor: $_currThemeVars['--colorSwitchKnob']
+	}
+	$: textSearchInputTheme = {
+		colorText: $_currThemeVars['--colorText'],
+		colorIcon: $_orgSearchValue
+			? $_currThemeVars['--colorIcon']
+			: $_currThemeVars['--colorBackground']
+	}
+	$: placeSearchInputTheme = {
+		colorText: $_currThemeVars['--colorText'],
+		colorIcon: $_placesSearchValue
+			? $_currThemeVars['--colorIcon']
+			: $_currThemeVars['--colorBackground']
+	}
 </script>
 
 <div class='Settings'>
@@ -83,8 +105,8 @@
 			<h3>{$_orgsCount} organisations </h3>
 			<button
 				aria-label='Download selected results'
-				title='Download selected results'
 				on:click={onClickDownload}
+				title='Download selected results'
 			>
 				<Icon
 					glyph={Download}
@@ -102,7 +124,8 @@
 			<div class='item'>
 				<Input
 					bind:value={$_orgSearchValue}
-					placeholder='search in name or description'
+					placeholder='search name or description'
+					theme={textSearchInputTheme}
 				/>
 			</div>
 
@@ -111,7 +134,8 @@
 			<div class='item'>
 				<Input
 					bind:value={$_placesSearchValue}
-					placeholder='search in place name'
+					placeholder='search place name'
+					theme={placeSearchInputTheme}
 				/>
 			</div>
 		</div>
@@ -133,17 +157,18 @@
 					on:clicked={toggledOrgType}
 					selectedKeys={$_selectedOrgTypes}
 					theme={{
+						...$_barchartsTheme,
+						hoverColorBar: null,
 						padding: 0,
-						selectedKeyBackgroundColor:
-							$_currThemeVars['--colorSelectedLight'],
 					}}
 				/>
 			</div>
 			<div class='item'>
 				<Switch
+					on:toggled={toggleOrgTypesSelectionMode}
+					theme={switchTheme}
 					value={$_orgTypesSelectionMode}
 					values={orgTypesSelectionModes}
-					on:toggled={toggleOrgTypesSelectionMode}
 				/>
 			</div>
 		</div>
@@ -172,6 +197,7 @@
 								<Icon
 									glyph={XCircle}
 									strokeWidth=1.25
+									stroke={$_currThemeVars['--colorIcon']}
 								/>
 							</span>
 						</div>
@@ -189,7 +215,10 @@
 							class='clickable'
 							on:click={deselectAllTopics}
 						>
-							<Icon glyph={XCircle} />
+							<Icon
+								glyph={XCircle}
+								stroke={$_currThemeVars['--colorIcon']}
+							/>
 						</span>
 					</div>
 				</div>
@@ -201,7 +230,10 @@
 
 			<div class='item'>
 				<span>
-					<Icon glyph={Tag} />
+					<Icon
+						glyph={Tag}
+						stroke={$_currThemeVars['--colorIcon']}
+					/>
 				</span>
 				<span class='tip'>To select topics, please head to the Topics bar, enter edit mode and click on items</span>
 			</div>
@@ -234,6 +266,8 @@
 								<Icon
 									glyph={XCircle}
 									strokeWidth=1.25
+									stroke={$_currThemeVars['--colorIcon']
+								}
 								/>
 							</span>
 						</div>
@@ -251,7 +285,10 @@
 							class='clickable'
 							on:click={deselectAllPlaces}
 						>
-							<Icon glyph={XCircle} />
+							<Icon
+								glyph={XCircle}
+								stroke={$_currThemeVars['--colorIcon']}
+							/>
 						</span>
 					</div>
 				</div>
@@ -264,7 +301,7 @@
 			<div class='item'>
 				<span>
 					<Icon
-						fill='black'
+						fill={$_currThemeVars['--colorIcon']}
 						glyph={City}
 						stroke='none'
 					/>
@@ -298,6 +335,7 @@
 							<span>
 								<Icon
 									glyph={XCircle}
+									stroke={$_currThemeVars['--colorIcon']}
 									strokeWidth=1.25
 								/>
 							</span>
@@ -316,7 +354,10 @@
 							class='clickable'
 							on:click={deselectAllRegions}
 						>
-							<Icon glyph={XCircle} />
+							<Icon
+								glyph={XCircle}
+								stroke={$_currThemeVars['--colorIcon']}
+							/>
 						</span>
 					</div>
 				</div>
@@ -328,7 +369,10 @@
 
 			<div class='item'>
 				<span>
-					<Icon glyph={Region} />
+					<Icon
+						glyph={Region}
+						stroke={$_currThemeVars['--colorIcon']}
+					/>
 				</span>
 				<span class='tip'>To select some regions, please head to the Regions bar, enter edit mode and click on items</span>
 			</div>
@@ -347,7 +391,7 @@
 	}
 
 	.panel:not(:last-child) {
-		border-bottom: 1px solid lightgrey;
+		border-bottom: var(--border);
 		margin-bottom: 1em;
 		padding-bottom: 1em;
 	}

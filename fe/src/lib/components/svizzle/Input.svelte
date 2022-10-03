@@ -12,7 +12,9 @@
 
 	const defaultTheme = {
 		backgroundColor: 'transparent',
-		borderColor: 'rgb(70, 70, 70)'
+		borderColor: 'rgb(70, 70, 70)',
+		colorIcon: 'black',
+		colorText: 'black'
 	};
 
 	let input;
@@ -73,6 +75,7 @@
 				glyph={X}
 				size=16
 				strokeWidth='1px'
+				stroke={theme.colorIcon}
 			/>
 		</button>
 	{/if}
@@ -98,6 +101,7 @@
 	input {
 		background: none;
 		border: none;
+		color: var(--colorText);
 		font-size: 1em;
 		width: 100%;
 	}

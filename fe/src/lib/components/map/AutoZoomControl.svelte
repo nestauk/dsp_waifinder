@@ -17,6 +17,7 @@
 	div {
 		align-items: center;
 		background: white;
+		color: black;
 		border-radius: 4px;
 		column-gap: 0.5em;
 		display: grid;

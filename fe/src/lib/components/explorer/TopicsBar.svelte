@@ -11,7 +11,7 @@
 		exitTopicsEditMode,
 		toggleTopicId,
 	} from '$lib/stores/selection';
-	import {_currThemeVars} from '$lib/stores/theme';
+	import {_barchartsTheme} from '$lib/stores/theme';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
@@ -66,10 +66,7 @@
 			on:entered={({detail: {id}}) => asyncUpdateTopicDetails(id)}
 			on:exited={clearActiveTopic}
 			selectedKeys={$_selectedTopicIds}
-			theme={{
-				deselectedOpacity: 1,
-				selectedKeyBackgroundColor: $_currThemeVars['--colorSelectedLight'],
-			}}
+			theme={$_barchartsTheme}
 		/>
 	</div>
 </div>
@@ -96,7 +93,7 @@
 		width: 100%;
 	}
 	.editMode {
-		border-bottom: 1px solid lightgrey;
+		border-bottom: var(--border);
 		grid-area: editMode;
 		padding: 0.75rem;
 	}
@@ -105,7 +102,7 @@
 		overflow: hidden;
 	}
 	.small .editMode {
-		border-top: 1px solid lightgrey;
+		border-top: var(--border);
 	}
 
 	.button {

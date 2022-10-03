@@ -40,8 +40,9 @@
 		// exposed but undocumented
 		backgroundOpacity: 1,
 
-		// TODO to be documented
+		// to be documented
 		selectedKeyBackgroundColor: transparentColor,
+		selectedKeyTextColor: 'black',
 
 		// exposed and documented
 		axisColor: 'lightgrey',
@@ -49,9 +50,12 @@
 		barDefaultColor: 'black',
 		deselectedOpacity: 0.25,
 		focusedKeyColor: 'rgba(0,0,0,0.1)',
+		focusedKeyColorText: 'rgba(0,0,0,0.1)',
 		fontSize: 14,
 		headerHeight: '2em',
-		hoverColor: 'rgba(0,0,0,0.05)',
+		hoverColor: 'rgba(0,0,0,0.5)',
+		hoverColorBar: null,
+		hoverColorText: 'white',
 		messageColor: 'black',
 		messageFontSize: '1rem',
 		padding: 10,
@@ -61,7 +65,7 @@
 		refRectStrokeColor: 'white',
 		refTextFill: 'black',
 		refWidth: 0.5,
-		textColor: 'grey',
+		textColor: '#333',
 		titleFontSize: '1.5em',
 	};
 
@@ -154,16 +158,41 @@
 
 		/* colors */
 
+		// background
+
 		const barBackgroundColor =
-			isDeselected
-				? transparentColor
-				: theme.selectedKeyBackgroundColor;
-		const barColor =
+			key === focusedKey
+				? theme.focusedKeyColor
+				: key === hoveredKey
+					? theme.hoverColor
+					: isDeselected
+						? transparentColor
+						: theme.selectedKeyBackgroundColor;
+
+		// bar
+
+		const barBaseColor =
 			keyToColor
 				? keyToColor[key] || theme.barDefaultColor
 				: keyToColorFn
 					? keyToColorFn(key)
 					: theme.barDefaultColor;
+		const barColor =
+			key === hoveredKey
+				? theme.hoverColorBar || barBaseColor
+				: barBaseColor;
+
+		// text
+
+		const textBaseColor = isDeselected
+			? theme.textColor
+			: theme.selectedKeyTextColor;
+		const textColor =
+			key === focusedKey
+				? theme.focusedKeyColorText
+				: key === hoveredKey
+					? theme.hoverColorText || textBaseColor
+					: textBaseColor;
 
 		return {...item, ...{
 			barBackgroundColor,
@@ -173,6 +202,7 @@
 			isNeg,
 			label,
 			labelLength,
+			textColor,
 			value,
 		}}
 	});
@@ -444,6 +474,7 @@
 							key,
 							label,
 							labelX,
+							textColor,
 							valueX,
 							x
 						}, index (key)}
@@ -458,12 +489,7 @@
 							>
 								<rect
 									{width}
-									fill={key === focusedKey
-										? theme.focusedKeyColor
-										: key === hoveredKey
-											? theme.hoverColor
-											: barBackgroundColor
-									}
+									fill={barBackgroundColor}
 									height={itemHeight}
 								/>
 								<line
@@ -477,12 +503,15 @@
 								<text
 									class:right={isLabelAlignedRight}
 									class='label'
+									fill={textColor}
+									stroke='none'
 									x={labelX}
 									y={textY}
 								>{label}</text>
 								<text
 									class:right={isValueAlignedRight}
 									class='value'
+									fill={textColor}
 									x={valueX}
 									y={textY}
 								>{displayValue}</text>
@@ -576,7 +605,6 @@
 		stroke-opacity: var(--deselectedOpacity);
 	}
 	.item text {
-		fill: var(--textColor);
 		font-size: var(--fontSize);
 		stroke: none;
 	}

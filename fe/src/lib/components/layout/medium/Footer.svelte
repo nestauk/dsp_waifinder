@@ -7,7 +7,7 @@
 		_a11yFillColor,
 		_a11yStrokeColor,
 		_currThemeVars,
-		_getLinkColor,
+		_getNavLinkColor,
 		_isThemeEditorActive,
 		_themeName,
 		toggleTheme,
@@ -66,8 +66,8 @@
 			href={changelogUrl}
 			type='external'
 			theme={{
-				color: $_currThemeVars['--colorMain'],
-				iconStroke: $_currThemeVars['--colorMain']
+				color: $_currThemeVars['--colorNavLink'],
+				iconStroke: $_currThemeVars['--colorIcon']
 			}}
 		>
 			{version}
@@ -85,12 +85,12 @@
 				<li role='none'>
 					<button
 						aria-label='Color theme editor'
-						on:click={toggleThemeEditor}
 						class='clickable'
+						on:click={toggleThemeEditor}
 					>
 						<Icon
 							glyph={Droplet}
-							stroke={$_currThemeVars['--colorMain)']}
+							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1
 						/>
 					</button>
@@ -102,27 +102,27 @@
 			<li role='none'>
 				<button
 					aria-label='Color theme'
-					on:click={toggleTheme}
 					class='clickable'
+					on:click={toggleTheme}
 				>
 					<Icon
-						glyph={themeIconGlyph}
-						stroke={$_currThemeVars['--colorMain)']}
-						strokeWidth=1
 						fill=''
+						glyph={themeIconGlyph}
+						stroke={$_currThemeVars['--colorIcon']}
+						strokeWidth=1
 					/>
 				</button>
 			</li>
 
 			<!-- a11y -->
 
-			<li
-				class:selected='{segment === 'accessibility'}'
-				role='none'
-			>
+			<li role='none'>
 				<Link
 					href='/accessibility'
-					theme={{color: $_getLinkColor('accessibility')}}
+					theme={{
+						color: $_getNavLinkColor(segment, 'accessibility'),
+						iconStroke: $_currThemeVars['--colorIcon']
+					}}
 				>
 					Accessibility
 				</Link>
@@ -130,14 +130,14 @@
 			<li role='none'>
 				<button
 					aria-label='Accessibility settings'
-					on:click={toggleA11yMenu}
 					class='clickable'
+					on:click={toggleA11yMenu}
 				>
 					<Icon
+						fill={$_a11yFillColor}
 						glyph={A11yPerson}
 						stroke={$_a11yStrokeColor}
 						strokeWidth=1
-						fill={$_a11yFillColor}
 					/>
 				</button>
 			</li>
@@ -179,16 +179,10 @@
 		padding: 0 0.5em;
 		white-space: nowrap;
 	}
-	li.selected {
-		color: var(--colorLink);
-		display: inline-block;
-		position: relative;
-	}
-
 	button {
 		border: none;
 		background: transparent;
-		color: var(--colorMain);
+		color: var(--colorText);
 		width: min-content;
 		height: min-content;
 		z-index: var(--z1000);

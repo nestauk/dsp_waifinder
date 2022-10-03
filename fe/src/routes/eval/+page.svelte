@@ -20,6 +20,7 @@
 		loadNextOrg,
 	} from '$lib/stores/eval';
 	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_currThemeVars} from '$lib/stores/theme';
 	import {getTopicLabel} from '$lib/utils/dataUtils';
 	import {dbrPrefix} from '$lib/utils/dbpedia';
 	import {sendEvaluations} from '$lib/utils/eval';
@@ -120,6 +121,10 @@
 		clearActiveTopic();
 		sendOrg();
 	}
+	$: highlightedTheme = {
+		colorHighlightedBackground: $_currThemeVars['--colorHighlightedTextBackground'],
+		colorHighlightedText: $_currThemeVars['--colorHighlightedText'],
+	};
 </script>
 
 <svelte:head>
@@ -180,6 +185,7 @@
 								regex={surfaceFormRegex}
 								shouldScrollIntoView=true
 								string={description}
+								theme={highlightedTheme}
 							/>
 						</Scroller>
 					</div>

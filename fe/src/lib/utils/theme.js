@@ -1,18 +1,6 @@
-export const getColorIfEqual = (
-	reference,
-	actual,
-	themeVars,
-	varEqual,
-	varNot
-) => reference === actual
-	? themeVars[varEqual]
-	: themeVars[varNot];
-
-export const makeGetColorIfEqual = (themeVars, varEqual, varNotEqual) =>
-	(reference, actual) => getColorIfEqual(
-		reference,
-		actual,
-		themeVars,
-		varEqual,
-		varNotEqual,
-	);
+export const makeSegmentToCssVar =
+	(themeVars, activeSegmentCssVar, inactiveSegmentCssVar) =>
+		(segment, string) =>
+			segment === string
+				? themeVars[activeSegmentCssVar]
+				: themeVars[inactiveSegmentCssVar];

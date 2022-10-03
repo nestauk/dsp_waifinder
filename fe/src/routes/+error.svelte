@@ -1,9 +1,11 @@
 <script>
+	import { page } from '$app/stores';
 	import {toolName} from '$lib/config';
 	import {isDev} from '$lib/env';
 
-	export let error;
-	export let status;
+
+	$: status = $page.status;
+	$: error = $page.error;
 </script>
 
 <svelte:head>
@@ -18,8 +20,8 @@
 
 <p>{error?.message || 'Message not defined'}</p>
 
-{#if isDev && error.stack}
-	<pre>{error.stack}</pre>
+{#if isDev && error?.stack}
+	<pre>{error?.stack}</pre>
 {/if}
 
 <style>

@@ -318,7 +318,7 @@
 	}
 	.cluster text {
 		dominant-baseline: hanging;
-		fill: var(--colorMain);
+		fill: var(--colorText);
 		stroke: none;
 		text-anchor: middle;
 	}
@@ -334,7 +334,7 @@
 
 	.multiMarker .center {
 		fill: var(--colorClusterTextBkgStroke);
-		stroke: var(--colorMain);
+		stroke: var(--colorMultiMarkerCenter);
 	}
 	.ray .hero {
 		fill: var(--colorMarkerFocused);

@@ -1,16 +1,21 @@
 <script>
+	import {makeStyleVars} from '@svizzle/dom';
 	import * as _ from 'lamb';
 	import {tick} from 'svelte';
 
 	import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
-	const defaultColor = 'yellow';
 	const defaultString = '';
 
-	export let color = defaultColor;
+	const defaultTheme = {
+		colorHighlightedBackground: 'yellow',
+		colorHighlightedText: 'black'
+	};
+
 	export let regex;
 	export let shouldScroll = false;
 	export let string = defaultString;
+	export let theme;
 
 	const splitText = (text, regExp) => {
 		let pairs = [[text, '']];
@@ -25,7 +30,7 @@
 		}
 
 		return pairs;
-	}
+	};
 
 	const scrollIntoView = async () => {
 		await tick();
@@ -41,9 +46,20 @@
 
 	$: string = string || defaultString;
 	$: parts = splitText(string, regex);
-	$: color = color || defaultColor;
-	$: style = `background-color:${color}`;
+	$: theme = {...defaultTheme, ...theme};
+	$: style = makeStyleVars(theme);
 	$: string && regex && shouldScroll && scrollIntoView();
 </script>
 
-{#each parts as [normal, styled], i}{normal}{#if styled}<span {style} id='highlighted-{i}'>{styled}</span>{/if}{/each}
+{#each parts as [normal, styled], i}{normal}{#if styled}<span {style} id='highlighted-{i}' class='highlighted'>{styled}</span>{/if}{/each}
+
+<style>
+	span {
+		background-color: 'inherit';
+		color: 'inherit';
+	}
+	.highlighted {
+		background-color: var(--colorHighlightedTextBackground);
+		color: var(--colorHighlightedText);
+	}
+</style>

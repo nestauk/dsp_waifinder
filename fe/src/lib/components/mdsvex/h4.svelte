@@ -4,7 +4,7 @@
 
 <style>
 	h4 {
-		color: var(--colorSecondary);
+		color: var(--colorTagH4);
 		font-style: italic;
 	}
 </style>

@@ -17,7 +17,7 @@
 		align-items: center;
 		background-color: var(--colorPillBackground);
 		border-radius: 50vh;
-		color: var(--colorPill);
+		color: var(--colorPillText);
 		display: flex;
 		padding: 0.2em 0.4em;
 		text-align: center;

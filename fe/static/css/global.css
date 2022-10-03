@@ -39,84 +39,143 @@ a {
 	--z1000: 1000;
 }
 
+/* theme: geometry */
+
 .themeLight {
-	--boxShadowY: 0px 8px 9px -4px lightgrey;
-	--colorBackground: #333;
-	--colorBackgroundMain: white;
-	--colorClusterTextBkgStroke: white;
-	--colorDisabled: grey;
-	--colorEvalHighlighted: aqua;
-	--colorHoverToDelete: mistyrose;
-	--colorLink: #0658aa;
-	--colorMain: #333;
-	--colorMainInverted: white;
-	--colorMainLighter: #555;
-	--colorMarkerFocused: red;
-	--colorOrgAddress: aquamarine;
-	--colorOrgHighlighted: lavender;
-	--colorOrgtype0: #2455ad;
-	--colorOrgtype0Text: white;
-	--colorOrgtype1: yellowgreen;
-	--colorOrgtype1Text: white;
-	--colorOrgtype2: plum;
-	--colorOrgtype2Text: white;
-	--colorOrgtype3: gold;
-	--colorOrgtype3Text: var(--colorMain);
-	--colorPill: white;
-	--colorPillBackground: #333;
-	--colorPillScore: white;
-	--colorSecondary: #075aa2;
-	--colorSelected: #00645f;
-	--colorSelectedLight: aliceblue;
-	--colorSelectedText: white;
-	--colorTagBlockquoteBackground: aliceblue;
-	--colorTagBlockquoteLeftborder: dodgerblue;
-	--colorTagCodeBackground: aliceblue;
-	--colorTagCodeBorder: lightgrey;
-	--colorTagCodeText: #333;
-	--colorWarningBackground: orange;
-	--colorWarningBorder: darkorange;
-	--colorWarningText: white;
+	--boxShadowY: 0px 8px 9px -4px var(--colorShadow);
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
 }
 
 .themeDark {
-	--boxShadowY: 0px 8px 9px -4px lightgrey;
-	--colorBackground: #333;
-	--colorBackgroundMain: black;
-	--colorClusterTextBkgStroke: black;
-	--colorDisabled: gsilverrey;
-	--colorEvalHighlighted: aqua;
+	--boxShadowY: 0px 8px 9px -4px var(--colorShadow);
+	--dimHeaderHeight: 3rem;
+	--dimPadding: 0.5rem;
+}
+
+/* theme: colors */
+
+.themeLight {
+	--border: thin solid #ccc;
+	--borderAux: thin solid #333; /* see --colorBorderAux */
+	--colorActiveBackground: #333;
+	--colorActiveText: #ccc;
+	--colorAux: #f5f5f5;
+	--colorBackdropSensor: rgba(0, 0, 0, 0.25);
+	--colorBackground: white; /* back to --colorMain? */
+	--colorBarchartHoveredItemBackground: peachpuff;
+	--colorBarchartHoveredItemBar: #333;
+	--colorBarchartHoveredItemText: #333;
+	--colorBarchartItemBar: black;
+	--colorBarchartSelectedItemBackground: #fff4e5;
+	--colorBarchartSelectedItemText: #333;
+	--colorBorderAux: #333; /* FIXME needed by a11y menu */
+	--colorClusterTextBkgStroke: white;
+	--colorHighlightedText: #333;
+	--colorHighlightedTextBackground: yellow;
+	--colorHoverToDelete: mistyrose;
+	--colorIcon: #333;
+	--colorIconSelected: white;
 	--colorLink: #0658aa;
-	--colorMain: #CCC;
-	--colorMainInverted: white;
-	--colorMainLighter: #BBB;
+	--colorMarkerFocused: red;
+	--colorMultiMarkerCenter: #333;
+	--colorNavLink: #333;
+	--colorNavLinkActive: #0658aa;
 	--colorOrgAddress: aquamarine;
 	--colorOrgHighlighted: lavender;
+	--colorOrgtype0: #2455ad;
+	--colorOrgtype0Text: var(--colorTextInverted);
+	--colorOrgtype1: yellowgreen;
+	--colorOrgtype1Text: var(--colorTextInverted);
+	--colorOrgtype2: plum;
+	--colorOrgtype2Text: var(--colorTextInverted);
+	--colorOrgtype3: gold;
+	--colorOrgtype3Text: var(--colorTextInverted);
+	--colorPageBackground: #333;
+	--colorPillBackground: #333;
+	--colorPillText: white;
+	--colorScrollbarThumb: #ddd; /* windows */
+	--colorScrollbarTrack: #f5f5f5; /* windows */
+	--colorSelectedBackground: #00645f;
+	--colorSelectedText: white;
+	--colorShadow: rgba(0, 0, 0, 0.5);
+	--colorSwitchKnob: lightgray;
+	--colorTagBlockquoteBackground: aliceblue;
+	--colorTagBlockquoteLeftBorder: dodgerblue;
+	--colorTagCodeBackground: aliceblue;
+	--colorTagCodeBorder: lightgrey;
+	--colorTagCodeText: #333;
+	--colorTagH4: #075aa2;
+	--colorText: #333;
+	--colorTextDisabled: #ccc;
+	--colorTextInverted: white;
+	--colorWarningBackground: orange;
+	--colorWarningBorder: darkorange;
+	--colorWarningText: white;
+
+	/* eval */
+	--colorEvalHighlighted: aqua;
+}
+
+.themeDark {
+	--border: thin solid #444;
+	--borderAux: thin solid #ccc; /* see --colorBorderAux */
+	--colorActiveBackground: #ccc;
+	--colorActiveText: #333;
+	--colorAux: #222;
+	--colorBackdropSensor: rgba(255, 255, 255, 0.25);
+	--colorBackground: #111; /* back to --colorMain? */
+	--colorBarchartHoveredItemBackground: cornflowerblue;
+	--colorBarchartHoveredItemBar: white;
+	--colorBarchartHoveredItemText: white;
+	--colorBarchartItemBar: white;
+	--colorBarchartSelectedItemBackground: #002c66;
+	--colorBarchartSelectedItemText: white;
+	--colorBorderAux: #ccc; /* FIXME needed by a11y menu */
+	--colorClusterTextBkgStroke: #333;
+	--colorHighlightedText: #333;
+	--colorHighlightedTextBackground: yellow;
+	--colorHoverToDelete: mistyrose;
+	--colorIcon: #ccc;
+	--colorIconSelected: black;
+	--colorLink: #7FA6CC;
+	--colorMarkerFocused: red;
+	--colorMultiMarkerCenter: #ccc;
+	--colorNavLink: #ccc;
+	--colorNavLinkActive: #7FA6CC;
+	--colorOrgAddress: #294C41;
+	--colorOrgHighlighted: #555;
 	--colorOrgPlace: aliceblue;
-	--colorOrgtype0: #808eaa;
-	--colorOrgtype0Text: black;
-	--colorOrgtype1: rgb(56, 75, 19);
-	--colorOrgtype1Text: black;
-	--colorOrgtype2: rgb(95, 32, 95);
-	--colorOrgtype2Text: black;
-	--colorOrgtype3: rgb(85, 75, 19);
-	--colorOrgtype3Text: var(--colorMain);
-	--colorPill: black;
-	--colorPillBackground: white;
-	--colorPillScore: black;
-	--colorSecondary: #6785a0;
-	--colorSelected: #83b8b5;
+	--colorOrgtype0: #6c96ea;
+	--colorOrgtype0Text: var(--colorTextInverted);
+	--colorOrgtype1: #b9ef4e;
+	--colorOrgtype1Text: var(--colorTextInverted);
+	--colorOrgtype2: #ea95ea;
+	--colorOrgtype2Text: var(--colorTextInverted);
+	--colorOrgtype3: #e1d17a;
+	--colorOrgtype3Text: var(--colorTextInverted);
+	--colorPageBackground: #333;
+	--colorPillBackground: #ddd;
+	--colorPillText: black;
+	--colorScrollbarThumb: #666; /* windows */
+	--colorScrollbarTrack: #222; /* windows */
+	--colorSelectedBackground: #83b8b5;
 	--colorSelectedText: black;
+	--colorShadow: rgba(0, 0, 0, 0.5);
+	--colorSwitchKnob: gray;
 	--colorTagBlockquoteBackground: rgb(33, 71, 105);
-	--colorTagBlockquoteLeftborder: rgb(15, 49, 83);
+	--colorTagBlockquoteLeftBorder: rgb(15, 49, 83);
 	--colorTagCodeBackground: rgb(43, 74, 102);
 	--colorTagCodeBorder: darkgrey;
 	--colorTagCodeText: white;
+	--colorTagH4: #6785a0;
+	--colorText: #ccc;
+	--colorTextDisabled: #666;
+	--colorTextInverted: black;
 	--colorWarningBackground: rgb(117, 76, 0);
 	--colorWarningBorder: rgb(109, 60, 1);
 	--colorWarningText: black;
-	--dimHeaderHeight: 3rem;
-	--dimPadding: 0.5rem;
+
+	/* eval */
+	--colorEvalHighlighted: aqua;
 }

@@ -2,7 +2,10 @@
 	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
 
 	import {jsonUrl} from '$lib/config';
-	import {_getLinkColor} from '$lib/stores/theme';
+	import {
+		_currThemeVars,
+		_getNavLinkColor
+	} from '$lib/stores/theme';
 
 	export let segment;
 
@@ -15,46 +18,46 @@
 	<menu>
 		<div role='none'>
 			<ul role='none'>
-				<li
-					class:selected='{segment === undefined}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/'
-						theme={{color: $_getLinkColor('')}}
+						theme={{
+							color: $_getNavLinkColor(segment, ''),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Home
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'methodology'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/methodology'
-						theme={{color: $_getLinkColor('methodology')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'methodology'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Methodology
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'guides'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/guides'
-						theme={{color: $_getLinkColor('guides')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'guides'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Guides
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'explorer'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/explorer'
-						theme={{color: $_getLinkColor('explorer')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'explorer'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Explorer
 					</Link>
@@ -71,46 +74,53 @@
 					<Link
 						download
 						href={jsonUrl}
+						theme={{
+							color: $_getNavLinkColor(segment, 'dataset'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Dataset
 						<Icon
 							glyph={Download}
 							size=20
+							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'feedback'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/feedback'
 						rel='prefetch'
-						theme={{color: $_getLinkColor('feedback')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'feedback'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Feedback
 						<Icon
 							glyph={Send}
 							size=20
+							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'info'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/info'
 						rel='prefetch'
-						theme={{color: $_getLinkColor('info')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'info'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Info
 						<Icon
 							glyph={Info}
 							size=20
 							strokeWidth=1.5
+							stroke={$_currThemeVars['--colorIcon']}
 						/>
 					</Link>
 				</li>
@@ -137,7 +147,7 @@
 		z-index: var(--z1000);
 	}
 	menu {
-		background: var(--colorBackgroundMain);
+		background: var(--colorBackground);
 		flex-direction: row;
 		height: 100%;
 		justify-content: space-between;
@@ -156,10 +166,5 @@
 		display: block;
 		padding: 0 0.5em;
 		white-space: nowrap;
-	}
-	li.selected {
-		color: var(--colorLink);
-		display: inline-block;
-		position: relative;
 	}
 </style>

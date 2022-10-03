@@ -7,6 +7,7 @@
 
 	import {bannersDefaultFooterText} from '$lib/config';
 	import {_hero, _isCursorOnMap, clearHero} from '$lib/stores/interaction';
+	import {_bannersTheme} from '$lib/stores/theme';
 
 	$: footerText = $_hero.isPinned
 		? $_isCursorOnMap ? 'Click to unpin' : bannersDefaultFooterText
@@ -17,6 +18,7 @@
 	{_screen}
 	isNarrow={false}
 	on:close={clearHero}
+	theme={$_bannersTheme}
 >
 	<LayoutHMF>
 		<OrgDetails

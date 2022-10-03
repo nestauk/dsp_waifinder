@@ -121,7 +121,7 @@
 
 	{#if $_activeTopicDetails}
 		<TopicBanner
-			hasBackground={true}
+			hasBackdrop={true}
 			isPinned={true}
 		/>
 	{/if}

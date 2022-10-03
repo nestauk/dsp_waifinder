@@ -74,7 +74,7 @@
 <style>
 	.ThemeEditor {
 		padding: 1em;
-		border-left: thin solid var(--colorMain);
+		border-left: var(--border);
 		display: grid;
 		grid-template-rows: min-content min-content 1fr;
 		height: 100%;
@@ -85,7 +85,7 @@
 		grid-template-columns: 1fr min-content;
 	}
 	header span {
-		color: var(--colorMainLighter);
+		color: var(--colorText);
 	}
 
 	ul {
@@ -93,11 +93,11 @@
 	}
 
 	.themeList {
-		border: thin solid var(--colorMain);
+		border: var(--border);
 		margin-bottom: 0.5em;
 	}
 	.themeList .selected {
-		background: var(--colorSelected);
+		background: var(--colorSelectedBackground);
 		color: var(--colorSelectedText);
 	}
 

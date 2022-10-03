@@ -5,7 +5,7 @@
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
 	import ResponsiveButton from '$lib/components/svizzle/ResponsiveButton.svelte';
-	import {_currThemeVars, _getStrokeColor} from '$lib/stores/theme';
+	import {_currThemeVars, _getIconColor} from '$lib/stores/theme';
 
 	export let activeViewId;
 	export let setView = noop;
@@ -15,11 +15,11 @@
 	let placesOverflows;
 	let regionsOverflows;
 
-	const theme = {
-		activeColorBackground: $_currThemeVars['--colorSelected'],
-		activeColorText:  $_currThemeVars['--colorSelectedText'],
+	$: theme = {
+		border: $_currThemeVars['--border'],
+		colorBackgroundActive: $_currThemeVars['--colorSelectedBackground'],
+		colorTextActive: $_currThemeVars['--colorSelectedText'],
 	}
-
 	$: isOptionalHidden =
 		detailsOverflows
 		|| topicsOverflows
@@ -33,17 +33,17 @@
 
 	<ResponsiveButton
 		{isOptionalHidden}
+		{theme}
 		bind:doesOverflow={detailsOverflows}
 		isActive={activeViewId === 'details'}
 		on:click={setView('details')}
-		{theme}
 		title='List of organisations'
 	>
 		<span slot='optional'>Details</span>
 		<Icon
 			glyph={List}
 			slot='always'
-			stroke={$_getStrokeColor('details', activeViewId)}
+			stroke={$_getIconColor('details', activeViewId)}
 		/>
 	</ResponsiveButton>
 
@@ -51,17 +51,17 @@
 
 	<ResponsiveButton
 		{isOptionalHidden}
+		{theme}
 		bind:doesOverflow={topicsOverflows}
 		isActive={activeViewId === 'topics'}
 		on:click={setView('topics')}
-		{theme}
 		title='Amount of organisations by topic'
 	>
 		<span slot='optional'>Topics</span>
 		<Icon
 			glyph={Tag}
 			slot='always'
-			stroke={$_getStrokeColor('topics', activeViewId)}
+			stroke={$_getIconColor('topics', activeViewId)}
 		/>
 	</ResponsiveButton>
 
@@ -69,15 +69,15 @@
 
 	<ResponsiveButton
 		{isOptionalHidden}
+		{theme}
 		bind:doesOverflow={placesOverflows}
 		isActive={activeViewId === 'places'}
 		on:click={setView('places')}
-		{theme}
 		title='Amount of organisations by place'
 	>
 		<span slot='optional'>Places</span>
 		<Icon
-			fill={$_getStrokeColor('places', activeViewId)}
+			fill={$_getIconColor('places', activeViewId)}
 			glyph={City}
 			slot='always'
 			stroke='none'
@@ -88,17 +88,17 @@
 
 	<ResponsiveButton
 		{isOptionalHidden}
+		{theme}
 		bind:doesOverflow={regionsOverflows}
 		isActive={activeViewId === 'regions'}
 		on:click={setView('regions')}
-		{theme}
 		title='Amount of organisations by region (NUTS3)'
 	>
 		<span slot='optional'>Regions</span>
 		<Icon
 			glyph={Region}
 			slot='always'
-			stroke={$_getStrokeColor('regions', activeViewId)}
+			stroke={$_getIconColor('regions', activeViewId)}
 			strokeWidth=1.25
 		/>
 	</ResponsiveButton>
@@ -106,7 +106,7 @@
 
 <style>
 	.MultiviewSelector {
-		background-color: var(--colorBackgroundMain);
+		background-color: var(--colorBackground);
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-template-rows: 100%;

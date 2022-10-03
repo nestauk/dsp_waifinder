@@ -4,7 +4,7 @@
 
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
-	import {_getStrokeColor} from '$lib/stores/theme';
+	import {_getIconColor} from '$lib/stores/theme';
 
 	export let activeViewId;
 	export let setView = noop;
@@ -20,7 +20,7 @@
 	>
 		<Icon
 			glyph={Sliders}
-			stroke={$_getStrokeColor('settings', activeViewId)}
+			stroke={$_getIconColor('settings', activeViewId)}
 		/>
 	</div>
 
@@ -32,7 +32,7 @@
 	>
 		<Icon
 			glyph={MapPin}
-			stroke={$_getStrokeColor('map', activeViewId)}
+			stroke={$_getIconColor('map', activeViewId)}
 		/>
 	</div>
 
@@ -44,7 +44,7 @@
 	>
 		<Icon
 			glyph={List}
-			stroke={$_getStrokeColor('details', activeViewId)}
+			stroke={$_getIconColor('details', activeViewId)}
 		/>
 	</div>
 
@@ -56,7 +56,7 @@
 	>
 		<Icon
 			glyph={Tag}
-			stroke={$_getStrokeColor('topics', activeViewId)}
+			stroke={$_getIconColor('topics', activeViewId)}
 		/>
 	</div>
 
@@ -67,7 +67,7 @@
 		on:click={setView('places')}
 	>
 		<Icon
-			fill={$_getStrokeColor('places', activeViewId)}
+			fill={$_getIconColor('places', activeViewId)}
 			glyph={City}
 			stroke='none'
 		/>
@@ -81,7 +81,7 @@
 	>
 		<Icon
 			glyph={Region}
-			stroke={$_getStrokeColor('regions', activeViewId)}
+			stroke={$_getIconColor('regions', activeViewId)}
 			strokeWidth=1.25
 		/>
 	</div>
@@ -89,8 +89,8 @@
 
 <style>
 	.ViewSelector {
-		background-color: var(--colorBackgroundMain);
-		border-top: 1px solid var(--colorMain);
+		background-color: var(--colorBackground);
+		border-top: var(--border);
 		display: grid;
 		grid-template-columns: repeat(6, 1fr);
 		grid-template-rows: 100%;
@@ -98,7 +98,7 @@
 		width: 100%;
 	}
 	.active {
-		background: var(--colorSelected);
+		background: var(--colorSelectedBackground);
 		color: var(--colorSelectedText);
 	}
 

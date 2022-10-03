@@ -19,7 +19,7 @@
 		_a11yFillColor,
 		_a11yStrokeColor,
 		_currThemeVars,
-		_getLinkColor,
+		_getNavLinkColor,
 		_themeName,
 		toggleTheme,
 	} from '$lib/stores/theme';
@@ -62,7 +62,7 @@
 	>
 		<Icon
 			glyph={themeIconGlyph}
-			stroke={$_currThemeVars['--colorMain)']}
+			stroke={$_currThemeVars['--colorIcon']}
 			strokeWidth=1
 			fill=''
 		/>
@@ -85,9 +85,15 @@
 		on:click={toggleMenu}
 	>
 		{#if showMenu}
-			<Icon glyph={X} />
+			<Icon
+				glyph={X}
+				stroke={$_currThemeVars['--colorIcon']}
+			/>
 		{:else}
-			<Icon glyph={Menu} />
+			<Icon
+				glyph={Menu}
+				stroke={$_currThemeVars['--colorIcon']}
+			/>
 		{/if}
 	</button>
 	{#if showMenu || isServerSide}
@@ -115,43 +121,45 @@
 						href={changelogUrl}
 						type='external'
 						theme={{
-							color: $_currThemeVars['--colorMain'],
-							iconStroke: $_currThemeVars['--colorMain']
+							color: $_currThemeVars['--colorText'],
+							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						{version}
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'info'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/info'
 						rel='prefetch'
-						theme={{color: $_getLinkColor('info')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'info'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Info
 						<Icon
 							glyph={Info}
 							size=20
+							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'feedback'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/feedback'
 						rel='prefetch'
-						theme={{color: $_getLinkColor('feedback')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'feedback'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Feedback
 						<Icon
 							glyph={Send}
 							size=20
+							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
 					</Link>
@@ -164,67 +172,74 @@
 					<Link
 						download
 						href={jsonUrl}
+						theme={{
+							color: $_getNavLinkColor(segment, 'download'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Dataset
 						<Icon
 							glyph={Download}
 							size=20
+							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
 					</Link>
 				</li>
 				<li
-					class:selected='{segment === 'accessibility'}'
 					class='sectionStart'
 					role='none'
 				>
 					<Link
 						href='/accessibility'
-						theme={{color: $_getLinkColor('accessibility')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'accessibility'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Accessibility
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'guides'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/guides'
-						theme={{color: $_getLinkColor('guides')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'guides'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Guides
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'methodology'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/methodology'
-						theme={{color: $_getLinkColor('methodology')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'methodology'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Methodology
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === 'explorer'}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/explorer'
-						theme={{color: $_getLinkColor('explorer')}}
+						theme={{
+							color: $_getNavLinkColor(segment, 'explorer'),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Explorer
 					</Link>
 				</li>
-				<li
-					class:selected='{segment === undefined}'
-					role='none'
-				>
+				<li role='none'>
 					<Link
 						href='/'
-						theme={{color: $_getLinkColor('')}}
+						theme={{
+							color: $_getNavLinkColor(segment, ''),
+							iconStroke: $_currThemeVars['--colorIcon']
+						}}
 					>
 						Home
 					</Link>
@@ -249,7 +264,7 @@
 		position: relative;
 	}
 	header {
-		color: var(--colorLink);
+		color: var(--colorNavLinkActive);
 		font-weight: bold;
 		margin: 0 auto;
 		position: absolute;
@@ -259,13 +274,13 @@
 	button {
 		border: none;
 		background: transparent;
-		color: var(--colorMain);
+		color: var(--colorText);
 		width: min-content;
 		height: min-content;
 		z-index: var(--z1000);
 	}
 	menu {
-		background: var(--colorBackgroundMain);
+		background: var(--colorBackground);
 		display: grid;
 		grid-template-rows: min-content 1fr;
 		height: var(--content-height);

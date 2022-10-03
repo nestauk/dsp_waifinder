@@ -37,10 +37,10 @@
 		enabledChars={$_orgsChar}
 		on:charSelected={onCharSelected}
 		theme={{
-			backgroundColor: $_currThemeVars['--colorMain'],
-			backgroundColorDisabled: $_currThemeVars['--colorMain'],
-			textColor: $_currThemeVars['--colorMainInverted'],
-			textColorDisabled: $_currThemeVars['--colorDisabled']
+			backgroundColor: $_currThemeVars['--colorAux'],
+			backgroundColorDisabled: $_currThemeVars['--colorAux'],
+			textColor: $_currThemeVars['--colorText'],
+			textColorDisabled: $_currThemeVars['--colorTextDisabled']
 		}}
 	/>
 </div>

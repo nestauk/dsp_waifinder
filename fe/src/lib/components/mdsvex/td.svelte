@@ -2,7 +2,7 @@
 
 <style>
 	td {
-		border: 1px solid var(--colorMainLighter);
+		border: var(--border);
 		padding: 0.5rem;
 		text-align: left;
 	}

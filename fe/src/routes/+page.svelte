@@ -20,7 +20,7 @@
 
 <style>
 	.about {
-		background-color: var(--colorBackground);
+		background-color: var(--colorPageBackground);
 		display: flex;
 		font-weight: 200;
 		height: 100%;
@@ -29,7 +29,7 @@
 	}
 
 	div {
-		background-color: var(--colorBackgroundMain);
+		background-color: var(--colorBackground);
 		max-width: 900px;
 		overflow-y: auto;
 		padding: 2rem;
