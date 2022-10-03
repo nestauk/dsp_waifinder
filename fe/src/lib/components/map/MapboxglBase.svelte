@@ -251,8 +251,8 @@
 
 	// eslint-disable-next-line no-unused-expressions, no-sequences
 	$: $_size, map?.resize()
-
 	$: bounds && fitToBbox(bounds);
+	$: map?.setStyle(styleURL);
 </script>
 
 <svelte:head>

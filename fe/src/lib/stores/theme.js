@@ -3,10 +3,24 @@ import {derived, writable} from 'svelte/store';
 import {_isA11yDirty} from '@svizzle/ui';
 
 import {_dataset} from '$lib/stores/dataset';
+import {makeGetColorIfEqual} from '$lib/utils/theme';
 
 export const _isThemeEditorActive = writable(false);
 
-export const _themeName = writable('theme');
+const prefersDarkTheme =
+	// eslint-disable-next-line no-undef
+	globalThis.matchMedia?.("(prefers-color-scheme: dark)").matches;
+
+export const _themeName = writable(
+	prefersDarkTheme ? 'themeDark' : 'themeLight'
+);
+
+export const toggleTheme = () => {
+	_themeName.update(
+		themeName => themeName === 'themeLight' ? 'themeDark' : 'themeLight'
+	)
+}
+
 export const _themeVars = writable({});
 
 export const _themeNames = derived(
@@ -35,6 +49,24 @@ export const _a11yFillColor = derived(
 	[_currThemeVars, _isA11yDirty],
 	([currThemeVars, isA11yDirty]) => isA11yDirty
 		? currThemeVars['--colorMain'] : ''
+);
+
+export const _getStrokeColor = derived(
+	_currThemeVars,
+	currThemeVars => makeGetColorIfEqual(
+		currThemeVars,
+		'--colorMainInverted',
+		'--colorMain'
+	)
+);
+
+export const _getLinkColor = derived(
+	_currThemeVars,
+	currThemeVars => makeGetColorIfEqual(
+		currThemeVars,
+		'--colorLink',
+		'--colorMain'
+	)
 );
 
 /* org types */

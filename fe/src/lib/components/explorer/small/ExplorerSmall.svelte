@@ -14,7 +14,7 @@
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
-		MAPBOXGL_STYLEURL as styleURL,
+		MAPBOXGL_STYLEURLs as styleURLs,
 		noOrgsMessage
 	} from '$lib/config';
 	import {
@@ -24,6 +24,7 @@
 	} from '$lib/stores/data';
 	import {_autoZoom, _hero} from '$lib/stores/interaction';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
+	import {_themeName} from '$lib/stores/theme';
 	import {_activeTopicDetails} from '$lib/stores/topics';
 	import {getLonLat} from '$lib/utils/dataUtils';
 
@@ -44,12 +45,12 @@
 				<Mapbox
 					{accessToken}
 					{getLonLat}
-					{styleURL}
 					bounds={$_allOrgsBBox}
 					customControl={{
 						control: AutoZoomControl,
 						position: 'bottom-left'
 					}}
+					styleURL={styleURLs[$_themeName]}
 					CustomLayers={SvgLayers}
 					items={$_clusters}
 					on:bboxChanged={disableAutoZoom}

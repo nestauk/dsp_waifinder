@@ -2,9 +2,9 @@
 	import {Icon, List, MapPin, Sliders, Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
-	import {getStrokeColor} from '$lib/components/explorer/utils';
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
+	import {_getStrokeColor} from '$lib/stores/theme';
 
 	export let activeViewId;
 	export let setView = noop;
@@ -20,7 +20,7 @@
 	>
 		<Icon
 			glyph={Sliders}
-			stroke={getStrokeColor('settings', activeViewId)}
+			stroke={$_getStrokeColor('settings', activeViewId)}
 		/>
 	</div>
 
@@ -32,7 +32,7 @@
 	>
 		<Icon
 			glyph={MapPin}
-			stroke={getStrokeColor('map', activeViewId)}
+			stroke={$_getStrokeColor('map', activeViewId)}
 		/>
 	</div>
 
@@ -44,7 +44,7 @@
 	>
 		<Icon
 			glyph={List}
-			stroke={getStrokeColor('details', activeViewId)}
+			stroke={$_getStrokeColor('details', activeViewId)}
 		/>
 	</div>
 
@@ -56,7 +56,7 @@
 	>
 		<Icon
 			glyph={Tag}
-			stroke={getStrokeColor('topics', activeViewId)}
+			stroke={$_getStrokeColor('topics', activeViewId)}
 		/>
 	</div>
 
@@ -67,7 +67,7 @@
 		on:click={setView('places')}
 	>
 		<Icon
-			fill={getStrokeColor('places', activeViewId)}
+			fill={$_getStrokeColor('places', activeViewId)}
 			glyph={City}
 			stroke='none'
 		/>
@@ -81,7 +81,7 @@
 	>
 		<Icon
 			glyph={Region}
-			stroke={getStrokeColor('regions', activeViewId)}
+			stroke={$_getStrokeColor('regions', activeViewId)}
 			strokeWidth=1.25
 		/>
 	</div>

@@ -2,12 +2,10 @@
 	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
 
 	import {jsonUrl} from '$lib/config';
-	import {_currThemeVars} from '$lib/stores/theme';
+	import {_getLinkColor} from '$lib/stores/theme';
 
 	export let segment;
 
-	$: makeColor = id =>
-		segment === id ? $_currThemeVars['--colorLink'] : undefined;
 </script>
 
 <nav
@@ -23,7 +21,7 @@
 				>
 					<Link
 						href='/'
-						theme={{color: makeColor('')}}
+						theme={{color: $_getLinkColor('')}}
 					>
 						Home
 					</Link>
@@ -34,7 +32,7 @@
 				>
 					<Link
 						href='/methodology'
-						theme={{color: makeColor('methodology')}}
+						theme={{color: $_getLinkColor('methodology')}}
 					>
 						Methodology
 					</Link>
@@ -45,7 +43,7 @@
 				>
 					<Link
 						href='/guides'
-						theme={{color: makeColor('guides')}}
+						theme={{color: $_getLinkColor('guides')}}
 					>
 						Guides
 					</Link>
@@ -56,7 +54,7 @@
 				>
 					<Link
 						href='/explorer'
-						theme={{color: makeColor('explorer')}}
+						theme={{color: $_getLinkColor('explorer')}}
 					>
 						Explorer
 					</Link>
@@ -89,7 +87,7 @@
 					<Link
 						href='/feedback'
 						rel='prefetch'
-						theme={{color: makeColor('feedback')}}
+						theme={{color: $_getLinkColor('feedback')}}
 					>
 						Feedback
 						<Icon
@@ -106,7 +104,7 @@
 					<Link
 						href='/info'
 						rel='prefetch'
-						theme={{color: makeColor('info')}}
+						theme={{color: $_getLinkColor('info')}}
 					>
 						Info
 						<Icon

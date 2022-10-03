@@ -1,13 +1,16 @@
 <script>
-	import {A11yPerson, Icon, Droplet, Link} from '@svizzle/ui';
+	import {A11yPerson, Icon, Droplet, Link, Moon, Sun} from '@svizzle/ui';
 
-	import {changelogUrl} from '$lib/config';
+	import {changelogUrl, LOGOS} from '$lib/config';
 	import {isDev} from '$lib/env';
 	import {
 		_a11yFillColor,
 		_a11yStrokeColor,
 		_currThemeVars,
-		_isThemeEditorActive
+		_getLinkColor,
+		_isThemeEditorActive,
+		_themeName,
+		toggleTheme,
 	} from '$lib/stores/theme';
 	import {version} from '$lib/utils/version';
 
@@ -24,8 +27,8 @@
 		}
 	}
 
-	$: makeColor = id =>
-		segment === id ? $_currThemeVars['--colorLink'] : undefined;
+	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
+	$: logos = LOGOS[$_themeName]
 </script>
 
 <div class='Footer'>
@@ -36,19 +39,19 @@
 		<a href='https://www.ukri.org/'>
 			<img
 				alt='UK Research and Innovation'
-				src='/logos/UKResearchAndInnovation.svg'
+				src={logos.ukri}
 			/>
 		</a>
 		<a href='https://www.turing.ac.uk/'>
 			<img
 				alt='The Alan Turing Institute'
-				src='/logos/AlanTuringInstitute.svg'
+				src={logos.turing}
 			/>
 		</a>
 		<a href='https://www.nesta.org.uk/'>
 			<img
 				alt='Nesta'
-				src='/logos/Nesta.svg'
+				src={logos.nesta}
 			/>
 		</a>
 	</span>
@@ -81,7 +84,7 @@
 			{#if isDev}
 				<li role='none'>
 					<button
-						aria-label='Color theme'
+						aria-label='Color theme editor'
 						on:click={toggleThemeEditor}
 						class='clickable'
 					>
@@ -94,6 +97,23 @@
 				</li>
 			{/if}
 
+			<!-- theme switcher -->
+
+			<li role='none'>
+				<button
+					aria-label='Color theme'
+					on:click={toggleTheme}
+					class='clickable'
+				>
+					<Icon
+						glyph={themeIconGlyph}
+						stroke={$_currThemeVars['--colorMain)']}
+						strokeWidth=1
+						fill=''
+					/>
+				</button>
+			</li>
+
 			<!-- a11y -->
 
 			<li
@@ -102,7 +122,7 @@
 			>
 				<Link
 					href='/accessibility'
-					theme={{color: makeColor('accessibility')}}
+					theme={{color: $_getLinkColor('accessibility')}}
 				>
 					Accessibility
 				</Link>

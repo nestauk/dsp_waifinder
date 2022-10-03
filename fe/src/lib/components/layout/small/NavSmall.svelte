@@ -8,15 +8,20 @@
 		isServerSide,
 		Link,
 		Menu,
+		Moon,
 		Send,
+		Sun,
 		X
 	} from '@svizzle/ui';
 
-	import {changelogUrl, jsonUrl} from '$lib/config';
+	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config';
 	import {
 		_a11yFillColor,
 		_a11yStrokeColor,
-		_currThemeVars
+		_currThemeVars,
+		_getLinkColor,
+		_themeName,
+		toggleTheme,
 	} from '$lib/stores/theme';
 	import {version} from '$lib/utils/version';
 
@@ -38,8 +43,8 @@
 		event.target.setAttribute('aria-expanded', showMenu.toString());
 	}
 
-	$: makeColor = id =>
-		segment === id ? $_currThemeVars['--colorLink'] : undefined;
+	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
+	$: logos = LOGOS[$_themeName]
 </script>
 
 <nav
@@ -47,32 +52,44 @@
 	role='none'
 	style='--content-height: {contentHeight}px'
 >
-		<header>
-			{segment ? capitalize(segment) : 'Home'}
-		</header>
-		<button
-			aria-label='Accessibility settings'
-			class='clickable'
-			on:click={toggleA11yMenu}
-		>
-			<Icon
-				fill={$_a11yFillColor}
-				glyph={A11yPerson}
-				stroke={$_a11yStrokeColor}
-				strokeWidth=1
-			/>
-		</button>
-		<button
-			aria-label='Website links'
-			class='clickable'
-			on:click={toggleMenu}
-		>
-			{#if showMenu}
-				<Icon glyph={X} />
-			{:else}
-				<Icon glyph={Menu} />
-			{/if}
-		</button>
+	<header>
+		{segment ? capitalize(segment) : 'Home'}
+	</header>
+	<button
+		aria-label='Color theme'
+		class='clickable'
+		on:click={toggleTheme}
+	>
+		<Icon
+			glyph={themeIconGlyph}
+			stroke={$_currThemeVars['--colorMain)']}
+			strokeWidth=1
+			fill=''
+		/>
+	</button>
+	<button
+		aria-label='Accessibility settings'
+		class='clickable'
+		on:click={toggleA11yMenu}
+	>
+		<Icon
+			fill={$_a11yFillColor}
+			glyph={A11yPerson}
+			stroke={$_a11yStrokeColor}
+			strokeWidth=1
+		/>
+	</button>
+	<button
+		aria-label='Website links'
+		class='clickable'
+		on:click={toggleMenu}
+	>
+		{#if showMenu}
+			<Icon glyph={X} />
+		{:else}
+			<Icon glyph={Menu} />
+		{/if}
+	</button>
 	{#if showMenu || isServerSide}
 		<menu on:click={closeMenu}>
 			<div
@@ -80,13 +97,13 @@
 				role='none'
 			>
 				<a href='https://www.ukri.org/'>
-					<img src='/logos/UKResearchAndInnovation.svg' alt='Nesta' />
+					<img src={logos.ukri} alt='UK Research and Innovation' />
 				</a>
 				<a href='https://www.turing.ac.uk/'>
-					<img src='/logos/AlanTuringInstitute.svg' alt='Nesta' />
+					<img src={logos.turing} alt='The Alan Turing Institute' />
 				</a>
 				<a href='https://www.nesta.org.uk/'>
-					<img src='/logos/Nesta.svg' alt='Nesta' />
+					<img src={logos.nesta} alt='Nesta' />
 				</a>
 			</div>
 			<ul role='none'>
@@ -112,7 +129,7 @@
 					<Link
 						href='/info'
 						rel='prefetch'
-						theme={{color: makeColor('info')}}
+						theme={{color: $_getLinkColor('info')}}
 					>
 						Info
 						<Icon
@@ -129,7 +146,7 @@
 					<Link
 						href='/feedback'
 						rel='prefetch'
-						theme={{color: makeColor('feedback')}}
+						theme={{color: $_getLinkColor('feedback')}}
 					>
 						Feedback
 						<Icon
@@ -163,7 +180,7 @@
 				>
 					<Link
 						href='/accessibility'
-						theme={{color: makeColor('accessibility')}}
+						theme={{color: $_getLinkColor('accessibility')}}
 					>
 						Accessibility
 					</Link>
@@ -174,7 +191,7 @@
 				>
 					<Link
 						href='/guides'
-						theme={{color: makeColor('guides')}}
+						theme={{color: $_getLinkColor('guides')}}
 					>
 						Guides
 					</Link>
@@ -185,7 +202,7 @@
 				>
 					<Link
 						href='/methodology'
-						theme={{color: makeColor('methodology')}}
+						theme={{color: $_getLinkColor('methodology')}}
 					>
 						Methodology
 					</Link>
@@ -196,7 +213,7 @@
 				>
 					<Link
 						href='/explorer'
-						theme={{color: makeColor('explorer')}}
+						theme={{color: $_getLinkColor('explorer')}}
 					>
 						Explorer
 					</Link>
@@ -207,7 +224,7 @@
 				>
 					<Link
 						href='/'
-						theme={{color: makeColor('')}}
+						theme={{color: $_getLinkColor('')}}
 					>
 						Home
 					</Link>

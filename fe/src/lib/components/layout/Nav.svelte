@@ -9,7 +9,6 @@
 	export let segment;
 	export let showA11yMenu = false;
 	export let isA11yDirty = false;
-
 </script>
 
 {#if $_isSmallScreen || isServerSide}

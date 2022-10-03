@@ -2,11 +2,10 @@
 	import {Icon, List, Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
-	import {getStrokeColor} from '$lib/components/explorer/utils';
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
 	import ResponsiveButton from '$lib/components/svizzle/ResponsiveButton.svelte';
-	import {_currThemeVars} from '$lib/stores/theme';
+	import {_currThemeVars, _getStrokeColor} from '$lib/stores/theme';
 
 	export let activeViewId;
 	export let setView = noop;
@@ -44,7 +43,7 @@
 		<Icon
 			glyph={List}
 			slot='always'
-			stroke={getStrokeColor('details', activeViewId)}
+			stroke={$_getStrokeColor('details', activeViewId)}
 		/>
 	</ResponsiveButton>
 
@@ -62,7 +61,7 @@
 		<Icon
 			glyph={Tag}
 			slot='always'
-			stroke={getStrokeColor('topics', activeViewId)}
+			stroke={$_getStrokeColor('topics', activeViewId)}
 		/>
 	</ResponsiveButton>
 
@@ -78,7 +77,7 @@
 	>
 		<span slot='optional'>Places</span>
 		<Icon
-			fill={getStrokeColor('places', activeViewId)}
+			fill={$_getStrokeColor('places', activeViewId)}
 			glyph={City}
 			slot='always'
 			stroke='none'
@@ -99,7 +98,7 @@
 		<Icon
 			glyph={Region}
 			slot='always'
-			stroke={getStrokeColor('regions', activeViewId)}
+			stroke={$_getStrokeColor('regions', activeViewId)}
 			strokeWidth=1.25
 		/>
 	</ResponsiveButton>

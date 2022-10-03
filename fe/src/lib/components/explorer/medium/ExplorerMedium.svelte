@@ -8,7 +8,7 @@
 
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
-		MAPBOXGL_STYLEURL as styleURL
+		MAPBOXGL_STYLEURLs as styleURLs
 	} from '$lib/config';
 	import {_allOrgsBBox, _clusters} from '$lib/stores/data';
 	import {getLonLat} from '$lib/utils/dataUtils';
@@ -19,6 +19,7 @@
 		clearIsCursorOnMap,
 		setIsCursorOnMap
 	} from '$lib/stores/interaction';
+	import {_themeName} from '$lib/stores/theme';
 	import {_activeTopicDetails} from '$lib/stores/topics';
 
 	import Multiview from './Multiview.svelte';
@@ -41,12 +42,12 @@
 		<Mapbox
 			{accessToken}
 			{getLonLat}
-			{styleURL}
 			bounds={$_allOrgsBBox}
 			customControl={{
 				control: AutoZoomControl,
 				position: 'top-left'
 			}}
+			styleURL={styleURLs[$_themeName]}
 			CustomLayers={SvgLayers}
 			items={$_clusters}
 			on:bboxChanged={disableAutoZoom}

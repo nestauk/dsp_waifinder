@@ -17,10 +17,6 @@ html, body, #app {
 	*/
 }
 
-body {
-	color: #333;
-}
-
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 400;
 	margin: 0 0 0.7em 0;
@@ -43,7 +39,7 @@ a {
 	--z1000: 1000;
 }
 
-.theme {
+.themeLight {
 	--boxShadowY: 0px 8px 9px -4px lightgrey;
 	--colorBackground: #333;
 	--colorBackgroundMain: white;
@@ -81,6 +77,46 @@ a {
 	--colorWarningBackground: orange;
 	--colorWarningBorder: darkorange;
 	--colorWarningText: white;
+	--dimHeaderHeight: 3rem;
+	--dimPadding: 0.5rem;
+}
+
+.themeDark {
+	--boxShadowY: 0px 8px 9px -4px lightgrey;
+	--colorBackground: #333;
+	--colorBackgroundMain: black;
+	--colorClusterTextBkgStroke: black;
+	--colorDisabled: gsilverrey;
+	--colorEvalHighlighted: aqua;
+	--colorLink: #0658aa;
+	--colorMain: #CCC;
+	--colorMainInverted: white;
+	--colorMainLighter: #BBB;
+	--colorOrgAddress: aquamarine;
+	--colorOrgHighlighted: lavender;
+	--colorOrgPlace: aliceblue;
+	--colorOrgtype0: #808eaa;
+	--colorOrgtype0Text: black;
+	--colorOrgtype1: rgb(56, 75, 19);
+	--colorOrgtype1Text: black;
+	--colorOrgtype2: rgb(95, 32, 95);
+	--colorOrgtype2Text: black;
+	--colorOrgtype3: rgb(85, 75, 19);
+	--colorOrgtype3Text: var(--colorMain);
+	--colorPill: black;
+	--colorPillBackground: white;
+	--colorPillScore: black;
+	--colorSecondary: #6785a0;
+	--colorSelected: #83b8b5;
+	--colorSelectedText: black;
+	--colorTagBlockquoteBackground: rgb(33, 71, 105);
+	--colorTagBlockquoteLeftborder: rgb(15, 49, 83);
+	--colorTagCodeBackground: rgb(43, 74, 102);
+	--colorTagCodeBorder: darkgrey;
+	--colorTagCodeText: white;
+	--colorWarningBackground: rgb(117, 76, 0);
+	--colorWarningBorder: rgb(109, 60, 1);
+	--colorWarningText: black;
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
 }

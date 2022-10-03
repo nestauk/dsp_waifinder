@@ -10,6 +10,7 @@ In the lower part of the screen you have a navigation bar with, from the right:
 	* an icon with three lines (a so-called &quot;hamburger&quot;) to open
 	  the navigation menu
 	* the accessibility icon, to toggle the accessibility menu
+	* a theme switcher button to select between light and dark color themes
 	* the name of the current page
 
 ### Navigating to a new page

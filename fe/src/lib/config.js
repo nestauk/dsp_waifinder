@@ -40,8 +40,26 @@ export const flags = {
 
 /* mapbox */
 
-export const MAPBOXGL_STYLEURL = 'mapbox://styles/nesta-uk/cjja7cb0s0bcw2rmvflhof4io';
+export const MAPBOXGL_STYLEURLs = {
+	themeLight: 'mapbox://styles/nesta-uk/cl8olrzo200ci16pim0h4c1pn',
+	themeDark: 'mapbox://styles/nesta-uk/cl8ilzuy3001214qyg06jwsoy'
+};
 
+
+/* logos */
+
+export const LOGOS = {
+	themeLight: {
+		nesta: '/logos/Nesta-light.svg',
+		turing: '/logos/AlanTuringInstitute-light.svg',
+		ukri: '/logos/UKResearchAndInnovation-light.svg'
+	},
+	themeDark: {
+		nesta: '/logos/Nesta-dark.svg',
+		turing: '/logos/AlanTuringInstitute-dark.svg',
+		ukri: '/logos/UKResearchAndInnovation-dark.svg'
+	}
+}
 // TODO call an API to retrieve the accessToken
 // to limit the use of this access token to domains we control
 export const MAPBOXGL_ACCESSTOKEN = 'pk.eyJ1IjoibmVzdGEtdWsiLCJhIjoiY2ozbjUzY2drMDAwNzJxbnl6a21uM253cSJ9.3RTMySEVk0LC4gQvGoG-Zw';
