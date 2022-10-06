@@ -1,5 +1,3 @@
-import {getFamilies} from '@svizzle/ui';
-
 /* tool */
 
 export const toolName = 'WAIFinder';
@@ -168,5 +166,3 @@ export const fontsInfo = [
 		]
 	}
 ];
-
-export const a11yFontFamilies = getFamilies(fontsInfo);

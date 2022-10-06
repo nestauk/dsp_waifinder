@@ -5,6 +5,7 @@
 		A11yMenu,
 		A11yMenuDriver,
 		FontsLoader,
+		getFamilies,
 		LoadingView,
 		NoScript,
 		ScreenSensor,
@@ -20,7 +21,6 @@
 	import MultiBanner from '$lib/components/svizzle/MultiBanner.svelte';
 	import StyleSensor from '$lib/components/svizzle/StyleSensor.svelte';
 	import {
-		a11yFontFamilies,
 		bannersDefaultFooterText,
 		fontsInfo,
 	} from '$lib/config';
@@ -34,11 +34,13 @@
 		_themeVars
 	} from '$lib/stores/theme'
 
-	import Privacy from '$lib/_content/info/Privacy.svx';
+	import Privacy from '$lib/_content/info/PrivacyBanner.svx';
 
 	const bannerComponents = [
 		Privacy
 	];
+
+	const a11yFontFamilies = getFamilies(fontsInfo);
 
 	// actions
 	const {

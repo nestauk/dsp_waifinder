@@ -102,7 +102,7 @@
 		<!-- Results -->
 
 		<header>
-			<h3>{$_orgsCount} organisations </h3>
+			<div class='sectionHeader'>{$_orgsCount} organisations </div>
 			<button
 				aria-label='Download selected results'
 				on:click={onClickDownload}
@@ -145,7 +145,7 @@
 
 	<div class='panel'>
 		<header>
-			<h3>Org types</h3>
+			<div class='sectionHeader'>Org types</div>
 		</header>
 
 		<div class='group'>
@@ -178,7 +178,7 @@
 
 	<div class='panel'>
 		<header>
-			<h3>{topicsHeaderStart} selected topic{topicsHeaderEnd}</h3>
+			<div class='sectionHeader'>{topicsHeaderStart} selected topic{topicsHeaderEnd}</div>
 		</header>
 
 		{#if $_hasSelectedTopics}
@@ -247,7 +247,7 @@
 	<div class='panel'>
 
 		<header>
-			<h3>{placesHeaderStart} selected place{placesHeaderEnd}</h3>
+			<div class='sectionHeader'>{placesHeaderStart} selected place{placesHeaderEnd}</div>
 		</header>
 
 		{#if $_hasSelectedPlaces}
@@ -317,7 +317,7 @@
 	<div class='panel'>
 
 		<header>
-			<h3>{regionsHeaderStart} selected region{regionsHeaderEnd}</h3>
+			<div class='sectionHeader'>{regionsHeaderStart} selected region{regionsHeaderEnd}</div>
 		</header>
 
 		{#if $_hasSelectedRegions}
@@ -403,7 +403,8 @@
 		margin-bottom: 0.7em;
 	}
 
-	h3 {
+	.sectionHeader {
+		font-size: 1.2em;
 		margin: 0;
 	}
 

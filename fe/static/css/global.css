@@ -86,11 +86,11 @@ a {
 	--colorOrgtype0: #2455ad;
 	--colorOrgtype0Text: var(--colorTextInverted);
 	--colorOrgtype1: yellowgreen;
-	--colorOrgtype1Text: var(--colorTextInverted);
+	--colorOrgtype1Text: #222;
 	--colorOrgtype2: plum;
-	--colorOrgtype2Text: var(--colorTextInverted);
+	--colorOrgtype2Text: #222;
 	--colorOrgtype3: gold;
-	--colorOrgtype3Text: var(--colorTextInverted);
+	--colorOrgtype3Text: #222;
 	--colorPageBackground: #333;
 	--colorPillBackground: #333;
 	--colorPillText: white;
@@ -146,7 +146,7 @@ a {
 	--colorOrgAddress: #294C41;
 	--colorOrgHighlighted: #555;
 	--colorOrgPlace: aliceblue;
-	--colorOrgtype0: #6c96ea;
+	--colorOrgtype0: #4173D8;
 	--colorOrgtype0Text: var(--colorTextInverted);
 	--colorOrgtype1: #b9ef4e;
 	--colorOrgtype1Text: var(--colorTextInverted);
