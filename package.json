@@ -1,7 +1,7 @@
 {
 	"author": "nestauk",
-	"description": "UK AI map",
+	"description": "WAIfinder app",
 	"license": "MIT",
-	"name": "dap_uk_ai_map",
-	"version": "0.0.2"
+	"name": "waifinder_app",
+	"version": "0.0.3"
 }
