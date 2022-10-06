@@ -7,9 +7,10 @@
 	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
 
-	const segments = ['survey', 'add_your_org'];
+	const segments = ['survey', 'add_your_org', 'remove_your_org'];
 	const titles = {
 		add_your_org: 'Add your org',
+		remove_your_org: 'Remove your org',
 		survey: 'Survey'
 	};
 

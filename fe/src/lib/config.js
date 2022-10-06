@@ -32,6 +32,11 @@ export const surveyFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSflqKXmPR
 // source: https://docs.google.com/forms/d/1RfGhH3hEHYsq_hChpZYtIMP9urZVNu53UeIEbL2KaZg/edit
 export const addOrgFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScVgKNvr4-LW1LD9jfXrPaDRO09XMC2PMAVrn_TNk-p1K3Utw/viewform?embedded=true';
 
+// remove your org
+
+// source: https://docs.google.com/forms/d/177v6fMUUYjIDWrgRrSo5UIhFfmzDMX8_8JZECZja_8c/edit
+export const removeOrgFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdESWSlpXlPkmDfF-RGB2gG2Uvpdr7sIKahDQDAxtdhuCY01g/viewform?embedded=true';
+
 /* flags */
 
 export const flags = {
