@@ -1,2 +1,7 @@
 Here you can find a bar chart showing the region names for the selected orgs.
-For each region, you can read how many orgs are found in that place.
+For each region, you can read how many orgs are found in that area.
+
+To select specific regions, click on the Edit Mode button, click on various items
+to (de)select them, then exit Edit Mode.
+
+Switching to another tab exits Edit Mode automatically.

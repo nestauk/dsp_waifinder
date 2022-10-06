@@ -1,2 +1,7 @@
 Here you can find a bar chart showing the top topics for the selected orgs.
 For each topic, you can read how many orgs have been tagged with that topic.
+
+To select specific topics, click on the Edit Mode button, click on various items
+to (de)select them, then exit Edit Mode.
+
+Switching to another tab exits Edit Mode automatically.
