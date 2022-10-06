@@ -2,7 +2,7 @@ import * as _ from 'lamb';
 import {get, writable} from 'svelte/store';
 
 import {_isSmallScreen, _screenId} from '$lib/stores/layout';
-import {exitPlacesEditMode} from '$lib/stores/selection';
+import {exitPlacesEditMode, exitRegionsEditMode, exitTopicsEditMode} from '$lib/stores/selection';
 
 const availableViewIds = {
 	medium: ['details', 'places', 'regions', 'topics']
@@ -27,6 +27,12 @@ export const setActiveView = id => {
 
 	if (newId !== 'places') {
 		exitPlacesEditMode();
+	}
+	if (newId !== 'regions') {
+		exitRegionsEditMode();
+	}
+	if (newId !== 'topics') {
+		exitTopicsEditMode();
 	}
 
 	_activeViewId.set(newId);
