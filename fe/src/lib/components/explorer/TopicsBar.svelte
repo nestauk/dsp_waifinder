@@ -21,6 +21,9 @@
 	const toggleItem = ({detail: {id}}) => toggleTopicId(id);
 
 	$: onClick = $_isTopicsEditMode ? toggleItem : null;
+	$: onEntered = $_isSmallScreen
+		? null
+		: ({detail: {id}}) => asyncUpdateTopicDetails(id);
 </script>
 
 <div
@@ -63,7 +66,7 @@
 			items={$_keyTopicIdValueOrgsCount}
 			keyToLabelFn={getTopicLabel}
 			on:clicked={onClick}
-			on:entered={({detail: {id}}) => asyncUpdateTopicDetails(id)}
+			on:entered={onEntered}
 			on:exited={clearActiveTopic}
 			selectedKeys={$_selectedTopicIds}
 			theme={$_barchartsTheme}
