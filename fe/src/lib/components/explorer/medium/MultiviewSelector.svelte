@@ -16,7 +16,8 @@
 	let regionsOverflows;
 
 	$: theme = {
-		border: $_currThemeVars['--border'],
+		borderRight: $_currThemeVars['--border'],
+		borderTop: $_currThemeVars['--border'],
 		colorBackgroundActive: $_currThemeVars['--colorSelectedBackground'],
 		colorTextActive: $_currThemeVars['--colorSelectedText'],
 	}
@@ -88,10 +89,13 @@
 
 	<ResponsiveButton
 		{isOptionalHidden}
-		{theme}
 		bind:doesOverflow={regionsOverflows}
 		isActive={activeViewId === 'regions'}
 		on:click={setView('regions')}
+		theme={{
+			...theme,
+			borderRight: 'none'
+		}}
 		title='Amount of organisations by region (NUTS3)'
 	>
 		<span slot='optional'>Regions</span>

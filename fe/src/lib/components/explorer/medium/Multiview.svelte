@@ -82,6 +82,7 @@
 
 <style>
 	.Multiview {
+		border-left: var(--border);
 		display: grid;
 		grid-auto-flow: row;
 		grid-template-columns: 100%;

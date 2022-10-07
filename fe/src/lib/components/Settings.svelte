@@ -384,6 +384,7 @@
 
 <style>
 	.Settings {
+		border-right: var(--border);
 		height: 100%;
 		overflow-y: auto;
 		padding: 1em;

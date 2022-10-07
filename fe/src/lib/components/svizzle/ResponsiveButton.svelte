@@ -19,9 +19,12 @@
 	export let theme;
 
 	const defaultTheme = {
+		borderBottom: 'none',
+		borderLeft: 'none',
+		borderRight: 'none',
+		borderTop: 'none',
 		colorBackground: 'initial',
 		colorBackgroundActive: '#333',
-		colorBorder: 'initial',
 		colorText: 'initial',
 		colorTextActive: 'white',
 	};
@@ -60,8 +63,10 @@
 
 <style>
 	.ResponsiveButton {
-		border: var(--border);
-		border-bottom: none;
+		border-bottom: var(--borderBottom);
+		border-left: var(--borderLeft);
+		border-right: var(--borderRight);
+		border-top: var(--borderTop);
 		cursor: pointer;
 		height: 100%;
 		padding: 0.5em;
