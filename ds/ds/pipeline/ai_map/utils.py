@@ -453,3 +453,22 @@ def format_places(places):
             }
         )
     return places_list
+
+
+def manual_edits(ai_map_data, incubator_companies_list, orgs_to_remove_list):
+    """
+    Manually curated edits to the data (delete organisations, change codings)
+    """
+
+    # 1. All incubators shouldn't also be companies
+    ai_map_data.loc[ai_map_data["Incubator / accelerator"] == 1, "Company"] = None
+
+    # 2. Some incubators should also be companies
+    ai_map_data.loc[ai_map_data["Name"].isin(incubator_companies_list), "Company"] = 1
+
+    # 3. Remove some organisations entirely - Import this list from a txt
+    ai_map_data = ai_map_data[
+        ~ai_map_data["Name"].isin(orgs_to_remove_list)
+    ].reset_index(drop=True)
+
+    return ai_map_data

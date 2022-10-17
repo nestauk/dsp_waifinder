@@ -12,6 +12,8 @@ from metaflow import (
 
 import json
 
+from ds import config
+
 """
     Read in the data provided from GtR, Crunchbase and GlassAI
     and merge and reformat for outputs.
@@ -132,13 +134,26 @@ class merge_map_datasets(FlowSpec):
 
     @step
     def merge_names(self):
-        from ds.pipeline.ai_map.utils import get_merged_data, clean_dash_names
+        from ds.pipeline.ai_map.utils import (
+            get_merged_data,
+            clean_dash_names,
+            manual_edits,
+        )
 
         self.ai_map_data["Name"], self.ai_map_data["Name_extra"] = map(
             list, zip(*self.ai_map_data["Name"].map(clean_dash_names))
         )
 
         self.ai_map_data = get_merged_data(self.ai_map_data)
+
+        # Make manual edits
+        with open(config["flows"]["utils"]["orgs_to_remove_filename"]) as f:
+            orgs_to_remove_list = set(f.read().splitlines())
+        with open(config["flows"]["utils"]["incubator_companies_filename"]) as f:
+            incubator_companies_list = set(f.read().splitlines())
+        self.ai_map_data = manual_edits(
+            self.ai_map_data, incubator_companies_list, orgs_to_remove_list
+        )
 
         self.next(self.add_places)
 
