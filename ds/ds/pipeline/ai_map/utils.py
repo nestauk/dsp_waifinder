@@ -458,6 +458,12 @@ def format_places(places):
 def manual_edits(ai_map_data, incubator_companies_list, orgs_to_remove_list):
     """
     Manually curated edits to the data (delete organisations, change codings)
+
+    incubator_companies_list is a set or list of organisation names that should be
+    both in the "Incubator / accelerator" AND the "Company" category.
+
+    orgs_to_remove_list is a set or list of organisation names that need to be removed
+    from the data entirely.
     """
 
     # 1. All incubators shouldn't also be companies

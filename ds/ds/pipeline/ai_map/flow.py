@@ -12,8 +12,6 @@ from metaflow import (
 
 import json
 
-from ds import config
-
 """
     Read in the data provided from GtR, Crunchbase and GlassAI
     and merge and reformat for outputs.
@@ -139,6 +137,7 @@ class merge_map_datasets(FlowSpec):
             clean_dash_names,
             manual_edits,
         )
+        from ds import config
 
         self.ai_map_data["Name"], self.ai_map_data["Name_extra"] = map(
             list, zip(*self.ai_map_data["Name"].map(clean_dash_names))
