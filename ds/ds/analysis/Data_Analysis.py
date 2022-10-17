@@ -21,26 +21,27 @@
 #
 # ### Data size
 #
-# - There are 3029 organisations in the dataset
+# - There are 3362 organisations in the dataset
 #
 # ### Which organisations come from the different sources?
 #
-# - 2558 organisations were included from the GlassAI dataset in the Company category
+# - 2826 organisations were included from the GlassAI dataset in the Company category
 # - 329 organisations were included from the Crunchbase dataset in the Funder category
-# - 73 organisations were included from the GlassAI dataset in the Incubator / accelerator category
+# - 68 organisations were included from the GlassAI dataset in the Incubator / accelerator category
 # - 152 organisations were included from the GtR dataset in the University / RTO category
 #
 # Number of organisations from the different sources:
 #
 # |Company|Funder|Incubator / accelerator|University / RTO|n|
 # |--|--|--|--|--|
-# |x||||2484|
-# |x||x||65|
-# |x|x|x||8|
-# |x|x|||1|
+# |x||||2822|
+# |x||x||2|
+# |x|x|x||0|
+# |x|x|||2|
+# |||x||58|
 # ||||x|151|
 # ||x||x|1|
-# ||x|||319|
+# ||x|||318|
 #
 #
 # ### What is the coverage for the different fields?
@@ -50,21 +51,21 @@
 #
 # - Orgs with no url: ['Food & Environment Research Agency', 'STFC']
 #
-# - Orgs with no description: ['Offshore Renewable Energy Catapult',
-#  'MRC London Institute of Medical Sciences',
+# - Orgs with no description: ['MRC London Institute of Medical Sciences',
 #  'High Value Manufacturing Catapult',
+#  'Offshore Renewable Energy Catapult',
 #  'Food & Environment Research Agency',
 #  'Culham Centre for Fusion Energy',
 #  'Aircraft Research Association Limited',
 #  'The Pirbright Institute',
-#  'STFC',
-#  'UK Astronomy Technology Centre']
+#  'UK Astronomy Technology Centre',
+#  'STFC']
 #
 #
 #
 # |Dataset |GtR | Crunchbase | GlassAI |
 # |---|---|---|---|
-# |Number of data points|158|329|2558|
+# |Number of data points|158|329|2921|
 # |% with the Postcode field|100%|100%|100%|
 # |% with the Longitude/Latitude fields|100%|100%|100%|
 # |% with the Link field|98.73%|100%|100%|
@@ -74,19 +75,21 @@
 #
 # ### Places
 #
-# - There are 355 places
-# - The place 'types' are from.. Counter({'village': 48, 'city': 107, 'town': 153, 'suburb': 39, 'county': 8})
+# - There are 397 places
+# - The place 'types' are from.. Counter({'village': 58, 'city': 122, 'town': 161, 'suburb': 50, 'county': 6})
 # - The most common places:
-# [('London', 1821),
-#  ('Cambridgeshire', 114),
-#  ('Edinburgh', 63),
+#  [('London', 1964),
+#  ('Cambridgeshire', 138),
+#  ('Edinburgh', 72),
+#  ('Manchester', 64),
 #  ('Oxford', 50),
-#  ('Manchester', 46),
-#  ('Bristol', 40),
-#  ('Glasgow', 34),
-#  ('Leeds', 30),
-#  ('Birmingham', 30),
-#  ('Guildford', 24)]
+#  ('Bristol', 45),
+#  ('Glasgow', 37),
+#  ('Leeds', 34),
+#  ('Birmingham', 29),
+#  ('Guildford', 25)]
+#
+#
 
 # %%
 import pandas as pd
