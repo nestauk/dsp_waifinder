@@ -1,7 +1,7 @@
 <script>
 	import {_screen} from '@svizzle/ui';
 
-	import OrgDetails from '$lib/components/orgs/OrgDetails.svelte';
+	import OrgDetails from '$lib/components/explorer/orgs/OrgDetails.svelte';
 	import Banner from '$lib/components/svizzle/Banner.svelte';
 	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
 

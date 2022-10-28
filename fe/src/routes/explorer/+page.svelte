@@ -1,8 +1,8 @@
 <script>
 	import {isClientSide} from '@svizzle/ui';
 
-	import ExplorerMedium from '$lib/components/explorer/medium/ExplorerMedium.svelte';
-	import ExplorerSmall from '$lib/components/explorer/small/ExplorerSmall.svelte';
+	import ExplorerMedium from '$lib/components/explorer/layout/medium/ExplorerMedium.svelte';
+	import ExplorerSmall from '$lib/components/explorer/layout/small/ExplorerSmall.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {toolName} from '$lib/config';

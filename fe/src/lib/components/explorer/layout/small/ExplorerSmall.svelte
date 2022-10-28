@@ -1,15 +1,15 @@
 <script>
-	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
-	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
+	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
+	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
 	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
 	import Mapbox from '$lib/components/map/Mapbox.svelte';
 	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
-	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
-	import Pill from '$lib/components/orgs/Pill.svelte';
-	import Settings from '$lib/components/Settings.svelte';
+	import OrgsList from '$lib/components/explorer/orgs/OrgsList.svelte';
+	import Pill from '$lib/components/explorer/orgs/Pill.svelte';
+	import Settings from '$lib/components/explorer/Settings.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
