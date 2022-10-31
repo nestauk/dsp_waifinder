@@ -331,6 +331,8 @@ class merge_map_datasets(FlowSpec):
     @step
     def join_data(self, inputs):
 
+        import numpy as np
+
         self.merge_artifacts(inputs, include=["ai_map_data", "places"])
 
         self.all_url_format_dict = {}
@@ -340,6 +342,8 @@ class merge_map_datasets(FlowSpec):
         self.ai_map_data["Link"] = self.ai_map_data["Link"].map(
             self.all_url_format_dict
         )
+        # Make sure all nulls are coded the same (as None)
+        self.ai_map_data.replace({np.nan: None}, inplace=True)
 
         self.next(self.save_tsv)
 
