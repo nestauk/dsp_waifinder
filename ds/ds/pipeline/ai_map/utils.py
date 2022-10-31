@@ -134,6 +134,7 @@ def get_pgeocode_cities(postcode_list):
         "Bristol",
         "Birmingham",
         "Sheffield",
+        "York",
     ]
     pgeocode_cities = [
         q if q in city_names else None
@@ -249,6 +250,10 @@ def get_final_places(ai_map_data, city_names):
         "geopy_village",
         "geopy_county",
         "geopy_neighbourhood",
+    ]
+
+    trust_order = [
+        col_name for col_name in trust_order if col_name in ai_map_data.columns
     ]
 
     # First pass - try to find these locations in the geographic_data
@@ -448,3 +453,28 @@ def format_places(places):
             }
         )
     return places_list
+
+
+def manual_edits(ai_map_data, incubator_companies_list, orgs_to_remove_list):
+    """
+    Manually curated edits to the data (delete organisations, change codings)
+
+    incubator_companies_list is a set or list of organisation names that should be
+    both in the "Incubator / accelerator" AND the "Company" category.
+
+    orgs_to_remove_list is a set or list of organisation names that need to be removed
+    from the data entirely.
+    """
+
+    # 1. All incubators shouldn't also be companies
+    ai_map_data.loc[ai_map_data["Incubator / accelerator"] == 1, "Company"] = None
+
+    # 2. Some incubators should also be companies
+    ai_map_data.loc[ai_map_data["Name"].isin(incubator_companies_list), "Company"] = 1
+
+    # 3. Remove some organisations entirely - Import this list from a txt
+    ai_map_data = ai_map_data[
+        ~ai_map_data["Name"].isin(orgs_to_remove_list)
+    ].reset_index(drop=True)
+
+    return ai_map_data

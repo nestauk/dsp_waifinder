@@ -18,7 +18,7 @@ import {stripDbrPrefix} from '../lib/utils/dbpedia.js';
 /* resources */
 
 const ANNOTATED_ORGS_URL =
-	'https://s3.eu-west-2.amazonaws.com/dap-uk-ai-map.public/ai_map_02.json';
+	'https://s3.eu-west-2.amazonaws.com/dap-uk-ai-map.public/ai_map_03.json';
 const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places.json';
 const OUT_FILE_DATA = 'static/data/ai_map_annotated_orgs.json';
 const OUT_FILE_UNTAGGED_ORGS = 'dataQuality/orgsWithNoTopics.json';

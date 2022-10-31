@@ -3,8 +3,9 @@
 To run steps 1 and 2 you will need to have the Nesta SQL database credentials stored on your computer, and for this location to be saved in an environmental variable:
 
 1. Download the `mysqldb_team.config` file from S3
-2. Run `echo export SQL_DB_CREDS="$HOME/path/to/mysqldb_team.config" > .env` from `dap_uk_ai_map/ds`
-3. Activate with `direnv reload`
+2. From `dap_uk_ai_map/ds` run `export SQL_DB_CREDS="$HOME/path/to/mysqldb_team.config" > .env`
+3. and `export METAFLOW_PROFILE=ds-cookiecutter`
+4. Activate with `direnv reload`
 
 ## 1. Gateway to Research (GtR) dataset
 
@@ -26,7 +27,7 @@ Run `python ds/pipeline/ai_map/flow.py --datastore=s3 --production run` to merge
 
 | Dataset             | Tag in final output                      | Has long/lat                   | Has city | Has postcode | Has description         | Has link                | Number of organisations |
 | ------------------- | ---------------------------------------- | ------------------------------ | -------- | ------------ | ----------------------- | ----------------------- | ----------------------- |
-| Gateway to Research | University / RTO                         | Yes                            | 30% do   | Yes          | 78% do (via Crunchbase) | 78% do (via Crunchbase) | 158                     |
+| Gateway to Research | University / RTO                         | Yes                            | 30% do   | Yes          | 94% do (via Crunchbase) | 99% do (via Crunchbase) | 158                     |
 | Crunchbase          | Funder                                   | Yes (via NSPL postcode lookup) | Yes      | Yes          | Yes                     | Yes                     | 329                     |
 | GlassAI             | 'Company' and 'Incubator / accelerators' | Yes (via NSPL postcode lookup) | None     | Yes          | Yes                     | Yes                     | 2558                    |
 
@@ -44,7 +45,7 @@ The first step is searching for projects with certain topic tags which we felt w
 
 This leaves us with research organisations which are large, relevant, and recent.
 
-To supplement this data with urls and organisation descriptions, we query the Crunchbase dataset. If a Crunchbase organisation name is within a GtR organisation name, then we will add some of the Crunchbase data - namely the organisation description and the url. This is only possible for about 80% of the data points.
+To supplement this data with urls and organisation descriptions, we query the Crunchbase dataset. If a Crunchbase organisation name is within a GtR organisation name, then we will add some of the Crunchbase data - namely the organisation description and the url. We also manually curated a lookup table of organisations that have different names between the GtR and the Crunchbase datasets, but we know to be the same organisation - for example the correct organisational url and description for "Leeds Metropolitan University" is given by searching for "Leeds Beckett University" in the Crunchbase data (since the University changed its name).
 
 ### Crunchbase
 

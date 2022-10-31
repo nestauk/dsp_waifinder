@@ -6,10 +6,11 @@ from metaflow import (
     Parameter,
     project,
     step,
+    conda,
+    batch,
 )
 
-import pandas as pd
-import numpy as np
+import json
 
 """
     Read in the data provided from GtR, Crunchbase and GlassAI
@@ -74,6 +75,7 @@ class merge_map_datasets(FlowSpec):
     def merge_datasets(self):
 
         """Merging datasets (crunchbase, glassai, gtr)"""
+        import pandas as pd
 
         self.ai_map_data = pd.concat(
             [self.glass_output, self.cb_output, self.gtr_output]
@@ -130,13 +132,27 @@ class merge_map_datasets(FlowSpec):
 
     @step
     def merge_names(self):
-        from ds.pipeline.ai_map.utils import get_merged_data, clean_dash_names
+        from ds.pipeline.ai_map.utils import (
+            get_merged_data,
+            clean_dash_names,
+            manual_edits,
+        )
+        from ds import config
 
         self.ai_map_data["Name"], self.ai_map_data["Name_extra"] = map(
             list, zip(*self.ai_map_data["Name"].map(clean_dash_names))
         )
 
         self.ai_map_data = get_merged_data(self.ai_map_data)
+
+        # Make manual edits
+        with open(config["flows"]["utils"]["orgs_to_remove_filename"]) as f:
+            orgs_to_remove_list = set(f.read().splitlines())
+        with open(config["flows"]["utils"]["incubator_companies_filename"]) as f:
+            incubator_companies_list = set(f.read().splitlines())
+        self.ai_map_data = manual_edits(
+            self.ai_map_data, incubator_companies_list, orgs_to_remove_list
+        )
 
         self.next(self.add_places)
 
@@ -148,6 +164,8 @@ class merge_map_datasets(FlowSpec):
         """
 
         from ds.pipeline.ai_map.utils import get_pgeocode_cities, get_geopy_addresses
+
+        import pandas as pd
 
         self.ai_map_data.reset_index(inplace=True)
 
@@ -231,6 +249,9 @@ class merge_map_datasets(FlowSpec):
     @step
     def data_clean_up(self):
 
+        from toolz.itertoolz import partition
+        import pandas as pd
+
         from ds.pipeline.ai_map.utils import convert_unicode
 
         self.ai_map_data["Description"] = self.ai_map_data["Description"].map(
@@ -240,6 +261,89 @@ class merge_map_datasets(FlowSpec):
         self.ai_map_data = pd.merge(
             self.ai_map_data, self.places[["Place", "place_id"]], how="left", on="Place"
         ).reset_index(drop=True)
+
+        # Chunk up for Batch
+        all_links = self.ai_map_data["Link"].tolist()
+        self.links_chunked = list(partition(50, all_links))
+
+        # # For loop through each data path
+        print(
+            f"Running predictions on {len(all_links)} data files in {len(self.links_chunked)} batches ..."
+        )
+
+        # Get batching ready
+        self.next(self.format_links, foreach="links_chunked")
+
+    @batch(
+        queue="job-queue-GPU-nesta-metaflow",
+        image="metaflow-pytorch",
+        memory=60000,
+        cpu=8,
+    )
+    @step
+    def format_links(self):
+        """
+        Create dicts of {original url: formatted url}
+        """
+        import requests
+
+        def is_url_ok(url):
+            # From https://pytutorial.com/check-url-is-reachable
+            try:
+                get = requests.get(url)
+                if get.status_code == 200:
+                    return True
+                else:
+                    return False
+            except requests.exceptions.RequestException as e:
+                return False
+
+        def format_url(url):
+            """
+            url: raw url from the dataset
+            """
+            if url:
+                if url[0:5] == "https":
+                    return url
+                elif url[0:5] == "http:":
+                    https_version = url.replace("http", "https")
+                    if is_url_ok(https_version):
+                        return https_version
+                    else:
+                        return url
+                else:
+                    https_version = "https://" + url
+                    if is_url_ok(https_version):
+                        return https_version
+                    else:
+                        return "http://" + url
+            else:
+                return None
+
+        self.url_format_dict = {}
+        for i, url in enumerate(self.input):
+            if i % 10 == 0:
+                print(f"{i}th url")
+            self.url_format_dict[url] = format_url(url)
+
+        self.next(self.join_data)
+
+    @step
+    def join_data(self, inputs):
+
+        import numpy as np
+
+        self.merge_artifacts(inputs, include=["ai_map_data", "places"])
+
+        self.all_url_format_dict = {}
+        for batch_i in inputs:
+            self.all_url_format_dict.update(batch_i.url_format_dict)
+
+        self.ai_map_data["Link"] = self.ai_map_data["Link"].map(
+            self.all_url_format_dict
+        )
+        # Make sure all nulls are coded the same (as None)
+        self.ai_map_data.replace({np.nan: None}, inplace=True)
 
         self.next(self.save_tsv)
 
