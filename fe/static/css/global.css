@@ -56,7 +56,7 @@ a {
 /* theme: colors */
 
 .themeLight {
-	--colorAccentBckground: #333;
+	--colorAccentBackground: #333;
 	--colorAccentText: orange;
 	--colorActiveBackground: #333;
 	--colorActiveText: #ccc;
@@ -118,7 +118,7 @@ a {
 }
 
 .themeDark {
-	--colorAccentBckground: #ccc;
+	--colorAccentBackground: #ccc;
 	--colorAccentText: rgb(117, 76, 0);
 	--colorActiveBackground: #ccc;
 	--colorActiveText: #333;

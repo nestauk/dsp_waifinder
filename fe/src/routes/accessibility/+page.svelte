@@ -282,7 +282,7 @@
 		padding: 0.5em 1em;
 		border-top: var(--border);
 		color: var(--colorAccentText);
-		background: var(--colorAccentBckground);
+		background: var(--colorAccentBackground);
 		text-align: right;
 	}
 	dt:first-child {
