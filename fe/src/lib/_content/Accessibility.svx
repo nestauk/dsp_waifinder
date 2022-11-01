@@ -3,8 +3,7 @@
 
 	import {contactEmail,toolName} from '$lib/config';
 	import {_currThemeVars} from '$lib/stores/theme';
-	// import {zipUrl} from '$lib/utils/assets';
-	const zipUrl = '';
+	import {jsonUrl} from '$lib/config';
 
 	const lighthouseUrl = 'https://developers.google.com/web/tools/lighthouse';
 	const openDyslexicUrl = 'https://opendyslexic.org/';
@@ -14,7 +13,7 @@
 	const wcag21Url = 'https://www.w3.org/TR/WCAG21/';
 	const windowsMouseURL = 'https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b';
 
-	const theme = {
+	$: theme = {
 		backgroundColor: $_currThemeVars['--colorLink']
 	};
 </script>
@@ -69,7 +68,7 @@ partially supported.
 While we aim to make the information provided as accessible as possible, this
 website presents data mostly as interactive charts which at the moment do not
 also render a text alternative, so those aren't accessible by screen readers.
-However, the data is available for [download in CSV format]({zipUrl}).
+However, the data is available for [download in CSV format]({jsonUrl}).
 
 ## Feedback
 

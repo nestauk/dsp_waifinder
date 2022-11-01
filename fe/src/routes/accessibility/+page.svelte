@@ -281,8 +281,8 @@
 	dt {
 		padding: 0.5em 1em;
 		border-top: var(--border);
-		color: var(--colorWarningBackground);
-		background: var(--colorText);
+		color: var(--colorAccentText);
+		background: var(--colorAccentBckground);
 		text-align: right;
 	}
 	dt:first-child {
@@ -308,6 +308,9 @@
 	.tabs input[type="radio"] + label, .tabs div label, .tabs li .spinner {
 		display: block;
 		padding: 0.5em 1em;
+	}
+	.tabs li {
+		color: var(--colorLink);
 	}
 	.tabs li:first-child {
 		border-left: var(--border);
