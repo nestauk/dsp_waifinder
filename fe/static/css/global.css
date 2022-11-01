@@ -58,6 +58,8 @@ a {
 .themeLight {
 	--border: thin solid #ccc;
 	--borderAux: thin solid #333; /* see --colorBorderAux */
+	--colorAccentBackground: #333;
+	--colorAccentText: orange;
 	--colorActiveBackground: #333;
 	--colorActiveText: #ccc;
 	--colorAux: #f5f5f5;
@@ -120,6 +122,8 @@ a {
 .themeDark {
 	--border: thin solid #444;
 	--borderAux: thin solid #ccc; /* see --colorBorderAux */
+	--colorAccentBackground: #ccc;
+	--colorAccentText: rgb(117, 76, 0);
 	--colorActiveBackground: #ccc;
 	--colorActiveText: #333;
 	--colorAux: #222;
