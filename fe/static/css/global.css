@@ -56,13 +56,9 @@ a {
 /* theme: colors */
 
 .themeLight {
-<<<<<<< Updated upstream
-	--colorAccentBackground: #333;
-=======
 	--border: thin solid #ccc;
 	--borderAux: thin solid #333; /* see --colorBorderAux */
-	--colorAccentBckground: #333;
->>>>>>> Stashed changes
+	--colorAccentBackground: #333;
 	--colorAccentText: orange;
 	--colorActiveBackground: #333;
 	--colorActiveText: #ccc;
@@ -124,13 +120,9 @@ a {
 }
 
 .themeDark {
-<<<<<<< Updated upstream
-	--colorAccentBackground: #ccc;
-=======
 	--border: thin solid #444;
 	--borderAux: thin solid #ccc; /* see --colorBorderAux */
-	--colorAccentBckground: #ccc;
->>>>>>> Stashed changes
+	--colorAccentBackground: #ccc;
 	--colorAccentText: rgb(117, 76, 0);
 	--colorActiveBackground: #ccc;
 	--colorActiveText: #333;
