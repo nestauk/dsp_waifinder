@@ -64,7 +64,7 @@
 	$: postCode = item.location?.postcode || '';
 	$: place = item.place?.name || '';
 	$: sep = postCode && place ? ' - ' : '';
-	$: address = `${postCode}${sep}${place}`;
+	$: address = `${place}${sep}${postCode}`;
 	$: topics = item.topics || [];
 	$: types = _.map(
 		item.types || [],

@@ -16,17 +16,17 @@ You can change:
 	* the letter spacing (distance between letters in a word),
 	* the word spacing (distance between words).
 
-### Color features
+### Colour features
 
 You can:
-	*	invert all the colors in the app,
-	* select a color vision deficiency: this will remap all the colors in the
-	  app to compensate for a diminished ability to see certain colors,
-	* edit the hue of all the colors in the app,
-	* edit the saturation of all the colors in the app (by editing their level
+	*	invert all the colours in the app,
+	* select a colour vision deficiency: this will remap all the colours in the
+	  app to compensate for a diminished ability to see certain colours,
+	* edit the hue of all the colours in the app,
+	* edit the saturation of all the colours in the app (by editing their level
 	  of grey),
-	* edit the brightness of all the colors in the app,
-	* edit the contrast of all the colors in the app.
+	* edit the brightness of all the colours in the app,
+	* edit the contrast of all the colours in the app.
 
 ## How to use the menu
 
@@ -38,7 +38,7 @@ top-right corner of the app.
 ### Where to find the menu
 
 {#if $_screen?.sizes.medium}
-The menu should appear at the center of the screen sligthly toward the bottom.
+The menu should appear at the centre of the screen slightly toward the bottom.
 
 {:else}
 The menu should appear below the navigation header, near the thumb.
@@ -48,12 +48,12 @@ The menu should appear below the navigation header, near the thumb.
 ### How to navigate the menu
 
 The menu is composed of three sections:
-	* the main area, in the center, shows the controls to manipulate a certain
+	* the main area, in the centre, shows the controls to manipulate a certain
 	  feature,
 	* on the right, you have two buttons to navigate to the previous or next
 	  feature,
 	* on the left, you have two buttons to reset all the features of a
-	  particular group (text or color).
+	  particular group (text or colour).
 
 ### Editing features
 
@@ -69,9 +69,9 @@ For example, you can choose multiple font sizes.
 
 #### Pair of values
 
-When you have only two opposite options you get presented with a switch.
+When you have only two opposite options, you get presented with a switch.
 
-For example, you can invert all colors of the app, or not.
+For example, you can invert all colours of the app, or not.
 
 #### Range of values
 

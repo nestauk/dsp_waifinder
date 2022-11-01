@@ -22,13 +22,13 @@ Ensuring greater access to technologies by meeting the needs of people with
 disabilities lays the foundation for inclusive work cultures that empower
 individuals and teams to thrive.
 
-Therefore, {toolName} is committed to making its best effort towards continually
+Therefore, the {toolName} tool is committed to making its best effort towards continually
 improving the accessibility of all the information provided in this website.
 
 ## Support
 
 We follow the recommendations of the [WCAG 2.1 guidelines]({wcag21Url}). Also:
-	* Ensure that the choices of color provide sufficient contrast for
+	* Ensure that the choices of colour provide sufficient contrast for
 	  comfortable reading.
 	* Offer a selection of typefaces for improved legibility, including one
 	  widely believed to improve comprehension among people with
@@ -57,7 +57,7 @@ continually strive to achieve the highest levels of compliance with the
 requirements and recommendations.
 
 Meeting all of the WCAG criteria requires evaluating some of them manually. Due
-to time constraints we might not have been able to test all of the
+to time constraints, we might not have been able to test all of the
 recommendations listed in the section "Additional items to manually check" in
 the "Accessibility" part of each audit below, in the "Quality audits" section of
 this page. In particular at this time ARIA and keyboard navigation are only

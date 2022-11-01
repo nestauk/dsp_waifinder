@@ -10,7 +10,7 @@ Linked Open Data / Semantic Web is provided in the Appendix below.
 ### DBpedia Spotlight Tool
 
 The Spotlight Tool extracts DBpedia URIs from unstructured data, providing
-high-quality linked data from text sources. It does this using a four step
+high-quality linked data from text sources. It does this using a four-step
 approach:
 
 - **Spotting**: the process of identifying strings or substrings (known as
@@ -95,8 +95,8 @@ the use of the Spotlight API to annotate an Elasticsearch index using the
 methods we've outlined above. The majority of the logic used is contained in the
 `src/node_modules/dbpedia` and `src/node_modules/es` directories.
 
-We host our own private annotation server on AWS, but there is a publicy
-available endpoint provided by the University of Liepzig at
+We host our own private annotation server on AWS, but there is a publicly
+available endpoint provided by the University of Leipzig at
 https://api.dbpedia-spotlight.org/en/annotate. You can also use the [Spotlight
 docker container](https://github.com/dbpedia-spotlight/spotlight-docker) to host
 the API locally and point the script to the localhost port.
@@ -130,11 +130,11 @@ format to allow for the collecting, organising, sharing, searching and using of
 the results in an open and transparent manner.
 
 DBpedia data is served as Linked Data, so that it sits as an important part of
-the Semantic Web and allows for complex, graph-like queries, such as ' find
+the Semantic Web and allows for complex, graph-like queries, such as 'find
 cities with low criminality, warm weather and open jobs'. DBpedia contains all
 of the information found on Wikipedia (and other Wikimedia projects), whilst
 also connecting Wikipedia articles and the information contained within those
-articles in a machine readable format, so that the example query above is
+articles in a machine-readable format, so that the example query above is
 actually possible.
 
 Each Wikipedia article is represented using a Uniform Resource Identifier (URI),

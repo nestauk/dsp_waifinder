@@ -1,4 +1,4 @@
-# UK AI Map
+# UK WAIfinder
 
 ## About this map
 

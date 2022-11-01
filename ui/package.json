@@ -1,5 +1,5 @@
 {
-	"description": "UK AI map UI",
+	"description": "UK WAIfinder UI",
 	"devDependencies": {
 		"babel-core": "^6.26.3",
 		"babel-polyfill": "^6.26.0",

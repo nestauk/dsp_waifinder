@@ -10,16 +10,16 @@ Note that in order to be able to download search results multiple times, you
 might have to enable multiple file downloads in your browser settings, to avoid
 it silently fails to download the results after the first download.
 
-#### Org types panel
+#### Organisation types panel
 
-Here you have a bar chart displaying the amount of orgs per type.
+Here you have a bar chart displaying the amount of organisations per type.
 
 You can (de)select each type by clicking on the type bar.
 
 You can set the logic for the selection by type by using the switch below the
 bar chart:
-	* `OR` means selecting all orgs of ANY of the active types;
-	* `AND` means selecting all orgs of ALL the active types.
+	* `OR` means selecting all organisations of ANY of the active types;
+	* `AND` means selecting all organisations of ALL the active types.
 
 Enabling auto-zoom on the map to automatically scales the
 map to the region encompassing the markers selected by the search parameters

@@ -1,12 +1,12 @@
-Here you have a scrollable list of "org cards" sorted aplhpabetically. You can
+Here you have a scrollable list of "organisation cards" sorted aplhpabetically. You can
 click on the alphabet to the right to quickly scroll to organisations starting
 with that letter.
 
 Each card shows:
-	* the org name and a link to its website
-	* the org description, possibly shortened
+	* the organisation name and a link to its website
+	* the organisation description, possibly shortened
 	* a button to copy the description to your clipboard
 	* depending on the length of the description, a button to expand/collapse the description
 	* a place tag, with the place postcode and name
-	* a list of org type tags
-	* a list of topics derived from the org description, shown as "pills"
+	* a list of organisation type tags
+	* a list of topics derived from the organisation description, shown as "pills"

@@ -30,14 +30,14 @@ To select an area of the map, you can:
 		* clicking on the +/- buttons on the map
 
 Enabling the auto-zoom checkbox in the bottom-left corner, zooms the map to fit
-the selected orgs according to the current filtering criteria.
+the selected organisations according to the current filtering criteria.
 
 The scale in the top-right corner indicates the current level of zoom.
 
 #### Interacting with markers
 
-Clicking a single org or a star ray shows a pop-up with the same info displayed
-in the org card and pins it, so that you can click on the org's website link or
+Clicking a single organisation or a star ray shows a pop-up with the same info displayed
+in the organisation card and pins it, so that you can click on the organisation's website link or
 pills. To dismiss it, click on the background.
 
 ### Details tab

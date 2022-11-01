@@ -9,9 +9,11 @@
 The header is a navigation bar divided in two sections:
 	* on the left you have various links to navigate the app
 	* on the right you have:
+		* a link to the raw data in JSON format.
 		* a link to a set of pages where you can provide feedback:
 			* a survey to provide general feedback
-			* a form to request adding your org to the app
+			* a form to request adding your organisation to the app
+			* a form to request the removal of your organisation from the dataset
 		* a link to a set of pages where you can find app info like privacy
 			and disclaimers
 
@@ -22,7 +24,7 @@ The footer is another navigation bar divided in three parts showing:
 	* the list of sponsor logos, linked to their website
 	* the app version, linked to its change log on GitHub
 	* the accessibility section, with:
-		* a theme switcher button to select between light and dark color themes
+		* a theme switcher button to select between light and dark colour themes
 		* a link to the app accessibility statement
 		* a button to toggle the accessibility menu
 

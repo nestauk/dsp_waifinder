@@ -32,20 +32,20 @@ To select an area of the map, you can:
 rectangle with the pointer and then end dragging.
 
 Enabling the auto-zoom checkbox in the top-left corner, zooms the map to fit the
-selected orgs according to the current filtering criteria.
+selected organisations according to the current filtering criteria.
 
 The scale in the top-right corner indicates the current level of zoom.
 
 #### Interacting with markers
 
-Hovering a single org or a star ray shows a pop-up with the same info displayed
-in the org card (see below).
+Hovering a single organisation or a star ray shows a pop-up with the same info displayed
+in the organisation card (see below).
 
-Clicking a single org or a star ray will pin it, so that the pop-up will
+Clicking a single organisation or a star ray will pin it, so that the pop-up will
 persist even when you remove the pointer from the red dot, so that you can click
-on the org's website link or interact with its pills.
+on the organisation's website link or interact with its pills.
 
-To un-pin an org, you can click anywhere in the map or on the pop-up background.
+To un-pin an organisation, you can click anywhere in the map or on the pop-up background.
 
 ### Right sidebar
 
@@ -61,8 +61,8 @@ Hovering a topic pill should show a pop-up with:
 	* the topic abstract, taken from Wikipedia
 	* the topic thumbnail, also taken from Wikipedia, if available.
 
-Hovering an org card should show a red dot on the card itself and a correspondent
-red dot on the map, to help you visually identifying that org on the map.
+Hovering an organisation card should show a red dot on the card itself and a correspondent
+red dot on the map, to help you visually identifying that organisation on the map.
 
 #### Topics tab
 

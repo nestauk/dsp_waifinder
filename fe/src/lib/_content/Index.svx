@@ -1,3 +1,7 @@
-# AI map
+<script>
+	import {toolName} from '$lib/config';
+</script>
+
+# {toolName}
 
 TODO

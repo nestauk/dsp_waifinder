@@ -1,5 +1,5 @@
-Here you can find a bar chart showing the place names for the selected orgs.
-For each place, you can read how many orgs are found in that place.
+Here you can find a bar chart showing the place names for the selected organisations.
+For each place, you can read how many organisations are found in that place.
 
 To select specific places, click on the Edit Mode button, click on various items
 to (de)select them, then exit Edit Mode.
