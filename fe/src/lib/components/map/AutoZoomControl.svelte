@@ -17,12 +17,13 @@
 	div {
 		align-items: center;
 		background: white;
-		color: black;
 		border-radius: 4px;
+		color: black;
 		column-gap: 0.5em;
 		display: grid;
 		grid-auto-flow: column;
 		padding: 0.25em 0.5em;
+		user-select: none;
 	}
 	div * {
 		cursor: pointer;

@@ -32,7 +32,19 @@ export const countOrgTypes = ({orgs, orgTypes}) => {
 	});
 
 	return orgCountByType;
-}
+};
+
+export const getBoundingBox = (
+	orgs,
+	initial = [[180, 90], [-180, -90]]
+) => _.reduce(
+	orgs,
+	([[w, s], [e, n]], {location: {lat, lon}}) => [
+		[Math.min(w, lon), Math.min(s, lat)],
+		[Math.max(e, lon), Math.max(n, lat)],
+	],
+	initial
+);
 
 // FIXME unused for now
 export const objToKeyValueDesc = _.pipe([

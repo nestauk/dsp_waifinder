@@ -13,7 +13,6 @@
 	import {_allOrgsBBox, _clusters} from '$lib/stores/data';
 	import {getLonLat} from '$lib/utils/dataUtils';
 	import {
-		_autoZoom,
 		_hero,
 		clearInteractionStores,
 		clearIsCursorOnMap,
@@ -23,10 +22,6 @@
 	import {_activeTopicDetails} from '$lib/stores/topics';
 
 	import Multiview from './Multiview.svelte';
-
-	const disableAutoZoom = () => {
-		$_autoZoom = false;
-	}
 </script>
 
 <svelte:body on:mouseleave={clearInteractionStores} />
@@ -50,7 +45,7 @@
 			styleURL={styleURLs[$_themeName]}
 			CustomLayers={SvgLayers}
 			items={$_clusters}
-			on:bboxChanged={disableAutoZoom}
+			on:bboxChanged
 			withScaleControl={true}
 			withZoomControl={true}
 		/>

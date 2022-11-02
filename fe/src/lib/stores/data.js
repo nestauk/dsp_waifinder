@@ -13,7 +13,7 @@ import * as _ from 'lamb';
 import Supercluster from 'supercluster';
 import {derived, get} from 'svelte/store';
 
-import {nutsLevel} from '$lib/config';
+import {DEFAULT_BBOX_WS_EN, nutsLevel} from '$lib/config';
 import {_dataset} from '$lib/stores/dataset';
 import {_autoZoom} from '$lib/stores/interaction';
 import {
@@ -29,11 +29,11 @@ import {
 	_selectedPlaceIds,
 	_selectedRegionIds,
 	_selectedTopicIds,
-	_zoom,
-	bbox_WS_EN_UK
+	_zoom
 } from '$lib/stores/selection';
 import {
 	countOrgTypes,
+	getBoundingBox,
 	getLonLat,
 	getPlaceId,
 	getTopicIds,
@@ -152,18 +152,8 @@ export const _allOrgsBBox = derived(
 	[_allOrgs, _autoZoom],
 	([allOrgs, autoZoom]) => autoZoom
 		? allOrgs.length > 0
-			? _.reduce(
-				allOrgs,
-				([[w, s], [e, n]], {location: {lat, lon}}) => [
-					[Math.min(w, lon), Math.min(s, lat)],
-					[Math.max(e, lon), Math.max(n, lat)],
-				],
-				[
-					[bbox_WS_EN_UK[1][0], bbox_WS_EN_UK[1][1]],
-					[bbox_WS_EN_UK[0][0], bbox_WS_EN_UK[0][1]],
-				]
-			)
-			: bbox_WS_EN_UK
+			? getBoundingBox(allOrgs)
+			: DEFAULT_BBOX_WS_EN
 		: null
 );
 

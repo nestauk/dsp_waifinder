@@ -22,17 +22,13 @@
 		_clusters,
 		_orgs,
 	} from '$lib/stores/data';
-	import {_autoZoom, _hero} from '$lib/stores/interaction';
+	import {_hero} from '$lib/stores/interaction';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
 	import {_themeName} from '$lib/stores/theme';
 	import {_activeTopicDetails} from '$lib/stores/topics';
 	import {getLonLat} from '$lib/utils/dataUtils';
 
 	import ViewSelector from './ViewSelector.svelte';
-
-	const disableAutoZoom = () => {
-		$_autoZoom = false;
-	}
 </script>
 
 <div class='ExplorerSmall'>
@@ -53,7 +49,7 @@
 					styleURL={styleURLs[$_themeName]}
 					CustomLayers={SvgLayers}
 					items={$_clusters}
-					on:bboxChanged={disableAutoZoom}
+					on:bboxChanged
 					withScaleControl={true}
 					withZoomControl={true}
 				/>

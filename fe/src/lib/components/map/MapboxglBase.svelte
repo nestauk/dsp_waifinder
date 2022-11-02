@@ -1,6 +1,5 @@
 <script>
 	import geoViewport from '@mapbox/geo-viewport';
-	import {setupResizeObserver} from '@svizzle/ui';
 	import mapboxgl from 'mapbox-gl';
 	import {beforeUpdate, onMount, createEventDispatcher} from 'svelte';
 
@@ -145,7 +144,7 @@
 	const updateBbox = () => {
 		if (map) {
 			const mapBounds = map.getBounds().toArray();
-			_bbox_WS_EN.set(mapBounds);
+			$_bbox_WS_EN = mapBounds;
 		}
 	}
 
@@ -165,7 +164,8 @@
 		map.on('move', event => {
 			updateProjection();
 			updateBbox();
-			if (event.originalEvent) {
+			const {originalEvent} = event;
+			if (originalEvent && originalEvent.type !== 'resize') {
 				dispatch('bboxChanged');
 			}
 		});
@@ -176,11 +176,6 @@
 			dispatch('bboxChanged');
 		});
 	}
-
-	const {
-		_writable: _size,
-		resizeObserver
-	} = setupResizeObserver();
 
 	/* methods */
 
@@ -203,7 +198,8 @@
 		map = new mapboxgl.Map({
 			center,
 			container: mapcontainer,
-			maxZoom: 18,
+			maxZoom: MAPBOXGL_MAX_ZOOM,
+			minZoom: MAPBOXGL_MIN_ZOOM,
 			renderWorldCopies: false,
 			style: styleURL,
 			zoom,
@@ -221,7 +217,8 @@
 		.on('load', () => {
 			addCustomLayers();
 			setMapEvents();
-			fitToBbox(bounds || $_bbox_WSEN);
+			bounds && fitToBbox(bounds);
+			updateZoom();
 
 			setGeometry(); // ipad FIXME: initial svg is 100x100
 		})
@@ -249,8 +246,11 @@
 		setGeometry();
 	});
 
-	// eslint-disable-next-line no-unused-expressions, no-sequences
-	$: $_size, map?.resize()
+	const onResize = () => {
+		setGeometry();
+		bounds && fitToBbox(bounds);
+	}
+
 	$: bounds && fitToBbox(bounds);
 	$: map?.setStyle(styleURL);
 </script>
@@ -263,13 +263,12 @@
 	>
 </svelte:head>
 
-<svelte:window on:resize={setGeometry} />
+<svelte:window on:resize={onResize} />
 
 <div class='MapboxglBase'>
 	<div
 		bind:this={mapcontainer}
 		class='mapcontainer'
-		use:resizeObserver
 	></div>
 </div>
 

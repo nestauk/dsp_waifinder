@@ -6,6 +6,10 @@ export const contactEmail = 'dataanalytics@nesta.org.uk';
 export const changelogUrl = 'https://github.com/nestauk/dap_uk_ai_map/blob/staging/CHANGELOG.md';
 export const jsonUrl = '/data/ai_map_annotated_orgs.json';
 
+/* map bounding box (UK) */
+
+export const DEFAULT_BBOX_WS_EN = [[-8.61752, 49.90774], [1.76229, 60.84585]];
+
 /* banners */
 
 export const bannersDefaultFooterText = 'Click on background to dismiss';
@@ -47,7 +51,6 @@ export const MAPBOXGL_STYLEURLs = {
 	themeLight: 'mapbox://styles/nesta-uk/cl8olrzo200ci16pim0h4c1pn',
 	themeDark: 'mapbox://styles/nesta-uk/cl8ilzuy3001214qyg06jwsoy'
 };
-
 
 /* logos */
 

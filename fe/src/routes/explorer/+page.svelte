@@ -8,6 +8,7 @@
 	import {toolName} from '$lib/config';
 	import {updateDataset} from '$lib/stores/dataset';
 	import {_screenId} from '$lib/stores/layout';
+	import {_autoZoom} from '$lib/stores/interaction';
 	import {setDefaultActiveView} from '$lib/stores/navigation';
 
 	const loadData = async () => {
@@ -15,6 +16,10 @@
 		const json = await response.json();
 
 		json && updateDataset(json);
+	}
+
+	const onBboxChanged = () => {
+		$_autoZoom = false;
 	}
 
 	$: isClientSide && loadData();
@@ -31,9 +36,13 @@
 
 <ViewsXor viewId={$_screenId}>
 	<View id='medium'>
-		<ExplorerMedium />
+		<ExplorerMedium
+			on:bboxChanged={onBboxChanged}
+		/>
 	</View>
 	<View id='small'>
-		<ExplorerSmall />
+		<ExplorerSmall
+			on:bboxChanged={onBboxChanged}
+		/>
 	</View>
 </ViewsXor>
