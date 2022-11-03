@@ -36,6 +36,9 @@
 	let projectFn;
 	let width = 0;
 
+	/* machine */
+	// const __bus = getContext('__bus');
+
 	/* bbox */
 
 	$: viewport = geoViewport.viewport(
@@ -145,6 +148,12 @@
 		if (map) {
 			const mapBounds = map.getBounds().toArray();
 			$_bbox_WS_EN = mapBounds;
+			/*
+			__bus.send(
+				'UPDATED_BBOX',
+				{bbox_WS_EN: bounds}
+			)
+			*/
 		}
 	}
 
@@ -175,6 +184,12 @@
 		map.on('boxzoomend', () => {
 			dispatch('bboxChanged');
 		});
+		/*
+		map.on('moveend', () => __bus.send(
+			'COMMITTED',
+			{}
+		));
+		*/
 	}
 
 	/* methods */

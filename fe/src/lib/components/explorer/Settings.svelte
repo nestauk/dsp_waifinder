@@ -49,6 +49,37 @@
 	} from '$lib/utils/download';
 
 	const toggledOrgType = ({detail: {id}}) => toggleOrgType(id);
+	const __bus = getContext('__bus');
+	const toggledOrgType = ({detail: {id}}) => __bus.send(
+		'TOGGLED_ORG_TYPE',
+		{id}
+	);
+	const toggleOrgTypesSelectionMode = () => {
+		let selectionMode = $_orgTypesSelectionMode;
+
+		if (selectionMode === orgTypesSelectionModes[0]) {
+			[,selectionMode] = orgTypesSelectionModes;
+		} else {
+			[selectionMode] = orgTypesSelectionModes;
+		}
+
+		__bus.send(
+			'TOGGLED_ORG_TYPE_MODE',
+			{orgTypesSelectionMode: selectionMode}
+		)
+	};
+	const setOrgSearchValue = pOrgSearchValue => __bus.send(
+		'EDITED_ORG_SEARCH_VALUE',
+		{orgSearchValue: pOrgSearchValue}
+	);
+	const setPlacesSearchValue = pPlacesSearchValue => __bus.send(
+		'EDITED_PLACES_SEARCH_VALUE',
+		{placesSearchValue: pPlacesSearchValue}
+	);
+	const onBlur = () => __bus.send(
+		'COMMITTED',
+		{}
+	);
 
 	/* download results */
 
