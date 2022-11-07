@@ -52,6 +52,7 @@ export const getResultsMetadata = () => {
 
 	// filename
 
+	// TBD filename does not describe complete selection
 	const filenameParts = [
 		toolName,
 		dotsToBang(version),

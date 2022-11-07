@@ -4,11 +4,11 @@ import {
 	getLength,
 	getValue,
 	// isIterableNotEmpty,
-	isNotNil,
+	// isNotNil,
 	objectToKeyValueArray,
 	sortValueDescKeyAsc,
 } from '@svizzle/utils';
-import isEqual from 'just-compare';
+// import isEqual from 'just-compare';
 import * as _ from 'lamb';
 import Supercluster from 'supercluster';
 import {derived, get, writable} from 'svelte/store';
