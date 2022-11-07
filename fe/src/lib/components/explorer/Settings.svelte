@@ -5,6 +5,7 @@
 		Tag,
 		XCircle,
 	} from '@svizzle/ui';
+	import {getContext} from 'svelte';
 
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
@@ -33,8 +34,8 @@
 		deselectRegion,
 		deselectTopic,
 		orgTypesSelectionModes,
-		toggleOrgType,
-		toggleOrgTypesSelectionMode,
+		// toggleOrgType,
+		// oggleOrgTypesSelectionMode,
 	} from '$lib/stores/selection';
 	import {
 		_barchartsTheme,
@@ -48,7 +49,7 @@
 		initiateZippedDownload,
 	} from '$lib/utils/download';
 
-	const toggledOrgType = ({detail: {id}}) => toggleOrgType(id);
+	// const toggledOrgType = ({detail: {id}}) => toggleOrgType(id);
 	const __bus = getContext('__bus');
 	const toggledOrgType = ({detail: {id}}) => __bus.send(
 		'TOGGLED_ORG_TYPE',
@@ -92,6 +93,11 @@
 			'filters.json': filtersString,
 		});
 	}
+
+	$: setOrgSearchValue(orgSearchValue);
+	$: setPlacesSearchValue(placesSearchValue);
+	$: orgSearchValue = $_orgSearchValue;
+	$: placesSearchValue = $_placesSearchValue;
 
 	$: multipleSelectedPlaces = $_selectedPlaces.length > 1;
 	$: placesHeaderEnd = multipleSelectedPlaces ? 's' : '';
@@ -157,7 +163,8 @@
 
 			<div class='item'>
 				<Input
-					bind:value={$_orgSearchValue}
+					bind:value={orgSearchValue}
+					on:blur={onBlur}
 					placeholder='search name or description'
 					theme={textSearchInputTheme}
 				/>
@@ -167,7 +174,8 @@
 
 			<div class='item'>
 				<Input
-					bind:value={$_placesSearchValue}
+					bind:value={placesSearchValue}
+					on:blur={onBlur}
 					placeholder='search place name'
 					theme={placeSearchInputTheme}
 				/>
