@@ -17,7 +17,9 @@
 		"just-compare": "^2.2.2",
 		"lamb": "^0.60.0",
 		"mapbox-gl": "^2.10.0",
+		"rison": "^0.1.1",
 		"supercluster": "^7.1.5",
+		"xstate": "^4.34.0",
 		"yootils": "^0.3.1"
 	},
 	"description": "App UI",
