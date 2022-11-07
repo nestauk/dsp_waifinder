@@ -3,7 +3,7 @@ import {
 	getKey,
 	getLength,
 	getValue,
-	isIterableNotEmpty,
+	// isIterableNotEmpty,
 	isNotNil,
 	objectToKeyValueArray,
 	sortValueDescKeyAsc,
@@ -11,7 +11,7 @@ import {
 import isEqual from 'just-compare';
 import * as _ from 'lamb';
 import Supercluster from 'supercluster';
-import {derived, get} from 'svelte/store';
+import {derived, get, writable} from 'svelte/store';
 
 import {DEFAULT_BBOX_WS_EN, nutsLevel} from '$lib/config';
 import {_dataset} from '$lib/stores/dataset';
@@ -19,16 +19,16 @@ import {_autoZoom} from '$lib/stores/interaction';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
-	_isPlacesEditMode,
-	_isRegionsEditMode,
-	_isTopicsEditMode,
-	_orgSearchRegex,
-	_orgTypesSelectionMode,
-	_placesSearchRegex,
-	_selectedOrgTypes,
+	// _isPlacesEditMode,
+	// _isRegionsEditMode,
+	// _isTopicsEditMode,
+	// _orgSearchRegex,
+	// _orgTypesSelectionMode,
+	// _placesSearchRegex,
+	// _selectedOrgTypes,
 	_selectedPlaceIds,
 	_selectedRegionIds,
-	_selectedTopicIds,
+	// _selectedTopicIds,
 	_zoom
 } from '$lib/stores/selection';
 import {
@@ -39,7 +39,7 @@ import {
 	getPlaceId,
 	getTopicIds,
 } from '$lib/utils/dataUtils';
-import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
+// import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
 /* filtered orgs */
 
@@ -58,6 +58,7 @@ NOTE that this would work:
 isSelectedType = _.pipe([tapValue(), makeIsIncluded(selectedTypes)])
 ```
 */
+/*
 const makeIsOrgOfTypes = (selectedTypes, selectionMode) =>
 	({types}) => {
 		let passed;
@@ -148,6 +149,9 @@ export const _allOrgs = derived(
 
 		return _.filter(orgs, _.allOf(predicates));
 	});
+*/
+
+export const _allOrgs = writable([]);
 
 export const _allOrgsBBox = derived(
 	[_allOrgs, _autoZoom],

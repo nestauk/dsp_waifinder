@@ -2,9 +2,17 @@ import {getId, swapKeyValue} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
 
-import {nutsLevel} from '$lib/config';
+import {DEFAULT_BBOX_WS_EN, nutsLevel} from '$lib/config';
 import {_selectedOrgTypes} from '$lib/stores/selection';
 import {getName} from '$lib/utils/dataUtils';
+
+export let defaults = {
+	bbox_WS_EN: DEFAULT_BBOX_WS_EN,
+	orgSearchValue: '',
+	orgTypesSelectionMode: 'OR',
+	placesSearchValue: '',
+	selectedOrgTypes: []
+};
 
 export const _dataset = writable({
 	isEmpty: true,
