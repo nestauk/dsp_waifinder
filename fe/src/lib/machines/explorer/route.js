@@ -1,12 +1,12 @@
 import { createMachina } from '../utils';
 
-import editingActions from 'app/machines/map/editing.actions';
+import editingActions from '$lib/machines/explorer/editing.actions';
 import historyActions from './history.actions';
 // import historyGuards from './history.guards';
-import routeStateNodes from 'app/machines/map/route.stateNodes';
-import routeActions from 'app/machines/map/route.actions';
-import routeServices from 'app/machines/map/route.services';
-import { createEditingStores } from 'app/machines/map/editing.context';
+import routeStateNodes from '$lib/machines/explorer/route.stateNodes';
+import routeActions from '$lib/machines/explorer/route.actions';
+import routeServices from '$lib/machines/explorer/route.services';
+import { createEditingStores } from '$lib/machines/explorer/editing.context';
 
 export const createMapMachine = () => createMachina({
 	actions: {

@@ -1,4 +1,4 @@
-import {updateDataset} from 'app/stores/dataset';
+import {updateDataset} from '$lib/stores/dataset';
 
 export default {
 	loadData: async () => {

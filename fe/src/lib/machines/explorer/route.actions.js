@@ -7,8 +7,8 @@ import {
 	_orgSearchValue,
 	_orgTypesSelectionMode,
 	_selectedOrgTypes
-} from 'app/stores/selection';
-import {defaults} from 'app/stores/dataset';
+} from '$lib/stores/selection';
+import {defaults} from '$lib/stores/dataset';
 
 const getQuery = () => {
 	const urlParams = new URL(document.location.toString()).searchParams;

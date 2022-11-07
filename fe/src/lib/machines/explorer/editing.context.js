@@ -1,6 +1,6 @@
 // import { writable } from 'svelte/store';
 
-import {defaults as selectionDefaults} from 'app/stores/dataset';
+import {defaults as selectionDefaults} from '$lib/stores/dataset';
 
 export function createEditingStores () {
 	return {

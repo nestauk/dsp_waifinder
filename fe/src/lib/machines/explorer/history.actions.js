@@ -3,15 +3,15 @@ import rison from 'rison';
 import { get } from 'svelte/store';
 import {assign} from 'xstate/lib/actions';
 import {
-	_bbox_WS_EN,
+	// _bbox_WS_EN,
 	_orgSearchValue,
 	_orgTypesSelectionMode,
 	_placesSearchValue,
 	_selectedOrgTypes
-} from 'app/stores/selection';
+} from '$lib/stores/selection';
 
 const collectParams = () => ({
-	bbox_WS_EN: get(_bbox_WS_EN),
+	// bbox_WS_EN: get(_bbox_WS_EN),
 	orgSearchValue: get(_orgSearchValue),
 	orgTypesSelectionMode: get(_orgTypesSelectionMode),
 	selectedOrgTypes: get(_selectedOrgTypes),
