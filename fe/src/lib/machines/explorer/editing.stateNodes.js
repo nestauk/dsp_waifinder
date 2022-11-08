@@ -9,7 +9,6 @@ export default {
 						'sendEdited',
 						'computeOrgs',
 						'sendCommitted'
-						// 'navigate'
 					],
 					target: 'Idle'
 				},
@@ -26,7 +25,8 @@ export default {
 					actions: [
 						'setOrgSearchValue',
 						'sendEdited',
-						'computeOrgs'
+						'computeOrgs',
+						'sendCommitted'
 					],
 					target: 'Idle'
 				},
@@ -34,18 +34,49 @@ export default {
 					actions: [
 						'setPlacesSearchValue',
 						'sendEdited',
-						'computeOrgs'
+						'computeOrgs',
+						'sendCommitted'
 					],
 					target: 'Idle'
 				},
+				EDITED_PLACE_IDS: {
+					actions: [
+						'setPlaceIds',
+						'sendEdited',
+						'computeOrgs',
+						'sendCommitted'
+					],
+					target: 'Idle'
+				},
+				EDITED_REGION_IDS: {
+					actions: [
+						'setRegionIds',
+						'sendEdited',
+						'computeOrgs',
+						'sendCommitted'
+					],
+					target: 'Idle'
+				},
+				EDITED_TOPIC_IDS: {
+					actions: [
+						'setTopicIds',
+						'sendEdited',
+						'computeOrgs',
+						'sendCommitted'
+					],
+					target: 'Idle'
+				},
+				/*
 				UPDATED_BBOX: {
 					actions: [
 						'setBBox_WS_EN',
 						'sendEdited',
-						'computeOrgs'
+						'computeOrgs',
+						'sendCommitted'
 					],
 					target: 'Idle'
 				},
+				*/
 			}
 		}
 	}

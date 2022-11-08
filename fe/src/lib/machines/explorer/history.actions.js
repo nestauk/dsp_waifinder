@@ -7,7 +7,10 @@ import {
 	_orgSearchValue,
 	_orgTypesSelectionMode,
 	_placesSearchValue,
-	_selectedOrgTypes
+	_selectedOrgTypes,
+	_selectedPlaceIds,
+	_selectedRegionIds,
+	_selectedTopicIds
 } from '$lib/stores/selection';
 
 const collectParams = () => ({
@@ -15,7 +18,10 @@ const collectParams = () => ({
 	orgSearchValue: get(_orgSearchValue),
 	orgTypesSelectionMode: get(_orgTypesSelectionMode),
 	selectedOrgTypes: get(_selectedOrgTypes),
-	placesSearchValue: get(_placesSearchValue)
+	placesSearchValue: get(_placesSearchValue),
+	selectedPlaceIds: get(_selectedPlaceIds),
+	selecterRegionIds: get(_selectedRegionIds),
+	selectedTopicIds: get(_selectedTopicIds)
 });
 
 function updateEntry (ctx, event) {

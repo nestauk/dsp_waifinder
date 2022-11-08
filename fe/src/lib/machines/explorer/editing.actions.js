@@ -61,16 +61,14 @@ export default {
 	setPlacesSearchValue: (ctx, {placesSearchValue}) => {
 		_placesSearchValue.set(placesSearchValue);
 	},
-	/*
-	// these are not actual selections so not included for now
-	setIsPlacesEditMode: (ctx, isPlacesEditMode) => {
-		_isPlacesEditMode.set(isPlacesEditMode);
+	setPlaceIds: (ctx, {selectedPlaceIds}) => {
+		_selectedPlaceIds.set(selectedPlaceIds);
 	},
-	setIsRegionsEditMode: (ctx, isRegionsEditMode) => {
-		_isRegionsEditMode.set(isRegionsEditMode);
+	setRegionIds: (ctx, {selectedRegionIds}) => {
+		_selectedRegionIds.set(selectedRegionIds);
 	},
-	setIsTopicsEditMode: (ctx, isTopicsEditMode) => {
-		_isTopicsEditMode.set(isTopicsEditMode);
+	setTopicIds: (ctx, {selectedTopicIds}) => {
+		_selectedTopicIds.set(selectedTopicIds);
 	},
 	/*
 	setBBox_WS_EN: (ctx, {bbox_WS_EN}) => {

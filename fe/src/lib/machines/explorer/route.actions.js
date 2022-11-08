@@ -6,7 +6,10 @@ import {
 	_placesSearchValue,
 	_orgSearchValue,
 	_orgTypesSelectionMode,
-	_selectedOrgTypes
+	_selectedOrgTypes,
+	_selectedPlaceIds,
+	_selectedRegionIds,
+	_selectedTopicIds
 } from '$lib/stores/selection';
 import {defaults} from '$lib/stores/dataset';
 
@@ -27,7 +30,10 @@ export default {
 		placesSearchValue,
 		orgSearchValue,
 		orgTypesSelectionMode,
-		selectedOrgTypes
+		selectedOrgTypes,
+		selectedPlaceIds,
+		selectedRegionIds,
+		selectedTopicIds,
 	}) => {
 		console.log('set invoked')
 		// _bbox_WS_EN.set(bbox_WS_EN);
@@ -35,6 +41,9 @@ export default {
 		_orgSearchValue.set(orgSearchValue);
 		_orgTypesSelectionMode.set(orgTypesSelectionMode);
 		_selectedOrgTypes.set(selectedOrgTypes);
+		_selectedPlaceIds.set(selectedPlaceIds);
+		_selectedRegionIds.set(selectedRegionIds);
+		_selectedTopicIds.set(selectedTopicIds);
 		console.log('set returned')
 	}
 }
