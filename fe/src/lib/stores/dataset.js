@@ -16,7 +16,10 @@ export let defaults = {
 		'Funder',
 		'Incubator / accelerator',
 		'University / RTO'
-	]
+	],
+	selectedPlaceIds: [],
+	selectedRegionIds: [],
+	selectedTopicIds: []
 };
 
 export const _dataset = writable({
