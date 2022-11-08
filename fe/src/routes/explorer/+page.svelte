@@ -1,5 +1,5 @@
 <script>
-	import {isClientSide} from '@svizzle/ui';
+	// import {isClientSide} from '@svizzle/ui';
 	import {onMount, setContext} from 'svelte';
 
 	import {getStores} from '$app/stores';
@@ -9,19 +9,21 @@
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {toolName} from '$lib/config';
-	import {_dataset, updateDataset} from '$lib/stores/dataset';
+	import {_dataset /* , updateDataset */} from '$lib/stores/dataset';
 	import {_screenId} from '$lib/stores/layout';
 	import {_autoZoom} from '$lib/stores/interaction';
 	import {setDefaultActiveView} from '$lib/stores/navigation';
 
 	const {page} = getStores();
 
+	/*
 	const loadData = async () => {
 		const response = await fetch('/data/ai_map_annotated_orgs.json');
 		const json = await response.json();
 
 		json && updateDataset(json);
 	}
+	*/
 
 	const onBboxChanged = () => {
 		$_autoZoom = false;
@@ -56,7 +58,7 @@
 		};
 	});
 
-	$: isClientSide && $_dataset.isEmpty && loadData();
+	// $: isClientSide && $_dataset.isEmpty && loadData();
 	$: $_screenId && setDefaultActiveView();
 
 	$: console.log('bus', $__bus);
