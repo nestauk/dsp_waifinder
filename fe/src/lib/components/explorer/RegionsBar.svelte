@@ -1,5 +1,6 @@
 <script>
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
+	import {getContext} from 'svelte';
 
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import {_keyRegionIdValueOrgsCount} from '$lib/stores/data';
@@ -14,6 +15,12 @@
 	} from '$lib/stores/selection';
 	import {_barchartsTheme} from '$lib/stores/theme';
 
+	const __bus = getContext('__bus');
+	const setRegionIds = pSelectedRegionIds => __bus.send(
+		'EDITED_REGION_IDS',
+		{selectedRegionIds: pSelectedRegionIds}
+	);
+
 	const toggleItem = ({detail: {id}}) => toggleRegionId(id);
 
 	const onKeyDown = event => {
@@ -22,6 +29,9 @@
 			exitRegionsEditMode();
 		}
 	}
+
+	$: setRegionIds(selectedRegionIds);
+	$: selectedRegionIds = $_selectedRegionIds;
 
 	$: onClick = $_isRegionsEditMode ? toggleItem : null;
 </script>
@@ -49,7 +59,7 @@
 			items={$_keyRegionIdValueOrgsCount}
 			keyToLabelFn={$_regionIdToLabel}
 			on:clicked={onClick}
-			selectedKeys={$_selectedRegionIds}
+			selectedKeys={selectedRegionIds}
 			theme={$_barchartsTheme}
 		/>
 	</div>

@@ -1,5 +1,6 @@
 <script>
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
+	import {getContext} from 'svelte';
 
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import {_keyTopicIdValueOrgsCount} from '$lib/stores/data';
@@ -18,6 +19,12 @@
 	} from '$lib/stores/topics';
 	import {getTopicLabel} from '$lib/utils/dataUtils';
 
+	const __bus = getContext('__bus');
+	const setTopicIds = pSelectedTopicIds => __bus.send(
+		'EDITED_TOPIC_IDS',
+		{selectedTopicIds: pSelectedTopicIds}
+	);
+
 	const toggleItem = ({detail: {id}}) => toggleTopicId(id);
 
 	const onKeyDown = event => {
@@ -26,6 +33,9 @@
 			exitTopicsEditMode();
 		}
 	}
+
+	$: setTopicIds(selectedTopicIds);
+	$: selectedTopicIds = $_selectedTopicIds;
 
 	$: onClick = $_isTopicsEditMode ? toggleItem : null;
 	$: onEntered = $_isSmallScreen
@@ -59,7 +69,7 @@
 			on:clicked={onClick}
 			on:entered={onEntered}
 			on:exited={clearActiveTopic}
-			selectedKeys={$_selectedTopicIds}
+			selectedKeys={selectedTopicIds}
 			theme={$_barchartsTheme}
 		/>
 	</div>
