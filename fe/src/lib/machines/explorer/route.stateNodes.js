@@ -1,5 +1,5 @@
-import editingStateNodes from './editing.stateNodes';
-import historyStateNodes from './history.stateNodes';
+import editingStateNodes from './editing.stateNodes.js';
+import historyStateNodes from './history.stateNodes.js';
 
 export default {
 	id: 'MapRoute',
@@ -29,7 +29,9 @@ export default {
 				}
 			}
 		},
-		PageError: {},
+		PageError: {
+			// TODO
+		},
 		PageInteractive: {
 			on: {
 				ROUTE_CHANGED: {
