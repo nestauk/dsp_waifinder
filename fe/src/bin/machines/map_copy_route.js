@@ -1,9 +1,9 @@
 import clip from 'clipboardy';
 import {stringify} from '@svizzle/utils';
 
-import {stringifyObj} from '$lib/utils/svizzle/obj-string.js';
+import {stringifyObj} from '../../lib/utils/svizzle/obj-string.js';
 
-import mapRouteStateNodes from '$lib/machines/explorerroute.stateNodes.js';
+import mapRouteStateNodes from '../../lib/machines/explorer/route.stateNodes.js';
 
 clip.write(`Machine(${stringify(mapRouteStateNodes)}, ${stringifyObj({})})`);
 console.log('/builder route copied to the clipboard\n');
