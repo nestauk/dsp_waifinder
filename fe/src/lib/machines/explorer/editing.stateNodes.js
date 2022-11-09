@@ -2,12 +2,13 @@ export default {
 	initial: 'Idle',
 	states: {
 		Idle: {
+			entry: 'computeOrgs',
 			on: {
 				TOGGLED_ORG_TYPE: {
 					actions: [
 						'toggleOrgType',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'
@@ -16,7 +17,7 @@ export default {
 					actions: [
 						'toggleOrgTypeMode',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'
@@ -25,7 +26,7 @@ export default {
 					actions: [
 						'setOrgSearchValue',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'
@@ -34,7 +35,7 @@ export default {
 					actions: [
 						'setPlacesSearchValue',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'
@@ -43,7 +44,7 @@ export default {
 					actions: [
 						'setPlaceIds',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'
@@ -52,7 +53,7 @@ export default {
 					actions: [
 						'setRegionIds',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'
@@ -61,7 +62,7 @@ export default {
 					actions: [
 						'setTopicIds',
 						'sendEdited',
-						'computeOrgs',
+						// 'computeOrgs',
 						'sendCommitted'
 					],
 					target: 'Idle'

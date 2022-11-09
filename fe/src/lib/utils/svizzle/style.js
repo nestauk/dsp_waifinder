@@ -36,10 +36,12 @@ export const makeGetStyleRulesObj = selectorRegex => _.pipe([
 			_.fromPairs
 		])
 	])),
+	/*
 	v => {
 		console.log('v', v);
 		return v;
 	},
+	*/
 	_.reduceWith(
 		(themes, [selector, rules]) => {
 			const themeEntry = _.find(
