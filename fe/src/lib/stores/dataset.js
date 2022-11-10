@@ -4,8 +4,10 @@ import {derived, writable} from 'svelte/store';
 
 import {nutsLevel} from '$lib/config';
 import {_selectedOrgTypes} from '$lib/stores/selection';
+import {getName} from '$lib/utils/dataUtils';
 
 export const _dataset = writable({
+	isEmpty: true,
 	orgs: [],
 	orgsById: {},
 	orgTypeByIndex: {},
@@ -21,7 +23,7 @@ export const updateDataset = ({
 	placesById,
 	regionsByLevelById
 }) => {
-	const sortedOrgs = _.sort(orgs, [_.getKey('name')]);
+	const sortedOrgs = _.sort(orgs, [getName]);
 	const augmentedOrgs = _.map(sortedOrgs,
 		({place_id, types, ...others}) => ({
 			place_id,
@@ -35,6 +37,7 @@ export const updateDataset = ({
 	const orgTypeIndexByType = swapKeyValue(org_types);
 
 	_dataset.set({
+		isEmpty: false,
 		orgs: augmentedOrgs,
 		orgsById,
 		orgTypeByIndex: org_types,

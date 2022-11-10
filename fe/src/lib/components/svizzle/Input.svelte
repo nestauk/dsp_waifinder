@@ -22,8 +22,12 @@
 	const dispatch = createEventDispatcher();
 
 	const onInput = e => {
-		({value} = e.target);
-	}
+		const tValue = e.target.value;
+		if (value !== tValue) {
+			value = tValue;
+		}
+	};
+
 	const onKeyPress = event => {
 		if (event.keyCode === 13) {
 			event.preventDefault();

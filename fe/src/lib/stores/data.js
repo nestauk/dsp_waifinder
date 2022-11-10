@@ -35,6 +35,7 @@ import {
 	countOrgTypes,
 	getBoundingBox,
 	getLonLat,
+	getName,
 	getPlaceId,
 	getTopicIds,
 } from '$lib/utils/dataUtils';
@@ -169,7 +170,7 @@ export const _orgsCount = derived(_orgs, getLength);
 /* org chars */
 
 const getOrgNameFirstChar = _.pipe([
-	_.getKey('name'),
+	getName,
 	_.head,
 	_.invoke('toUpperCase'),
 	char => (/[A-Z]/ug).test(char) ? char : '#'

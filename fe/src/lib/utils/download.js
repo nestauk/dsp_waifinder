@@ -1,5 +1,6 @@
 import {
 	capitalize,
+	getId,
 	isIterableNotEmpty,
 	makePostfixed,
 	stringify,
@@ -88,7 +89,7 @@ export const getResultsCsv = () => {
 		url: org.url,
 		types: org.types,
 		id: org.id,
-		topics: org.topics.map(_.getKey('id')),
+		topics: org.topics.map(getId),
 		lat: org.location.lat,
 		lon: org.location.lon,
 		postcode: org.location.postcode,

@@ -6,7 +6,7 @@
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {toolName} from '$lib/config';
-	import {updateDataset} from '$lib/stores/dataset';
+	import {_dataset, updateDataset} from '$lib/stores/dataset';
 	import {_screenId} from '$lib/stores/layout';
 	import {_autoZoom} from '$lib/stores/interaction';
 	import {setDefaultActiveView} from '$lib/stores/navigation';
@@ -22,7 +22,7 @@
 		$_autoZoom = false;
 	}
 
-	$: isClientSide && loadData();
+	$: isClientSide && $_dataset.isEmpty && loadData();
 	$: $_screenId && setDefaultActiveView();
 </script>
 

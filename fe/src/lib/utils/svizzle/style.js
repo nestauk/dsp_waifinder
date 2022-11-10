@@ -20,14 +20,16 @@ export const getStylesheet = href => _.find(
 	_.hasKeyValue('href', href)
 );
 
+export const getSelectorText = _.getKey('selectorText');
+
 export const makeGetStyleRulesObj = selectorRegex => _.pipe([
 	_.filterWith(_.pipe([
-		_.getKey('selectorText'),
+		getSelectorText,
 		makeTrimmedSplitBy(','),
 		_.some(selectorRegex.test.bind(selectorRegex))
 	])),
 	_.mapWith(_.collect([
-		_.getKey('selectorText'),
+		getSelectorText,
 		_.pipe([
 			_.getPath('style.cssText'),
 			parseCssText,
@@ -39,7 +41,7 @@ export const makeGetStyleRulesObj = selectorRegex => _.pipe([
 
 export const getAllStylesBySelector = _.pipe([
 	_.mapWith(_.collect([
-		_.getKey('selectorText'),
+		getSelectorText,
 		_.getKey('style')
 	])),
 	_.fromPairs
