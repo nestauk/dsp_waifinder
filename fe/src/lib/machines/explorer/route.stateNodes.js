@@ -19,7 +19,7 @@ export default {
 				onDone: {
 					target: '#MapRoute.PageInteractive',
 					actions: [
-						'updateDataset',
+						/* 'updateDataset', */
 						'mergeDefaultsAndParams',
 						'updateEditingStores'
 					]
