@@ -35,7 +35,7 @@ export default {
 		PageInteractive: {
 			on: {
 				ROUTE_CHANGED: {
-					target: '#MapRoute.PageInteractive',
+					target: 'PageInteractive',
 					actions: [
 						'mergeDefaultsAndParams',
 						'updateEditingStores'

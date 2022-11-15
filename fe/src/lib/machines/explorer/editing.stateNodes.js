@@ -1,5 +1,6 @@
 export default {
 	initial: 'Idle',
+	entry: 'computeOrgs',
 	states: {
 		Idle: {
 			entry: 'computeOrgs',
