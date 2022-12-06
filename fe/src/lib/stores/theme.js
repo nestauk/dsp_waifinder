@@ -41,14 +41,17 @@ export const _currThemeVars = derived(
 export const _barchartsTheme = derived(
 	_currThemeVars,
 	currThemeVars => ({
-		barDefaultColor: currThemeVars['--colorBarchartItemBar'],
-		deselectedOpacity: 1,
-		focusOutline: currThemeVars['--outline'],
-		hoverColor: currThemeVars['--colorBarchartHoveredItemBackground'],
-		hoverColorBar: currThemeVars['--colorBarchartHoveredItemBar'],
-		hoverColorText: currThemeVars['--colorBarchartHoveredItemText'],
-		selectedKeyBackgroundColor: currThemeVars['--colorBarchartSelectedItemBackground'],
-		selectedKeyTextColor: currThemeVars['--colorBarchartSelectedItemText'],
+		backgroundOpacity: 1,
+		itemBackgroundColorHover: currThemeVars['--colorBarchartHoveredItemBackground'],
+		itemBackgroundColorSelected: currThemeVars['--colorBarchartSelectedItemBackground'],
+		itemBarColorDefault: currThemeVars['--colorBarchartItemBar'],
+		itemBarColorHover: currThemeVars['--colorBarchartHoveredItemBar'],
+		itemTextColorDefault: currThemeVars['--colorBarchartItemBar'],
+		itemTextColorHover: currThemeVars['--colorBarchartHoveredItemText'],
+		itemTextColorSelected: currThemeVars['--colorBarchartSelectedItemText'],
+		outlineColor: currThemeVars['--colorOutline'],
+		outlineStyle: currThemeVars['--focusLineStyle'],
+		outlineWidth: currThemeVars['--focusLineWidth'],
 		textColor: currThemeVars['--colorText'],
 	})
 );

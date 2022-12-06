@@ -1,7 +1,7 @@
 <script>
+	import {BarchartVDiv} from '@svizzle/barchart';
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
 
-	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import {_keyRegionIdValueOrgsCount} from '$lib/stores/data';
 	import {_regionIdToLabel} from '$lib/stores/dataset';
 	import {_isSmallScreen} from '$lib/stores/layout';

@@ -1,10 +1,9 @@
 <script>
-	import {_screen, ChevronLeft, ChevronRight, Icon} from '@svizzle/ui';
+	import {_screen, ChevronLeft, ChevronRight, Icon, Link} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 	import * as _ from 'lamb';
 
 	import {page as _page} from '$app/stores';
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
 
 	const segments = ['survey', 'add_your_org', 'remove_your_org'];
@@ -20,6 +19,11 @@
 	$: nextSegment = segments[currentValueIndex + 1];
 	$: hasPrevSegment = isNotNil(prevSegment);
 	$: hasNextSegment = isNotNil(nextSegment);
+	$: linkTheme = {
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
+	};
 </script>
 
 <main class='_layout feedback {$_screen?.classes}'>
@@ -33,6 +37,7 @@
 							<Link
 								href='/feedback/{id}'
 								theme={{
+									...linkTheme,
 									color: segment === id
 										? $_currThemeVars['--colorTextInverted']
 										: $_currThemeVars['--colorLink']
@@ -56,6 +61,7 @@
 							ariaLabel={hasPrevSegment ? 'Previous tab' : null}
 							href={hasPrevSegment && `/feedback/${prevSegment}`}
 							theme={{
+								...linkTheme,
 								color: hasPrevSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']
@@ -69,6 +75,7 @@
 							ariaLabel={hasNextSegment ? 'Next tab' : null}
 							href={hasNextSegment && `/feedback/${nextSegment}`}
 							theme={{
+								...linkTheme,
 								color: hasNextSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']

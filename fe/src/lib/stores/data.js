@@ -5,6 +5,7 @@ import {
 	getValue,
 	isIterableNotEmpty,
 	isNotNil,
+	isRegexpNotEmpty,
 	objectToKeyValueArray,
 	sortValueDescKeyAsc,
 } from '@svizzle/utils';
@@ -39,7 +40,6 @@ import {
 	getPlaceId,
 	getTopicIds,
 } from '$lib/utils/dataUtils';
-import {isRegexpNotEmpty} from '$lib/utils/svizzle/utils';
 
 /* filtered orgs */
 

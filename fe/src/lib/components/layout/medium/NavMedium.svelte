@@ -1,7 +1,6 @@
 <script>
-	import {Download, Icon, Info, Send} from '@svizzle/ui';
+	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
 
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {jsonUrl} from '$lib/config';
 	import {
 		_currThemeVars,
@@ -12,8 +11,10 @@
 
 	$: linkTheme = {
 		color: $_currThemeVars['--colorNavLink'],
-		focusOutline: $_currThemeVars['--outline'],
 		iconStroke: $_currThemeVars['--colorIcon'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	};
 </script>
 
@@ -141,16 +142,12 @@
 		display: flex;
 		height: 100%;
 		width: 100%;
-		z-index: var(--z1000);
 	}
 	nav {
 		gap: 12px;
 		justify-content: end; /* Align to the right on Firefox */
 		justify-content: flex-end; /* Align to the right on Chrome */
 		position: relative;
-	}
-	div {
-		z-index: var(--z1000);
 	}
 	menu {
 		background: var(--colorBackground);

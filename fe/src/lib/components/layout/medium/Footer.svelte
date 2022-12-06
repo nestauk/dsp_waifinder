@@ -1,7 +1,6 @@
 <script>
-	import {A11yPerson, Icon, Droplet, Moon, Sun} from '@svizzle/ui';
+	import {A11yPerson, Icon, Droplet, Link, Moon, Sun} from '@svizzle/ui';
 
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {changelogUrl, LOGOS} from '$lib/config';
 	import {isDev} from '$lib/env';
 	import {
@@ -31,8 +30,10 @@
 	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
 	$: linkTheme = {
 		color: $_currThemeVars['--colorNavLink'],
-		focusOutline: $_currThemeVars['--outline'],
 		iconStroke: $_currThemeVars['--colorIcon'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	};
 	$: logos = LOGOS[$_themeName]
 </script>

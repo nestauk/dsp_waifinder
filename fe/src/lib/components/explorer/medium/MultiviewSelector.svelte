@@ -1,10 +1,9 @@
 <script>
-	import {Icon, List, Tag} from '@svizzle/ui';
+	import {Icon, List, ResponsiveButton, Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
-	import ResponsiveButton from '$lib/components/svizzle/ResponsiveButton.svelte';
 	import {_currThemeVars, _getIconColor} from '$lib/stores/theme';
 
 	export let activeViewId;
@@ -18,9 +17,13 @@
 	$: theme = {
 		borderRight: $_currThemeVars['--border'],
 		borderTop: $_currThemeVars['--border'],
+		// TBD should we specify `colorBackground`?
 		colorBackgroundActive: $_currThemeVars['--colorSelectedBackground'],
+		// TBD should we specify `colorText`?
 		colorTextActive: $_currThemeVars['--colorSelectedText'],
-		focusOutline: $_currThemeVars['--outline'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	}
 	$: isOptionalHidden =
 		detailsOverflows

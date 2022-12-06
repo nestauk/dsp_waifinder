@@ -1,16 +1,16 @@
 <script>
+	import {BarchartVDiv} from '@svizzle/barchart';
 	import {
 		Download,
 		Icon,
+		Switch,
 		Tag,
 		XCircle,
 	} from '@svizzle/ui';
 
 	import City from '$lib/components/icons/City.svelte';
 	import Region from '$lib/components/icons/Region.svelte';
-	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
-	import Toggle from '$lib/components/svizzle/Toggle.svelte';
 	import {
 		_keyOrgTypeValueOrgsCount,
 		_orgsCount,
@@ -75,10 +75,12 @@
 	$: topicsHeaderStart = $_selectedTopicIds.length || 'No';
 
 	$: switchTheme = {
-		color: $_currThemeVars['--colorText'],
 		backgroundColor: $_currThemeVars['--colorBackground'],
-		focusOutline: $_currThemeVars['--outline'],
-		knobColor: $_currThemeVars['--colorSwitchKnob']
+		color: $_currThemeVars['--colorText'],
+		knobColor: $_currThemeVars['--colorSwitchKnob'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	}
 	$: textSearchInputTheme = {
 		colorText: $_currThemeVars['--colorText'],
@@ -167,7 +169,7 @@
 				/>
 			</div>
 			<div class='item'>
-				<Toggle
+				<Switch
 					on:toggled={toggleOrgTypesSelectionMode}
 					theme={switchTheme}
 					value={$_orgTypesSelectionMode}

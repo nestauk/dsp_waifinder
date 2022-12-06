@@ -1,7 +1,6 @@
 <script>
-	import {LinkButton, ResponsiveFlex} from '@svizzle/ui';
+	import {Link, LinkButton, ResponsiveFlex} from '@svizzle/ui';
 
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {contactEmail, jsonUrl, toolName} from '$lib/config';
 	import {_currThemeVars} from '$lib/stores/theme';
 
@@ -13,7 +12,15 @@
 	const wcag21Url = 'https://www.w3.org/TR/WCAG21/';
 	const windowsMouseURL = 'https://support.microsoft.com/en-us/windows/change-mouse-settings-e81356a4-0e74-fe38-7d01-9d79fbf8712b';
 
-	$: colorLink = $_currThemeVars['--colorLink'];
+	$: theme = {
+		backgroundColor: $_currThemeVars['--colorLink']
+	};
+	$: linkTheme = {
+		color: $_currThemeVars['--colorLink'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
+	}
 </script>
 
 # Accessibility
@@ -66,7 +73,7 @@ partially supported.
 While we aim to make the information provided as accessible as possible, this
 website presents data mostly as interactive charts which at the moment do not
 also render a text alternative, so those aren't accessible by screen readers.
-However, the data is available for <Link download href={jsonUrl} theme={{color: colorLink}}>download in JSON format</Link>.
+However, the data is available for <Link download href={jsonUrl} theme={linkTheme}>download in JSON format</Link>.
 
 ## Feedback
 
@@ -89,19 +96,15 @@ change its appearance so that it contrasts more with the screen content.
 
 <ResponsiveFlex>
 	<LinkButton
+		{theme}
 		href={windowsMouseURL}
 		text='Windows'
-		theme={{
-			backgroundColor: colorLink
-		}}
 		type='external'
 	/>
 	<LinkButton
+		{theme}
 		href={osxMouseURL}
 		text='OS X'
-		theme={{
-			backgroundColor: colorLink
-		}}
 		type='external'
 	/>
 </ResponsiveFlex>

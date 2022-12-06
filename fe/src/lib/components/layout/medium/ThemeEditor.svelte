@@ -1,9 +1,8 @@
 <script>
-	import * as _ from 'lamb';
+	import {CopyToClipboard, StyleDriver} from '@svizzle/ui';
 	import {containsOneOf} from '@svizzle/utils';
+	import * as _ from 'lamb';
 
-	import StyleDriver from '$lib/components/svizzle/StyleDriver.svelte';
-	import CopyToClipboardButton from '$lib/components/svizzle/CopyToClipboard.svelte';
 	import {
 		_currThemeVars,
 		_themeName,
@@ -36,7 +35,7 @@
 		<h3>
 			Current Style: <span>{$_themeName}</span>
 		</h3>
-		<CopyToClipboardButton getText={() => getThemeClassDefsText($_themeVars)} />
+		<CopyToClipboard getText={() => getThemeClassDefsText($_themeVars)} />
 	</header>
 
 	<!-- themes -->

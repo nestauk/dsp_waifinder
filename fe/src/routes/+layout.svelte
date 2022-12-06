@@ -6,20 +6,21 @@
 		A11yMenuDriver,
 		FontsLoader,
 		getFamilies,
+		isPlatformIn,
 		LoadingView,
+		MultiBanner,
 		NoScript,
 		ScreenSensor,
-		setupResizeObserver
+		ScrollbarStyler,
+		setupResizeObserver,
+		StyleSensor
 	} from '@svizzle/ui';
-	import Bowser from 'bowser';
 	import {beforeUpdate, onMount, tick} from 'svelte';
 
 	import {page as _page} from '$app/stores';
 	import Footer from '$lib/components/layout/medium/Footer.svelte';
 	import Nav from '$lib/components/layout/Nav.svelte';
 	import ThemeEditor from '$lib/components/layout/medium/ThemeEditor.svelte';
-	import MultiBanner from '$lib/components/svizzle/MultiBanner.svelte';
-	import StyleSensor from '$lib/components/svizzle/StyleSensor.svelte';
 	import {
 		bannersDefaultFooterText,
 		fontsInfo,
@@ -57,19 +58,10 @@
 	let isLayoutUndefined = true;
 	let scriptingActive = false;
 	let showA11yMenu;
-	let ScrollBarStyler
 
-	onMount(async () => {
+	onMount(() => {
 		scriptingActive = true;
 		window.nesta_isLayoutUndefined = () => isLayoutUndefined;
-
-		const agentObj = Bowser.parse(window.navigator.userAgent);
-		const environment = `${agentObj?.os?.name}/${agentObj?.browser.name}`;
-		if (environment === 'Windows/Chrome') {
-			// No need to instance component as CSS is already loaded on the
-			// page after this point!
-			ScrollBarStyler = await import('$lib/components/svizzle/ScrollbarStyler.svelte');
-		}
 	});
 
 	beforeUpdate(async () => {
@@ -89,7 +81,12 @@
 		colorDisabled: $_currThemeVars['--colorTextDisabled'],
 		colorText: $_currThemeVars['--colorText']
 	}
-	$: console.log($_currThemeVars)
+	$: scrollbarTheme = {
+		thumbColor: $_currThemeVars['--colorScrollbarThumb'],
+		trackBorderColor: $_currThemeVars['--colorScrollbarTrackBorder'],
+		trackColor: $_currThemeVars['--colorScrollbarTrack'],
+		// TBD, include `thumbRadius` & `trackWidth`?
+	}
 </script>
 
 <StyleSensor
@@ -113,6 +110,11 @@
 	{fontsInfo}
 />
 <NoScript />
+
+<ScrollbarStyler
+	isEnabled={isPlatformIn(['Windows'], ['Chrome'])}
+	theme={scrollbarTheme}
+/>
 
 {#if scriptingActive && fontLoadStatus.isFirstLoaded}
 	<ScreenSensor />
@@ -239,7 +241,7 @@
 	}
 	.accessibility {
 		grid-area: accessibility;
-		z-index: var(--z1000);
+		z-index: var(--z9000);
 	}
 	.medium .accessibility {
 		bottom: 150px;

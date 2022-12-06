@@ -1,9 +1,7 @@
 <script>
-	import {_screen} from '@svizzle/ui';
+	import {_screen, Banner, LayoutHMF} from '@svizzle/ui';
 
 	import OrgDetails from '$lib/components/orgs/OrgDetails.svelte';
-	import Banner from '$lib/components/svizzle/Banner.svelte';
-	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
 
 	import {bannersDefaultFooterText} from '$lib/config';
 	import {_hero, _isCursorOnMap, clearHero} from '$lib/stores/interaction';

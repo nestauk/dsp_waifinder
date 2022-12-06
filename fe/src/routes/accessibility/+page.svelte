@@ -4,7 +4,8 @@
 		ChevronLeft,
 		ChevronRight,
 		Icon,
-		LoadingView
+		Link,
+		LoadingView,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 	import Bowser from 'bowser';
@@ -13,7 +14,6 @@
 
 	import H2 from '$lib/components/mdsvex/h2.svelte';
 	import P from '$lib/components/mdsvex/p.svelte';
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {
 		failingA11yAudit,
 		lighthouseUrls,
@@ -33,11 +33,6 @@
 	const lighthouseIssueUrl = 'https://github.com/GoogleChrome/lighthouse/issues/12039';
 
 	const reportNames = _.keys(lighthouseUrls)
-
-	const linkTheme = {
-		color: $_currThemeVars['--colorLink'],
-		iconStroke: $_currThemeVars['--colorLink']
-	};
 
 	let [currentreport] = reportNames;
 	let environment;
@@ -91,6 +86,13 @@
 	$: clickedNext =
 		() => hasNextValue && updateCurrentReport(nextValue);
 	$: reportUrl = `/audits/lighthouse/${currentreport}.html`;
+	$: linkTheme = {
+		color: $_currThemeVars['--colorLink'],
+		iconStroke: $_currThemeVars['--colorLink'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
+	};
 </script>
 
 <svelte:head>

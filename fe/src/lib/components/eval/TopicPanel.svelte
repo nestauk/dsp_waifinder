@@ -1,7 +1,6 @@
 <script>
-	import {LoadingView} from '@svizzle/ui';
+	import {LoadingView, Scroller} from '@svizzle/ui';
 
-	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import {getFirstPhrases} from '$lib/utils/dataUtils';
 
 	export let topicDetails;

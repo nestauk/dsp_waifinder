@@ -6,6 +6,7 @@
 		Icon,
 		Info,
 		isServerSide,
+		Link,
 		Menu,
 		Moon,
 		Send,
@@ -13,7 +14,6 @@
 		X
 	} from '@svizzle/ui';
 
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config';
 	import {
 		_a11yFillColor,
@@ -46,8 +46,10 @@
 	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
 	$: linkTheme = {
 		color: $_currThemeVars['--colorNavLink'],
-		focusOutline: $_currThemeVars['--outline'],
 		iconStroke: $_currThemeVars['--colorIcon'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	};
 	$: logos = LOGOS[$_themeName]
 </script>

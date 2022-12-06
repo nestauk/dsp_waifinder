@@ -1,9 +1,8 @@
-import {isIterableNotEmpty, toggleItem} from '@svizzle/utils';
+import {isIterableNotEmpty, toggleItem, safeRegexOf} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, get, writable} from 'svelte/store';
 
 import {DEFAULT_BBOX_WS_EN} from '$lib/config';
-import {safeRegexOf} from '$lib/utils/svizzle/utils';
 
 /* bounding box, zoom */
 

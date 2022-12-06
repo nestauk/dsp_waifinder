@@ -5,12 +5,12 @@
 		ChevronRight,
 		Icon,
 		isClientSide,
+		Link,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 	import * as _ from 'lamb';
 
 	import {page as _page} from '$app/stores';
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
 
 	const segments = ['app', 'explorer', 'a11ymenu'];
@@ -34,6 +34,12 @@
 		$_page;
 		isClientSide && contentElement?.scrollTo(0, 0);
 	}
+
+	$: linkTheme = {
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
+	};
 </script>
 
 <main class='_layout guides {$_screen?.classes}'>
@@ -49,6 +55,7 @@
 							<Link
 								href='/guides/{id}'
 								theme={{
+									...linkTheme,
 									color: segment === id
 										? $_currThemeVars['--colorTextInverted']
 										: $_currThemeVars['--colorLink']
@@ -72,6 +79,7 @@
 							ariaLabel={hasPrevSegment ? 'Previous guide' : null}
 							href={hasPrevSegment && `/guides/${prevSegment}`}
 							theme={{
+								...linkTheme,
 								color: hasPrevSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']
@@ -85,6 +93,7 @@
 							ariaLabel={hasNextSegment ? 'Next guide' : null}
 							href={hasNextSegment && `/guides/${nextSegment}`}
 							theme={{
+								...linkTheme,
 								color: hasNextSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']

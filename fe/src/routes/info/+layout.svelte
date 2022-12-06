@@ -5,12 +5,12 @@
 		ChevronLeft,
 		ChevronRight,
 		Icon,
-		isClientSide
+		isClientSide,
+		Link,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 
 	import {page as _page} from '$app/stores';
-	import Link from '$lib/components/svizzle/Link.svelte';
 	import {_currThemeVars} from '$lib/stores/theme';
 
 	const segments = ['privacy', 'disclaimer'];
@@ -33,6 +33,12 @@
 		$_page;
 		isClientSide && contentElement?.scrollTo(0, 0);
 	}
+
+	$: linkTheme = {
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
+	};
 </script>
 
 <main class='_layout info {$_screen?.classes}'>
@@ -46,6 +52,7 @@
 							<Link
 								href='/info/{id}'
 								theme={{
+									...linkTheme,
 									color: segment === id
 										? $_currThemeVars['--colorTextInverted']
 										: $_currThemeVars['--colorLink']
@@ -69,6 +76,7 @@
 							ariaLabel={hasPrevSegment ? 'Previous form' : null}
 							href={hasPrevSegment && `/info/${prevSegment}`}
 							theme={{
+								...linkTheme,
 								color: hasPrevSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']
@@ -82,6 +90,7 @@
 							ariaLabel={hasNextSegment ? 'Next form' : null}
 							href={hasNextSegment && `/info/${nextSegment}`}
 							theme={{
+								...linkTheme,
 								color: hasNextSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']

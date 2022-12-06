@@ -1,12 +1,17 @@
 <script>
-	import {Icon, Link2, MinusCircle, PlusCircle} from '@svizzle/ui';
+	import {
+		CopyToClipboard,
+		HighlightedText,
+		Icon,
+		Link,
+		Link2,
+		MinusCircle,
+		PlusCircle,
+		Scroller,
+	} from '@svizzle/ui';
 	import * as _ from 'lamb';
 	import {createEventDispatcher} from 'svelte';
 
-	import CopyToClipboardButton from '$lib/components/svizzle/CopyToClipboard.svelte';
-	import HighlightedText from '$lib/components/svizzle/HighlightedText.svelte';
-	import Link from '$lib/components/svizzle/Link.svelte';
-	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import {_hero, setHero, clearHero} from '$lib/stores/interaction';
 	import {_isSmallScreen} from '$lib/stores/layout';
 	import {_orgSearchRegex} from '$lib/stores/selection';
@@ -79,8 +84,13 @@
 		colorHighlightedBackground: $_currThemeVars['--colorHighlightedTextBackground'],
 		colorHighlightedText: $_currThemeVars['--colorHighlightedText'],
 	};
+	// we're reusing `linkTheme` for `CopyToClipboard`'s `theme` but note that
+	// `CopyToClipboard`'s `theme` has additional props that we're not using
 	$: linkTheme = {
-		focusOutline: $_currThemeVars['--outline'],
+		color: $_currThemeVars['--colorIcon'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	};
 </script>
 
@@ -131,7 +141,7 @@
 			<div>
 				{#if isDescriptionUIVisible}
 					<div class='descriptionUI'>
-						<CopyToClipboardButton
+						<CopyToClipboard
 							getText={() => item.description}
 							theme={linkTheme}
 						/>

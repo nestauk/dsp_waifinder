@@ -35,8 +35,8 @@ a {
 }
 
 :root {
-	--z-1000: 1000; /* FIXME svizzle's A11yMenu depends on this */
 	--z1000: 1000;
+	--z9000: 9000;
 }
 
 /* theme: geometry */
@@ -47,14 +47,15 @@ a {
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
 	--focusLineWidth: 2px;
-	--focusLine: var(--focusLineWidth) solid;
+	--focusLineStyle: solid;
+	--focusLine: var(--focusLineWidth) var(--focusLineStyle);
 	--focusShadow: 0 0 2px 2px var(--colorOutline);
 
 	/* theme compound helpers */
 
 	--border: var(--borderLine) var(--colorBorder);
 	--borderAux: var(--borderLine) var(--colorBorderAux);
-	--outline: var(--focusLine) var(--colorOutline);
+	--outline: var(--focusLine) var(--colorOutline); /* TODO remove? */
 	--boxShadowY: var(--boxShadowGeom) var(--colorShadow);
 }
 
@@ -64,10 +65,10 @@ a {
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
 	--focusLineWidth: 2px;
-	--focusLine: var(--focusLineWidth) solid;
+	--focusLineStyle: solid;
+	--focusLine: var(--focusLineWidth) var(--focusLineStyle);
 	--focusShadow: 0 0 2px 2px var(--colorOutline);
 
-	box-shadow: var(--focusShadow) !important;
 	/* theme compound helpers */
 
 	--border: var(--borderLine) var(--colorBorder);
@@ -120,6 +121,7 @@ a {
 	--colorPillText: white;
 	--colorScrollbarThumb: #ddd; /* windows */
 	--colorScrollbarTrack: #f5f5f5; /* windows */
+	--colorScrollbarTrackBorder: #ddd; /* windows */
 	--colorSelectedBackground: #00645f;
 	--colorSelectedText: white;
 	--colorShadow: rgba(0, 0, 0, 0.5);
@@ -185,6 +187,7 @@ a {
 	--colorPillText: black;
 	--colorScrollbarThumb: #666; /* windows */
 	--colorScrollbarTrack: #222; /* windows */
+	--colorScrollbarTrackBorder: #666; /* windows */
 	--colorSelectedBackground: #83b8b5;
 	--colorSelectedText: black;
 	--colorShadow: rgba(0, 0, 0, 0.5);

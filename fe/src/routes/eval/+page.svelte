@@ -1,12 +1,18 @@
 <script>
-	import {_screen, isClientSide, LoadingView, StorageIO} from '@svizzle/ui';
+	import {
+		_screen,
+		HighlightedText,
+		isClientSide,
+		LayoutHMF,
+		LoadingView,
+		Scroller,
+		StorageIO,
+	} from '@svizzle/ui';
+	import {safeRegexOf} from '@svizzle/utils'
 
 	import TopicPanel from '$lib/components/eval/TopicPanel.svelte';
 	import VoteButtons from '$lib/components/eval/VoteButtons.svelte';
-	import HighlightedText from '$lib/components/svizzle/HighlightedText.svelte';
 	import EmailWidget from '$lib/components/svizzle/EmailWidget.svelte';
-	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
-	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import {toolName} from '$lib/config';
 	import {getOrientation, getScreenType} from '$lib/utils/svizzle/ui';
 
@@ -24,7 +30,6 @@
 	import {getTopicLabel} from '$lib/utils/dataUtils';
 	import {dbrPrefix} from '$lib/utils/dbpedia';
 	import {sendEvaluations} from '$lib/utils/eval';
-	import {safeRegexOf} from '$lib/utils/svizzle/utils';
 
 	let currentEntity;
 	let description;

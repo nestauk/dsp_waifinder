@@ -1,7 +1,6 @@
 <script>
-	import {_screen} from '@svizzle/ui';
+	import {_screen, AlphabetPicker} from '@svizzle/ui';
 
-	import AlphabetPicker from '$lib/components/svizzle/AlphabetPicker.svelte';
 	import VirtualList from '$lib/components/VirtualList/VirtualList.svelte';
 	import {_orgsChar} from '$lib/stores/data';
 	import {_currThemeVars} from '$lib/stores/theme';
@@ -39,7 +38,9 @@
 		theme={{
 			backgroundColor: $_currThemeVars['--colorAux'],
 			backgroundColorDisabled: $_currThemeVars['--colorAux'],
-			focusOutline: $_currThemeVars['--outline'],
+			outlineColor: $_currThemeVars['--colorOutline'],
+			outlineStyle: $_currThemeVars['--focusLineStyle'],
+			outlineWidth: $_currThemeVars['--focusLineWidth'],
 			textColor: $_currThemeVars['--colorText'],
 			textColorDisabled: $_currThemeVars['--colorTextDisabled']
 		}}

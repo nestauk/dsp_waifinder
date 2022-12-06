@@ -1,10 +1,14 @@
 <script>
-	import {_screen, Icon, LoadingView} from '@svizzle/ui';
+	import {
+		_screen,
+		Banner,
+		Icon,
+		LayoutHMF,
+		Link,
+		LoadingView,
+		Scroller,
+	} from '@svizzle/ui';
 
-	import Banner from '$lib/components/svizzle/Banner.svelte';
-	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
-	import Link from '$lib/components/svizzle/Link.svelte';
-	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import WikipediaLogo from '$lib/components/icons/WikipediaLogo.svelte';
 	import {bannersDefaultFooterText} from '$lib/config';
 	import {_bannersTheme, _currThemeVars} from '$lib/stores/theme';
@@ -25,7 +29,9 @@
 	}
 
 	$: linkTheme = {
-		focusOutline: $_currThemeVars['--outline'],
+		outlineColor: $_currThemeVars['--colorOutline'],
+		outlineStyle: $_currThemeVars['--focusLineStyle'],
+		outlineWidth: $_currThemeVars['--focusLineWidth'],
 	}
 	$: title = $_activeTopicDetails?.label ?? '';
 	$: abstract = $_activeTopicDetails?.abstract
@@ -47,7 +53,10 @@
 >
 	<LayoutHMF>
 		<h2 slot='header'>{title}</h2>
-		<div class='topic' slot='main'>
+		<div
+			class='topic'
+			slot='main'
+		>
 			{#if $_activeTopicDetails?.isLoading}
 				<LoadingView />
 			{:else}
