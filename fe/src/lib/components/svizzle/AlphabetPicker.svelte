@@ -17,6 +17,8 @@
 	const defaultTheme = {
 		backgroundColor: '#333',
 		backgroundColorDisabled: '#333',
+		focusOutline: '2px auto',
+		focusOutlineOffset: '2px',
 		textColor: 'white',
 		textColorDisabled: 'silver'
 	};
@@ -52,10 +54,15 @@
 		cursor: pointer;
 		padding: 0 0.5em;
 		text-align: center;
+		width: 2em;
 	}
 	input:disabled {
 		background-color: var(--backgroundColorDisabled);
 		color: var(--textColorDisabled);
 		cursor: inherit;
+	}
+	input:focus-visible {
+		outline: var(--outline);
+		outline-offset: calc(-1 * var(--focusOutlineOffset));
 	}
 </style>

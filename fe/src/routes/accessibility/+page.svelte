@@ -4,7 +4,6 @@
 		ChevronLeft,
 		ChevronRight,
 		Icon,
-		Link,
 		LoadingView
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
@@ -14,7 +13,7 @@
 
 	import H2 from '$lib/components/mdsvex/h2.svelte';
 	import P from '$lib/components/mdsvex/p.svelte';
-
+	import Link from '$lib/components/svizzle/Link.svelte';
 	import {
 		failingA11yAudit,
 		lighthouseUrls,

@@ -1,4 +1,5 @@
 <script>
+	import {makeStyleVars} from '@svizzle/dom';
 	import {ExternalLink, Icon} from '@svizzle/ui';
 	import {defaultRel} from './utils/shared';
 
@@ -8,6 +9,8 @@
 		iconStroke: 'rgb(16, 174, 249)',
 		iconStrokeWidth: defaultStrokeWidth,
 		color: 'black',
+		focusOutline: '2px auto',
+		focusOutlineOffset: '2px',
 	};
 
 	export let ariaDescribedBy = null;
@@ -24,6 +27,13 @@
 	export let theme = null;
 	export let type = null;
 
+	const disableSpaceToScroll = e => {
+		console.log(e)
+		if (e.keyCode === 32) {
+			e.preventDefault()
+		}
+	}
+
 	// FIXME https://github.com/sveltejs/svelte/issues/4442
 	$: download = download || null;
 	$: href = href || null;
@@ -38,7 +48,8 @@
 
 	$: isExternal = type === 'external';
 	$: theme = theme ? {...defaultTheme, ...theme} : defaultTheme;
-	$: style = theme.color ? `--color: ${theme.color}` : null;
+	// $: style = theme.color ? `--color: ${theme.color}` : null;
+	$: style = makeStyleVars(theme);
 </script>
 
 <a
@@ -52,6 +63,7 @@
 	{target}
 	{type}
 	class:underlined={isUnderlined}
+	on:keydown={disableSpaceToScroll}
 >
 	<span class:bold={isBold}>
 		<slot/>
@@ -81,6 +93,11 @@
 	}
 	a span:nth-child(2) {
 		margin-left: 0.1rem;
+	}
+
+	a:focus-visible {
+		outline: var(--focusOutline);
+		outline-offset: calc(-1 * var(--focusOutlineOffset));
 	}
 
 	.bold {

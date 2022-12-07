@@ -283,4 +283,14 @@
 		height: 100%;
 		width: 100%;
 	}
+
+	:global(.mapboxgl-canvas:focus-visible),
+	:global(.mapboxgl-ctrl-group button:focus:focus-visible),
+	:global(.mapboxgl-ctrl-logo:focus:focus-visible),
+	:global(.mapboxgl-ctrl-attrib-button:focus) {
+		box-shadow: none !important;
+		/* box-shadow: var(--focusShadow) !important; */
+		outline: var(--outline);
+		outline-offset: calc(var(--focusLineWidth) * -1);
+	}
 </style>

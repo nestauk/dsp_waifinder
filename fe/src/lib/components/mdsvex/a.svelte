@@ -1,5 +1,5 @@
 <script>
-	import {Link} from '@svizzle/ui';
+	import Link from '$lib/components/svizzle/Link.svelte';
 
 	import {_currThemeVars} from '$lib/stores/theme';
 
@@ -7,6 +7,7 @@
 
 	$: theme = {
 		color: $_currThemeVars['--colorLink'],
+		focusOutline: $_currThemeVars['--outline'],
 		iconStroke: $_currThemeVars['--colorLink']
 	};
 	$: type = href && href.startsWith('http') && 'external' || null;

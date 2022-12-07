@@ -20,44 +20,35 @@
 
 	const toggleItem = ({detail: {id}}) => toggleTopicId(id);
 
+	const onKeyDown = event => {
+		if ($_isTopicsEditMode && event.keyCode === 27) {
+			event.preventDefault();
+			exitTopicsEditMode();
+		}
+	}
+
 	$: onClick = $_isTopicsEditMode ? toggleItem : null;
 	$: onEntered = $_isSmallScreen
 		? null
 		: ({detail: {id}}) => asyncUpdateTopicDetails(id);
 </script>
 
+<svelte:window on:keydown={onKeyDown} />
+
 <div
 	class='TopicsBar'
 	class:small={$_isSmallScreen}
 >
 	<div class='editMode'>
-		{#if $_isTopicsEditMode}
-			<div
-				class='button'
-				on:click={exitTopicsEditMode}
-			>
-				<span>
-					<Icon
-						glyph={CheckCircle}
-						strokeWidth=1.25
-					/>
-				</span>
-				<span>Exit edit mode</span>
-			</div>
-		{:else}
-			<div
-				class='button'
-				on:click={enterTopicsEditMode}
-			>
-				<span>
-					<Icon
-						glyph={Edit3}
-						strokeWidth=1.25
-					/>
-				</span>
-				<span>Enter edit mode</span>
-			</div>
-		{/if}
+		<button on:click={$_isTopicsEditMode ? exitTopicsEditMode : enterTopicsEditMode}>
+			<span>
+				<Icon
+					glyph={$_isTopicsEditMode ? CheckCircle : Edit3}
+					strokeWidth=1.25
+				/>
+			</span>
+			<span>{$_isTopicsEditMode ? 'Exit' : 'Enter'} edit mode</span>
+		</button>
 	</div>
 	<div class='select'>
 		<!-- FIXME pointer cursor because it's interactive but it shouldn't if not in edit mode -->
@@ -108,12 +99,24 @@
 		border-top: var(--border);
 	}
 
-	.button {
+	button {
 		align-items: center;
+		background: var(--colorBackground);
+		border: none;
+		color: var(--colorText);
 		cursor: pointer;
 		display: flex;
-		gap: 1rem;
+		font-size: 1rem;
+		gap: 1em;
 		justify-content: center;
 		user-select: none;
+		width: 100%;
+	}
+	button:focus {
+		outline: none;
+	}
+	.editMode:focus-within {
+		outline: var(--outline);
+		outline-offset: calc(var(--focusLineWidth) * -1);
 	}
 </style>

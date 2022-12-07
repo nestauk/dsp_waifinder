@@ -42,22 +42,42 @@ a {
 /* theme: geometry */
 
 .themeLight {
-	--boxShadowY: 0px 8px 9px -4px var(--colorShadow);
+	--borderLine: 1px solid;
+	--boxShadowGeom: 0px 8px 9px -4px;
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
+	--focusLineWidth: 2px;
+	--focusLine: var(--focusLineWidth) solid;
+	--focusShadow: 0 0 2px 2px var(--colorOutline);
+
+	/* theme compound helpers */
+
+	--border: var(--borderLine) var(--colorBorder);
+	--borderAux: var(--borderLine) var(--colorBorderAux);
+	--outline: var(--focusLine) var(--colorOutline);
+	--boxShadowY: var(--boxShadowGeom) var(--colorShadow);
 }
 
 .themeDark {
-	--boxShadowY: 0px 8px 9px -4px var(--colorShadow);
+	--borderLine: 1px solid;
+	--boxShadowGeom: 0px 8px 9px -4px;
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
-}
+	--focusLineWidth: 2px;
+	--focusLine: var(--focusLineWidth) solid;
+	--focusShadow: 0 0 2px 2px var(--colorOutline);
 
+	box-shadow: var(--focusShadow) !important;
+	/* theme compound helpers */
+
+	--border: var(--borderLine) var(--colorBorder);
+	--borderAux: var(--borderLine) var(--colorBorderAux);
+	--outline: var(--focusLine) var(--colorOutline);
+	--boxShadowY: var(--boxShadowGeom) var(--colorShadow);
+}
 /* theme: colors */
 
 .themeLight {
-	--border: thin solid #ccc;
-	--borderAux: thin solid #333; /* see --colorBorderAux */
 	--colorAccentBackground: #333;
 	--colorAccentText: orange;
 	--colorActiveBackground: #333;
@@ -71,6 +91,7 @@ a {
 	--colorBarchartItemBar: black;
 	--colorBarchartSelectedItemBackground: #fff4e5;
 	--colorBarchartSelectedItemText: #333;
+	--colorBorder: #ccc;
 	--colorBorderAux: #333; /* FIXME needed by a11y menu */
 	--colorClusterTextBkgStroke: white;
 	--colorHighlightedText: #333;
@@ -93,6 +114,7 @@ a {
 	--colorOrgtype2Text: #222;
 	--colorOrgtype3: gold;
 	--colorOrgtype3Text: #222;
+	--colorOutline: rgb(256, 64, 64);
 	--colorPageBackground: #333;
 	--colorPillBackground: #333;
 	--colorPillText: white;
@@ -120,8 +142,6 @@ a {
 }
 
 .themeDark {
-	--border: thin solid #444;
-	--borderAux: thin solid #ccc; /* see --colorBorderAux */
 	--colorAccentBackground: #ccc;
 	--colorAccentText: rgb(117, 76, 0);
 	--colorActiveBackground: #ccc;
@@ -135,6 +155,7 @@ a {
 	--colorBarchartItemBar: white;
 	--colorBarchartSelectedItemBackground: #002c66;
 	--colorBarchartSelectedItemText: white;
+	--colorBorder: #444; /* FIXME needed by a11y menu */
 	--colorBorderAux: #ccc; /* FIXME needed by a11y menu */
 	--colorClusterTextBkgStroke: #333;
 	--colorHighlightedText: #333;
@@ -158,6 +179,7 @@ a {
 	--colorOrgtype2Text: var(--colorTextInverted);
 	--colorOrgtype3: #e1d17a;
 	--colorOrgtype3Text: var(--colorTextInverted);
+	--colorOutline: rgb(255, 64, 64);
 	--colorPageBackground: #333;
 	--colorPillBackground: #ddd;
 	--colorPillText: black;

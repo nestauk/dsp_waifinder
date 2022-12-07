@@ -1,6 +1,7 @@
 <script>
-	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
+	import {Download, Icon, Info, Send} from '@svizzle/ui';
 
+	import Link from '$lib/components/svizzle/Link.svelte';
 	import {jsonUrl} from '$lib/config';
 	import {
 		_currThemeVars,
@@ -9,6 +10,11 @@
 
 	export let segment;
 
+	$: linkTheme = {
+		color: $_currThemeVars['--colorNavLink'],
+		focusOutline: $_currThemeVars['--outline'],
+		iconStroke: $_currThemeVars['--colorIcon'],
+	};
 </script>
 
 <nav
@@ -22,8 +28,8 @@
 					<Link
 						href='/'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, ''),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Home
@@ -33,8 +39,8 @@
 					<Link
 						href='/methodology'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'methodology'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Methodology
@@ -44,8 +50,8 @@
 					<Link
 						href='/guides'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'guides'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Guides
@@ -55,8 +61,8 @@
 					<Link
 						href='/explorer'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'explorer'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Explorer
@@ -75,8 +81,8 @@
 						download
 						href={jsonUrl}
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'dataset'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Dataset
@@ -93,8 +99,8 @@
 						href='/feedback'
 						rel='prefetch'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'feedback'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Feedback
@@ -111,8 +117,8 @@
 						href='/info'
 						rel='prefetch'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'info'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Info

@@ -41,6 +41,7 @@
 		backgroundOpacity: 1,
 
 		// to be documented
+		focusOutline: '5px auto black',
 		selectedKeyBackgroundColor: transparentColor,
 		selectedKeyTextColor: 'black',
 
@@ -102,6 +103,7 @@
 
 	let height;
 	let hoveredKey;
+	let inFocusKey;
 	let width;
 
 	$: style = makeStyleVars({
@@ -136,6 +138,7 @@
 	/* layout */
 
 	$: hasSelectedKeys = isIterableNotEmpty(selectedKeys);
+	// eslint-disable-next-line complexity
 	$: bars = items.map(item => {
 		const {key} = item;
 
@@ -163,7 +166,7 @@
 		const barBackgroundColor =
 			key === focusedKey
 				? theme.focusedKeyColor
-				: key === hoveredKey
+				: key === hoveredKey || key === inFocusKey
 					? theme.hoverColor
 					: isDeselected
 						? transparentColor
@@ -178,7 +181,7 @@
 					? keyToColorFn(key)
 					: theme.barDefaultColor;
 		const barColor =
-			key === hoveredKey
+			key === hoveredKey || key === inFocusKey
 				? theme.hoverColorBar || barBaseColor
 				: barBaseColor;
 
@@ -190,7 +193,7 @@
 		const textColor =
 			key === focusedKey
 				? theme.focusedKeyColorText
-				: key === hoveredKey
+				: key === hoveredKey || key === inFocusKey
 					? theme.hoverColorText || textBaseColor
 					: textBaseColor;
 
@@ -354,12 +357,27 @@
 	const onClick = key => () => {
 		dispatch('clicked', {id: key})
 	}
+	const onKeypress = (event, key) => {
+		if (event.keyCode === 13 || event.key === ' ') {
+			console.log('pressed space')
+			event.preventDefault();
+			dispatch('clicked', {id: key})
+		}
+	}
 	const onMouseenter = key => () => {
 		hoveredKey = key;
 		isInteractive && dispatch('entered', {id: key})
 	}
 	const onMouseleave = key => () => {
 		dispatch('exited', {id: key})
+	}
+	const onFocus = key => () => {
+		// inFocusKey = key;
+		// isInteractive && dispatch('entered', {id: key})
+	}
+	const onBlur = key => () => {
+		inFocusKey = null;
+		// dispatch('exited', {id: key})
 	}
 </script>
 
@@ -485,6 +503,10 @@
 								on:click={isInteractive && onClick(key)}
 								on:mouseenter={onMouseenter(key)}
 								on:mouseleave={isInteractive && onMouseleave(key)}
+								on:keypress={isInteractive && (e => onKeypress(e, key))}
+								on:focus={onFocus(key)}
+								on:blur={isInteractive && onBlur(key)}
+								tabindex=0
 								transform='translate(0, {itemHeight * index})'
 							>
 								<rect
@@ -492,13 +514,12 @@
 									fill={barBackgroundColor}
 									height={itemHeight}
 								/>
-								<line
-									stroke={barColor}
-									stroke-width={barHeight}
-									x1={x0}
-									x2={x}
-									y1={barY}
-									y2={barY}
+								<rect
+									fill={barColor}
+									height={barHeight}
+									x={x0}
+									y={barY}
+									width={x-x0}
 								/>
 								<text
 									class:right={isLabelAlignedRight}
@@ -512,7 +533,7 @@
 									class:right={isValueAlignedRight}
 									class='value'
 									fill={textColor}
-									x={valueX}
+									x={valueX-2}
 									y={textY}
 								>{displayValue}</text>
 							</g>
@@ -601,8 +622,8 @@
 		cursor: pointer;
 		user-select: none;
 	}
-	.item.deselected line {
-		stroke-opacity: var(--deselectedOpacity);
+	.item.deselected rect {
+		fill-opacity: var(--deselectedOpacity);
 	}
 	.item text {
 		font-size: var(--fontSize);
@@ -613,5 +634,11 @@
 	}
 	.item text.value.right {
 		text-anchor: end;
+	}
+	.item:focus-visible {
+		outline: none;
+	}
+	.item:focus-visible .value {
+		outline: var(--focusOutline);
 	}
 </style>

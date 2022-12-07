@@ -1,7 +1,15 @@
 <script>
+	import {makeStyleVars} from '@svizzle/dom';
 	import {Clipboard, Copy, Icon} from '@svizzle/ui';
 
 	export let getText = () => '';
+	export let theme;
+
+	const defaultTheme = {
+		color: 'inherit',
+		background: 'inherit',
+		focusOutline: '1px solid'
+	}
 
 	let isTextCopyRecentlyFailed = false;
 	let isTextRecentlyCopied = false;
@@ -22,9 +30,14 @@
 			}, 2000);
 		}
 	};
+
+	$: style = makeStyleVars({...defaultTheme, ...theme});
 </script>
 
-<div on:click={copy}>
+<button
+	on:click={copy}
+	{style}
+>
 	{#if isTextRecentlyCopied}
 		<Icon
 			glyph={Clipboard}
@@ -38,4 +51,17 @@
 	{:else}
 		<Icon glyph={Copy} />
 	{/if}
-</div>
+</button>
+
+<style>
+	button {
+		border: none;
+		display: block;
+		color: var(--color);
+		background: var(--background);
+	}
+	button:focus {
+		outline: var(--focusOutline);
+		outline-offset: calc( -1 * var(--focusLineWidth));
+	}
+</style>

@@ -43,6 +43,7 @@ export const _barchartsTheme = derived(
 	currThemeVars => ({
 		barDefaultColor: currThemeVars['--colorBarchartItemBar'],
 		deselectedOpacity: 1,
+		focusOutline: currThemeVars['--outline'],
 		hoverColor: currThemeVars['--colorBarchartHoveredItemBackground'],
 		hoverColorBar: currThemeVars['--colorBarchartHoveredItemBar'],
 		hoverColorText: currThemeVars['--colorBarchartHoveredItemText'],

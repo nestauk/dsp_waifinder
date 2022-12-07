@@ -5,21 +5,21 @@
 </script>
 
 <svelte:head>
-	<title>About - {toolName}</title>
+	<title>Home - {toolName}</title>
 	<meta
 		content='{toolName}: homepage'
 		name='description'
 	>
 </svelte:head>
 
-<main class='about'>
+<main class='home'>
 	<div>
 		<Content />
 	</div>
 </main>
 
 <style>
-	.about {
+	.home {
 		background-color: var(--colorPageBackground);
 		display: flex;
 		font-weight: 200;

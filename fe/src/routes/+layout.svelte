@@ -89,6 +89,7 @@
 		colorDisabled: $_currThemeVars['--colorTextDisabled'],
 		colorText: $_currThemeVars['--colorText']
 	}
+	$: console.log($_currThemeVars)
 </script>
 
 <StyleSensor
@@ -133,7 +134,7 @@
 <div
 	class:hidden={isLayoutUndefined}
 	class:withThemeEditor
-	class='_layout root {$_screen?.classes} {$_themeName}'
+	class='_layout root {$_screen?.classes} {$_themeName} geomDefault'
 	role='none'
 	style='--menu-height: {menuHeight}px;'
 >

@@ -1,5 +1,6 @@
 <script>
 	import {_autoZoom} from '$lib/stores/interaction';
+	import {_currThemeVars} from '$lib/stores/theme';
 
 	export let map;
 </script>
@@ -27,5 +28,13 @@
 	}
 	div * {
 		cursor: pointer;
+	}
+
+	div:has(:focus-visible) {
+		outline: var(--outline);
+		outline-offset: calc(-1 * var(--focusLineWidth));
+	}
+	input:focus-visible {
+		outline: none;
 	}
 </style>

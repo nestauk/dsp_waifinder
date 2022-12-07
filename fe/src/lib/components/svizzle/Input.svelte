@@ -14,7 +14,8 @@
 		backgroundColor: 'transparent',
 		borderColor: 'rgb(70, 70, 70)',
 		colorIcon: 'black',
-		colorText: 'black'
+		colorText: 'black',
+		focusOutline: '1px solid',
 	};
 
 	let input;
@@ -98,8 +99,7 @@
 	}
 
 	.Input:focus-within {
-		border-width: 2px;
-		padding: calc(0.25em - 1px);
+		outline: var(--focusOutline);
 	}
 
 	input {
