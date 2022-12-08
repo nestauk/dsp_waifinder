@@ -1,12 +1,13 @@
 <script>
-	import {_screen, Icon, Link, LoadingView} from '@svizzle/ui';
+	import {_screen, Icon, LoadingView} from '@svizzle/ui';
 
 	import Banner from '$lib/components/svizzle/Banner.svelte';
 	import LayoutHMF from '$lib/components/svizzle/LayoutHMF.svelte';
+	import Link from '$lib/components/svizzle/Link.svelte';
 	import Scroller from '$lib/components/svizzle/Scroller.svelte';
 	import WikipediaLogo from '$lib/components/icons/WikipediaLogo.svelte';
 	import {bannersDefaultFooterText} from '$lib/config';
-	import {_bannersTheme} from '$lib/stores/theme';
+	import {_bannersTheme, _currThemeVars} from '$lib/stores/theme';
 	import {
 		_activeTopicDetails,
 		clearActiveTopic
@@ -23,6 +24,9 @@
 		isImgErrored = true;
 	}
 
+	$: linkTheme = {
+		focusOutline: $_currThemeVars['--outline'],
+	}
 	$: title = $_activeTopicDetails?.label ?? '';
 	$: abstract = $_activeTopicDetails?.abstract
 		? getFirstPhrases($_activeTopicDetails.abstract, 300)
@@ -70,6 +74,7 @@
 					href={wikipediaURL}
 					isBold={true}
 					target='_blank'
+					theme={linkTheme}
 				>
 					<Icon
 						fill='black'

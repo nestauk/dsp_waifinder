@@ -36,6 +36,26 @@ export const makeGetStyleRulesObj = selectorRegex => _.pipe([
 			_.fromPairs
 		])
 	])),
+	v => {
+		console.log('v', v);
+		return v;
+	},
+	_.reduceWith(
+		(themes, [selector, rules]) => {
+			const themeEntry = _.find(
+				themes,
+				_.hasPathValue('0', selector)
+			);
+			if (themeEntry) {
+				const [, existingRules] = themeEntry;
+				themeEntry[1] = {...existingRules, ...rules};
+			} else {
+				themes.push([selector, rules]);
+			}
+			return themes;
+		},
+		[]
+	),
 	_.fromPairs
 ]);
 

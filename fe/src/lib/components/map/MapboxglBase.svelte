@@ -283,4 +283,18 @@
 		height: 100%;
 		width: 100%;
 	}
+
+	/*
+		Outlines inside of MapboxGL instances must be themed directly
+		using its own CSS classes.
+	*/
+	.MapboxglBase :global(.mapboxgl-canvas:focus-visible),
+	.MapboxglBase :global(.mapboxgl-ctrl-group button:focus:focus-visible),
+	.MapboxglBase :global(.mapboxgl-ctrl-logo:focus:focus-visible),
+	.MapboxglBase :global(.mapboxgl-ctrl-attrib-button:focus) {
+		box-shadow: none !important;
+		/* box-shadow: var(--focusShadow) !important; */
+		outline: var(--outline);
+		outline-offset: calc(var(--focusLineWidth) * -1);
+	}
 </style>

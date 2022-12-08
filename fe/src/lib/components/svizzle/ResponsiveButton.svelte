@@ -27,6 +27,8 @@
 		colorBackgroundActive: '#333',
 		colorText: 'initial',
 		colorTextActive: 'white',
+		focusOutline: '2px auto',
+		focusOutlineOffset: '2px',
 	};
 
 	$: doesOverflow = $_contentSize.inlineSize < $_sensorSize.inlineSize;
@@ -34,7 +36,7 @@
 	$: style = makeStyleVars(theme);
 </script>
 
-<div
+<button
 	{style}
 	{title}
 	class:active={isActive}
@@ -50,7 +52,7 @@
 		{/if}
 		<slot name='always' />
 	</div>
-</div>
+</button>
 
 <div
 	class='ResponsiveButtonSensor nowrap'
@@ -63,19 +65,26 @@
 
 <style>
 	.ResponsiveButton {
+		background: var(--colorBackground);
 		border-bottom: var(--borderBottom);
 		border-left: var(--borderLeft);
 		border-right: var(--borderRight);
 		border-top: var(--borderTop);
+		color: var(--colorText);
 		cursor: pointer;
+		font-size: 1em;
 		height: 100%;
 		padding: 0.5em;
 		width: 100%;
 	}
+	.ResponsiveButton:focus-visible {
+		outline: var(--focusOutline);
+		outline-offset: calc(-1 * var(--focusOutlineOffset));
+		position: relative;
+		z-index: 1;
+	}
 	.content {
 		align-items: center;
-		background: var(--colorBackground);
-		color: var(--colorText);
 		display: flex;
 		justify-content: center;
 	}

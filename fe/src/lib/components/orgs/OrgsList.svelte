@@ -39,6 +39,7 @@
 		theme={{
 			backgroundColor: $_currThemeVars['--colorAux'],
 			backgroundColorDisabled: $_currThemeVars['--colorAux'],
+			focusOutline: $_currThemeVars['--outline'],
 			textColor: $_currThemeVars['--colorText'],
 			textColorDisabled: $_currThemeVars['--colorTextDisabled']
 		}}

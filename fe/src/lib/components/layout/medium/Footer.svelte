@@ -1,6 +1,7 @@
 <script>
-	import {A11yPerson, Icon, Droplet, Link, Moon, Sun} from '@svizzle/ui';
+	import {A11yPerson, Icon, Droplet, Moon, Sun} from '@svizzle/ui';
 
+	import Link from '$lib/components/svizzle/Link.svelte';
 	import {changelogUrl, LOGOS} from '$lib/config';
 	import {isDev} from '$lib/env';
 	import {
@@ -28,6 +29,11 @@
 	}
 
 	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
+	$: linkTheme = {
+		color: $_currThemeVars['--colorNavLink'],
+		focusOutline: $_currThemeVars['--outline'],
+		iconStroke: $_currThemeVars['--colorIcon'],
+	};
 	$: logos = LOGOS[$_themeName]
 </script>
 
@@ -36,24 +42,33 @@
 	<!-- left: sponsors -->
 
 	<span>
-		<a href='https://www.ukri.org/'>
+		<Link
+			href='https://www.ukri.org/'
+			theme={linkTheme}
+		>
 			<img
 				alt='UK Research and Innovation'
 				src={logos.ukri}
 			/>
-		</a>
-		<a href='https://www.turing.ac.uk/'>
+		</Link>
+		<Link
+			href='https://www.turing.ac.uk/'
+			theme={linkTheme}
+		>
 			<img
 				alt='The Alan Turing Institute'
 				src={logos.turing}
 			/>
-		</a>
-		<a href='https://www.nesta.org.uk/'>
+		</Link>
+		<Link
+			href='https://www.nesta.org.uk/'
+			theme={linkTheme}
+		>
 			<img
 				alt='Nesta'
 				src={logos.nesta}
 			/>
-		</a>
+		</Link>
 	</span>
 
 	<!-- center: version -->
@@ -65,10 +80,7 @@
 		<Link
 			href={changelogUrl}
 			type='external'
-			theme={{
-				color: $_currThemeVars['--colorNavLink'],
-				iconStroke: $_currThemeVars['--colorIcon']
-			}}
+			theme={linkTheme}
 		>
 			{version}
 		</Link>
@@ -120,8 +132,8 @@
 				<Link
 					href='/accessibility'
 					theme={{
+						...linkTheme,
 						color: $_getNavLinkColor(segment, 'accessibility'),
-						iconStroke: $_currThemeVars['--colorIcon']
 					}}
 				>
 					Accessibility
@@ -186,5 +198,8 @@
 		width: min-content;
 		height: min-content;
 		z-index: var(--z1000);
+	}
+	button:focus-visible {
+		outline: var(--outline)
 	}
 </style>

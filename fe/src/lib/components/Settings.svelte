@@ -2,7 +2,6 @@
 	import {
 		Download,
 		Icon,
-		Switch,
 		Tag,
 		XCircle,
 	} from '@svizzle/ui';
@@ -11,6 +10,7 @@
 	import Region from '$lib/components/icons/Region.svelte';
 	import BarchartVDiv from '$lib/components/svizzle/BarchartVDiv.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
+	import Toggle from '$lib/components/svizzle/Toggle.svelte';
 	import {
 		_keyOrgTypeValueOrgsCount,
 		_orgsCount,
@@ -77,19 +77,22 @@
 	$: switchTheme = {
 		color: $_currThemeVars['--colorText'],
 		backgroundColor: $_currThemeVars['--colorBackground'],
+		focusOutline: $_currThemeVars['--outline'],
 		knobColor: $_currThemeVars['--colorSwitchKnob']
 	}
 	$: textSearchInputTheme = {
 		colorText: $_currThemeVars['--colorText'],
 		colorIcon: $_orgSearchValue
 			? $_currThemeVars['--colorIcon']
-			: $_currThemeVars['--colorBackground']
+			: $_currThemeVars['--colorBackground'],
+		focusOutline: $_currThemeVars['--outline']
 	}
 	$: placeSearchInputTheme = {
 		colorText: $_currThemeVars['--colorText'],
 		colorIcon: $_placesSearchValue
 			? $_currThemeVars['--colorIcon']
-			: $_currThemeVars['--colorBackground']
+			: $_currThemeVars['--colorBackground'],
+		focusOutline: $_currThemeVars['--outline']
 	}
 </script>
 
@@ -164,7 +167,7 @@
 				/>
 			</div>
 			<div class='item'>
-				<Switch
+				<Toggle
 					on:toggled={toggleOrgTypesSelectionMode}
 					theme={switchTheme}
 					value={$_orgTypesSelectionMode}
@@ -193,13 +196,13 @@
 							on:click={() => deselectTopic(id)}
 						>
 							<span class='label'>{getTopicLabel(id)}</span>
-							<span>
+							<button>
 								<Icon
 									glyph={XCircle}
 									strokeWidth=1.25
 									stroke={$_currThemeVars['--colorIcon']}
 								/>
-							</span>
+							</button>
 						</div>
 					{/each}
 				</div>
@@ -211,7 +214,7 @@
 				<div class='item'>
 					<div class='row deselectAll'>
 						<span>Deselect all</span>
-						<span
+						<button
 							class='clickable'
 							on:click={deselectAllTopics}
 						>
@@ -219,7 +222,7 @@
 								glyph={XCircle}
 								stroke={$_currThemeVars['--colorIcon']}
 							/>
-						</span>
+						</button>
 					</div>
 				</div>
 			{/if}
@@ -262,14 +265,14 @@
 							on:click={() => deselectPlace(id)}
 						>
 							<span class='label'>{name}</span>
-							<span>
+							<button>
 								<Icon
 									glyph={XCircle}
 									strokeWidth=1.25
 									stroke={$_currThemeVars['--colorIcon']
 								}
 								/>
-							</span>
+							</button>
 						</div>
 					{/each}
 				</div>
@@ -281,7 +284,7 @@
 				<div class='item'>
 					<div class='row deselectAll'>
 						<span>Deselect all</span>
-						<span
+						<button
 							class='clickable'
 							on:click={deselectAllPlaces}
 						>
@@ -289,7 +292,7 @@
 								glyph={XCircle}
 								stroke={$_currThemeVars['--colorIcon']}
 							/>
-						</span>
+						</button>
 					</div>
 				</div>
 			{/if}
@@ -332,13 +335,13 @@
 							on:click={() => deselectRegion(id)}
 						>
 							<span class='label'>{name}</span>
-							<span>
+							<button>
 								<Icon
 									glyph={XCircle}
 									stroke={$_currThemeVars['--colorIcon']}
 									strokeWidth=1.25
 								/>
-							</span>
+							</button>
 						</div>
 					{/each}
 				</div>
@@ -350,7 +353,7 @@
 				<div class='item'>
 					<div class='row deselectAll'>
 						<span>Deselect all</span>
-						<span
+						<button
 							class='clickable'
 							on:click={deselectAllRegions}
 						>
@@ -358,7 +361,7 @@
 								glyph={XCircle}
 								stroke={$_currThemeVars['--colorIcon']}
 							/>
-						</span>
+						</button>
 					</div>
 				</div>
 			{/if}
@@ -409,10 +412,13 @@
 		margin: 0;
 	}
 
-	.panel header button {
+	button {
 		background: none;
 		border: none;
 		cursor: pointer;
+	}
+	button:focus-visible {
+		outline: var(--outline);
 	}
 
 	.group {
@@ -443,7 +449,7 @@
 	.selectedItem {
 		justify-content: space-between;
 	}
-	.selectedItem:hover {
+	.selectedItem:hover, .selectedItem:focus-within {
 		background-color: var(--colorHoverToDelete);
 	}
 	.deselectAll {
@@ -455,5 +461,8 @@
 
 	.label {
 		flex: 1;
+	}
+	.clickable {
+		cursor: pointer;
 	}
 </style>

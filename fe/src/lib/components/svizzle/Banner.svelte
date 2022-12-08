@@ -18,9 +18,18 @@
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
 
+	const onKeyDown = event => {
+		if (event.keyCode === 27) {
+			event.preventDefault();
+			close();
+		}
+	}
+
 	$: theme = theme ? {...defaultTheme, ...theme} : defaultTheme;
 	$: style = makeStyleVars(theme);
 </script>
+
+<svelte:window on:keydown={onKeyDown} />
 
 <div
 	{style}

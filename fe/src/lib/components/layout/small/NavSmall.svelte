@@ -6,7 +6,6 @@
 		Icon,
 		Info,
 		isServerSide,
-		Link,
 		Menu,
 		Moon,
 		Send,
@@ -14,6 +13,7 @@
 		X
 	} from '@svizzle/ui';
 
+	import Link from '$lib/components/svizzle/Link.svelte';
 	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config';
 	import {
 		_a11yFillColor,
@@ -44,6 +44,11 @@
 	}
 
 	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
+	$: linkTheme = {
+		color: $_currThemeVars['--colorNavLink'],
+		focusOutline: $_currThemeVars['--outline'],
+		iconStroke: $_currThemeVars['--colorIcon'],
+	};
 	$: logos = LOGOS[$_themeName]
 </script>
 
@@ -102,15 +107,24 @@
 				class='sponsors'
 				role='none'
 			>
-				<a href='https://www.ukri.org/'>
+				<Link
+					href='https://www.ukri.org/'
+					theme={linkTheme}
+				>
 					<img src={logos.ukri} alt='UK Research and Innovation' />
-				</a>
-				<a href='https://www.turing.ac.uk/'>
+				</Link>
+				<Link
+					href='https://www.turing.ac.uk/'
+					theme={linkTheme}
+				>
 					<img src={logos.turing} alt='The Alan Turing Institute' />
-				</a>
-				<a href='https://www.nesta.org.uk/'>
+				</Link>
+				<Link
+					href='https://www.nesta.org.uk/'
+					theme={linkTheme}
+				>
 					<img src={logos.nesta} alt='Nesta' />
-				</a>
+				</Link>
 			</div>
 			<ul role='none'>
 				<li
@@ -120,10 +134,7 @@
 					<Link
 						href={changelogUrl}
 						type='external'
-						theme={{
-							color: $_currThemeVars['--colorText'],
-							iconStroke: $_currThemeVars['--colorIcon']
-						}}
+						theme={linkTheme}
 					>
 						{version}
 					</Link>
@@ -133,8 +144,8 @@
 						href='/info'
 						rel='prefetch'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'info'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Info
@@ -151,8 +162,8 @@
 						href='/feedback'
 						rel='prefetch'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'feedback'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Feedback
@@ -173,8 +184,8 @@
 						download
 						href={jsonUrl}
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'download'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Dataset
@@ -193,8 +204,8 @@
 					<Link
 						href='/accessibility'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'accessibility'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Accessibility
@@ -204,8 +215,8 @@
 					<Link
 						href='/guides'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'guides'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Guides
@@ -215,8 +226,8 @@
 					<Link
 						href='/methodology'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'methodology'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Methodology
@@ -226,8 +237,8 @@
 					<Link
 						href='/explorer'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, 'explorer'),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Explorer
@@ -237,8 +248,8 @@
 					<Link
 						href='/'
 						theme={{
+							...linkTheme,
 							color: $_getNavLinkColor(segment, ''),
-							iconStroke: $_currThemeVars['--colorIcon']
 						}}
 					>
 						Home
@@ -278,6 +289,9 @@
 		width: min-content;
 		height: min-content;
 		z-index: var(--z1000);
+	}
+	button:focus-visible {
+		outline: var(--outline);
 	}
 	menu {
 		background: var(--colorBackground);

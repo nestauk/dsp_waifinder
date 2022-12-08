@@ -20,6 +20,7 @@
 		borderTop: $_currThemeVars['--border'],
 		colorBackgroundActive: $_currThemeVars['--colorSelectedBackground'],
 		colorTextActive: $_currThemeVars['--colorSelectedText'],
+		focusOutline: $_currThemeVars['--outline'],
 	}
 	$: isOptionalHidden =
 		detailsOverflows

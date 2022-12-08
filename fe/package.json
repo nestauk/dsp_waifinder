@@ -56,7 +56,7 @@
 		"dataDir": "mkdirp static/data",
 		"dataProcessing": "node src/bin/dataProcessing.js",
 		"dataSetup": "npm run dataDir && npm run dataProcessing",
-		"deploy": "npm run makedata && npm run export",
+		"deploy": "npm run makedata && npm run build",
 		"dev": "vite dev",
 		"lighthouse": "node test/lighthouse/validate.js",
 		"linksvizzles": "npm link @svizzle/dev @svizzle/dom @svizzle/file @svizzle/geo @svizzle/ui @svizzle/utils && npm list",
@@ -65,12 +65,14 @@
 		"postinstall": "npm run copymapboxcss",
 		"preview": "vite preview",
 		"redev": "npm run rmkv && npm run dev",
+		"reinstall": "npm run uninstall && npm install",
 		"reportToCSV": "npm run chmod && node src/bin/reportToCSV.js",
 		"rmdata": "rimraf static/data",
 		"rmkit": "rimraf .svelte-kit",
 		"rmkv": "npm run rmkit && npm run rmvite",
 		"rmvite": "rimraf node_modules/.vite",
 		"selenium": "node test/browserstack/selenium-runner.mjs",
+		"uninstall": "rimraf node_modules package-lock.json",
 		"unittest": "mocha --spec src/**/*.spec.js"
 	},
 	"type": "module"

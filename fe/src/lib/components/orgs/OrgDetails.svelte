@@ -79,6 +79,9 @@
 		colorHighlightedBackground: $_currThemeVars['--colorHighlightedTextBackground'],
 		colorHighlightedText: $_currThemeVars['--colorHighlightedText'],
 	};
+	$: linkTheme = {
+		focusOutline: $_currThemeVars['--outline'],
+	};
 </script>
 
 <div
@@ -105,6 +108,7 @@
 					ariaLabel='Website for {item.name}'
 					href={item.url}
 					target='_blank'
+					theme={linkTheme}
 				>
 					<Icon
 						glyph={Link2}
@@ -127,11 +131,14 @@
 			<div>
 				{#if isDescriptionUIVisible}
 					<div class='descriptionUI'>
-						<CopyToClipboardButton getText={() => item.description} />
+						<CopyToClipboardButton
+							getText={() => item.description}
+							theme={linkTheme}
+						/>
 						{#if isEllipsisActive}
-							<div on:click={toggleFolded}>
+							<button on:click={toggleFolded}>
 								<Icon glyph={isFolded ? PlusCircle : MinusCircle} />
-							</div>
+							</button>
 						{/if}
 					</div>
 				{/if}
@@ -185,6 +192,7 @@
 							<Link
 								href={getWikipediaURL(id)}
 								target='_blank'
+								theme={linkTheme}
 							>
 								<div
 									on:mouseenter={() => asyncUpdateTopicDetails(id)}
@@ -283,6 +291,16 @@
 	.descriptionUI > *:not(:last-child) {
 		padding-bottom: 0.5em;
 	}
+	button {
+		display: block;
+		border: none;
+		color: var(--colorText);
+		background: none;
+	}
+	button:focus {
+		outline: var(--outline);
+		outline-offset: calc( -1 * var(--focusLineWidth));
+	}
 
 	/* row 3 */
 
@@ -298,5 +316,9 @@
 
 	.topic {
 		max-width: 100%;
+	}
+	.topic:has(:focus-visible) { /* for Pill on Chrome */
+		outline: var(--outline);
+		outline-offset: calc( -1 * var(--focusLineWidth));
 	}
 </style>

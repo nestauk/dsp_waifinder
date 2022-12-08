@@ -16,41 +16,32 @@
 
 	const toggleItem = ({detail: {id}}) => togglePlaceId(id);
 
+	const onKeyDown = event => {
+		if ($_isPlacesEditMode && event.keyCode === 27) {
+			event.preventDefault();
+			exitPlacesEditMode();
+		}
+	}
+
 	$: onClick = $_isPlacesEditMode ? toggleItem : null;
 </script>
+
+<svelte:window on:keydown={onKeyDown} />
 
 <div
 	class='PlacesBar'
 	class:small={$_isSmallScreen}
 >
 	<div class='editMode'>
-		{#if $_isPlacesEditMode}
-			<div
-				class='button'
-				on:click={exitPlacesEditMode}
-			>
-				<span>
-					<Icon
-						glyph={CheckCircle}
-						strokeWidth=1.25
-					/>
-				</span>
-				<span>Exit edit mode</span>
-			</div>
-		{:else}
-			<div
-				class='button'
-				on:click={enterPlacesEditMode}
-			>
-				<span>
-					<Icon
-						glyph={Edit3}
-						strokeWidth=1.25
-					/>
-				</span>
-				<span>Enter edit mode</span>
-			</div>
-		{/if}
+		<button on:click={$_isPlacesEditMode ? exitPlacesEditMode : enterPlacesEditMode}>
+			<span>
+				<Icon
+					glyph={$_isPlacesEditMode ? CheckCircle : Edit3}
+					strokeWidth=1.25
+				/>
+			</span>
+			<span>{$_isPlacesEditMode ? 'Exit' : 'Enter'} edit mode</span>
+		</button>
 	</div>
 	<div class='select'>
 		<BarchartVDiv
@@ -98,12 +89,24 @@
 		border-top: var(--border);
 	}
 
-	.button {
+	button {
 		align-items: center;
+		background: var(--colorBackground);
+		border: none;
+		color: var(--colorText);
 		cursor: pointer;
 		display: flex;
-		gap: 1rem;
+		font-size: 1rem;
+		gap: 1em;
 		justify-content: center;
 		user-select: none;
+		width: 100%;
+	}
+	button:focus {
+		outline: none;
+	}
+	.editMode:focus-within {
+		outline: var(--outline);
+		outline-offset: calc(var(--focusLineWidth) * -1);
 	}
 </style>

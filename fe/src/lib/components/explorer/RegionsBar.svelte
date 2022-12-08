@@ -16,41 +16,32 @@
 
 	const toggleItem = ({detail: {id}}) => toggleRegionId(id);
 
+	const onKeyDown = event => {
+		if ($_isRegionsEditMode && event.keyCode === 27) {
+			event.preventDefault();
+			exitRegionsEditMode();
+		}
+	}
+
 	$: onClick = $_isRegionsEditMode ? toggleItem : null;
 </script>
+
+<svelte:window on:keydown={onKeyDown} />
 
 <div
 	class='RegionsBar'
 	class:small={$_isSmallScreen}
 >
 	<div class='editMode'>
-		{#if $_isRegionsEditMode}
-			<div
-				class='button'
-				on:click={exitRegionsEditMode}
-			>
-				<span>
-					<Icon
-						glyph={CheckCircle}
-						strokeWidth=1.25
-					/>
-				</span>
-				<span>Exit edit mode</span>
-			</div>
-		{:else}
-			<div
-				class='button'
-				on:click={enterRegionsEditMode}
-			>
-				<span>
-					<Icon
-						glyph={Edit3}
-						strokeWidth=1.25
-					/>
-				</span>
-				<span>Enter edit mode</span>
-			</div>
-		{/if}
+		<button on:click={$_isRegionsEditMode ? exitRegionsEditMode : enterRegionsEditMode}>
+			<span>
+				<Icon
+					glyph={$_isRegionsEditMode ? CheckCircle : Edit3}
+					strokeWidth=1.25
+				/>
+			</span>
+			<span>{$_isRegionsEditMode ? 'Exit' : 'Enter'} edit mode</span>
+		</button>
 	</div>
 	<div class='select'>
 		<BarchartVDiv
@@ -98,12 +89,24 @@
 		border-top: var(--border);
 	}
 
-	.button {
+	button {
 		align-items: center;
+		background: var(--colorBackground);
+		border: none;
+		color: var(--colorText);
 		cursor: pointer;
 		display: flex;
-		gap: 1rem;
+		font-size: 1rem;
+		gap: 1em;
 		justify-content: center;
 		user-select: none;
+		width: 100%;
+	}
+	button:focus {
+		outline: none;
+	}
+	.editMode:focus-within {
+		outline: var(--outline);
+		outline-offset: calc(var(--focusLineWidth) * -1);
 	}
 </style>
