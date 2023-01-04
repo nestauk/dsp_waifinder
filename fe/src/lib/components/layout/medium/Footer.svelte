@@ -44,6 +44,7 @@
 	<span>
 		<Link
 			href='https://www.ukri.org/'
+			target='_blank'
 			theme={linkTheme}
 		>
 			<img
@@ -53,6 +54,7 @@
 		</Link>
 		<Link
 			href='https://www.turing.ac.uk/'
+			target='_blank'
 			theme={linkTheme}
 		>
 			<img
@@ -62,6 +64,7 @@
 		</Link>
 		<Link
 			href='https://www.nesta.org.uk/'
+			target='_blank'
 			theme={linkTheme}
 		>
 			<img
