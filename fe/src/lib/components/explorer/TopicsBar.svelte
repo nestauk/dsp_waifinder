@@ -117,6 +117,6 @@
 	}
 	.editMode:focus-within {
 		outline: var(--outline);
-		outline-offset: calc(var(--focusLineWidth) * -1);
+		outline-offset: calc(var(--outlineWidth) * -1);
 	}
 </style>

@@ -11,7 +11,7 @@
 	import * as _ from 'lamb';
 
 	import {page as _page} from '$app/stores';
-	import {_currThemeVars} from '$lib/stores/theme';
+	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme';
 
 	const segments = ['orgs', 'topics'];
 	const titles = {
@@ -33,12 +33,6 @@
 		$_page;
 		isClientSide && contentElement?.scrollTo(0, 0);
 	}
-
-	$: linkTheme = {
-		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
-	}
 </script>
 
 <main class='_layout methodology {$_screen?.classes}'>
@@ -54,7 +48,7 @@
 							<Link
 								href='/methodology/{id}'
 								theme={{
-									...linkTheme,
+									...$_linkTheme0,
 									color: segment === id
 										? $_currThemeVars['--colorTextInverted']
 										: $_currThemeVars['--colorLink']
@@ -78,7 +72,7 @@
 							ariaLabel={hasPrevSegment ? 'Previous document' : null}
 							href={hasPrevSegment && `/methodology/${prevSegment}`}
 							theme={{
-								...linkTheme,
+								...$_linkTheme0,
 								color: hasPrevSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']
@@ -92,7 +86,7 @@
 							ariaLabel={hasNextSegment ? 'Next document' : null}
 							href={hasNextSegment && `/methodology/${nextSegment}`}
 							theme={{
-								...linkTheme,
+								...$_linkTheme0,
 								color: hasNextSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']

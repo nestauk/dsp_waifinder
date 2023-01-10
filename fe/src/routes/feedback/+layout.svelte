@@ -4,7 +4,7 @@
 	import * as _ from 'lamb';
 
 	import {page as _page} from '$app/stores';
-	import {_currThemeVars} from '$lib/stores/theme';
+	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme';
 
 	const segments = ['survey', 'add_your_org', 'remove_your_org'];
 	const titles = {
@@ -19,11 +19,6 @@
 	$: nextSegment = segments[currentValueIndex + 1];
 	$: hasPrevSegment = isNotNil(prevSegment);
 	$: hasNextSegment = isNotNil(nextSegment);
-	$: linkTheme = {
-		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
-	};
 </script>
 
 <main class='_layout feedback {$_screen?.classes}'>
@@ -37,7 +32,7 @@
 							<Link
 								href='/feedback/{id}'
 								theme={{
-									...linkTheme,
+									...$_linkTheme0,
 									color: segment === id
 										? $_currThemeVars['--colorTextInverted']
 										: $_currThemeVars['--colorLink']
@@ -61,7 +56,7 @@
 							ariaLabel={hasPrevSegment ? 'Previous tab' : null}
 							href={hasPrevSegment && `/feedback/${prevSegment}`}
 							theme={{
-								...linkTheme,
+								...$_linkTheme0,
 								color: hasPrevSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']
@@ -75,7 +70,7 @@
 							ariaLabel={hasNextSegment ? 'Next tab' : null}
 							href={hasNextSegment && `/feedback/${nextSegment}`}
 							theme={{
-								...linkTheme,
+								...$_linkTheme0,
 								color: hasNextSegment
 									? $_currThemeVars['--colorLink']
 									: $_currThemeVars['--colorTextDisabled']

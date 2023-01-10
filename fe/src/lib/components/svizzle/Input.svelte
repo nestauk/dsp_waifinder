@@ -15,7 +15,7 @@
 		borderColor: 'rgb(70, 70, 70)',
 		colorIcon: 'black',
 		colorText: 'black',
-		focusOutline: '1px solid',
+		outline: '1px solid',
 	};
 
 	let input;
@@ -99,7 +99,7 @@
 	}
 
 	.Input:focus-within {
-		outline: var(--focusOutline);
+		outline: var(--outline);
 	}
 
 	input {

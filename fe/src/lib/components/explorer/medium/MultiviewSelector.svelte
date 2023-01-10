@@ -22,8 +22,8 @@
 		// TBD should we specify `colorText`?
 		colorTextActive: $_currThemeVars['--colorSelectedText'],
 		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
+		outlineStyle: $_currThemeVars['--outlineStyle'],
+		outlineWidth: $_currThemeVars['--outlineWidth'],
 	}
 	$: isOptionalHidden =
 		detailsOverflows

@@ -28,11 +28,13 @@
 	import {isDev} from '$lib/env';
 	import {_isSmallScreen} from '$lib/stores/layout';
 	import {
+		_a11yMenuTheme,
 		_bannersTheme,
 		_currThemeVars,
 		_isThemeEditorActive,
+		_scrollbarTheme,
 		_themeName,
-		_themeVars
+		_themeVars,
 	} from '$lib/stores/theme'
 
 	import Privacy from '$lib/_content/info/PrivacyBanner.svx';
@@ -74,19 +76,6 @@
 	$: menuHeight = $_headerSize.blockSize + (showA11yMenu ? a11yHeight : 0);
 	$: $_screen?.classes && (isLayoutUndefined = false);
 	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
-	$: a11yMenuTheme = {
-		colorBackground: $_currThemeVars['--colorBackground'],
-		colorBorder: $_currThemeVars['--colorBorderAux'],
-		colorKnob: $_currThemeVars['--colorSwitchKnob'],
-		colorDisabled: $_currThemeVars['--colorTextDisabled'],
-		colorText: $_currThemeVars['--colorText']
-	}
-	$: scrollbarTheme = {
-		thumbColor: $_currThemeVars['--colorScrollbarThumb'],
-		trackBorderColor: $_currThemeVars['--colorScrollbarTrackBorder'],
-		trackColor: $_currThemeVars['--colorScrollbarTrack'],
-		// TBD, include `thumbRadius` & `trackWidth`?
-	}
 </script>
 
 <StyleSensor
@@ -113,7 +102,7 @@
 
 <ScrollbarStyler
 	isEnabled={isPlatformIn(['Windows'], ['Chrome'])}
-	theme={scrollbarTheme}
+	theme={$_scrollbarTheme}
 />
 
 {#if scriptingActive && fontLoadStatus.isFirstLoaded}
@@ -179,7 +168,7 @@
 		>
 			<A11yMenu
 				{_screen}
-				theme={a11yMenuTheme}
+				theme={$_a11yMenuTheme}
 			/>
 		</section>
 	{/if}

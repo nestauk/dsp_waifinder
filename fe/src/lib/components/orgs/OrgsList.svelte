@@ -39,8 +39,8 @@
 			backgroundColor: $_currThemeVars['--colorAux'],
 			backgroundColorDisabled: $_currThemeVars['--colorAux'],
 			outlineColor: $_currThemeVars['--colorOutline'],
-			outlineStyle: $_currThemeVars['--focusLineStyle'],
-			outlineWidth: $_currThemeVars['--focusLineWidth'],
+			outlineStyle: $_currThemeVars['--outlineStyle'],
+			outlineWidth: $_currThemeVars['--outlineWidth'],
 			textColor: $_currThemeVars['--colorText'],
 			textColorDisabled: $_currThemeVars['--colorTextDisabled']
 		}}

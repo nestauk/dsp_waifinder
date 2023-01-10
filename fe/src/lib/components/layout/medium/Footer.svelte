@@ -4,11 +4,13 @@
 	import {changelogUrl, LOGOS} from '$lib/config';
 	import {isDev} from '$lib/env';
 	import {
-		_a11yFillColor,
-		_a11yStrokeColor,
+		_a11yIconFillColor,
+		_a11yIconStrokeColor,
 		_currThemeVars,
 		_getNavLinkColor,
 		_isThemeEditorActive,
+		_linkTheme0,
+		_extLinkTheme,
 		_themeName,
 		toggleTheme,
 	} from '$lib/stores/theme';
@@ -28,13 +30,6 @@
 	}
 
 	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
-	$: linkTheme = {
-		color: $_currThemeVars['--colorNavLink'],
-		iconStroke: $_currThemeVars['--colorIcon'],
-		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
-	};
 	$: logos = LOGOS[$_themeName]
 </script>
 
@@ -46,7 +41,7 @@
 		<Link
 			href='https://www.ukri.org/'
 			target='_blank'
-			theme={linkTheme}
+			theme={$_linkTheme0}
 		>
 			<img
 				alt='UK Research and Innovation'
@@ -56,7 +51,7 @@
 		<Link
 			href='https://www.turing.ac.uk/'
 			target='_blank'
-			theme={linkTheme}
+			theme={$_linkTheme0}
 		>
 			<img
 				alt='The Alan Turing Institute'
@@ -66,7 +61,7 @@
 		<Link
 			href='https://www.nesta.org.uk/'
 			target='_blank'
-			theme={linkTheme}
+			theme={$_linkTheme0}
 		>
 			<img
 				alt='Nesta'
@@ -84,7 +79,7 @@
 		<Link
 			href={changelogUrl}
 			type='external'
-			theme={linkTheme}
+			theme={$_extLinkTheme}
 		>
 			{version}
 		</Link>
@@ -136,7 +131,7 @@
 				<Link
 					href='/accessibility'
 					theme={{
-						...linkTheme,
+						...$_linkTheme0,
 						color: $_getNavLinkColor(segment, 'accessibility'),
 					}}
 				>
@@ -150,9 +145,9 @@
 					on:click={toggleA11yMenu}
 				>
 					<Icon
-						fill={$_a11yFillColor}
+						fill={$_a11yIconFillColor}
 						glyph={A11yPerson}
-						stroke={$_a11yStrokeColor}
+						stroke={$_a11yIconStrokeColor}
 						strokeWidth=1
 					/>
 				</button>

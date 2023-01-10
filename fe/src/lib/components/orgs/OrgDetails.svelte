@@ -17,8 +17,9 @@
 	import {_orgSearchRegex} from '$lib/stores/selection';
 	import {
 		_currThemeVars,
+		_linkTheme2,
 		_orgTypeToColorFn,
-		_orgTypeToTextColorFn
+		_orgTypeToTextColorFn,
 	} from '$lib/stores/theme';
 	import {
 		asyncUpdateTopicDetails,
@@ -84,14 +85,6 @@
 		colorHighlightedBackground: $_currThemeVars['--colorHighlightedTextBackground'],
 		colorHighlightedText: $_currThemeVars['--colorHighlightedText'],
 	};
-	// we're reusing `linkTheme` for `CopyToClipboard`'s `theme` but note that
-	// `CopyToClipboard`'s `theme` has additional props that we're not using
-	$: linkTheme = {
-		color: $_currThemeVars['--colorIcon'],
-		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
-	};
 </script>
 
 <div
@@ -118,7 +111,7 @@
 					ariaLabel='Website for {item.name}'
 					href={item.url}
 					target='_blank'
-					theme={linkTheme}
+					theme={$_linkTheme2}
 				>
 					<Icon
 						glyph={Link2}
@@ -143,7 +136,7 @@
 					<div class='descriptionUI'>
 						<CopyToClipboard
 							getText={() => item.description}
-							theme={linkTheme}
+							theme={$_linkTheme2}
 						/>
 						{#if isEllipsisActive}
 							<button on:click={toggleFolded}>
@@ -202,7 +195,7 @@
 							<Link
 								href={getWikipediaURL(id)}
 								target='_blank'
-								theme={linkTheme}
+								theme={$_linkTheme2}
 							>
 								<div
 									on:mouseenter={() => asyncUpdateTopicDetails(id)}
@@ -302,14 +295,15 @@
 		padding-bottom: 0.5em;
 	}
 	button {
-		display: block;
+		background: none;
 		border: none;
 		color: var(--colorText);
-		background: none;
+		cursor: pointer;
+		display: block;
 	}
 	button:focus {
 		outline: var(--outline);
-		outline-offset: calc( -1 * var(--focusLineWidth));
+		outline-offset: calc( -1 * var(--outlineWidth));
 	}
 
 	/* row 3 */
@@ -329,6 +323,6 @@
 	}
 	.topic:has(:focus-visible) { /* for Pill on Chrome */
 		outline: var(--outline);
-		outline-offset: calc( -1 * var(--focusLineWidth));
+		outline-offset: calc( -1 * var(--outlineWidth));
 	}
 </style>

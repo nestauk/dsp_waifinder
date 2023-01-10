@@ -11,7 +11,7 @@
 
 	import WikipediaLogo from '$lib/components/icons/WikipediaLogo.svelte';
 	import {bannersDefaultFooterText} from '$lib/config';
-	import {_bannersTheme, _currThemeVars} from '$lib/stores/theme';
+	import {_bannersTheme, _linkTheme0} from '$lib/stores/theme';
 	import {
 		_activeTopicDetails,
 		clearActiveTopic
@@ -28,11 +28,6 @@
 		isImgErrored = true;
 	}
 
-	$: linkTheme = {
-		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
-	}
 	$: title = $_activeTopicDetails?.label ?? '';
 	$: abstract = $_activeTopicDetails?.abstract
 		? getFirstPhrases($_activeTopicDetails.abstract, 300)
@@ -83,7 +78,7 @@
 					href={wikipediaURL}
 					isBold={true}
 					target='_blank'
-					theme={linkTheme}
+					theme={$_linkTheme0}
 				>
 					<Icon
 						fill='black'

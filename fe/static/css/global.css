@@ -46,16 +46,15 @@ a {
 	--boxShadowGeom: 0px 8px 9px -4px;
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
-	--focusLineWidth: 2px;
-	--focusLineStyle: solid;
-	--focusLine: var(--focusLineWidth) var(--focusLineStyle);
+	--outlineWidth: 2px;
+	--outlineStyle: solid;
 	--focusShadow: 0 0 2px 2px var(--colorOutline);
 
 	/* theme compound helpers */
 
 	--border: var(--borderLine) var(--colorBorder);
 	--borderAux: var(--borderLine) var(--colorBorderAux);
-	--outline: var(--focusLine) var(--colorOutline); /* TODO remove? */
+	--outline: var(--outlineWidth) var(--outlineStyle) var(--colorOutline);
 	--boxShadowY: var(--boxShadowGeom) var(--colorShadow);
 }
 
@@ -64,16 +63,15 @@ a {
 	--boxShadowGeom: 0px 8px 9px -4px;
 	--dimHeaderHeight: 3rem;
 	--dimPadding: 0.5rem;
-	--focusLineWidth: 2px;
-	--focusLineStyle: solid;
-	--focusLine: var(--focusLineWidth) var(--focusLineStyle);
+	--outlineWidth: 2px;
+	--outlineStyle: solid;
 	--focusShadow: 0 0 2px 2px var(--colorOutline);
 
 	/* theme compound helpers */
 
 	--border: var(--borderLine) var(--colorBorder);
 	--borderAux: var(--borderLine) var(--colorBorderAux);
-	--outline: var(--focusLine) var(--colorOutline);
+	--outline: var(--outlineWidth) var(--outlineStyle) var(--colorOutline);
 	--boxShadowY: var(--boxShadowGeom) var(--colorShadow);
 }
 /* theme: colors */

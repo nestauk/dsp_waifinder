@@ -4,18 +4,11 @@
 	import {jsonUrl} from '$lib/config';
 	import {
 		_currThemeVars,
-		_getNavLinkColor
+		_getNavLinkColor,
+		_linkTheme0,
 	} from '$lib/stores/theme';
 
 	export let segment;
-
-	$: linkTheme = {
-		color: $_currThemeVars['--colorNavLink'],
-		iconStroke: $_currThemeVars['--colorIcon'],
-		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
-	};
 </script>
 
 <nav
@@ -29,7 +22,7 @@
 					<Link
 						href='/'
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, ''),
 						}}
 					>
@@ -40,7 +33,7 @@
 					<Link
 						href='/methodology'
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, 'methodology'),
 						}}
 					>
@@ -51,7 +44,7 @@
 					<Link
 						href='/guides'
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, 'guides'),
 						}}
 					>
@@ -62,7 +55,7 @@
 					<Link
 						href='/explorer'
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, 'explorer'),
 						}}
 					>
@@ -82,7 +75,7 @@
 						download
 						href={jsonUrl}
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, 'dataset'),
 						}}
 					>
@@ -100,7 +93,7 @@
 						href='/feedback'
 						rel='prefetch'
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, 'feedback'),
 						}}
 					>
@@ -118,7 +111,7 @@
 						href='/info'
 						rel='prefetch'
 						theme={{
-							...linkTheme,
+							...$_linkTheme0,
 							color: $_getNavLinkColor(segment, 'info'),
 						}}
 					>

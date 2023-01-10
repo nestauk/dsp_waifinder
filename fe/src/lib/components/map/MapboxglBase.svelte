@@ -295,6 +295,6 @@
 		box-shadow: none !important;
 		/* box-shadow: var(--focusShadow) !important; */
 		outline: var(--outline);
-		outline-offset: calc(var(--focusLineWidth) * -1);
+		outline-offset: calc(var(--outlineWidth) * -1);
 	}
 </style>

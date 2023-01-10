@@ -79,22 +79,22 @@
 		color: $_currThemeVars['--colorText'],
 		knobColor: $_currThemeVars['--colorSwitchKnob'],
 		outlineColor: $_currThemeVars['--colorOutline'],
-		outlineStyle: $_currThemeVars['--focusLineStyle'],
-		outlineWidth: $_currThemeVars['--focusLineWidth'],
+		outlineStyle: $_currThemeVars['--outlineStyle'],
+		outlineWidth: $_currThemeVars['--outlineWidth'],
 	}
 	$: textSearchInputTheme = {
 		colorText: $_currThemeVars['--colorText'],
 		colorIcon: $_orgSearchValue
 			? $_currThemeVars['--colorIcon']
 			: $_currThemeVars['--colorBackground'],
-		focusOutline: $_currThemeVars['--outline']
+		outline: $_currThemeVars['--outline']
 	}
 	$: placeSearchInputTheme = {
 		colorText: $_currThemeVars['--colorText'],
 		colorIcon: $_placesSearchValue
 			? $_currThemeVars['--colorIcon']
 			: $_currThemeVars['--colorBackground'],
-		focusOutline: $_currThemeVars['--outline']
+		outline: $_currThemeVars['--outline']
 	}
 </script>
 

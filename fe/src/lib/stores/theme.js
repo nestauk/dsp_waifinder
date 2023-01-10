@@ -50,8 +50,8 @@ export const _barchartsTheme = derived(
 		itemTextColorHover: currThemeVars['--colorBarchartHoveredItemText'],
 		itemTextColorSelected: currThemeVars['--colorBarchartSelectedItemText'],
 		outlineColor: currThemeVars['--colorOutline'],
-		outlineStyle: currThemeVars['--focusLineStyle'],
-		outlineWidth: currThemeVars['--focusLineWidth'],
+		outlineStyle: currThemeVars['--outlineStyle'],
+		outlineWidth: currThemeVars['--outlineWidth'],
 		textColor: currThemeVars['--colorText'],
 	})
 );
@@ -65,20 +65,6 @@ export const _bannersTheme = derived(
 		colorBoxShadow: currThemeVars['--colorShadow'],
 		colorText: currThemeVars['--colorText'],
 	})
-);
-
-export const _a11yStrokeColor = derived(
-	[_currThemeVars, _isA11yDirty],
-	([currThemeVars, isA11yDirty]) => isA11yDirty
-		? currThemeVars['--colorBackground']
-		: currThemeVars['--colorIcon']
-);
-
-export const _a11yFillColor = derived(
-	[_currThemeVars, _isA11yDirty],
-	([currThemeVars, isA11yDirty]) => isA11yDirty
-		? currThemeVars['--colorIcon']
-		: currThemeVars['--colorBackground']
 );
 
 export const _getIconColor = derived(
@@ -97,6 +83,74 @@ export const _getNavLinkColor = derived(
 		'--colorNavLinkActive',
 		'--colorNavLink'
 	)
+);
+
+/* links */
+
+export const _linkTheme0 = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		outlineColor: currThemeVars['--colorOutline'],
+		outlineStyle: currThemeVars['--outlineStyle'],
+		outlineWidth: currThemeVars['--outlineWidth'],
+	})
+);
+
+export const _linkTheme1 = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		color: currThemeVars['--colorLink'],
+		iconStroke: currThemeVars['--colorLink'],
+		outlineColor: currThemeVars['--colorOutline'],
+		outlineStyle: currThemeVars['--outlineStyle'],
+		outlineWidth: currThemeVars['--outlineWidth'],
+	})
+);
+
+export const _linkTheme2 = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		color: currThemeVars['--colorIcon'],
+		outlineColor: currThemeVars['--colorOutline'],
+		outlineStyle: currThemeVars['--outlineStyle'],
+		outlineWidth: currThemeVars['--outlineWidth'],
+	})
+);
+
+export const _extLinkTheme = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		color: currThemeVars['--colorNavLink'],
+		iconStroke: currThemeVars['--colorIcon'],
+		outlineColor: currThemeVars['--colorOutline'],
+		outlineStyle: currThemeVars['--outlineStyle'],
+		outlineWidth: currThemeVars['--outlineWidth'],
+	})
+);
+
+/* a11y menu & icon */
+
+export const _a11yMenuTheme = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		colorBackground: currThemeVars['--colorBackground'],
+		colorBorder: currThemeVars['--colorBorderAux'],
+		colorKnob: currThemeVars['--colorSwitchKnob'],
+		colorDisabled: currThemeVars['--colorTextDisabled'],
+		colorText: currThemeVars['--colorText']
+	})
+);
+export const _a11yIconFillColor = derived(
+	[_currThemeVars, _isA11yDirty],
+	([currThemeVars, isA11yDirty]) => isA11yDirty
+		? currThemeVars['--colorIcon']
+		: currThemeVars['--colorBackground']
+);
+export const _a11yIconStrokeColor = derived(
+	[_currThemeVars, _isA11yDirty],
+	([currThemeVars, isA11yDirty]) => isA11yDirty
+		? currThemeVars['--colorBackground']
+		: currThemeVars['--colorIcon']
 );
 
 /* org types */
@@ -119,4 +173,16 @@ export const _orgTypeToTextColorFn = derived(
 
 			return currThemeVars[`--colorOrgtype${classIndex}Text`];
 		}
+);
+
+/* scrollbars */
+
+export const _scrollbarTheme = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		thumbColor: currThemeVars['--colorScrollbarThumb'],
+		trackBorderColor: currThemeVars['--colorScrollbarTrackBorder'],
+		trackColor: currThemeVars['--colorScrollbarTrack'],
+		// TBD, include `thumbRadius` & `trackWidth`?
+	})
 );
