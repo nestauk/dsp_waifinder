@@ -1,10 +1,10 @@
 <script>
-	import OrgBanner from '$lib/components/banners/OrgBanner.svelte';
-	import TopicBanner from '$lib/components/banners/TopicBanner.svelte';
-	import AutoZoomControl from '$lib/components/map/AutoZoomControl.svelte';
-	import Mapbox from '$lib/components/map/Mapbox.svelte';
-	import SvgLayers from '$lib/components/map/SvgLayers.svelte';
-	import Settings from '$lib/components/Settings.svelte';
+	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
+	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
+	import AutoZoomControl from '$lib/components/explorer/map/AutoZoomControl.svelte';
+	import Mapbox from '$lib/components/explorer/map/Mapbox.svelte';
+	import SvgLayers from '$lib/components/explorer/map/SvgLayers.svelte';
+	import Settings from '$lib/components/explorer/Settings.svelte';
 
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,

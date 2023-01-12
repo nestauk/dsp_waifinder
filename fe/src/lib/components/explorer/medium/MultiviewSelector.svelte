@@ -2,8 +2,8 @@
 	import {Icon, List, ResponsiveButton, Tag} from '@svizzle/ui';
 	import {noop} from '@svizzle/utils';
 
-	import City from '$lib/components/icons/City.svelte';
-	import Region from '$lib/components/icons/Region.svelte';
+	import City from '$lib/components/explorer/icons/City.svelte';
+	import Region from '$lib/components/explorer/icons/Region.svelte';
 	import {_currThemeVars, _getIconColor} from '$lib/stores/theme';
 
 	export let activeViewId;

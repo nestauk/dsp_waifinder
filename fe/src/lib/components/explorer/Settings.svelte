@@ -8,8 +8,8 @@
 		XCircle,
 	} from '@svizzle/ui';
 
-	import City from '$lib/components/icons/City.svelte';
-	import Region from '$lib/components/icons/Region.svelte';
+	import City from '$lib/components/explorer/icons/City.svelte';
+	import Region from '$lib/components/explorer/icons/Region.svelte';
 	import Input from '$lib/components/svizzle/Input.svelte';
 	import {
 		_keyOrgTypeValueOrgsCount,

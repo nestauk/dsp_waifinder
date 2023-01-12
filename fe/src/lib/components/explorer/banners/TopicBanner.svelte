@@ -9,7 +9,7 @@
 		Scroller,
 	} from '@svizzle/ui';
 
-	import WikipediaLogo from '$lib/components/icons/WikipediaLogo.svelte';
+	import WikipediaLogo from '$lib/components/explorer/icons/WikipediaLogo.svelte';
 	import {bannersDefaultFooterText} from '$lib/config';
 	import {_bannersTheme, _linkTheme0} from '$lib/stores/theme';
 	import {

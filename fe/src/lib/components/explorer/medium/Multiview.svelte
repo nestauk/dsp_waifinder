@@ -1,6 +1,6 @@
 <script>
-	import OrgsList from '$lib/components/orgs/OrgsList.svelte';
-	import Pill from '$lib/components/orgs/Pill.svelte';
+	import OrgsList from '$lib/components/explorer/orgs/OrgsList.svelte';
+	import Pill from '$lib/components/explorer/orgs/Pill.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
