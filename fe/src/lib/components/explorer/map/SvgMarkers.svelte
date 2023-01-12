@@ -223,6 +223,7 @@
 					class='ray'
 					on:click|stopPropagation={() => onMarkerClick(id)}
 					on:dblclick|stopPropagation
+					on:keydown|stopPropagation={null}
 					on:mouseenter={() => onMouseEnterMarker(id)}
 					on:mouseleave={onMouseLeaveMarker}
 					transform='translate({X},{Y}) rotate({angleDeg})'
@@ -258,6 +259,7 @@
 			class='marker'
 			on:click|stopPropagation={() => onMarkerClick(id)}
 			on:dblclick|stopPropagation
+			on:keydown|stopPropagation={null}
 			on:mouseenter={() => onMouseEnterMarker(id)}
 			on:mouseleave={onMouseLeaveMarker}
 			transform='translate({x},{y})'
@@ -278,6 +280,7 @@
 			class='cluster'
 			on:click|stopPropagation={() => onClusterClick(coordinates, id)}
 			on:dblclick|stopPropagation
+			on:keydown|stopPropagation={null}
 			transform='translate({x},{y})'
 		>
 			{#each sectors as {arc, fill}}

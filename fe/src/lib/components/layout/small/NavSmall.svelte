@@ -46,7 +46,14 @@
 	}
 
 	$: themeIconGlyph = $_themeName === 'themeLight' ? Moon : Sun;
-	$: logos = LOGOS[$_themeName]
+	$: logos = LOGOS[$_themeName];
+
+	const onKeyDown = event => {
+		if (['Enter', ' '].includes(event.key)) {
+			event.preventDefault();
+			closeMenu();
+		}
+	}
 </script>
 
 <nav
@@ -99,7 +106,10 @@
 		{/if}
 	</button>
 	{#if showMenu || isServerSide}
-		<menu on:click={closeMenu}>
+		<menu
+			on:click={closeMenu}
+			on:keydown={onKeyDown}
+		>
 			<div
 				class='sponsors'
 				role='none'

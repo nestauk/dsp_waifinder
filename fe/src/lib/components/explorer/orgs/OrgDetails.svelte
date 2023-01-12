@@ -85,6 +85,13 @@
 		colorHighlightedBackground: $_currThemeVars['--colorHighlightedTextBackground'],
 		colorHighlightedText: $_currThemeVars['--colorHighlightedText'],
 	};
+
+	const makeOnKeyDown = id => event => {
+		if (['Enter', ' '].includes(event.key)) {
+			event.preventDefault();
+			asyncUpdateTopicDetails(id);
+		}
+	}
 </script>
 
 <div
@@ -185,6 +192,7 @@
 						<div
 							class='topic'
 							on:click={() => asyncUpdateTopicDetails(id)}
+							on:keydown={makeOnKeyDown(id)}
 						>
 							<Pill label={getTopicLabel(id)} />
 						</div>

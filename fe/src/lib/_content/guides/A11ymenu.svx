@@ -19,7 +19,7 @@ You can change:
 ### Colour features
 
 You can:
-	*	invert all the colours in the app,
+	* invert all the colours in the app,
 	* select a colour vision deficiency: this will remap all the colours in the
 	  app to compensate for a diminished ability to see certain colours,
 	* edit the hue of all the colours in the app,

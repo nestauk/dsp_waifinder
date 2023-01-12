@@ -96,6 +96,13 @@
 			: $_currThemeVars['--colorBackground'],
 		outline: $_currThemeVars['--outline']
 	}
+
+	const makeOnKeyDown = (func, id) => event => {
+		if (['Enter', ' '].includes(event.key)) {
+			event.preventDefault();
+			func(id);
+		}
+	}
 </script>
 
 <div class='Settings'>
@@ -196,6 +203,7 @@
 						<div
 							class='clickable row selectedItem'
 							on:click={() => deselectTopic(id)}
+							on:keydown={makeOnKeyDown(deselectTopic, id)}
 						>
 							<span class='label'>{getTopicLabel(id)}</span>
 							<button>
@@ -265,6 +273,7 @@
 						<div
 							class='clickable row selectedItem'
 							on:click={() => deselectPlace(id)}
+							on:keydown={makeOnKeyDown(deselectPlace, id)}
 						>
 							<span class='label'>{name}</span>
 							<button>
@@ -335,6 +344,7 @@
 						<div
 							class='clickable row selectedItem'
 							on:click={() => deselectRegion(id)}
+							on:keydown={makeOnKeyDown(deselectRegion, id)}
 						>
 							<span class='label'>{name}</span>
 							<button>

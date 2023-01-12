@@ -20,6 +20,13 @@
 	};
 
 	$: varNames = $_currThemeVars ? getVarNames($_currThemeVars) : [];
+
+	const makeOnKeyDown = themeName => event => {
+		if (['Enter', ' '].includes(event.key)) {
+			event.preventDefault();
+			$_themeName = themeName;
+		}
+	}
 </script>
 
 <StyleDriver
@@ -45,6 +52,7 @@
 			<li
 				class:selected={name === $_themeName}
 				on:click={() => {$_themeName = name}}
+				on:keydown={makeOnKeyDown(name)}
 			>
 				{name}
 			</li>

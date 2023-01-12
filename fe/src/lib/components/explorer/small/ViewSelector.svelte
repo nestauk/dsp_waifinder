@@ -8,6 +8,13 @@
 
 	export let activeViewId;
 	export let setView = noop;
+
+	const makeOnKeyDown = viewId => event => {
+		if (['Enter', ' '].includes(event.key)) {
+			event.preventDefault();
+			setView(viewId);
+		}
+	}
 </script>
 
 <nav class='ViewSelector'>
@@ -17,6 +24,7 @@
 		class:active={activeViewId === 'settings'}
 		class='button clickable'
 		on:click={setView('settings')}
+		on:keydown={makeOnKeyDown('settings')}
 	>
 		<Icon
 			glyph={Sliders}
@@ -29,6 +37,7 @@
 		class:active={activeViewId === 'map'}
 		class='button clickable'
 		on:click={setView('map')}
+		on:keydown={makeOnKeyDown('map')}
 	>
 		<Icon
 			glyph={MapPin}
@@ -41,6 +50,7 @@
 		class:active={activeViewId === 'details'}
 		class='button clickable'
 		on:click={setView('details')}
+		on:keydown={makeOnKeyDown('details')}
 	>
 		<Icon
 			glyph={List}
@@ -53,6 +63,7 @@
 		class:active={activeViewId === 'topics'}
 		class='button clickable'
 		on:click={setView('topics')}
+		on:keydown={makeOnKeyDown('topics')}
 	>
 		<Icon
 			glyph={Tag}
@@ -65,6 +76,7 @@
 		class:active={activeViewId === 'places'}
 		class='button clickable'
 		on:click={setView('places')}
+		on:keydown={makeOnKeyDown('places')}
 	>
 		<Icon
 			fill={$_getIconColor('places', activeViewId)}
@@ -78,6 +90,7 @@
 		class:active={activeViewId === 'regions'}
 		class='button clickable'
 		on:click={setView('regions')}
+		on:keydown={makeOnKeyDown('regions')}
 	>
 		<Icon
 			glyph={Region}

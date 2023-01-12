@@ -1,7 +1,5 @@
 <script>
 	import {_autoZoom} from '$lib/stores/interaction';
-
-	export let map;
 </script>
 
 <div class='AutoZoomControl'>
