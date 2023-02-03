@@ -61,6 +61,10 @@ class merge_map_datasets(FlowSpec):
         self.glass_output = get_glassai_companies()
         self.cb_output = get_cb_ai_investors()
 
+        # Due to legal reasons we need to remove all the crunchbase fields apart from Name
+        self.cb_output = self.cb_output[["Name"]]
+        self.gtr_output.drop(columns=["Link", "Description"], inplace=True)
+
         # adding column names
         self.glass_output["Company"] = 1
         self.cb_output["Funder"] = 1
@@ -263,7 +267,7 @@ class merge_map_datasets(FlowSpec):
         ).reset_index(drop=True)
 
         # Chunk up for Batch
-        all_links = self.ai_map_data["Link"].tolist()
+        all_links = self.ai_map_data["Link"].dropna().tolist()
         self.links_chunked = list(partition(50, all_links))
 
         # # For loop through each data path

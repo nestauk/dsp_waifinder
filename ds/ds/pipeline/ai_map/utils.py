@@ -146,13 +146,22 @@ def get_pgeocode_cities(postcode_list):
 def get_geopy_addresses(all_output):
 
     locator = Nominatim(user_agent="myGeocoder", timeout=10)
-    all_output["lat_long"] = (
-        all_output["Latitude"].map(str) + "," + all_output["Longitude"].map(str)
+
+    def lat_lon_str(lat, lon):
+        if pd.notnull(lat) and pd.notnull(lon):
+            return f"{lat},{lon}"
+        else:
+            return None
+
+    all_output["lat_long"] = all_output.apply(
+        lambda x: lat_lon_str(x["Latitude"], x["Longitude"]), axis=1
     )
 
     geopy_addresses = []
     for i, row in tqdm(all_output.iterrows()):
         if pd.notnull(row["City"]):
+            geopy_addresses.append(None)
+        elif pd.isnull(row["lat_long"]):
             geopy_addresses.append(None)
         else:
             geopy_addresses.append(locator.reverse(row["lat_long"]))
@@ -167,10 +176,12 @@ def get_postcode_field(postcode, geopy_postcode, lat_long):
         return postcode
     elif geopy_postcode:
         return geopy_postcode
-    else:
+    elif lat_long:
         locator = Nominatim(user_agent="myGeocoder", timeout=10)
         address = locator.reverse(lat_long)
         return address.raw["address"]["postcode"]
+    else:
+        return None
 
 
 def clean_place_names(name):
@@ -281,7 +292,7 @@ def get_final_places(ai_map_data, city_names):
     # Second pass - fill in gaps with first that comes up (even though its not in geographic data)
 
     second_pass_places = [
-        [(n, t) for n, t in zip(names, types) if n][0]
+        [(n, t) for n, t in zip(names, types) if n][0] if any(names) else (None, None)
         for names, types in zip(
             ai_map_data[trust_order].values.tolist(), [trust_order] * len(ai_map_data)
         )
@@ -297,13 +308,17 @@ def get_final_places(ai_map_data, city_names):
 
     cleaned_final_place = []
     for x in final_place:
-        if "City of" in str(x):
-            x = x.replace("City of ", "")
-        x = clean_place_names(str(x))
-        cleaned_final_place.append(x)
+        if x:
+            if "City of" in str(x):
+                x = x.replace("City of ", "")
+            x = clean_place_names(str(x))
+            cleaned_final_place.append(x)
+        else:
+            cleaned_final_place.append(None)
 
     place_types = [
-        p.lower().replace("_clean", "").replace("geopy_", "") for p in place_types
+        p.lower().replace("_clean", "").replace("geopy_", "") if p else None
+        for p in place_types
     ]
 
     cities = set([a for a, b in zip(cleaned_final_place, place_types) if b == "city"])
@@ -315,11 +330,17 @@ def get_final_places(ai_map_data, city_names):
 
 
 def merge_place_data(ai_map_data, geo_data):
-    all_places = set(ai_map_data["Place"])
+
+    ai_map_data_with_place = ai_map_data.dropna(
+        subset=["Place", "Latitude", "Longitude"]
+    )
+    all_places = set(ai_map_data_with_place["Place"])
 
     # Trust average lat/long primarily
     places = (
-        ai_map_data.groupby("Place")[["Latitude", "Longitude"]].mean().reset_index()
+        ai_map_data_with_place.groupby("Place")[["Latitude", "Longitude"]]
+        .mean()
+        .reset_index()
     )
 
     geo_data_places = geo_data[geo_data["city"].isin(all_places)].reset_index(drop=True)
