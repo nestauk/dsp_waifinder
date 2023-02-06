@@ -1,0 +1,45 @@
+{
+    "took": 63,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 3391,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "textBody_abstract_article_token_count_histogram": {
+            "buckets": []
+        },
+        "textBody_abstract_article_token_count_extended_stats": {
+            "count": 0,
+            "min": null,
+            "max": null,
+            "avg": null,
+            "sum": 0,
+            "sum_of_squares": null,
+            "variance": null,
+            "variance_population": null,
+            "variance_sampling": null,
+            "std_deviation": null,
+            "std_deviation_population": null,
+            "std_deviation_sampling": null,
+            "std_deviation_bounds": {
+                "upper": null,
+                "lower": null,
+                "upper_population": null,
+                "lower_population": null,
+                "upper_sampling": null,
+                "lower_sampling": null
+            }
+        }
+    }
+}

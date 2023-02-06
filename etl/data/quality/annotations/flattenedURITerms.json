@@ -1,0 +1,429 @@
+{
+    "took": 79,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 3391,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "dbpedia": {
+            "doc_count": 103132,
+            "URIs": {
+                "doc_count_error_upper_bound": 97,
+                "sum_other_doc_count": 73279,
+                "buckets": [
+                    {
+                        "key": "http://dbpedia.org/resource/Artificial_intelligence",
+                        "doc_count": 1976
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Machine_learning",
+                        "doc_count": 991
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Wikimedia_Foundation",
+                        "doc_count": 976
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Technology",
+                        "doc_count": 889
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Wikipedia",
+                        "doc_count": 887
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/United_Kingdom",
+                        "doc_count": 864
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Computing_platform",
+                        "doc_count": 755
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Solution",
+                        "doc_count": 731
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Customer",
+                        "doc_count": 676
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Big_data",
+                        "doc_count": 639
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Innovation",
+                        "doc_count": 570
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Team",
+                        "doc_count": 515
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Software_development",
+                        "doc_count": 506
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Automation",
+                        "doc_count": 475
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Information_technology",
+                        "doc_count": 467
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Software",
+                        "doc_count": 437
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Enabling",
+                        "doc_count": 386
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Insight",
+                        "doc_count": 386
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Industry",
+                        "doc_count": 380
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Customer_service",
+                        "doc_count": 376
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Leadership",
+                        "doc_count": 346
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Business_process",
+                        "doc_count": 337
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Marketing",
+                        "doc_count": 329
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Delivery_(commerce)",
+                        "doc_count": 324
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Analytics",
+                        "doc_count": 322
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Digital_signature",
+                        "doc_count": 319
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Data",
+                        "doc_count": 309
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/New_product_development",
+                        "doc_count": 308
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Investment",
+                        "doc_count": 304
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Time",
+                        "doc_count": 297
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Customer_experience",
+                        "doc_count": 295
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Radix",
+                        "doc_count": 281
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Application_software",
+                        "doc_count": 277
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Deep_learning",
+                        "doc_count": 273
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Algorithm",
+                        "doc_count": 268
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Startup_company",
+                        "doc_count": 267
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Empowerment",
+                        "doc_count": 261
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Intelligence",
+                        "doc_count": 242
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Developed_country",
+                        "doc_count": 241
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Management",
+                        "doc_count": 240
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Data_science",
+                        "doc_count": 239
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Health_care",
+                        "doc_count": 233
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Digital_data",
+                        "doc_count": 228
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Technical_support",
+                        "doc_count": 226
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Sathya_Sai_Baba",
+                        "doc_count": 223
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Real-time_computing",
+                        "doc_count": 221
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Human",
+                        "doc_count": 216
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Mission_statement",
+                        "doc_count": 210
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/MacOS",
+                        "doc_count": 207
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Computer_vision",
+                        "doc_count": 206
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Operating_system",
+                        "doc_count": 205
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Expert",
+                        "doc_count": 204
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/London",
+                        "doc_count": 204
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/The_Guardian",
+                        "doc_count": 201
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Programming_tool",
+                        "doc_count": 199
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Reliability_of_Wikipedia",
+                        "doc_count": 196
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Globalization",
+                        "doc_count": 193
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Enzo_and_Cass",
+                        "doc_count": 190
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Accuracy_and_precision",
+                        "doc_count": 189
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Cost",
+                        "doc_count": 189
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Cloud_computing",
+                        "doc_count": 181
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Science",
+                        "doc_count": 175
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Propaganda",
+                        "doc_count": 173
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Brand",
+                        "doc_count": 172
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Multinational_corporation",
+                        "doc_count": 171
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Company",
+                        "doc_count": 169
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Astatine",
+                        "doc_count": 165
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Human_enhancement",
+                        "doc_count": 165
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Analysis",
+                        "doc_count": 159
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Electricity_generation",
+                        "doc_count": 159
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Internet",
+                        "doc_count": 159
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/The_New_York_Times",
+                        "doc_count": 159
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Economic_growth",
+                        "doc_count": 154
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Skill",
+                        "doc_count": 154
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Natural-language_processing",
+                        "doc_count": 153
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Project",
+                        "doc_count": 152
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/University",
+                        "doc_count": 152
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Sales",
+                        "doc_count": 151
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Complexity",
+                        "doc_count": 145
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Individual",
+                        "doc_count": 145
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Software_deployment",
+                        "doc_count": 144
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Computational_problem",
+                        "doc_count": 143
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Experience",
+                        "doc_count": 143
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Statistical_power",
+                        "doc_count": 143
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Mobile_app",
+                        "doc_count": 141
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Business",
+                        "doc_count": 140
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Redox",
+                        "doc_count": 140
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Enriched_uranium",
+                        "doc_count": 138
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Solved_game",
+                        "doc_count": 138
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Decision-making",
+                        "doc_count": 137
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/International",
+                        "doc_count": 136
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Manufacturing",
+                        "doc_count": 136
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Tool",
+                        "doc_count": 136
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/For_loop",
+                        "doc_count": 135
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Business_operations",
+                        "doc_count": 133
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Driving",
+                        "doc_count": 133
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Consumer",
+                        "doc_count": 132
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Risk_management",
+                        "doc_count": 132
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Self-help",
+                        "doc_count": 130
+                    },
+                    {
+                        "key": "http://dbpedia.org/resource/Creativity",
+                        "doc_count": 129
+                    }
+                ]
+            }
+        }
+    }
+}

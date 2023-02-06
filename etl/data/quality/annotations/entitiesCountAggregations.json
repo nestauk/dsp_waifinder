@@ -1,0 +1,506 @@
+{
+    "took": 9,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 3391,
+            "relation": "eq"
+        },
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "entities_count_extended_stats": {
+            "count": 3391,
+            "min": 1,
+            "max": 141,
+            "avg": 30.413447360660573,
+            "sum": 103132,
+            "sum_of_squares": 4635838,
+            "variance": 442.12277994702265,
+            "variance_population": 442.12277994702265,
+            "variance_sampling": 442.2531996461221,
+            "std_deviation": 21.0267158621365,
+            "std_deviation_population": 21.0267158621365,
+            "std_deviation_sampling": 21.029816918987244,
+            "std_deviation_bounds": {
+                "upper": 72.46687908493357,
+                "lower": -11.639984363612424,
+                "upper_population": 72.46687908493357,
+                "lower_population": -11.639984363612424,
+                "upper_sampling": 72.47308119863506,
+                "lower_sampling": -11.646186477313915
+            }
+        },
+        "entities_count_histogram": {
+            "buckets": [
+                {
+                    "key": 1,
+                    "doc_count": 3
+                },
+                {
+                    "key": 2,
+                    "doc_count": 15
+                },
+                {
+                    "key": 3,
+                    "doc_count": 29
+                },
+                {
+                    "key": 4,
+                    "doc_count": 34
+                },
+                {
+                    "key": 5,
+                    "doc_count": 59
+                },
+                {
+                    "key": 6,
+                    "doc_count": 68
+                },
+                {
+                    "key": 7,
+                    "doc_count": 82
+                },
+                {
+                    "key": 8,
+                    "doc_count": 70
+                },
+                {
+                    "key": 9,
+                    "doc_count": 80
+                },
+                {
+                    "key": 10,
+                    "doc_count": 59
+                },
+                {
+                    "key": 11,
+                    "doc_count": 70
+                },
+                {
+                    "key": 12,
+                    "doc_count": 66
+                },
+                {
+                    "key": 13,
+                    "doc_count": 71
+                },
+                {
+                    "key": 14,
+                    "doc_count": 72
+                },
+                {
+                    "key": 15,
+                    "doc_count": 81
+                },
+                {
+                    "key": 16,
+                    "doc_count": 98
+                },
+                {
+                    "key": 17,
+                    "doc_count": 94
+                },
+                {
+                    "key": 18,
+                    "doc_count": 101
+                },
+                {
+                    "key": 19,
+                    "doc_count": 109
+                },
+                {
+                    "key": 20,
+                    "doc_count": 96
+                },
+                {
+                    "key": 21,
+                    "doc_count": 79
+                },
+                {
+                    "key": 22,
+                    "doc_count": 81
+                },
+                {
+                    "key": 23,
+                    "doc_count": 69
+                },
+                {
+                    "key": 24,
+                    "doc_count": 76
+                },
+                {
+                    "key": 25,
+                    "doc_count": 66
+                },
+                {
+                    "key": 26,
+                    "doc_count": 69
+                },
+                {
+                    "key": 27,
+                    "doc_count": 63
+                },
+                {
+                    "key": 28,
+                    "doc_count": 60
+                },
+                {
+                    "key": 29,
+                    "doc_count": 64
+                },
+                {
+                    "key": 30,
+                    "doc_count": 51
+                },
+                {
+                    "key": 31,
+                    "doc_count": 60
+                },
+                {
+                    "key": 32,
+                    "doc_count": 45
+                },
+                {
+                    "key": 33,
+                    "doc_count": 61
+                },
+                {
+                    "key": 34,
+                    "doc_count": 49
+                },
+                {
+                    "key": 35,
+                    "doc_count": 44
+                },
+                {
+                    "key": 36,
+                    "doc_count": 57
+                },
+                {
+                    "key": 37,
+                    "doc_count": 37
+                },
+                {
+                    "key": 38,
+                    "doc_count": 45
+                },
+                {
+                    "key": 39,
+                    "doc_count": 36
+                },
+                {
+                    "key": 40,
+                    "doc_count": 44
+                },
+                {
+                    "key": 41,
+                    "doc_count": 42
+                },
+                {
+                    "key": 42,
+                    "doc_count": 40
+                },
+                {
+                    "key": 43,
+                    "doc_count": 45
+                },
+                {
+                    "key": 44,
+                    "doc_count": 37
+                },
+                {
+                    "key": 45,
+                    "doc_count": 24
+                },
+                {
+                    "key": 46,
+                    "doc_count": 30
+                },
+                {
+                    "key": 47,
+                    "doc_count": 40
+                },
+                {
+                    "key": 48,
+                    "doc_count": 26
+                },
+                {
+                    "key": 49,
+                    "doc_count": 34
+                },
+                {
+                    "key": 50,
+                    "doc_count": 30
+                },
+                {
+                    "key": 51,
+                    "doc_count": 22
+                },
+                {
+                    "key": 52,
+                    "doc_count": 12
+                },
+                {
+                    "key": 53,
+                    "doc_count": 18
+                },
+                {
+                    "key": 54,
+                    "doc_count": 21
+                },
+                {
+                    "key": 55,
+                    "doc_count": 29
+                },
+                {
+                    "key": 56,
+                    "doc_count": 24
+                },
+                {
+                    "key": 57,
+                    "doc_count": 23
+                },
+                {
+                    "key": 58,
+                    "doc_count": 16
+                },
+                {
+                    "key": 59,
+                    "doc_count": 22
+                },
+                {
+                    "key": 60,
+                    "doc_count": 17
+                },
+                {
+                    "key": 61,
+                    "doc_count": 23
+                },
+                {
+                    "key": 62,
+                    "doc_count": 15
+                },
+                {
+                    "key": 63,
+                    "doc_count": 17
+                },
+                {
+                    "key": 64,
+                    "doc_count": 17
+                },
+                {
+                    "key": 65,
+                    "doc_count": 9
+                },
+                {
+                    "key": 66,
+                    "doc_count": 14
+                },
+                {
+                    "key": 67,
+                    "doc_count": 15
+                },
+                {
+                    "key": 68,
+                    "doc_count": 9
+                },
+                {
+                    "key": 69,
+                    "doc_count": 6
+                },
+                {
+                    "key": 70,
+                    "doc_count": 12
+                },
+                {
+                    "key": 71,
+                    "doc_count": 6
+                },
+                {
+                    "key": 72,
+                    "doc_count": 12
+                },
+                {
+                    "key": 73,
+                    "doc_count": 8
+                },
+                {
+                    "key": 74,
+                    "doc_count": 8
+                },
+                {
+                    "key": 75,
+                    "doc_count": 7
+                },
+                {
+                    "key": 76,
+                    "doc_count": 5
+                },
+                {
+                    "key": 77,
+                    "doc_count": 8
+                },
+                {
+                    "key": 78,
+                    "doc_count": 8
+                },
+                {
+                    "key": 79,
+                    "doc_count": 12
+                },
+                {
+                    "key": 80,
+                    "doc_count": 8
+                },
+                {
+                    "key": 81,
+                    "doc_count": 9
+                },
+                {
+                    "key": 82,
+                    "doc_count": 7
+                },
+                {
+                    "key": 83,
+                    "doc_count": 5
+                },
+                {
+                    "key": 84,
+                    "doc_count": 5
+                },
+                {
+                    "key": 85,
+                    "doc_count": 5
+                },
+                {
+                    "key": 86,
+                    "doc_count": 8
+                },
+                {
+                    "key": 87,
+                    "doc_count": 8
+                },
+                {
+                    "key": 88,
+                    "doc_count": 5
+                },
+                {
+                    "key": 89,
+                    "doc_count": 6
+                },
+                {
+                    "key": 90,
+                    "doc_count": 5
+                },
+                {
+                    "key": 91,
+                    "doc_count": 4
+                },
+                {
+                    "key": 92,
+                    "doc_count": 4
+                },
+                {
+                    "key": 93,
+                    "doc_count": 3
+                },
+                {
+                    "key": 94,
+                    "doc_count": 1
+                },
+                {
+                    "key": 95,
+                    "doc_count": 2
+                },
+                {
+                    "key": 96,
+                    "doc_count": 1
+                },
+                {
+                    "key": 97,
+                    "doc_count": 2
+                },
+                {
+                    "key": 99,
+                    "doc_count": 1
+                },
+                {
+                    "key": 100,
+                    "doc_count": 1
+                },
+                {
+                    "key": 101,
+                    "doc_count": 3
+                },
+                {
+                    "key": 103,
+                    "doc_count": 1
+                },
+                {
+                    "key": 104,
+                    "doc_count": 5
+                },
+                {
+                    "key": 106,
+                    "doc_count": 1
+                },
+                {
+                    "key": 107,
+                    "doc_count": 1
+                },
+                {
+                    "key": 108,
+                    "doc_count": 1
+                },
+                {
+                    "key": 109,
+                    "doc_count": 2
+                },
+                {
+                    "key": 116,
+                    "doc_count": 2
+                },
+                {
+                    "key": 121,
+                    "doc_count": 1
+                },
+                {
+                    "key": 124,
+                    "doc_count": 1
+                },
+                {
+                    "key": 125,
+                    "doc_count": 1
+                },
+                {
+                    "key": 133,
+                    "doc_count": 1
+                },
+                {
+                    "key": 137,
+                    "doc_count": 2
+                },
+                {
+                    "key": 139,
+                    "doc_count": 1
+                },
+                {
+                    "key": 140,
+                    "doc_count": 1
+                },
+                {
+                    "key": 141,
+                    "doc_count": 1
+                }
+            ]
+        }
+    }
+}
