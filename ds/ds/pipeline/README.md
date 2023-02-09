@@ -88,6 +88,8 @@ If there is duplication we decide which rows to drop to include based of the cri
 2. then trust GtR - since Lat/Long was given in this data,
 3. lastly trust Crunchbase
 
+For legal reasons we needed to remove information from Crunchbase in the final map. Thus, we removed the Link and Description fields from the GtR-found universities data (which were found using Crunchbase) and all the metadata from the Crunchbase-found funders.
+
 ### Adding place information
 
 We add the 'Place' field to any data points that don't have it (which is 70% of GtR data and all of the GlassAI data) by using the postcode or lat/long data. We do this using a two methods:
