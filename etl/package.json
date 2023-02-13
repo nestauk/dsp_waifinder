@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@svizzle/file": "^0.14.1",
+    "@svizzle/utils": "^0.19.0",
+    "cli-progress": "^3.11.2",
+    "dap_dv_backends_utils": "github:nestauk/dap_dv_backends_utils#v0.0.5",
+    "lamb": "^0.61.0",
+    "undici": "^5.19.1"
+  },
+  "description": "Backend scripts for filling missing data etc.",
+  "scripts": {
+    "fillMissingData": "node bin/fillMissingData.mjs",
+    "getEntityDataQuality": "npx entitiesDataQuality -d 'https://es.production.dap-tools.uk' -i ai_map -o data",
+    "getAnnotationsDataQuality": "npx annotationsDataQuality -d es.production.dap-tools.uk -i ai_map -o data/quality/annotations",
+    "ingestToEs": "npx jsonToEsIndex -d es.production.dap-tools.uk -i ai_map -p data/outputs/ai_map_orgs_places_populated.json --list-key orgs --batch-size 100"
+  }
+}

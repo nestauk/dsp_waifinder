@@ -1,0 +1,56 @@
+{
+    "error": {
+        "root_cause": [
+            {
+                "type": "script_exception",
+                "reason": "runtime error",
+                "script_stack": [
+                    "org.elasticsearch.search.lookup.LeafDocLookup.get(LeafDocLookup.java:88)",
+                    "org.elasticsearch.search.lookup.LeafDocLookup.get(LeafDocLookup.java:40)",
+                    "if (doc['dbpedia_entities_metadata.confidence_counts.20'].size() == 0 || doc['textBody_abstract_article.token_count'].size() == 0) { ",
+                    "                                                                             ^---- HERE"
+                ],
+                "script": "if (doc['dbpedia_entities_metadata.confidence_counts.20'].size() == 0 || doc['textBody_abstract_article.token_count'].size() == 0) { return 0; } return ((double) doc['dbpedia_entities_metadata.confidence_counts.20'].value) / doc['textBody_abstract_article. ...",
+                "lang": "painless",
+                "position": {
+                    "offset": 77,
+                    "start": 0,
+                    "end": 133
+                }
+            }
+        ],
+        "type": "search_phase_execution_exception",
+        "reason": "all shards failed",
+        "phase": "query",
+        "grouped": true,
+        "failed_shards": [
+            {
+                "shard": 0,
+                "index": "ai_map",
+                "node": "UkJqB49zRZqDzLcAZmK2_w",
+                "reason": {
+                    "type": "script_exception",
+                    "reason": "runtime error",
+                    "script_stack": [
+                        "org.elasticsearch.search.lookup.LeafDocLookup.get(LeafDocLookup.java:88)",
+                        "org.elasticsearch.search.lookup.LeafDocLookup.get(LeafDocLookup.java:40)",
+                        "if (doc['dbpedia_entities_metadata.confidence_counts.20'].size() == 0 || doc['textBody_abstract_article.token_count'].size() == 0) { ",
+                        "                                                                             ^---- HERE"
+                    ],
+                    "script": "if (doc['dbpedia_entities_metadata.confidence_counts.20'].size() == 0 || doc['textBody_abstract_article.token_count'].size() == 0) { return 0; } return ((double) doc['dbpedia_entities_metadata.confidence_counts.20'].value) / doc['textBody_abstract_article. ...",
+                    "lang": "painless",
+                    "position": {
+                        "offset": 77,
+                        "start": 0,
+                        "end": 133
+                    },
+                    "caused_by": {
+                        "type": "illegal_argument_exception",
+                        "reason": "No field found for [textBody_abstract_article.token_count] in mapping with types []"
+                    }
+                }
+            }
+        ]
+    },
+    "status": 400
+}
