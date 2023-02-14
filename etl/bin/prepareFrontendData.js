@@ -8,23 +8,24 @@ import {
 	sortObjectKeysAsc,
 	transformValues,
 } from '@svizzle/utils';
+import {clearScroll, scroll} from 'dap_dv_backends_utils/es/search.mjs'
 import * as _ from 'lamb';
-import fetch from 'node-fetch';
+import {mkdirp} from 'mkdirp'
 import hash from 'object-hash';
 
-import {getTopics} from '../lib/utils/dataUtils.js';
-import {stripDbrPrefix} from '../lib/utils/dbpedia.js';
+import {getTopics} from '../../fe/src/lib/utils/dataUtils.js';
+import {stripDbrPrefix} from '../../fe/src/lib/utils/dbpedia.js';
 
 /* resources */
 
-const ANNOTATED_ORGS_URL =
-	'https://s3.eu-west-2.amazonaws.com/dap-uk-ai-map.public/ai_map_03.json';
+const DOMAIN = 'es.production.dap-tools.uk';
+const INDEX = 'ai_map';
 const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places.json';
-const OUT_FILE_DATA = 'static/data/ai_map_annotated_orgs.json';
-const OUT_FILE_UNTAGGED_ORGS = 'dataQuality/orgsWithNoTopics.json';
-const OUT_FILE_UNPLACED_ORGS = 'dataQuality/orgsWithNoPlace.json';
-const OUT_FILE_UNLINKED_ORGS = 'dataQuality/orgsWithNoURL.json';
-const OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA = 'dataQuality/orgsCountsByUrlSchema.json';
+const OUT_FILE_DATA = '../fe/static/data/ai_map_annotated_orgs.json';
+const OUT_FILE_UNTAGGED_ORGS = 'data/quality/fe/orgsWithNoTopics.json';
+const OUT_FILE_UNPLACED_ORGS = 'data/quality/fe/orgsWithNoPlace.json';
+const OUT_FILE_UNLINKED_ORGS = 'data/quality/fe/orgsWithNoURL.json';
+const OUT_FILE_ORGS_COUNTS_BY_URL_SCHEMA = 'data/quality/fe/orgsCountsByUrlSchema.json';
 
 /* utils */
 
@@ -124,15 +125,21 @@ const main = async () => {
 
 	/* fetch annotated orgs */
 
-	console.log(`Fetching ${ANNOTATED_ORGS_URL}...`);
+	await mkdirp('../fe/static/data');
+	await mkdirp('data/quality/fe');
 
-	const orgs =
-		await fetch(ANNOTATED_ORGS_URL)
-		.then(res => res.json())
-		.catch(err => console.error(err));
+	console.log(`Fetching docs from ${DOMAIN}/${INDEX}...`);
+	const scroller = scroll(DOMAIN, INDEX);
+	let orgs = [];
+	let page;
+	for await (page of scroller) {
+		orgs.push(...(_.map(page.hits.hits, _.getKey('_source'))));
+	}
+	if (page) {
+		clearScroll(DOMAIN, page._scroll_id);
+	}
 
 	/* process */
-
 	const data =
 		await readJson(IN_FILE_DATA)
 		.then(obj => ({...obj, orgs}))
