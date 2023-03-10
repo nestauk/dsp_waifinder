@@ -1,11 +1,15 @@
 <script>
+	import {
+		CustomControl,
+		Mapbox,
+		SvgLayer
+	} from '@svizzle/mapbox';
+
 	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
-	import AutoZoomControl from '$lib/components/explorer/map/AutoZoomControl.svelte';
-	import Mapbox from '$lib/components/explorer/map/Mapbox.svelte';
-	import SvgLayers from '$lib/components/explorer/map/SvgLayers.svelte';
+	import SvgMarkers from '$lib/components/explorer/map/SvgMarkers.svelte';
 	import Settings from '$lib/components/explorer/Settings.svelte';
-
+	import ToggleControl from '$lib/components/svizzle/ToggleControl.svelte';
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURLs as styleURLs
@@ -13,11 +17,14 @@
 	import {_allOrgsBBox, _clusters} from '$lib/stores/data';
 	import {getLonLat} from '$lib/utils/dataUtils';
 	import {
+		_autoZoom,
 		_hero,
+		clearHero,
 		clearInteractionStores,
 		clearIsCursorOnMap,
 		setIsCursorOnMap
 	} from '$lib/stores/interaction';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 	import {_themeName} from '$lib/stores/theme';
 	import {_activeTopicDetails} from '$lib/stores/topics';
 
@@ -35,20 +42,32 @@
 		on:mouseleave={clearIsCursorOnMap}
 	>
 		<Mapbox
+			{_bbox_WS_EN}
+			{_bbox_WSEN}
+			{_zoom}
 			{accessToken}
-			{getLonLat}
 			bounds={$_allOrgsBBox}
-			customControl={{
-				control: AutoZoomControl,
-				position: 'top-left'
-			}}
 			styleURL={styleURLs[$_themeName]}
-			CustomLayers={SvgLayers}
-			items={$_clusters}
 			on:bboxChanged
 			withScaleControl={true}
 			withZoomControl={true}
-		/>
+			on:mapClick={clearHero}
+		>
+			<SvgLayer>
+				<SvgMarkers
+					{getLonLat}
+					items={$_clusters}
+				/>
+			</SvgLayer>
+
+			<CustomControl position='top-left'>
+				<ToggleControl
+					bind:checked={$_autoZoom}
+					title='Auto zoom'
+				/>
+			</CustomControl>
+
+		</Mapbox>
 		{#if $_activeTopicDetails}
 			<TopicBanner isPinned={false} />
 		{/if}

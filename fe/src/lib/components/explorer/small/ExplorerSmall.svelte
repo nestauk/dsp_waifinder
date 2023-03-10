@@ -1,15 +1,20 @@
 <script>
+	import {
+		CustomControl,
+		Mapbox,
+		SvgLayer
+	} from '@svizzle/mapbox';
+
 	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
-	import AutoZoomControl from '$lib/components/explorer/map/AutoZoomControl.svelte';
-	import Mapbox from '$lib/components/explorer/map/Mapbox.svelte';
-	import SvgLayers from '$lib/components/explorer/map/SvgLayers.svelte';
+	import SvgMarkers from '$lib/components/explorer/map/SvgMarkers.svelte';
 	import OrgsList from '$lib/components/explorer/orgs/OrgsList.svelte';
 	import Pill from '$lib/components/explorer/orgs/Pill.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
 	import Settings from '$lib/components/explorer/Settings.svelte';
+	import ToggleControl from '$lib/components/svizzle/ToggleControl.svelte';
 	import View from '$lib/components/viewports/View.svelte';
 	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
@@ -22,8 +27,10 @@
 		_clusters,
 		_orgs,
 	} from '$lib/stores/data';
-	import {_hero} from '$lib/stores/interaction';
+
+	import {_autoZoom, _hero, clearHero} from '$lib/stores/interaction';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
 	import {_themeName} from '$lib/stores/theme';
 	import {_activeTopicDetails} from '$lib/stores/topics';
 	import {getLonLat} from '$lib/utils/dataUtils';
@@ -39,20 +46,32 @@
 			</View>
 			<View id='map'>
 				<Mapbox
+					{_bbox_WS_EN}
+					{_bbox_WSEN}
+					{_zoom}
 					{accessToken}
-					{getLonLat}
 					bounds={$_allOrgsBBox}
-					customControl={{
-						control: AutoZoomControl,
-						position: 'bottom-left'
-					}}
 					styleURL={styleURLs[$_themeName]}
-					CustomLayers={SvgLayers}
-					items={$_clusters}
 					on:bboxChanged
+					on:mapClick={clearHero}
 					withScaleControl={true}
 					withZoomControl={true}
-				/>
+				>
+					<SvgLayer>
+						<SvgMarkers
+							{getLonLat}
+							items={$_clusters}
+						/>
+					</SvgLayer>
+
+					<CustomControl position='bottom-left'>
+						<ToggleControl
+							bind:checked={$_autoZoom}
+							title='Auto zoom'
+						/>
+					</CustomControl>
+
+				</Mapbox>
 				{#if $_orgs.length === 0}
 					<div class='noOrgsMessage'>
 						<Pill label={noOrgsMessage} />

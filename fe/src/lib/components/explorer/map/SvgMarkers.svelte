@@ -2,6 +2,7 @@
 	import {isIterableLongerThan1, noop} from '@svizzle/utils';
 	import {arc, pie} from 'd3-shape';
 	import * as _ from 'lamb';
+	import {getContext} from 'svelte';
 
 	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
 	import {
@@ -19,7 +20,10 @@
 	export let getLonLat = _.identity;
 	export let items = [];
 	export let map;
-	export let projectFn = _.identity;
+
+	/* context */
+
+	const {_projectFn} = getContext('mapBox');
 
 	/* groups */
 
@@ -87,7 +91,7 @@
 	}));
 	$: projectMulti = item => ({
 		...item,
-		...projectFn(item.coordinates),
+		...$_projectFn(item.coordinates),
 	});
 	$: multiMarkers = _.map(unprojectedMultis, projectMulti);
 
@@ -128,7 +132,7 @@
 	$: unprojectedMarkers = _.map(groups[2], makeUnprojectedMarker);
 	$: projectMarker = item => ({
 		...item,
-		...projectFn(getLonLat(item.properties)),
+		...$_projectFn(getLonLat(item.properties)),
 	});
 	$: markers = _.map(unprojectedMarkers, projectMarker);
 
@@ -177,14 +181,14 @@
 
 		return {
 			...cluster,
-			...projectFn(cluster.geometry.coordinates),
+			...$_projectFn(cluster.geometry.coordinates),
 			sectors: getClusterSectors(typesCount)
 		}
 	};
 	$: unprojectedClusters = _.map(groups[0], makeUnprojectedCluster);
 	$: projectCluster = cluster => ({
 		...cluster,
-		...projectFn(cluster.geometry.coordinates),
+		...$_projectFn(cluster.geometry.coordinates),
 	});
 	$: clusters = _.map(unprojectedClusters, projectCluster);
 
@@ -192,8 +196,8 @@
 
 	const heroRadius = 6;
 	$: hero =
-		$_hero?.org && projectFn && getLonLat &&
-		projectFn(getLonLat($_hero?.org));
+		$_hero?.org && $_projectFn && getLonLat &&
+		$_projectFn(getLonLat($_hero?.org));
 	$: onMouseEnterMarker = $_isSmallScreen
 		? noop
 		: id => !$_hero?.isPinned && setHero({
