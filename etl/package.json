@@ -14,10 +14,11 @@
   "scripts": {
     "annotateData": "node bin/annotateOrgs.js",
     "downloadAnnotations": "node bin/downloadAnnotatedOrgs.js",
-    "fillMissingData": "node bin/fillMissingData.mjs",
-    "getEntityDataQuality": "npx entitiesDataQuality -d es.production.dap-tools.uk -i ai_map -o data/quality/entities",
+    "fillMissingData": "node bin/fillMissingData.js",
+    "fillMissingLocations": "node bin/fillMissingLocations.js",
+    "getEntityDataQuality": "npx entitiesDataQuality -d es.production.dap-tools.uk -i ai_map -o data",
     "getAnnotationsDataQuality": "npx annotationsDataQuality -d es.production.dap-tools.uk -i ai_map -o data/quality/annotations",
-    "ingestToEs": "npx jsonToEsIndex -d es.production.dap-tools.uk -i ai_map -p data/outputs/ai_map_orgs_places_populated.json --list-key orgs --batch-size 100",
+    "ingestToEs": "npx jsonToEsIndex -d es.production.dap-tools.uk -i ai_map -p ../ds/outputs/data/ai_map_orgs_places_refreshed_part_2.json --list-key orgs --batch-size 100",
     "prepareFrontEndData": "node bin/prepareFrontEndData.js"
   },
   "type": "module"

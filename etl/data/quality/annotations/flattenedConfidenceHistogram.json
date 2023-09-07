@@ -1,5 +1,5 @@
 {
-    "took": 78,
+    "took": 93,
     "timed_out": false,
     "_shards": {
         "total": 5,
@@ -9,7 +9,7 @@
     },
     "hits": {
         "total": {
-            "value": 3391,
+            "value": 3280,
             "relation": "eq"
         },
         "max_score": null,
@@ -17,50 +17,50 @@
     },
     "aggregations": {
         "dbpedia": {
-            "doc_count": 103132,
+            "doc_count": 101300,
             "confidence": {
                 "doc_count_error_upper_bound": 0,
-                "sum_other_doc_count": 103,
+                "sum_other_doc_count": 98,
                 "buckets": [
                     {
                         "key": 30,
-                        "doc_count": 76927
+                        "doc_count": 75510
                     },
                     {
                         "key": 40,
-                        "doc_count": 7447
+                        "doc_count": 7317
                     },
                     {
                         "key": 90,
-                        "doc_count": 6243
+                        "doc_count": 6107
                     },
                     {
                         "key": 50,
-                        "doc_count": 4152
+                        "doc_count": 4107
                     },
                     {
                         "key": 60,
-                        "doc_count": 1888
+                        "doc_count": 1868
                     },
                     {
                         "key": 70,
-                        "doc_count": 1851
-                    },
-                    {
-                        "key": 80,
-                        "doc_count": 1532
+                        "doc_count": 1853
                     },
                     {
                         "key": 100,
-                        "doc_count": 1529
+                        "doc_count": 1534
+                    },
+                    {
+                        "key": 80,
+                        "doc_count": 1487
                     },
                     {
                         "key": 20,
-                        "doc_count": 775
+                        "doc_count": 778
                     },
                     {
                         "key": 10,
-                        "doc_count": 685
+                        "doc_count": 641
                     }
                 ]
             }

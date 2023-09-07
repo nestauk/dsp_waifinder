@@ -1,5 +1,5 @@
 {
-    "took": 18,
+    "took": 95,
     "timed_out": false,
     "_shards": {
         "total": 5,
@@ -9,7 +9,7 @@
     },
     "hits": {
         "total": {
-            "value": 3391,
+            "value": 3280,
             "relation": "eq"
         },
         "max_score": null,
@@ -20,27 +20,27 @@
             "buckets": [
                 {
                     "key": 0,
-                    "doc_count": 100
+                    "doc_count": 96
                 },
                 {
                     "key": 10,
-                    "doc_count": 552
+                    "doc_count": 522
                 },
                 {
                     "key": 20,
-                    "doc_count": 514
+                    "doc_count": 518
                 },
                 {
                     "key": 30,
-                    "doc_count": 2215
+                    "doc_count": 2134
                 },
                 {
                     "key": 40,
-                    "doc_count": 3
+                    "doc_count": 2
                 },
                 {
                     "key": 50,
-                    "doc_count": 2
+                    "doc_count": 4
                 },
                 {
                     "key": 70,
@@ -52,7 +52,7 @@
                 },
                 {
                     "key": 100,
-                    "doc_count": 2
+                    "doc_count": 1
                 }
             ]
         },
@@ -60,11 +60,11 @@
             "buckets": [
                 {
                     "key": 30,
-                    "doc_count": 30
+                    "doc_count": 26
                 },
                 {
                     "key": 40,
-                    "doc_count": 55
+                    "doc_count": 58
                 },
                 {
                     "key": 50,
@@ -72,32 +72,28 @@
                 },
                 {
                     "key": 60,
-                    "doc_count": 64
+                    "doc_count": 76
                 },
                 {
                     "key": 70,
-                    "doc_count": 116
+                    "doc_count": 120
                 },
                 {
                     "key": 80,
-                    "doc_count": 92
+                    "doc_count": 101
                 },
                 {
                     "key": 90,
-                    "doc_count": 1946
+                    "doc_count": 1826
                 },
                 {
                     "key": 100,
-                    "doc_count": 1018
+                    "doc_count": 1003
                 }
             ]
         },
         "avg_confidence_histogram": {
             "buckets": [
-                {
-                    "key": 22,
-                    "doc_count": 1
-                },
                 {
                     "key": 26,
                     "doc_count": 2
@@ -108,111 +104,111 @@
                 },
                 {
                     "key": 28,
-                    "doc_count": 7
+                    "doc_count": 5
                 },
                 {
                     "key": 29,
-                    "doc_count": 6
+                    "doc_count": 5
                 },
                 {
                     "key": 30,
-                    "doc_count": 54
-                },
-                {
-                    "key": 31,
                     "doc_count": 51
                 },
                 {
+                    "key": 31,
+                    "doc_count": 56
+                },
+                {
                     "key": 32,
-                    "doc_count": 138
+                    "doc_count": 134
                 },
                 {
                     "key": 33,
-                    "doc_count": 210
+                    "doc_count": 211
                 },
                 {
                     "key": 34,
-                    "doc_count": 289
+                    "doc_count": 268
                 },
                 {
                     "key": 35,
-                    "doc_count": 361
+                    "doc_count": 349
                 },
                 {
                     "key": 36,
-                    "doc_count": 353
+                    "doc_count": 336
                 },
                 {
                     "key": 37,
-                    "doc_count": 311
+                    "doc_count": 299
                 },
                 {
                     "key": 38,
-                    "doc_count": 279
+                    "doc_count": 275
                 },
                 {
                     "key": 39,
-                    "doc_count": 187
+                    "doc_count": 183
                 },
                 {
                     "key": 40,
-                    "doc_count": 216
+                    "doc_count": 210
                 },
                 {
                     "key": 41,
-                    "doc_count": 181
+                    "doc_count": 179
                 },
                 {
                     "key": 42,
-                    "doc_count": 151
+                    "doc_count": 145
                 },
                 {
                     "key": 43,
-                    "doc_count": 95
+                    "doc_count": 96
                 },
                 {
                     "key": 44,
-                    "doc_count": 87
+                    "doc_count": 86
                 },
                 {
                     "key": 45,
-                    "doc_count": 83
+                    "doc_count": 77
                 },
                 {
                     "key": 46,
-                    "doc_count": 49
+                    "doc_count": 53
                 },
                 {
                     "key": 47,
-                    "doc_count": 48
+                    "doc_count": 44
                 },
                 {
                     "key": 48,
-                    "doc_count": 38
+                    "doc_count": 37
                 },
                 {
                     "key": 49,
-                    "doc_count": 12
+                    "doc_count": 14
                 },
                 {
                     "key": 50,
-                    "doc_count": 41
+                    "doc_count": 31
                 },
                 {
                     "key": 51,
-                    "doc_count": 23
+                    "doc_count": 24
                 },
                 {
                     "key": 52,
-                    "doc_count": 18
+                    "doc_count": 15
                 },
                 {
                     "key": 53,
-                    "doc_count": 18
+                    "doc_count": 16
                 },
                 {
                     "key": 54,
-                    "doc_count": 8
+                    "doc_count": 9
                 },
                 {
                     "key": 55,
@@ -220,23 +216,23 @@
                 },
                 {
                     "key": 56,
-                    "doc_count": 8
+                    "doc_count": 5
                 },
                 {
                     "key": 57,
-                    "doc_count": 8
+                    "doc_count": 7
                 },
                 {
                     "key": 58,
-                    "doc_count": 10
+                    "doc_count": 8
                 },
                 {
                     "key": 60,
-                    "doc_count": 10
+                    "doc_count": 11
                 },
                 {
                     "key": 61,
-                    "doc_count": 4
+                    "doc_count": 3
                 },
                 {
                     "key": 62,
@@ -248,11 +244,11 @@
                 },
                 {
                     "key": 65,
-                    "doc_count": 4
+                    "doc_count": 5
                 },
                 {
                     "key": 66,
-                    "doc_count": 1
+                    "doc_count": 3
                 },
                 {
                     "key": 67,
@@ -264,11 +260,7 @@
                 },
                 {
                     "key": 70,
-                    "doc_count": 4
-                },
-                {
-                    "key": 74,
-                    "doc_count": 1
+                    "doc_count": 5
                 },
                 {
                     "key": 76,
@@ -288,7 +280,7 @@
                 },
                 {
                     "key": 100,
-                    "doc_count": 2
+                    "doc_count": 1
                 }
             ]
         }
