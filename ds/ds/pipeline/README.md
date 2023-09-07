@@ -106,3 +106,25 @@ Then we finalise this 'Place' field for an organisation using the following meth
 Some cleaning of the place name fields is also included (e.g. convert "London Borough of Camden" to "London").
 
 For each unique place name we find we add NUTS data using the [nuts-finder python package](https://pypi.org/project/nuts-finder/) and calculate the average lat/long coordinate from all the organisations from this place.
+
+### Additions after September 2023
+
+Due to changes in Nesta's SQL database the above flows will no longer work. Hence, for the GlassAI data refresh we received on 06/09/2023 we opted to create a one-off script that would add (and remove) the new organisations to the existing dataset.
+
+This can be run with:
+
+```python
+python ds.pipeline.ai_map.data_refresh.py
+```
+
+It will take the existing formatted map data stored in `outputs/data/ai_map_orgs_places.json` and merge it with the new GlassAI dataset stored in S3 `s3://nesta-glass-ai/dap_uk_ai_map/inputs/glass_ai/nesta_ai.orgs.20230905.csv`. The output will be stored in `outputs/data/ai_map_orgs_places_refreshed.json`.
+
+This dataset has the following attributes:
+
+- There are 3319 organisations
+- 2785 organisations are in the Company category
+- 329 organisations are in the Funder category
+- 74 organisations are in the Incubator / accelerator category
+- 152 organisations are in the University / RTO category
+- There are 422 places
+- 1698 organisations are in London, 78 are from Cambridge and 64 are from Edinburgh
