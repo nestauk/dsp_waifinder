@@ -61,10 +61,8 @@ class GlassAICompanies(FlowSpec):
     def find_lon_lat(self):
         """Find and append lat/lon coordinates from postcodes using NSPL"""
 
-        from ds.pipeline.glassai.utils import (
-            get_cleaned_postcode,
-            get_lat_long,
-        )
+        from ds.pipeline.glassai.utils import get_cleaned_postcode, get_lat_long
+
         from ds.utils.nspl_data import (
             chrome_driver,
             find_download_url,
@@ -78,12 +76,13 @@ class GlassAICompanies(FlowSpec):
             download_url = find_download_url(driver, geoportal_url)
 
         with download_zip(download_url) as zipfile:
-            # Load main postcode lookup
+            # Load main postcode lookups
             nspl_data = read_nspl_data(zipfile)
 
         self.ai_companies_df["cleaned_postcode"] = get_cleaned_postcode(
             self.ai_companies_df
         )
+
         (
             self.ai_companies_df["Latitude"],
             self.ai_companies_df["Longitude"],
@@ -99,34 +98,9 @@ class GlassAICompanies(FlowSpec):
         in filtered output
         """
 
-        self.ai_companies_df.rename(
-            columns={
-                "organization_name": "Name",
-                "organization_website": "Link",
-                "cleaned_postcode": "Postcode",
-                "organization_description": "Description",
-            },
-            inplace=True,
-        )
+        from ds.pipeline.glassai.utils import format_glassai_data
 
-        # Removing GlassAI's url queries
-        self.ai_companies_df["Link"] = self.ai_companies_df["Link"].apply(
-            lambda x: x[0 : x.find("?utm_")] if "?utm_" in x else x
-        )
-
-        self.ai_companies_df_filtered = self.ai_companies_df.dropna(
-            subset=["Longitude", "Latitude"]
-        ).reset_index(drop=True)[
-            [
-                "Name",
-                "Link",
-                "Longitude",
-                "Latitude",
-                "is_incubator",
-                "Postcode",
-                "Description",
-            ]
-        ]
+        self.ai_companies_df_filtered = format_glassai_data(self.ai_companies_df)
 
         self.next(self.end)
 

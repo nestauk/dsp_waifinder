@@ -249,7 +249,7 @@ def clean_places(ai_map_data):
     return ai_map_data
 
 
-def get_final_places(ai_map_data, city_names):
+def get_final_places(ai_map_data, city_names=None):
     # In order of preference to look in
     # Only add if the value is in the list of 'city' names
 
@@ -280,11 +280,18 @@ def get_final_places(ai_map_data, city_names):
     for place_options in ai_map_data[trust_order].to_dict(orient="records"):
         place_found = False
         for place_type, place_name in place_options.items():
-            if place_name and (place_name != "Bury") and (place_name in city_names):
-                first_pass_places.append(place_name)
-                first_pass_place_types.append(place_type)
-                place_found = True
-                break
+            if city_names:
+                if place_name and (place_name != "Bury") and (place_name in city_names):
+                    first_pass_places.append(place_name)
+                    first_pass_place_types.append(place_type)
+                    place_found = True
+                    break
+            else:
+                if place_name and (place_name != "Bury"):
+                    first_pass_places.append(place_name)
+                    first_pass_place_types.append(place_type)
+                    place_found = True
+                    break
         if not place_found:
             first_pass_places.append(None)
             first_pass_place_types.append(None)
@@ -499,3 +506,20 @@ def manual_edits(ai_map_data, incubator_companies_list, orgs_to_remove_list):
     ].reset_index(drop=True)
 
     return ai_map_data
+
+
+def flow_add_places(ai_map_data):
+
+    ai_map_data.reset_index(inplace=True)
+
+    # Try to find cities using the pgeocode package (quick but incomplete)
+    ai_map_data["pgeocode_city"] = get_pgeocode_cities(ai_map_data["Postcode"].tolist())
+
+    # Fill in the City field with pgeocode_city if Null
+    ai_map_data.loc[ai_map_data["City"].isnull(), "City"] = ai_map_data["pgeocode_city"]
+
+    # Find places using the geopy package (slow)
+    geopy_addresses = get_geopy_addresses(ai_map_data)
+    ai_map_data = pd.concat([ai_map_data, geopy_addresses.add_prefix("geopy_")], axis=1)
+
+    return geopy_addresses, ai_map_data

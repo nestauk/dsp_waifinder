@@ -1,4 +1,5 @@
 import re
+import pandas as pd
 
 
 def get_cleaned_postcode(ai_companies_df):
@@ -18,7 +19,10 @@ def get_cleaned_postcode(ai_companies_df):
     """
 
     def clean_postcode(pcd):
-        return pcd.lower().replace(" ", "")
+        if pd.notnull(pcd):
+            return pcd.lower().replace(" ", "")
+        else:
+            return None
 
     first_pcd = ai_companies_df["source_postcode"].map(clean_postcode).replace("", None)
     second_pcd = ai_companies_df["ch_postcode"].map(clean_postcode).replace("", None)
@@ -52,3 +56,34 @@ def clean_description(description):
         if found_match:
             description = found_match.group(1)
     return description
+
+
+def format_glassai_data(ai_companies_df):
+    ai_companies_df.rename(
+        columns={
+            "organization_name": "Name",
+            "organization_website": "Link",
+            "cleaned_postcode": "Postcode",
+            "organization_description": "Description",
+        },
+        inplace=True,
+    )
+
+    # Removing GlassAI's url queries
+    ai_companies_df["Link"] = ai_companies_df["Link"].apply(
+        lambda x: x[0 : x.find("?utm_")] if "?utm_" in x else x
+    )
+
+    return ai_companies_df.dropna(subset=["Longitude", "Latitude"]).reset_index(
+        drop=True
+    )[
+        [
+            "Name",
+            "Link",
+            "Longitude",
+            "Latitude",
+            "is_incubator",
+            "Postcode",
+            "Description",
+        ]
+    ]

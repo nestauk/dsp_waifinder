@@ -167,27 +167,9 @@ class merge_map_datasets(FlowSpec):
         for those organisations which don't already have this data
         """
 
-        from ds.pipeline.ai_map.utils import get_pgeocode_cities, get_geopy_addresses
+        from ds.pipeline.ai_map.utils import flow_add_places
 
-        import pandas as pd
-
-        self.ai_map_data.reset_index(inplace=True)
-
-        # Try to find cities using the pgeocode package (quick but incomplete)
-        self.ai_map_data["pgeocode_city"] = get_pgeocode_cities(
-            self.ai_map_data["Postcode"].tolist()
-        )
-
-        # Fill in the City field with pgeocode_city if Null
-        self.ai_map_data.loc[
-            self.ai_map_data["City"].isnull(), "City"
-        ] = self.ai_map_data["pgeocode_city"]
-
-        # Find places using the geopy package (slow)
-        self.geopy_addresses = get_geopy_addresses(self.ai_map_data)
-        self.ai_map_data = pd.concat(
-            [self.ai_map_data, self.geopy_addresses.add_prefix("geopy_")], axis=1
-        )
+        self.geopy_addresses, self.ai_map_data = flow_add_places(self.ai_map_data)
 
         self.next(self.organise_places)
 
