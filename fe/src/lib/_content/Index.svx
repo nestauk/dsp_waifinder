@@ -4,4 +4,92 @@
 
 # {toolName}
 
-TODO
+Showcasing AI capability in the UK and increasing connections across the AI R&D
+ecosystem.
+
+## The app
+
+Developed by UK Research and Innovation (UKRI) and Nesta, {toolName} is a
+web application to support ecosystem facilitation and maximise connectivity
+across the AI landscape.
+
+The tool will make it easier to find information and navigate the UK’s dynamic
+AI R&D landscape as well as find partners to collaborate with.
+
+Users will be able to browse companies, research institutions, funders and
+incubators that are involved in creating and funding AI products, services,
+processes and research.
+
+## Get involved
+
+Engagement from the AI community will be essential to keep the tool useful and
+relevant.
+
+If you want your organisation to be added to the map or would like to update an
+existing entry, please complete [this form](/feedback/add_your_org).
+
+If you want your organisation to be removed from the map, please complete
+[this form](/feedback/remove_your_org).
+
+Other feedback on the tool can be provided by completing
+[this survey](/feedback/survey).
+
+## UKRI
+
+### Who we are
+
+[UKRI](https://www.ukri.org/) convenes, catalyses and invests in close
+collaboration with others to build a thriving, inclusive research and innovation
+ecosystem.
+
+Our vision is for an outstanding research and innovation system in the UK that
+gives everyone the opportunity to contribute and to benefit, enriching lives
+locally, nationally and internationally.
+
+### Why we support {toolName}
+
+UKRI’s vision is for advances in artificial intelligence in the UK to benefit
+society, provide skilled employment and deliver significant economic growth.
+
+Our vision is founded on:
+- building ambitious new UK AI capability
+- growing the UK AI research and innovation capacity in a sustainable way
+- achieving positive economic, societal and environmental impact through growth
+  of the sector and wider adoption of AI that works for everyone
+- enabling adventure and creativity in AI research and innovation
+- increasing the connections across the UK’s AI research and innovation
+  communities.
+
+UK WAIFinder is an important tool in connecting communities to enable collaboration
+and cross-fertilisation of ideas.
+
+
+## Nesta
+
+### Who we are
+
+[Nesta](https://www.nesta.org.uk/) is the UK’s innovation agency for social
+good.
+
+We design, test and scale new solutions to society’s biggest problems, changing
+millions of lives for the better.
+
+### Why we support {toolName}
+
+Nesta has a history of supporting innovation activity in the UK and globally
+with research and tools.
+
+Nesta currently focuses on three core missions:
+- A Fairer Start;
+- A Sustainable Future;
+- A Healthy Life.
+
+We are able to transfer components of the tools we have built for the wider
+innovation ecosystem, like UK WAIFinder, to support our missions.
+
+This includes:
+- Design and implementation of accessible, responsive user interface components
+  for domain-specific applications
+- Advanced interactive visualisation components for geographic data
+- Annotating text data at scale with Wikipedia topics for visualisation
+  and analysis
