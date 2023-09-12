@@ -169,6 +169,9 @@
 		padding: 0 0.5em;
 		white-space: nowrap;
 	}
+	li:first-child {
+		padding-left: 0;
+	}
 	img {
 		height: 1.5rem;
 		padding: 0 0.5rem;
