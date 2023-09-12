@@ -39,26 +39,6 @@
 
 	<span>
 		<Link
-			href='https://www.ukri.org/'
-			target='_blank'
-			theme={$_linkTheme0}
-		>
-			<img
-				alt='UK Research and Innovation'
-				src={logos.ukri}
-			/>
-		</Link>
-		<Link
-			href='https://www.turing.ac.uk/'
-			target='_blank'
-			theme={$_linkTheme0}
-		>
-			<img
-				alt='The Alan Turing Institute'
-				src={logos.turing}
-			/>
-		</Link>
-		<Link
 			href='https://www.nesta.org.uk/'
 			target='_blank'
 			theme={$_linkTheme0}
