@@ -4,6 +4,7 @@
 		"@svizzle/barchart": "^0.10.1",
 		"@svizzle/dom": "^0.7.2",
 		"@svizzle/geo": "^0.9.1",
+		"@svizzle/geometry": "^0.6.0",
 		"@svizzle/mapbox": "^0.1.0",
 		"@svizzle/ui": "^0.10.0",
 		"@svizzle/utils": "^0.20.0",
