@@ -5,7 +5,6 @@ import { search } from 'dap_dv_backends_utils/bing/search.mjs';
 import { sleep } from 'dap_dv_backends_utils/util/time.mjs'
 import * as _ from 'lamb';
 
-
 const FILE_SOURCE = '../ds/outputs/data/ai_map_orgs_places.json';
 const FILE_SUBSET = 'data/outputs/ai_map_orgs_places_populated_subset.json';
 const FILE_POPULATED = 'data/outputs/ai_map_orgs_places_populated.json';

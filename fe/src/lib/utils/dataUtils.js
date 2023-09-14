@@ -1,8 +1,4 @@
-import {
-	getValue,
-	makeKeyedZeroes,
-	objectToKeyValueArray,
-} from '@svizzle/utils';
+import {makeKeyedZeroes} from '@svizzle/utils';
 import * as _ from 'lamb';
 
 export const getLonLat = _.collect([
@@ -45,9 +41,3 @@ export const getBoundingBox = (
 	],
 	initial
 );
-
-// FIXME unused for now
-export const objToKeyValueDesc = _.pipe([
-	objectToKeyValueArray,
-	_.sortWith([_.sorterDesc(getValue)]),
-]);
