@@ -1,4 +1,5 @@
 <script>
+	import {radToDeg} from '@svizzle/geometry';
 	import {isIterableLongerThan1, noop} from '@svizzle/utils';
 	import {arc, pie} from 'd3-shape';
 	import * as _ from 'lamb';
@@ -13,7 +14,6 @@
 	} from '$lib/stores/interaction';
 	import {_isSmallScreen} from '$lib/stores/layout';
 	import {_orgTypeToColorFn} from '$lib/stores/theme';
-	import {radToDeg} from '$lib/utils/svizzle/geometry';
 
 	/* props */
 
