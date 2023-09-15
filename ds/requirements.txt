@@ -17,3 +17,5 @@ geopy
 pgeocode
 nuts-finder
 metaflow_extensions@git+https://github.com/nestauk/metaflow_extensions
+fsspec
+s3fs
