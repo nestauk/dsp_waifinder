@@ -5,7 +5,7 @@ populated data fields were computed.
 
 ### fillMissingData script
 
-The [fillMissingData.mjs script](fillMissingData.mjs) is
+The [fillMissingData.js script](fillMissingData.js) is
 used to populate the missing `url` and `description` fields. Making this script
 more generic so it could work on any dataset is future work.
 
@@ -19,18 +19,45 @@ you'll see a list of services. Make sure "Microsoft.Bing" is registered, as if
 you don't, no pricing tiers appear when creating the Bing Search service.
 
 Once the service has been registered, you can create a Bing Search service and
-obtain the neccessary API keys. Export this key to an environment variable
+obtain the necessary API keys. Export this key to an environment variable
 named AZURE_SUBSCRIPTION_KEY and you should be able to run the script directly.
 
 Once you have configured everything, run using
 
 `npm run fillMissingData`
 
+### fillMissingLocations script
+The [fillMissingLocations.js script](etl/bin/fillMissingLocations.js) is
+used to populate missing locations for Funder type organisations. It uses
+the Google Places API to fetch lat, long and postcodes for as many organisations
+as possible.
+
+To run the script, you must have a Google Cloud Project with the Places API
+enabled, and an associated Google Cloud API access Key exported to the
+`GOOGLE_API_KEY` environment variable.
+
+Run using:
+
+`npm run fillMissingLocations`
+
+### Data refresh part 2
+
+Due to new data being added from the `fillMissingLocations.js` script,
+an additional step is required to recalculate how we compute unique
+place ids, which are used in the FE to filter based on location.
+
+A thorough explanation is provided in the [DS README](ds/ds/pipeline/README.md)
+
+
+The command to run this pipeline is
+
+`python ds.pipeline.ai_map.data_refresh_part_2.py`
+
 ### Ingestion
 
 Once the script has populated the missing data, we first ingest it to an ES
 index using the [ingestion script](https://github.com/nestauk/dap_dv_backends_utils/blob/v0.0.14/bin/jsonToEsIndex.js)
-script with the following paramaters (please refer to the commander
+script with the following parameters (please refer to the commander
 documentation for more details about any parameters in the following node
 script):
 
@@ -45,6 +72,10 @@ endpoint. Details can be found on the [Github README](https://github.com/nestauk
 
 You can also use `npm run annotateData`, which will only work if you
 have the required Nesta credentials.
+
+You can run the process using the package.json script:
+
+`npm run annotateData`
 
 ### Entity Data Quality
 

@@ -1,5 +1,7 @@
 import { fetch } from 'undici'
 
+import { sleep } from 'dap_dv_backends_utils/util/time.mjs';
+
 const { NESTA_EMAIL, NESTA_TOKEN } = process.env;
 
 if (!NESTA_EMAIL || !NESTA_TOKEN) {
@@ -29,7 +31,20 @@ let options = {
 	}
 };
 
-const response = await fetch(url, options);
-const result = await response.json();
+let response = await fetch(url, options);
+const { id } = await response.json();
 
-console.log(result);
+console.log(id);
+
+const progressEndpoint = 'https://api.dap-tools.uk/annotate/progress/'
+response = await fetch(`${progressEndpoint}/${id}`)
+let progress = await response.json();
+
+while (progress.status !== 'finished') {
+	response = await fetch(`${progressEndpoint}/${id}`)
+	progress = await response.json();
+	console.log(progress);
+
+	await sleep(1000 * 10);
+}
+

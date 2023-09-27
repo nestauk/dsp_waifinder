@@ -1,5 +1,5 @@
 {
-    "took": 141,
+    "took": 31,
     "timed_out": false,
     "_shards": {
         "total": 5,
@@ -9,7 +9,7 @@
     },
     "hits": {
         "total": {
-            "value": 3391,
+            "value": 3280,
             "relation": "eq"
         },
         "max_score": null,
@@ -17,44 +17,44 @@
     },
     "aggregations": {
         "dbpedia_entities": {
-            "doc_count": 103132,
+            "doc_count": 101300,
             "similarityScore": {
                 "buckets": [
                     {
                         "key": 0.2,
-                        "doc_count": 59
+                        "doc_count": 68
                     },
                     {
                         "key": 0.30000000000000004,
-                        "doc_count": 573
+                        "doc_count": 547
                     },
                     {
                         "key": 0.4,
-                        "doc_count": 1658
+                        "doc_count": 1597
                     },
                     {
                         "key": 0.5,
-                        "doc_count": 4130
+                        "doc_count": 4038
                     },
                     {
                         "key": 0.6000000000000001,
-                        "doc_count": 4403
+                        "doc_count": 4327
                     },
                     {
                         "key": 0.7000000000000001,
-                        "doc_count": 5103
+                        "doc_count": 4990
                     },
                     {
                         "key": 0.8,
-                        "doc_count": 6929
+                        "doc_count": 6760
                     },
                     {
                         "key": 0.9,
-                        "doc_count": 55926
+                        "doc_count": 54850
                     },
                     {
                         "key": 1,
-                        "doc_count": 24351
+                        "doc_count": 24123
                     }
                 ]
             }

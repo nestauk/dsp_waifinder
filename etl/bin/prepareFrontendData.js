@@ -20,7 +20,7 @@ import {stripDbrPrefix} from '../../fe/src/lib/utils/dbpedia.js';
 
 const DOMAIN = 'es.production.dap-tools.uk';
 const INDEX = 'ai_map';
-const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places.json';
+const IN_FILE_DATA = '../ds/outputs/data/ai_map_orgs_places_refreshed_part_2.json';
 const OUT_FILE_DATA = '../fe/static/data/ai_map_annotated_orgs.json';
 const OUT_FILE_UNTAGGED_ORGS = 'data/quality/fe/orgsWithNoTopics.json';
 const OUT_FILE_UNPLACED_ORGS = 'data/quality/fe/orgsWithNoPlace.json';

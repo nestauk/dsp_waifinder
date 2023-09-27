@@ -27,7 +27,7 @@
             {
                 "shard": 0,
                 "index": "ai_map",
-                "node": "UkJqB49zRZqDzLcAZmK2_w",
+                "node": "mRKoceSESCSEqeAiQa9c7g",
                 "reason": {
                     "type": "script_exception",
                     "reason": "runtime error",
