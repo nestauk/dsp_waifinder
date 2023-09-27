@@ -19,11 +19,10 @@
 
 	export let getLonLat = _.identity;
 	export let items = [];
-	export let map;
 
 	/* context */
 
-	const {_bbox, _projectFn} = getContext('mapBox');
+	const {_bbox, _map, _projectFn} = getContext('mapBox');
 
 	/* groups */
 
@@ -132,8 +131,8 @@
 	/* cluster */
 
 	const onClusterClick = (coordinates, id) => {
-		if (map) {
-			map.flyTo({
+		if ($_map) {
+			$_map.flyTo({
 				center: coordinates,
 				zoom: getClusterExpansionZoom(id),
 			});
