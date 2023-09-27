@@ -141,7 +141,7 @@ This dataset has the following attributes:
 - 1698 organisations are in London, 78 are from Cambridge and 64 are from Edinburgh
 - 318 of the organisations do not have place information
 
-After this, another pipeline was run to add postcodes for the funders (since we only had the funder name). Details of this can be found [here](). This generated the output file "../etl/data/outputs/ai_map_orgs_places_locations_populated.json". Finally, using this enhanced dataset we added the place information (e.g. the city name) for these funders and updated the output dataset.
+After this, another pipeline was run to add postcodes for the funders (since we only had the funder name). Details of this can be found [here](/etl/bin/fillMissingLocations.js). This generated the output file "../etl/data/outputs/ai_map_orgs_places_locations_populated.json". Finally, using this enhanced dataset we added the place information (e.g. the city name) for these funders and updated the output dataset.
 
 This can be done by running:
 
