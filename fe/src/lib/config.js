@@ -56,14 +56,12 @@ export const MAPBOXGL_STYLEURLs = {
 
 export const LOGOS = {
 	themeLight: {
-		nesta: '/logos/Nesta-light.svg',
-		turing: '/logos/AlanTuringInstitute-light.svg',
-		ukri: '/logos/UKResearchAndInnovation-light.svg'
+		nesta: '/logos/Nesta_light.svg',
+		ukri: '/logos/UKRI_logo_light.svg'
 	},
 	themeDark: {
-		nesta: '/logos/Nesta-dark.svg',
-		turing: '/logos/AlanTuringInstitute-dark.svg',
-		ukri: '/logos/UKResearchAndInnovation-dark.svg'
+		nesta: '/logos/Nesta_dark.svg',
+		ukri: '/logos/UKRI_logo_dark.svg'
 	}
 }
 // TODO call an API to retrieve the accessToken

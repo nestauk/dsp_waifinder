@@ -121,12 +121,6 @@
 					<img src={logos.ukri} alt='UK Research and Innovation' />
 				</Link>
 				<Link
-					href='https://www.turing.ac.uk/'
-					theme={$_linkTheme0}
-				>
-					<img src={logos.turing} alt='The Alan Turing Institute' />
-				</Link>
-				<Link
 					href='https://www.nesta.org.uk/'
 					theme={$_linkTheme0}
 				>
@@ -313,7 +307,7 @@
 	.sponsors {
 		align-items: center;
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		grid-gap: 1em;
 		justify-items: center;
 		padding: 1em;

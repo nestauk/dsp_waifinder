@@ -1,14 +1,17 @@
 <script>
 	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
 
-	import {jsonUrl} from '$lib/config';
+	import {jsonUrl, LOGOS} from '$lib/config';
 	import {
 		_currThemeVars,
 		_getNavLinkColor,
 		_linkTheme0,
+		_themeName,
 	} from '$lib/stores/theme';
 
 	export let segment;
+
+	$: logos = LOGOS[$_themeName]
 </script>
 
 <nav
@@ -26,7 +29,10 @@
 							color: $_getNavLinkColor(segment, ''),
 						}}
 					>
-						Home
+						<img
+							alt='UK Research and Innovation'
+							src={logos.ukri}
+						/>
 					</Link>
 				</li>
 				<li role='none'>
@@ -163,4 +169,13 @@
 		padding: 0 0.5em;
 		white-space: nowrap;
 	}
+	li:first-child {
+		padding-left: 0;
+	}
+	img {
+		height: 1.5rem;
+		padding: 0 0.5rem;
+		vertical-align: middle;
+	}
+
 </style>
