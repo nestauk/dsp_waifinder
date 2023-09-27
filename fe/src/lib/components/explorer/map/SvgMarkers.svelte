@@ -23,7 +23,7 @@
 
 	/* context */
 
-	const {_projectFn} = getContext('mapBox');
+	const {_bbox, _projectFn} = getContext('mapBox');
 
 	/* groups */
 
@@ -85,15 +85,12 @@
 
 		return rays;
 	};
-	$: unprojectedMultis = _.map(groups[1], item => ({
+	$: augmentMulti = item => ({
 		...item,
-		rays: getRays(item)
-	}));
-	$: projectMulti = item => ({
-		...item,
+		rays: getRays(item),
 		...$_projectFn(item.coordinates),
 	});
-	$: multiMarkers = _.map(unprojectedMultis, projectMulti);
+	$: multiMarkers = _.map(groups[1], augmentMulti);
 
 	/* single */
 
@@ -125,16 +122,12 @@
 			}
 		})
 	]);
-	$: makeUnprojectedMarker = item => ({
-		...item,
-		sectors: getMarkerPieSectors(item.properties.types)
-	});
-	$: unprojectedMarkers = _.map(groups[2], makeUnprojectedMarker);
-	$: projectMarker = item => ({
+	$: augmentMarker = item => ({
 		...item,
 		...$_projectFn(getLonLat(item.properties)),
+		sectors: getMarkerPieSectors(item.properties.types),
 	});
-	$: markers = _.map(unprojectedMarkers, projectMarker);
+	$: markers = _.map(groups[2], augmentMarker);
 
 	/* cluster */
 
@@ -175,7 +168,7 @@
 		_.pairs,
 		_.sortWith([_.head]),
 	]);
-	$: makeUnprojectedCluster = cluster => {
+	$: augmentCluster = cluster => {
 		const leaves = getClusterLeaves(cluster.id);
 		const typesCount = getLeavesTypesCount(leaves);
 
@@ -185,18 +178,13 @@
 			sectors: getClusterSectors(typesCount)
 		}
 	};
-	$: unprojectedClusters = _.map(groups[0], makeUnprojectedCluster);
-	$: projectCluster = cluster => ({
-		...cluster,
-		...$_projectFn(cluster.geometry.coordinates),
-	});
-	$: clusters = _.map(unprojectedClusters, projectCluster);
+	$: clusters = _.map(groups[0], augmentCluster);
 
 	/* hero */
 
 	const heroRadius = 6;
 	$: hero =
-		$_hero?.org && $_projectFn && getLonLat &&
+		$_hero?.org && $_projectFn && getLonLat && $_bbox &&
 		$_projectFn(getLonLat($_hero?.org));
 	$: onMouseEnterMarker = $_isSmallScreen
 		? noop
