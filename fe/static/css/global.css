@@ -114,7 +114,7 @@ a {
 	--colorOrgtype3: gold;
 	--colorOrgtype3Text: #222;
 	--colorOutline: rgb(256, 64, 64);
-	--colorPageBackground: #333;
+	--colorPageBackground: rgb(45,46,95); /* UKRI color */
 	--colorPillBackground: #333;
 	--colorPillText: white;
 	--colorScrollbarThumb: #ddd; /* windows */
@@ -180,7 +180,7 @@ a {
 	--colorOrgtype3: #e1d17a;
 	--colorOrgtype3Text: var(--colorTextInverted);
 	--colorOutline: rgb(255, 64, 64);
-	--colorPageBackground: #333;
+	--colorPageBackground: rgb(45,46,95); /* UKRI color */
 	--colorPillBackground: #ddd;
 	--colorPillText: black;
 	--colorScrollbarThumb: #666; /* windows */
