@@ -139,3 +139,22 @@ This dataset has the following attributes:
 - 152 organisations are in the University / RTO category
 - There are 422 places
 - 1698 organisations are in London, 78 are from Cambridge and 64 are from Edinburgh
+- 318 of the organisations do not have place information
+
+After this, another pipeline was run to add postcodes for the funders (since we only had the funder name). Details of this can be found [here](). This generated the output file "../etl/data/outputs/ai_map_orgs_places_locations_populated.json". Finally, using this enhanced dataset we added the place information (e.g. the city name) for these funders and updated the output dataset.
+
+This can be done by running:
+
+```python
+python ds.pipeline.ai_map.data_refresh_part_2.py
+```
+
+Which generates `outputs/data/ai_map_orgs_places_refreshed_part_2.json` with the following attributes:
+
+- There are 3280 organisations
+- 2785 organisations are in the Company category
+- 290 organisations are in the Funder category
+- 74 organisations are in the Incubator / accelerator category
+- 152 organisations are in the University / RTO category
+- There are 419 places
+- 1886 organisations are in London, 84 are from Cambridge and 75 are from Edinburgh
