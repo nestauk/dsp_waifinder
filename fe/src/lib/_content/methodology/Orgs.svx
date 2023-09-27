@@ -68,7 +68,7 @@ Merged dataset outputs:
 ||Number of organisations|
 |---|---|
 |Company category|2785|
-|Funder category|329|
+|Funder category|290|
 |Incubator / accelerator category|74|
 |University / RTO category|152|
 |**Total deduplicated**|**3319**|

@@ -47,7 +47,7 @@
 					strokeWidth=1.25
 				/>
 			</span>
-			<span>{$_isTopicsEditMode ? 'Exit' : 'Enter'} edit mode</span>
+			<span>{$_isTopicsEditMode ? 'Confirm selection' : 'Select topics'}</span>
 		</button>
 	</div>
 	<div class='select'>

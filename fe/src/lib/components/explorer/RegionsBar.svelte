@@ -40,7 +40,7 @@
 					strokeWidth=1.25
 				/>
 			</span>
-			<span>{$_isRegionsEditMode ? 'Exit' : 'Enter'} edit mode</span>
+			<span>{$_isRegionsEditMode ? 'Confirm selection' : 'Select regions'}</span>
 		</button>
 	</div>
 	<div class='select'>

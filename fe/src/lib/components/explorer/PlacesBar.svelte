@@ -40,7 +40,8 @@
 					strokeWidth=1.25
 				/>
 			</span>
-			<span>{$_isPlacesEditMode ? 'Exit' : 'Enter'} edit mode</span>
+			<span>{$_isPlacesEditMode ? 'Confirm selection' : 'Select places'}</span>
+
 		</button>
 	</div>
 	<div class='select'>
