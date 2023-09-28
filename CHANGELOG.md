@@ -1,3 +1,7 @@
+# 0.1.1
+
+- Slightly updated the home page content
+
 # 0.1.0
 
 ## Data
