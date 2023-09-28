@@ -1,3 +1,34 @@
+# 0.1.0
+
+## Data
+
+- Data has been refreshed
+- Removed Crunchbase data
+- Updated the data pipeline
+
+## UI features
+
+- Homepage: added homepage content
+- Updated logos
+- Guides:
+   - add missing guide about the link to download the dataset
+   - add guide about the form to request to remove an org
+- Orgs list: invert place name / post code
+- Better borders for the MultiviewSelector
+
+## UI fixes
+
+- Fixed error when navigating back to the explorer after filtering
+- Fixed some bugs in the a11y statement page
+- Fixed some a11y warnings
+- Improved keyboard navigation
+
+## UI internal
+
+- Updated dependencies
+- Some refactoring
+- Removed unused code
+
 # 0.0.3
 
 ## UI features

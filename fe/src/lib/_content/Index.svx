@@ -9,9 +9,9 @@ ecosystem.
 
 ## The app
 
-Developed by UK Research and Innovation (UKRI) and Nesta, {toolName} is a
-web application to support ecosystem facilitation and maximise connectivity
-across the AI landscape.
+Development led by UK Research and Innovation (UKRI), with support from Nesta,
+{toolName} is an online tool to support ecosystem facilitation and maximise
+connectivity across the AI landscape.
 
 The tool will make it easier to find information and navigate the UK’s dynamic
 AI R&D landscape as well as find partners to collaborate with.
