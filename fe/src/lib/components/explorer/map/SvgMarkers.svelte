@@ -22,7 +22,7 @@
 
 	/* context */
 
-	const {_bbox, _map, _projectFn} = getContext('mapBox');
+	const {_bbox, _map, _projectFn} = getContext('Mapbox');
 
 	/* groups */
 

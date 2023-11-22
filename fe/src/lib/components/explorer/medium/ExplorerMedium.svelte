@@ -47,11 +47,11 @@
 			{_zoom}
 			{accessToken}
 			bounds={$_allOrgsBBox}
-			styleURL={styleURLs[$_themeName]}
 			on:bboxChanged
+			on:mapClick={clearHero}
+			style={styleURLs[$_themeName]}
 			withScaleControl={true}
 			withZoomControl={true}
-			on:mapClick={clearHero}
 		>
 			<SvgLayer>
 				<SvgMarkers
