@@ -17,8 +17,12 @@
 		clearActiveTopic
 	} from '$lib/stores/topics';
 	import {getTopicLabel} from '$lib/utils/dataUtils';
+	import {getWikipediaURL} from '$lib/utils/dbpedia';
 
 	const toggleItem = ({detail: {key}}) => toggleTopicId(key);
+	const navigate = ({detail: {key}}) => {
+		window.location = getWikipediaURL(key);
+	}
 
 	const onKeyDown = event => {
 		if ($_isTopicsEditMode && event.keyCode === 27) {
@@ -27,10 +31,10 @@
 		}
 	}
 
-	$: onClick = $_isTopicsEditMode ? toggleItem : null;
+	$: onClick = $_isTopicsEditMode ? toggleItem : navigate;
 	$: onEntered = $_isSmallScreen
 		? null
-		: ({detail: {id}}) => asyncUpdateTopicDetails(id);
+		: ({detail: {key}}) => asyncUpdateTopicDetails(key);
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
