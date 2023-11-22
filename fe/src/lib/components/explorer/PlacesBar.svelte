@@ -14,7 +14,7 @@
 	} from '$lib/stores/selection';
 	import {_barchartsTheme} from '$lib/stores/theme';
 
-	const toggleItem = ({detail: {id}}) => togglePlaceId(id);
+	const toggleItem = ({detail: {key}}) => togglePlaceId(key);
 
 	const onKeyDown = event => {
 		if ($_isPlacesEditMode && event.keyCode === 27) {

@@ -18,7 +18,7 @@
 	} from '$lib/stores/topics';
 	import {getTopicLabel} from '$lib/utils/dataUtils';
 
-	const toggleItem = ({detail: {id}}) => toggleTopicId(id);
+	const toggleItem = ({detail: {key}}) => toggleTopicId(key);
 
 	const onKeyDown = event => {
 		if ($_isTopicsEditMode && event.keyCode === 27) {

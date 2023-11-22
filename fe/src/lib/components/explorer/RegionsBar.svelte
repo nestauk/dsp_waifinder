@@ -14,7 +14,7 @@
 	} from '$lib/stores/selection';
 	import {_barchartsTheme} from '$lib/stores/theme';
 
-	const toggleItem = ({detail: {id}}) => toggleRegionId(id);
+	const toggleItem = ({detail: {key}}) => toggleRegionId(key);
 
 	const onKeyDown = event => {
 		if ($_isRegionsEditMode && event.keyCode === 27) {

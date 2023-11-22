@@ -48,7 +48,7 @@
 		initiateZippedDownload,
 	} from '$lib/utils/download';
 
-	const toggledOrgType = ({detail: {id}}) => toggleOrgType(id);
+	const toggledOrgType = ({detail: {key}}) => toggleOrgType(key);
 
 	/* download results */
 
