@@ -59,7 +59,7 @@
 		"deploy": "npm run makedata && npm run build",
 		"dev": "vite dev",
 		"lighthouse": "node test/lighthouse/validate.js",
-		"linksvizzles": "npm install && npm link @svizzle/barchart @svizzle/dev @svizzle/dom @svizzle/file @svizzle/geo @svizzle/mapbox @svizzle/ui @svizzle/utils && npm list",
+		"linksvizzles": "npm link && npm link @svizzle/barchart @svizzle/dev @svizzle/dom @svizzle/file @svizzle/geo @svizzle/mapbox @svizzle/ui @svizzle/utils && npm list",
 		"lint": "eslint .",
 		"pa11y": "node test/pa11y/validate.js",
 		"preview": "vite preview",

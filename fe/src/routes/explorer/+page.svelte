@@ -1,10 +1,8 @@
 <script>
-	import {isClientSide} from '@svizzle/ui';
+	import {isClientSide, View, ViewsXor} from '@svizzle/ui';
 
 	import ExplorerMedium from '$lib/components/explorer/medium/ExplorerMedium.svelte';
 	import ExplorerSmall from '$lib/components/explorer/small/ExplorerSmall.svelte';
-	import View from '$lib/components/viewports/View.svelte';
-	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {toolName} from '$lib/config';
 	import {_dataset, updateDataset} from '$lib/stores/dataset';
 	import {_screenId} from '$lib/stores/layout';

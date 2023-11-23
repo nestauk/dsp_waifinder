@@ -4,6 +4,7 @@
 		Mapbox,
 		SvgLayer
 	} from '@svizzle/mapbox';
+	import {View, ViewsXor} from '@svizzle/ui';
 
 	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
@@ -15,8 +16,6 @@
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
 	import Settings from '$lib/components/explorer/Settings.svelte';
 	import ToggleControl from '$lib/components/svizzle/ToggleControl.svelte';
-	import View from '$lib/components/viewports/View.svelte';
-	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURLs as styleURLs,
