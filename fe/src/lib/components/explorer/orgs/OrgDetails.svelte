@@ -2,8 +2,8 @@
 	import {
 		CopyToClipboard,
 		HighlightedText,
+		HyperLink,
 		Icon,
-		Link,
 		Link2,
 		MinusCircle,
 		PlusCircle,
@@ -113,7 +113,7 @@
 						theme={highlightedTheme}
 					/>
 				</span>
-				<Link
+				<HyperLink
 					ariaDescribedBy='title-{item.id}'
 					ariaLabel='Website for {item.name}'
 					href={item.url}
@@ -125,7 +125,7 @@
 						size={20}
 						stroke={$_currThemeVars['--colorLink']}
 					/>
-				</Link>
+				</HyperLink>
 			{/if}
 		</div>
 		{#if isFocused || showAsFocused}
@@ -200,7 +200,7 @@
 				{:else}
 					{#each topics as {id}}
 						<div class='topic'>
-							<Link
+							<HyperLink
 								href={getWikipediaURL(id)}
 								target='_blank'
 								theme={$_linkTheme2}
@@ -211,7 +211,7 @@
 								>
 									<Pill label={getTopicLabel(id)} />
 								</div>
-							</Link>
+							</HyperLink>
 						</div>
 					{/each}
 				{/if}

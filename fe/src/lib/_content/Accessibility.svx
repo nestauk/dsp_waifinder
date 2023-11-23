@@ -1,5 +1,5 @@
 <script>
-	import {Link, LinkButton, ResponsiveFlex} from '@svizzle/ui';
+	import {HyperLink, LinkButton, ResponsiveFlex} from '@svizzle/ui';
 
 	import {contactEmail, jsonUrl, toolName} from '$lib/config';
 	import {_currThemeVars, _linkTheme1} from '$lib/stores/theme';
@@ -73,7 +73,7 @@ partially supported.
 While we aim to make the information provided as accessible as possible, this
 website presents data mostly as interactive charts which at the moment do not
 also render a text alternative, so those aren't accessible by screen readers.
-However, the data is available for <Link download href={jsonUrl} theme={$_linkTheme1}>download in JSON format</Link>.
+However, the data is available for <HyperLink download href={jsonUrl} theme={$_linkTheme1}>download in JSON format</HyperLink>.
 
 ## Feedback
 

@@ -3,8 +3,8 @@
 		_screen,
 		ChevronLeft,
 		ChevronRight,
+		HyperLink,
 		Icon,
-		Link,
 		LoadingView,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
@@ -214,14 +214,14 @@
 			<figure>
 				Unfortunately the accessibility audit for this page fails
 				because of an
-				<Link
+				<HyperLink
 					href={lighthouseIssueUrl}
 					isBold={true}
 					theme={$_extLinkTheme}
 					type='external'
 				>
 					issue
-				</Link> in Google Lighthouse.
+				</HyperLink> in Google Lighthouse.
 			</figure>
 		{/if}
 		<iframe

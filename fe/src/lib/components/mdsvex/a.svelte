@@ -1,5 +1,5 @@
 <script>
-	import {Link} from '@svizzle/ui';
+	import {HyperLink} from '@svizzle/ui';
 
 	import {_linkTheme1} from '$lib/stores/theme';
 
@@ -8,10 +8,10 @@
 	$: type = href && href.startsWith('http') && 'external' || null;
 </script>
 
-<Link
+<HyperLink
 	{...$$props}
 	theme={$_linkTheme1}
 	{type}
 	isBold={true}
 	showIcon={true}
-><slot/></Link>
+><slot/></HyperLink>

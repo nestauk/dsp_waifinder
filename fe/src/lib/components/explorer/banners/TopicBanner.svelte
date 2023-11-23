@@ -2,9 +2,9 @@
 	import {
 		_screen,
 		Banner,
+		HyperLink,
 		Icon,
 		LayoutHMF,
-		Link,
 		LoadingView,
 		Scroller,
 	} from '@svizzle/ui';
@@ -74,7 +74,7 @@
 			slot='footer'
 		>
 			{#if isPinned}
-				<Link
+				<HyperLink
 					href={wikipediaURL}
 					isBold={true}
 					target='_blank'
@@ -86,7 +86,7 @@
 						size=24
 						stroke='none'
 					/>
-				</Link>
+				</HyperLink>
 			{/if}
 			<p>{footerText}</p>
 		</div>
