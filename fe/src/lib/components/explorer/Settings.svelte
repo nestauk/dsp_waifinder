@@ -3,6 +3,7 @@
 	import {
 		Download,
 		Icon,
+		Input,
 		Switch,
 		Tag,
 		XCircle,
@@ -10,7 +11,6 @@
 
 	import City from '$lib/components/explorer/icons/City.svelte';
 	import Region from '$lib/components/explorer/icons/Region.svelte';
-	import Input from '$lib/components/svizzle/Input.svelte';
 	import {
 		_keyOrgTypeValueOrgsCount,
 		_orgsCount,
