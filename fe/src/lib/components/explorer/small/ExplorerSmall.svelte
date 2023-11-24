@@ -4,13 +4,12 @@
 		Mapbox,
 		SvgLayer
 	} from '@svizzle/mapbox';
-	import {View, ViewsXor} from '@svizzle/ui';
+	import {Pill, View, ViewsXor} from '@svizzle/ui';
 
 	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
 	import SvgMarkers from '$lib/components/explorer/map/SvgMarkers.svelte';
 	import OrgsList from '$lib/components/explorer/orgs/OrgsList.svelte';
-	import Pill from '$lib/components/explorer/orgs/Pill.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
@@ -26,11 +25,10 @@
 		_clusters,
 		_orgs,
 	} from '$lib/stores/data';
-
 	import {_autoZoom, _hero, clearHero} from '$lib/stores/interaction';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
 	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
-	import {_themeName} from '$lib/stores/theme';
+	import {_pillTheme, _themeName} from '$lib/stores/theme';
 	import {_activeTopicDetails} from '$lib/stores/topics';
 	import {getLonLat} from '$lib/utils/dataUtils';
 
@@ -73,7 +71,10 @@
 				</Mapbox>
 				{#if $_orgs.length === 0}
 					<div class='noOrgsMessage'>
-						<Pill label={noOrgsMessage} />
+						<Pill
+							label={noOrgsMessage}
+							theme={$_pillTheme}
+						/>
 					</div>
 				{/if}
 			</View>
@@ -82,7 +83,10 @@
 					<OrgsList items={$_orgs} />
 				{:else}
 					<div class='noOrgsMessage'>
-						<Pill label={noOrgsMessage} />
+						<Pill
+							label={noOrgsMessage}
+							theme={$_pillTheme}
+						/>
 					</div>
 				{/if}
 			</View>
@@ -92,7 +96,10 @@
 						<TopicsBar />
 					{:else}
 						<div class='noOrgsMessage'>
-							<Pill label={noOrgsMessage} />
+							<Pill
+								label={noOrgsMessage}
+								theme={$_pillTheme}
+							/>
 							<!-- TBD unify `nowrap` prop for Pills -->
 						</div>
 					{/if}
@@ -104,7 +111,10 @@
 						<PlacesBar />
 					{:else}
 						<div class='noOrgsMessage'>
-							<Pill label={noOrgsMessage} />
+							<Pill
+								label={noOrgsMessage}
+								theme={$_pillTheme}
+							/>
 						</div>
 					{/if}
 				</div>
@@ -115,7 +125,10 @@
 						<RegionsBar />
 					{:else}
 						<div class='noOrgsMessage'>
-							<Pill label={noOrgsMessage} />
+							<Pill
+								label={noOrgsMessage}
+								theme={$_pillTheme}
+							/>
 						</div>
 					{/if}
 				</div>

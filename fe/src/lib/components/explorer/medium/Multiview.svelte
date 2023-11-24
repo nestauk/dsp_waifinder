@@ -1,14 +1,14 @@
 <script>
-	import {View, ViewsXor} from '@svizzle/ui';
+	import {Pill, View, ViewsXor} from '@svizzle/ui';
 
 	import OrgsList from '$lib/components/explorer/orgs/OrgsList.svelte';
-	import Pill from '$lib/components/explorer/orgs/Pill.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
 	import {noOrgsMessage} from '$lib/config';
 	import {_orgs} from '$lib/stores/data';
 	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
+	import {_pillTheme} from '$lib/stores/theme';
 
 	import MultiviewSelector from './MultiviewSelector.svelte';
 </script>
@@ -24,6 +24,7 @@
 						<Pill
 							label={noOrgsMessage}
 							nowrap={false}
+							theme={$_pillTheme}
 						/>
 					</div>
 				{/if}
@@ -36,7 +37,8 @@
 						<div class='noOrgsMessage'>
 							<Pill
 								label={noOrgsMessage}
-								nowrap=false
+								nowrap={false}
+								theme={$_pillTheme}
 							/>
 						</div>
 					{/if}
@@ -50,7 +52,8 @@
 						<div class='noOrgsMessage'>
 							<Pill
 								label={noOrgsMessage}
-								nowrap=false
+								nowrap={false}
+								theme={$_pillTheme}
 							/>
 						</div>
 					{/if}
@@ -64,7 +67,8 @@
 						<div class='noOrgsMessage'>
 							<Pill
 								label={noOrgsMessage}
-								nowrap=false
+								nowrap={false}
+								theme={$_pillTheme}
 							/>
 						</div>
 					{/if}

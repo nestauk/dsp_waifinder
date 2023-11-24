@@ -6,6 +6,7 @@
 		Icon,
 		Link2,
 		MinusCircle,
+		Pill,
 		PlusCircle,
 		Scroller,
 	} from '@svizzle/ui';
@@ -20,6 +21,7 @@
 		_linkTheme2,
 		_orgTypeToColorFn,
 		_orgTypeToTextColorFn,
+		_pillTheme,
 	} from '$lib/stores/theme';
 	import {
 		asyncUpdateTopicDetails,
@@ -27,8 +29,6 @@
 	} from '$lib/stores/topics';
 	import {getTopicLabel} from '$lib/utils/dataUtils';
 	import {getWikipediaURL} from '$lib/utils/dbpedia';
-
-	import Pill from './Pill.svelte';
 
 	export let item = null;
 	export let shouldFocusOrg = true;
@@ -194,7 +194,10 @@
 							on:click={() => asyncUpdateTopicDetails(id)}
 							on:keydown={makeOnKeyDown(id)}
 						>
-							<Pill label={getTopicLabel(id)} />
+							<Pill
+								label={getTopicLabel(id)}
+								theme={$_pillTheme}
+							/>
 						</div>
 					{/each}
 				{:else}
@@ -209,7 +212,10 @@
 									on:mouseenter={() => asyncUpdateTopicDetails(id)}
 									on:mouseleave={clearActiveTopic}
 								>
-									<Pill label={getTopicLabel(id)} />
+									<Pill
+										label={getTopicLabel(id)}
+										theme={$_pillTheme}
+									/>
 								</div>
 							</HyperLink>
 						</div>

@@ -85,6 +85,18 @@ export const _getNavLinkColor = derived(
 	)
 );
 
+/* pills */
+
+export const _pillTheme = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		backgroundColor: currThemeVars['--colorPillBackground'],
+		border: currThemeVars['--border'],
+		textColor: currThemeVars['--colorPillText'],
+	})
+);
+
+
 /* links */
 
 export const _linkTheme0 = derived(
