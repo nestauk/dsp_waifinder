@@ -96,6 +96,9 @@ rules:
     - after: true
       before: true
   line-comment-position: off
+  linebreak-style:
+    - error
+    - unix
   lines-around-comment: off
   lines-around-directive: error
   lines-between-class-members: error
