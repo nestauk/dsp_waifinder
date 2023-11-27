@@ -5,15 +5,15 @@
 	import * as _ from 'lamb';
 	import {getContext} from 'svelte';
 
-	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
+	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data.js';
 	import {
 		_hero,
 		_isHeroInBounds,
 		clearHero,
 		setHero
-	} from '$lib/stores/interaction';
-	import {_isSmallScreen} from '$lib/stores/layout';
-	import {_orgTypeToColorFn} from '$lib/stores/theme';
+	} from '$lib/stores/interaction.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
+	import {_orgTypeToColorFn} from '$lib/stores/theme.js';
 
 	/* props */
 

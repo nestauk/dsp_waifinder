@@ -21,7 +21,7 @@ const getRuleDefs = _.pipe([
 ]);
 const getClassDef = _.pipe([
 	_.collect([
-		_.getAt(0),
+		_.head,
 		_.pipe([
 			_.getAt(1),
 			getRuleDefs

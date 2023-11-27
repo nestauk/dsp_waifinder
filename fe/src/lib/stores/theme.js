@@ -2,8 +2,8 @@ import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
 import {_isA11yDirty} from '@svizzle/ui';
 
-import {_dataset} from '$lib/stores/dataset';
-import {makeSegmentToCssVar} from '$lib/utils/theme';
+import {_dataset} from '$lib/stores/dataset.js';
+import {makeSegmentToCssVar} from '$lib/utils/theme.js';
 
 export const _isThemeEditorActive = writable(false);
 

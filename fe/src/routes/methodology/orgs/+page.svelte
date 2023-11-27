@@ -1,7 +1,7 @@
 <script>
 	import MethodologyOrgs from '$lib/_content/methodology/Orgs.svx';
 
-	import {toolName} from '$lib/config';
+	import {toolName} from '$lib/config.js';
 </script>
 
 <svelte:head>

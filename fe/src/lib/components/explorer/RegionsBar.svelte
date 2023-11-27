@@ -2,17 +2,17 @@
 	import {BarchartVDiv} from '@svizzle/barchart';
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
 
-	import {_keyRegionIdValueOrgsCount} from '$lib/stores/data';
-	import {_regionIdToLabel} from '$lib/stores/dataset';
-	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_keyRegionIdValueOrgsCount} from '$lib/stores/data.js';
+	import {_regionIdToLabel} from '$lib/stores/dataset.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
 	import {
 		_isRegionsEditMode,
 		_selectedRegionIds,
 		enterRegionsEditMode,
 		exitRegionsEditMode,
 		toggleRegionId,
-	} from '$lib/stores/selection';
-	import {_barchartsTheme} from '$lib/stores/theme';
+	} from '$lib/stores/selection.js';
+	import {_barchartsTheme} from '$lib/stores/theme.js';
 
 	const toggleItem = ({detail: {key}}) => toggleRegionId(key);
 

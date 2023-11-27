@@ -1,8 +1,8 @@
 <script>
 	import {A11yPerson, Icon, Droplet, HyperLink, Moon, Sun} from '@svizzle/ui';
 
-	import {changelogUrl, LOGOS} from '$lib/config';
-	import {isDev} from '$lib/env';
+	import {changelogUrl, LOGOS} from '$lib/config.js';
+	import {isDev} from '$lib/env.js';
 	import {
 		_a11yIconFillColor,
 		_a11yIconStrokeColor,
@@ -13,8 +13,8 @@
 		_extLinkTheme,
 		_themeName,
 		toggleTheme,
-	} from '$lib/stores/theme';
-	import {version} from '$lib/utils/version';
+	} from '$lib/stores/theme.js';
+	import {version} from '$lib/utils/version.js';
 
 	export let segment;
 	export let showA11yMenu = false;

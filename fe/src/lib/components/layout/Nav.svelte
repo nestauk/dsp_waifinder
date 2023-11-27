@@ -3,7 +3,7 @@
 
 	import NavMedium from '$lib/components/layout/medium/NavMedium.svelte';
 	import NavSmall from '$lib/components/layout/small/NavSmall.svelte';
-	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
 
 	export let contentHeight;
 	export let segment;

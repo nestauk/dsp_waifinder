@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
-	import {toolName} from '$lib/config';
-	import {isDev} from '$lib/env';
+	import {toolName} from '$lib/config.js';
+	import {isDev} from '$lib/env.js';
 
 
 	$: status = $page.status;

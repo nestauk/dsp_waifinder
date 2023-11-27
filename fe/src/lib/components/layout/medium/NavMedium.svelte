@@ -1,13 +1,13 @@
 <script>
 	import {Download, HyperLink, Icon, Info, Send} from '@svizzle/ui';
 
-	import {jsonUrl, LOGOS} from '$lib/config';
+	import {jsonUrl, LOGOS} from '$lib/config.js';
 	import {
 		_currThemeVars,
 		_getNavLinkColor,
 		_linkTheme0,
 		_themeName,
-	} from '$lib/stores/theme';
+	} from '$lib/stores/theme.js';
 
 	export let segment;
 

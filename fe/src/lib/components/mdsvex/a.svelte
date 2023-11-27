@@ -1,7 +1,7 @@
 <script>
 	import {HyperLink} from '@svizzle/ui';
 
-	import {_linkTheme1} from '$lib/stores/theme';
+	import {_linkTheme1} from '$lib/stores/theme.js';
 
 	export let href;
 

@@ -4,7 +4,7 @@
 	import * as _ from 'lamb';
 
 	import {page as _page} from '$app/stores';
-	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme';
+	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme.js';
 
 	const segments = ['survey', 'add_your_org', 'remove_your_org'];
 	const titles = {

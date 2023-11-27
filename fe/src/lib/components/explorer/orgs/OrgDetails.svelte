@@ -13,22 +13,22 @@
 	import * as _ from 'lamb';
 	import {createEventDispatcher} from 'svelte';
 
-	import {_hero, setHero, clearHero} from '$lib/stores/interaction';
-	import {_isSmallScreen} from '$lib/stores/layout';
-	import {_orgSearchRegex} from '$lib/stores/selection';
+	import {_hero, setHero, clearHero} from '$lib/stores/interaction.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
+	import {_orgSearchRegex} from '$lib/stores/selection.js';
 	import {
 		_currThemeVars,
 		_linkTheme2,
 		_orgTypeToColorFn,
 		_orgTypeToTextColorFn,
 		_pillTheme,
-	} from '$lib/stores/theme';
+	} from '$lib/stores/theme.js';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
-	} from '$lib/stores/topics';
-	import {getTopicLabel} from '$lib/utils/dataUtils';
-	import {getWikipediaURL} from '$lib/utils/dbpedia';
+	} from '$lib/stores/topics.js';
+	import {getTopicLabel} from '$lib/utils/dataUtils.js';
+	import {getWikipediaURL} from '$lib/utils/dbpedia.js';
 
 	export let item = null;
 	export let shouldFocusOrg = true;

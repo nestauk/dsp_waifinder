@@ -1,8 +1,12 @@
 import * as _ from 'lamb';
 import {get, writable} from 'svelte/store';
 
-import {_isSmallScreen, _screenId} from '$lib/stores/layout';
-import {exitPlacesEditMode, exitRegionsEditMode, exitTopicsEditMode} from '$lib/stores/selection';
+import {_isSmallScreen, _screenId} from '$lib/stores/layout.js';
+import {
+	exitPlacesEditMode,
+	exitRegionsEditMode,
+	exitTopicsEditMode
+} from '$lib/stores/selection.js';
 
 const availableViewIds = {
 	medium: ['details', 'places', 'regions', 'topics']

@@ -4,7 +4,7 @@
 	import ExplorerMedium from '$lib/_content/guides/explorer/ExplorerMedium.svx';
 	import ExplorerSmall from '$lib/_content/guides/explorer/ExplorerSmall.svx';
 
-	import {toolName} from '$lib/config';
+	import {toolName} from '$lib/config.js';
 </script>
 
 <svelte:head>

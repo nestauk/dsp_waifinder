@@ -2,9 +2,9 @@ import {getId, swapKeyValue} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
 
-import {nutsLevel} from '$lib/config';
-import {_selectedOrgTypes} from '$lib/stores/selection';
-import {getName} from '$lib/utils/dataUtils';
+import {nutsLevel} from '$lib/config.js';
+import {_selectedOrgTypes} from '$lib/stores/selection.js';
+import {getName} from '$lib/utils/dataUtils.js';
 
 export const _dataset = writable({
 	isEmpty: true,

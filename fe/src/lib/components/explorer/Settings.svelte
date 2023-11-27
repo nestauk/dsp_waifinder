@@ -16,7 +16,7 @@
 		_orgsCount,
 		_selectedPlaces,
 		_selectedRegions,
-	} from '$lib/stores/data';
+	} from '$lib/stores/data.js';
 	import {
 		_hasSelectedPlaces,
 		_hasSelectedRegions,
@@ -35,18 +35,18 @@
 		orgTypesSelectionModes,
 		toggleOrgType,
 		toggleOrgTypesSelectionMode,
-	} from '$lib/stores/selection';
+	} from '$lib/stores/selection.js';
 	import {
 		_barchartsTheme,
 		_currThemeVars,
 		_orgTypeToColorFn,
-	} from '$lib/stores/theme';
-	import {getTopicLabel} from '$lib/utils/dataUtils';
+	} from '$lib/stores/theme.js';
+	import {getTopicLabel} from '$lib/utils/dataUtils.js';
 	import {
 		getResultsCsv,
 		getResultsMetadata,
 		initiateZippedDownload,
-	} from '$lib/utils/download';
+	} from '$lib/utils/download.js';
 
 	const toggledOrgType = ({detail: {key}}) => toggleOrgType(key);
 

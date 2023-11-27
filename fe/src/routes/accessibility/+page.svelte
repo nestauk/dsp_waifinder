@@ -18,15 +18,15 @@
 		failingA11yAudit,
 		lighthouseUrls,
 		toolName,
-	} from '$lib/config';
-	import {_currThemeVars, _extLinkTheme} from '$lib/stores/theme';
+	} from '$lib/config.js';
+	import {_currThemeVars, _extLinkTheme} from '$lib/stores/theme.js';
 	import {
 		getTest,
 		getTestResultsFilename,
 		groupTests,
 		testResultsBaseURL,
 		summarizeResults
-	} from '$lib/utils/tests';
+	} from '$lib/utils/tests.js';
 
 	import Accessibility from '$lib/_content/Accessibility.svx';
 

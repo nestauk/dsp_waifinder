@@ -14,7 +14,7 @@
 		X
 	} from '@svizzle/ui';
 
-	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config';
+	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config.js';
 	import {
 		_a11yIconFillColor,
 		_a11yIconStrokeColor,
@@ -24,8 +24,8 @@
 		_extLinkTheme,
 		_themeName,
 		toggleTheme,
-	} from '$lib/stores/theme';
-	import {version} from '$lib/utils/version';
+	} from '$lib/stores/theme.js';
+	import {version} from '$lib/utils/version.js';
 
 	export let contentHeight;
 	export let segment;

@@ -8,8 +8,11 @@
 		_themeName,
 		_themeNames,
 		_themeVars
-	} from '$lib/stores/theme';
-	import {getHexColor, getThemeClassDefsText} from '$lib/utils/svizzle/style';
+	} from '$lib/stores/theme.js';
+	import {
+		getHexColor,
+		getThemeClassDefsText
+	} from '$lib/utils/svizzle/style.js';
 
 	const getVarNames = _.pipe([
 		_.keys,

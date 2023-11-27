@@ -1,5 +1,5 @@
 <script>
-	import {toolName} from '$lib/config';
+	import {toolName} from '$lib/config.js';
 
 	import Disclaimer from '$lib/_content/info/Disclaimer.svx';
 </script>

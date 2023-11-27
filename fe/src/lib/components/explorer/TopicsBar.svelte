@@ -2,22 +2,22 @@
 	import {BarchartVDiv} from '@svizzle/barchart';
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
 
-	import {_keyTopicIdValueOrgsCount} from '$lib/stores/data';
-	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_keyTopicIdValueOrgsCount} from '$lib/stores/data.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
 	import {
 		_isTopicsEditMode,
 		_selectedTopicIds,
 		enterTopicsEditMode,
 		exitTopicsEditMode,
 		toggleTopicId,
-	} from '$lib/stores/selection';
-	import {_barchartsTheme} from '$lib/stores/theme';
+	} from '$lib/stores/selection.js';
+	import {_barchartsTheme} from '$lib/stores/theme.js';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
-	} from '$lib/stores/topics';
-	import {getTopicLabel} from '$lib/utils/dataUtils';
-	import {getWikipediaURL} from '$lib/utils/dbpedia';
+	} from '$lib/stores/topics.js';
+	import {getTopicLabel} from '$lib/utils/dataUtils.js';
+	import {getWikipediaURL} from '$lib/utils/dbpedia.js';
 
 	const toggleItem = ({detail: {key}}) => toggleTopicId(key);
 	const navigate = ({detail: {key}}) => {

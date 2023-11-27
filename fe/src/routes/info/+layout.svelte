@@ -11,7 +11,7 @@
 	import {isNotNil} from '@svizzle/utils';
 
 	import {page as _page} from '$app/stores';
-	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme';
+	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme.js';
 
 	const segments = ['privacy', 'disclaimer'];
 	const titles = {

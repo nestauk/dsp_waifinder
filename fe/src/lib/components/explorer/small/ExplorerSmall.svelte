@@ -19,18 +19,18 @@
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURLs as styleURLs,
 		noOrgsMessage
-	} from '$lib/config';
+	} from '$lib/config.js';
 	import {
 		_allOrgsBBox,
 		_clusters,
 		_orgs,
-	} from '$lib/stores/data';
-	import {_autoZoom, _hero, clearHero} from '$lib/stores/interaction';
-	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
-	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
-	import {_pillTheme, _themeName} from '$lib/stores/theme';
-	import {_activeTopicDetails} from '$lib/stores/topics';
-	import {getLonLat} from '$lib/utils/dataUtils';
+	} from '$lib/stores/data.js';
+	import {_autoZoom, _hero, clearHero} from '$lib/stores/interaction.js';
+	import {_activeViewId, setActiveView} from '$lib/stores/navigation.js';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection.js';
+	import {_pillTheme, _themeName} from '$lib/stores/theme.js';
+	import {_activeTopicDetails} from '$lib/stores/topics.js';
+	import {getLonLat} from '$lib/utils/dataUtils.js';
 
 	import ViewSelector from './ViewSelector.svelte';
 </script>

@@ -5,10 +5,10 @@
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
-	import {noOrgsMessage} from '$lib/config';
-	import {_orgs} from '$lib/stores/data';
-	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
-	import {_pillTheme} from '$lib/stores/theme';
+	import {noOrgsMessage} from '$lib/config.js';
+	import {_orgs} from '$lib/stores/data.js';
+	import {_activeViewId, setActiveView} from '$lib/stores/navigation.js';
+	import {_pillTheme} from '$lib/stores/theme.js';
 
 	import MultiviewSelector from './MultiviewSelector.svelte';
 </script>

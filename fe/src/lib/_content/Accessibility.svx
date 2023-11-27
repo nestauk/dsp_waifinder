@@ -1,8 +1,8 @@
 <script>
 	import {HyperLink, LinkButton, ResponsiveFlex} from '@svizzle/ui';
 
-	import {contactEmail, jsonUrl, toolName} from '$lib/config';
-	import {_currThemeVars, _linkTheme1} from '$lib/stores/theme';
+	import {contactEmail, jsonUrl, toolName} from '$lib/config.js';
+	import {_currThemeVars, _linkTheme1} from '$lib/stores/theme.js';
 
 	const lighthouseUrl = 'https://developers.google.com/web/tools/lighthouse';
 	const openDyslexicUrl = 'https://opendyslexic.org/';
