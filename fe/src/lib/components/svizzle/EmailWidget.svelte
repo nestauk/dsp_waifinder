@@ -14,6 +14,7 @@
 	};
 
 	let email = '';
+	let isValidEmail;
 
 	const dispatch = createEventDispatcher();
 

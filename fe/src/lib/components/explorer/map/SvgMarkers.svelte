@@ -255,10 +255,10 @@
 			on:mouseleave={onMouseLeaveMarker}
 			transform='translate({x},{y})'
 		>
-			{#each sectors as {arc, fill}}
+			{#each sectors as {arc: arcPath, fill}}
 				<path
 					{fill}
-					d={arc}
+					d={arcPath}
 				/>
 			{/each}
 		</g>
@@ -274,10 +274,10 @@
 			on:keydown|stopPropagation={null}
 			transform='translate({x},{y})'
 		>
-			{#each sectors as {arc, fill}}
+			{#each sectors as {arc: arcPath, fill}}
 				<path
 					{fill}
-					d={arc}
+					d={arcPath}
 				/>
 			{/each}
 			<text

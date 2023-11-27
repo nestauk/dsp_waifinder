@@ -35,7 +35,7 @@
 	$: thumbnailURL = $_activeTopicDetails?.thumbnailURL;
 	$: footerText = isPinned
 		? bannersDefaultFooterText
-		: `Click to open this topic's Wikipedia page`;
+		: 'Click to open this topic\'s Wikipedia page';
 	$: wikipediaURL = getWikipediaURL($_activeTopicDetails.id);
 </script>
 

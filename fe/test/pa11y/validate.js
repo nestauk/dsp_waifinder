@@ -39,7 +39,7 @@ const auditURL = async (id, url) => {
 }
 
 const enqueueTask = ([id, url]) =>
-	queue.enqueue(async () => await auditURL(id, url));
+	queue.enqueue(() => auditURL(id, url));
 
 const auditUrls = _.pipe([
 	_.pairs,

@@ -4,8 +4,8 @@
 	import {isDev} from '$lib/env.js';
 
 
-	$: status = $page.status;
-	$: error = $page.error;
+	$: ({status} = $page);
+	$: ({error} = $page);
 </script>
 
 <svelte:head>

@@ -48,10 +48,10 @@ const auditURL = async (id, url) => {
 			options
 		);
 		const reportHtml = runnerResult.report.replaceAll(urlBases.development, urlBases.production);
-	
+
 		// eslint-disable-next-line no-sync
 		fs.writeFileSync(`static/audits/lighthouse/${id}.html`, reportHtml);
-	
+
 		// `.lhr` is the Lighthouse Result as a JS object
 		console.log(
 			'Report is done for',
@@ -61,11 +61,9 @@ const auditURL = async (id, url) => {
 			'Accessibility score was',
 			runnerResult.lhr.categories.accessibility.score * 100
 		);
-	}
-	catch (e) {
+	} catch (e) {
 		console.error('Error!', e);
-	}
-	finally {
+	} finally {
 		await chrome.kill();
 		console.log('Killed chrome.');
 	}

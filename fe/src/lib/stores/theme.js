@@ -9,7 +9,7 @@ export const _isThemeEditorActive = writable(false);
 
 const prefersDarkTheme =
 	// eslint-disable-next-line no-undef
-	globalThis.matchMedia?.("(prefers-color-scheme: dark)").matches;
+	globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches;
 
 export const _themeName = writable(
 	prefersDarkTheme ? 'themeDark' : 'themeLight'
