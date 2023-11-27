@@ -16,8 +16,9 @@ queue.on('end', () => {
 
 const auditURL = async (id, url) => {
 	console.log('Launching chrome...')
+	let chrome;
 	try {
-		const chrome = await chromeLauncher.launch({
+		chrome = await chromeLauncher.launch({
 			port: 9222,
 			chromeFlags: [
 				'--headless',
@@ -64,7 +65,7 @@ const auditURL = async (id, url) => {
 	} catch (e) {
 		console.error('Error!', e);
 	} finally {
-		await chrome.kill();
+		await chrome?.kill();
 		console.log('Killed chrome.');
 	}
 }
