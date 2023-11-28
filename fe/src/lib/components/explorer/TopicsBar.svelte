@@ -17,12 +17,8 @@
 		clearActiveTopic
 	} from '$lib/stores/topics.js';
 	import {getTopicLabel} from '$lib/utils/dataUtils.js';
-	import {getWikipediaURL} from '$lib/utils/dbpedia.js';
 
 	const toggleItem = ({detail: {key}}) => toggleTopicId(key);
-	const navigate = ({detail: {key}}) => {
-		window.location = getWikipediaURL(key);
-	}
 
 	const onKeyDown = event => {
 		if ($_isTopicsEditMode && event.keyCode === 27) {
@@ -31,7 +27,7 @@
 		}
 	}
 
-	$: onClick = $_isTopicsEditMode ? toggleItem : navigate;
+	$: onClick = $_isTopicsEditMode ? toggleItem : null;
 	$: onEntered = $_isSmallScreen
 		? null
 		: ({detail: {key}}) => asyncUpdateTopicDetails(key);
