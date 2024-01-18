@@ -2,22 +2,22 @@
 	import {
 		_screen,
 		Banner,
+		HyperLink,
 		Icon,
 		LayoutHMF,
-		Link,
 		LoadingView,
 		Scroller,
 	} from '@svizzle/ui';
 
 	import WikipediaLogo from '$lib/components/explorer/icons/WikipediaLogo.svelte';
-	import {bannersDefaultFooterText} from '$lib/config';
-	import {_bannersTheme, _linkTheme0} from '$lib/stores/theme';
+	import {bannersDefaultFooterText} from '$lib/config.js';
+	import {_bannersTheme, _linkTheme0} from '$lib/stores/theme.js';
 	import {
 		_activeTopicDetails,
 		clearActiveTopic
-	} from '$lib/stores/topics';
-	import {getFirstPhrases} from '$lib/utils/dataUtils';
-	import {getWikipediaURL} from '$lib/utils/dbpedia';
+	} from '$lib/stores/topics.js';
+	import {getFirstPhrases} from '$lib/utils/dataUtils.js';
+	import {getWikipediaURL} from '$lib/utils/dbpedia.js';
 
 	export let hasBackdrop = false;
 	export let isPinned;
@@ -35,7 +35,7 @@
 	$: thumbnailURL = $_activeTopicDetails?.thumbnailURL;
 	$: footerText = isPinned
 		? bannersDefaultFooterText
-		: `Click to open this topic's Wikipedia page`;
+		: 'Click to open this topic\'s Wikipedia page';
 	$: wikipediaURL = getWikipediaURL($_activeTopicDetails.id);
 </script>
 
@@ -74,7 +74,7 @@
 			slot='footer'
 		>
 			{#if isPinned}
-				<Link
+				<HyperLink
 					href={wikipediaURL}
 					isBold={true}
 					target='_blank'
@@ -86,7 +86,7 @@
 						size=24
 						stroke='none'
 					/>
-				</Link>
+				</HyperLink>
 			{/if}
 			<p>{footerText}</p>
 		</div>

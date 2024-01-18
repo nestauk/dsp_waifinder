@@ -115,8 +115,8 @@ a {
 	--colorOrgtype3Text: #222;
 	--colorOutline: rgb(256, 64, 64);
 	--colorPageBackground: rgb(45,46,95); /* UKRI color */
-	--colorPillBackground: #333;
-	--colorPillText: white;
+	--colorPillBackground: white;
+	--colorPillText: #333;
 	--colorScrollbarThumb: #ddd; /* windows */
 	--colorScrollbarTrack: #f5f5f5; /* windows */
 	--colorScrollbarTrackBorder: #ddd; /* windows */
@@ -181,8 +181,8 @@ a {
 	--colorOrgtype3Text: var(--colorTextInverted);
 	--colorOutline: rgb(255, 64, 64);
 	--colorPageBackground: rgb(45,46,95); /* UKRI color */
-	--colorPillBackground: #ddd;
-	--colorPillText: black;
+	--colorPillBackground: #333;
+	--colorPillText: #ddd;
 	--colorScrollbarThumb: #666; /* windows */
 	--colorScrollbarTrack: #222; /* windows */
 	--colorScrollbarTrackBorder: #666; /* windows */

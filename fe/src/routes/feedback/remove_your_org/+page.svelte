@@ -1,5 +1,5 @@
 <script>
-	import {toolName, removeOrgFormUrl} from '$lib/config';
+	import {toolName, removeOrgFormUrl} from '$lib/config.js';
 </script>
 
 <svelte:head>

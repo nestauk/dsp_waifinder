@@ -39,7 +39,7 @@ const reservedRe = /^\.+$/u;
 const windowsReservedRe = /^(con|prn|aux|nul|com[0-9]|lpt[0-9])(\..*)?$/ui;
 const windowsTrailingRe = /[. ]+$/u;
 
-function sanitize(input, replacement) {
+function sanitize (input, replacement) {
 	if (typeof input !== 'string') {
 		throw new Error('Input must be string');
 	}
@@ -55,7 +55,7 @@ function sanitize(input, replacement) {
 }
 
 export default (input, options) => {
-	const replacement = (options && options.replacement) || '';
+	const replacement = options && options.replacement || '';
 	const output = sanitize(input, replacement);
 	if (replacement === '') {
 		return output;

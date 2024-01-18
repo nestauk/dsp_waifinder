@@ -3,8 +3,8 @@
 		_screen,
 		ChevronLeft,
 		ChevronRight,
+		HyperLink,
 		Icon,
-		Link,
 		LoadingView,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
@@ -18,15 +18,15 @@
 		failingA11yAudit,
 		lighthouseUrls,
 		toolName,
-	} from '$lib/config';
-	import {_currThemeVars, _extLinkTheme} from '$lib/stores/theme';
+	} from '$lib/config.js';
+	import {_currThemeVars, _extLinkTheme} from '$lib/stores/theme.js';
 	import {
 		getTest,
 		getTestResultsFilename,
 		groupTests,
 		testResultsBaseURL,
 		summarizeResults
-	} from '$lib/utils/tests';
+	} from '$lib/utils/tests.js';
 
 	import Accessibility from '$lib/_content/Accessibility.svx';
 
@@ -214,14 +214,14 @@
 			<figure>
 				Unfortunately the accessibility audit for this page fails
 				because of an
-				<Link
+				<HyperLink
 					href={lighthouseIssueUrl}
 					isBold={true}
 					theme={$_extLinkTheme}
 					type='external'
 				>
 					issue
-				</Link> in Google Lighthouse.
+				</HyperLink> in Google Lighthouse.
 			</figure>
 		{/if}
 		<iframe

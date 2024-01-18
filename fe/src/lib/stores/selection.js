@@ -2,7 +2,7 @@ import {isIterableNotEmpty, toggleItem, safeRegexOf} from '@svizzle/utils';
 import * as _ from 'lamb';
 import {derived, get, writable} from 'svelte/store';
 
-import {DEFAULT_BBOX_WS_EN} from '$lib/config';
+import {DEFAULT_BBOX_WS_EN} from '$lib/config.js';
 
 /* bounding box, zoom */
 

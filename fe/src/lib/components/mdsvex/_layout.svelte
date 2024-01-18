@@ -19,7 +19,7 @@
 </script>
 
 <section class='_layout mdsvex {$_screen?.classes}'>
-	<slot></slot>
+	<slot />
 </section>
 
 <style>

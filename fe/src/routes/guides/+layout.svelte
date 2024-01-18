@@ -3,15 +3,15 @@
 		_screen,
 		ChevronLeft,
 		ChevronRight,
+		HyperLink,
 		Icon,
 		isClientSide,
-		Link,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 	import * as _ from 'lamb';
 
 	import {page as _page} from '$app/stores';
-	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme';
+	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme.js';
 
 	const segments = ['app', 'explorer', 'a11ymenu'];
 	const titles = {
@@ -46,7 +46,7 @@
 						<li
 							class:selected={segment === id}
 						>
-							<Link
+							<HyperLink
 								href='/guides/{id}'
 								theme={{
 									...$_linkTheme0,
@@ -58,7 +58,7 @@
 								<span>
 									{titles[id]}
 								</span>
-							</Link>
+							</HyperLink>
 						</li>
 					{/each}
 				</ul>
@@ -69,7 +69,7 @@
 					</label>
 
 					<div>
-						<Link
+						<HyperLink
 							ariaLabel={hasPrevSegment ? 'Previous guide' : null}
 							href={hasPrevSegment && `/guides/${prevSegment}`}
 							theme={{
@@ -80,10 +80,10 @@
 							}}
 						>
 							<Icon glyph={ChevronLeft} />
-						</Link>
+						</HyperLink>
 					</div>
 					<div>
-						<Link
+						<HyperLink
 							ariaLabel={hasNextSegment ? 'Next guide' : null}
 							href={hasNextSegment && `/guides/${nextSegment}`}
 							theme={{
@@ -94,7 +94,7 @@
 							}}
 						>
 							<Icon glyph={ChevronRight} />
-						</Link>
+						</HyperLink>
 					</div>
 				</div>
 			{/if}

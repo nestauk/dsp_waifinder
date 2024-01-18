@@ -1,13 +1,13 @@
 <script>
-	import {Download, Icon, Info, Link, Send} from '@svizzle/ui';
+	import {Download, HyperLink, Icon, Info, Send} from '@svizzle/ui';
 
-	import {jsonUrl, LOGOS} from '$lib/config';
+	import {jsonUrl, LOGOS} from '$lib/config.js';
 	import {
 		_currThemeVars,
 		_getNavLinkColor,
 		_linkTheme0,
 		_themeName,
-	} from '$lib/stores/theme';
+	} from '$lib/stores/theme.js';
 
 	export let segment;
 
@@ -22,7 +22,7 @@
 		<div role='none'>
 			<ul role='none'>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/'
 						theme={{
 							...$_linkTheme0,
@@ -33,10 +33,10 @@
 							alt='UK Research and Innovation'
 							src={logos.ukri}
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/methodology'
 						theme={{
 							...$_linkTheme0,
@@ -44,10 +44,10 @@
 						}}
 					>
 						Methodology
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/guides'
 						theme={{
 							...$_linkTheme0,
@@ -55,10 +55,10 @@
 						}}
 					>
 						Guides
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/explorer'
 						theme={{
 							...$_linkTheme0,
@@ -66,7 +66,7 @@
 						}}
 					>
 						Explorer
-					</Link>
+					</HyperLink>
 				</li>
 			</ul>
 		</div>
@@ -77,7 +77,7 @@
 					role='none'
 					title='Download the full dataset'
 				>
-					<Link
+					<HyperLink
 						download
 						href={jsonUrl}
 						theme={{
@@ -92,10 +92,10 @@
 							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/feedback'
 						rel='prefetch'
 						theme={{
@@ -110,10 +110,10 @@
 							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/info'
 						rel='prefetch'
 						theme={{
@@ -128,7 +128,7 @@
 							strokeWidth=1.5
 							stroke={$_currThemeVars['--colorIcon']}
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 			</ul>
 		</div>

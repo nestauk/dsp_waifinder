@@ -1,8 +1,8 @@
 <script>
-	import {A11yPerson, Icon, Droplet, Link, Moon, Sun} from '@svizzle/ui';
+	import {A11yPerson, Icon, Droplet, HyperLink, Moon, Sun} from '@svizzle/ui';
 
-	import {changelogUrl, LOGOS} from '$lib/config';
-	import {isDev} from '$lib/env';
+	import {changelogUrl, LOGOS} from '$lib/config.js';
+	import {isDev} from '$lib/env.js';
 	import {
 		_a11yIconFillColor,
 		_a11yIconStrokeColor,
@@ -13,8 +13,8 @@
 		_extLinkTheme,
 		_themeName,
 		toggleTheme,
-	} from '$lib/stores/theme';
-	import {version} from '$lib/utils/version';
+	} from '$lib/stores/theme.js';
+	import {version} from '$lib/utils/version.js';
 
 	export let segment;
 	export let showA11yMenu = false;
@@ -38,7 +38,7 @@
 	<!-- left: sponsors -->
 
 	<span>
-		<Link
+		<HyperLink
 			href='https://www.nesta.org.uk/'
 			target='_blank'
 			theme={$_linkTheme0}
@@ -47,7 +47,7 @@
 				alt='Nesta'
 				src={logos.nesta}
 			/>
-		</Link>
+		</HyperLink>
 	</span>
 
 	<!-- center: version -->
@@ -56,13 +56,13 @@
 		aria-label='Source code repository'
 		role='none'
 	>
-		<Link
+		<HyperLink
 			href={changelogUrl}
 			type='external'
 			theme={$_extLinkTheme}
 		>
 			{version}
-		</Link>
+		</HyperLink>
 	</div>
 
 	<!-- right -->
@@ -108,7 +108,7 @@
 			<!-- a11y -->
 
 			<li role='none'>
-				<Link
+				<HyperLink
 					href='/accessibility'
 					theme={{
 						...$_linkTheme0,
@@ -116,7 +116,7 @@
 					}}
 				>
 					Accessibility
-				</Link>
+				</HyperLink>
 			</li>
 			<li role='none'>
 				<button

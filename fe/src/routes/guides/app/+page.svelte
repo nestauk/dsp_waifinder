@@ -4,7 +4,7 @@
 	import AppMedium from '$lib/_content/guides/AppMedium.svx';
 	import AppSmall from '$lib/_content/guides/AppSmall.svx';
 
-	import {toolName} from '$lib/config';
+	import {toolName} from '$lib/config.js';
 </script>
 
 <svelte:head>

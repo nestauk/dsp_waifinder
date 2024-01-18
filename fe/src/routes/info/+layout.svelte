@@ -4,14 +4,14 @@
 		_screen,
 		ChevronLeft,
 		ChevronRight,
+		HyperLink,
 		Icon,
 		isClientSide,
-		Link,
 	} from '@svizzle/ui';
 	import {isNotNil} from '@svizzle/utils';
 
 	import {page as _page} from '$app/stores';
-	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme';
+	import {_currThemeVars, _linkTheme0} from '$lib/stores/theme.js';
 
 	const segments = ['privacy', 'disclaimer'];
 	const titles = {
@@ -43,7 +43,7 @@
 				<ul>
 					{#each segments as id}
 						<li class:selected={segment === id}>
-							<Link
+							<HyperLink
 								href='/info/{id}'
 								theme={{
 									...$_linkTheme0,
@@ -55,7 +55,7 @@
 								<span>
 									{titles[id]}
 								</span>
-							</Link>
+							</HyperLink>
 						</li>
 					{/each}
 				</ul>
@@ -66,7 +66,7 @@
 					</label>
 
 					<div>
-						<Link
+						<HyperLink
 							ariaLabel={hasPrevSegment ? 'Previous form' : null}
 							href={hasPrevSegment && `/info/${prevSegment}`}
 							theme={{
@@ -77,10 +77,10 @@
 							}}
 						>
 							<Icon glyph={ChevronLeft} />
-						</Link>
+						</HyperLink>
 					</div>
 					<div>
-						<Link
+						<HyperLink
 							ariaLabel={hasNextSegment ? 'Next form' : null}
 							href={hasNextSegment && `/info/${nextSegment}`}
 							theme={{
@@ -91,7 +91,7 @@
 							}}
 						>
 							<Icon glyph={ChevronRight} />
-						</Link>
+						</HyperLink>
 					</div>
 				</div>
 			{/if}

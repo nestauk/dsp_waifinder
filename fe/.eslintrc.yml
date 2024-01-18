@@ -5,6 +5,7 @@ env:
   mocha: true
 extends:
   - eslint:recommended
+  - plugin:svelte/recommended
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -12,7 +13,7 @@ overrides:
   -
     files:
       - '**/*.svelte'
-    processor: svelte3/svelte3
+    parser: svelte-eslint-parser
     rules:
       brace-style: off
       import/no-unresolved: off # svelte components not found
@@ -22,8 +23,6 @@ overrides:
 parserOptions:
   ecmaVersion: 2020
   sourceType: module
-plugins:
-  - svelte3
 rules:
   accessor-pairs: error
   array-bracket-newline: off
@@ -239,7 +238,9 @@ rules:
   prefer-spread: error
   prefer-template: error
   quote-props: off
-  quotes: off
+  quotes:
+    - error
+    - single
   radix: error
   require-await: error
   require-jsdoc: off

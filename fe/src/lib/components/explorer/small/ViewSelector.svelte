@@ -4,7 +4,7 @@
 
 	import City from '$lib/components/explorer/icons/City.svelte';
 	import Region from '$lib/components/explorer/icons/Region.svelte';
-	import {_getIconColor} from '$lib/stores/theme';
+	import {_getIconColor} from '$lib/stores/theme.js';
 
 	export let activeViewId;
 	export let setView = noop;

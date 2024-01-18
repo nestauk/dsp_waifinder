@@ -2,9 +2,9 @@
 	import {_screen, Banner, LayoutHMF} from '@svizzle/ui';
 
 	import OrgDetails from '$lib/components/explorer/orgs/OrgDetails.svelte';
-	import {bannersDefaultFooterText} from '$lib/config';
-	import {_hero, _isCursorOnMap, clearHero} from '$lib/stores/interaction';
-	import {_bannersTheme} from '$lib/stores/theme';
+	import {bannersDefaultFooterText} from '$lib/config.js';
+	import {_hero, _isCursorOnMap, clearHero} from '$lib/stores/interaction.js';
+	import {_bannersTheme} from '$lib/stores/theme.js';
 
 	$: footerText = $_hero.isPinned
 		? $_isCursorOnMap ? 'Click to unpin' : bannersDefaultFooterText

@@ -2,33 +2,33 @@
 	import {
 		CopyToClipboard,
 		HighlightedText,
+		HyperLink,
 		Icon,
-		Link,
 		Link2,
 		MinusCircle,
+		Pill,
 		PlusCircle,
 		Scroller,
 	} from '@svizzle/ui';
 	import * as _ from 'lamb';
 	import {createEventDispatcher} from 'svelte';
 
-	import {_hero, setHero, clearHero} from '$lib/stores/interaction';
-	import {_isSmallScreen} from '$lib/stores/layout';
-	import {_orgSearchRegex} from '$lib/stores/selection';
+	import {_hero, setHero, clearHero} from '$lib/stores/interaction.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
+	import {_orgSearchRegex} from '$lib/stores/selection.js';
 	import {
 		_currThemeVars,
 		_linkTheme2,
 		_orgTypeToColorFn,
 		_orgTypeToTextColorFn,
-	} from '$lib/stores/theme';
+		_pillTheme,
+	} from '$lib/stores/theme.js';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
-	} from '$lib/stores/topics';
-	import {getTopicLabel} from '$lib/utils/dataUtils';
-	import {getWikipediaURL} from '$lib/utils/dbpedia';
-
-	import Pill from './Pill.svelte';
+	} from '$lib/stores/topics.js';
+	import {getTopicLabel} from '$lib/utils/dataUtils.js';
+	import {getWikipediaURL} from '$lib/utils/dbpedia.js';
 
 	export let item = null;
 	export let shouldFocusOrg = true;
@@ -113,7 +113,7 @@
 						theme={highlightedTheme}
 					/>
 				</span>
-				<Link
+				<HyperLink
 					ariaDescribedBy='title-{item.id}'
 					ariaLabel='Website for {item.name}'
 					href={item.url}
@@ -125,7 +125,7 @@
 						size={20}
 						stroke={$_currThemeVars['--colorLink']}
 					/>
-				</Link>
+				</HyperLink>
 			{/if}
 		</div>
 		{#if isFocused || showAsFocused}
@@ -194,13 +194,16 @@
 							on:click={() => asyncUpdateTopicDetails(id)}
 							on:keydown={makeOnKeyDown(id)}
 						>
-							<Pill label={getTopicLabel(id)} />
+							<Pill
+								label={getTopicLabel(id)}
+								theme={$_pillTheme}
+							/>
 						</div>
 					{/each}
 				{:else}
 					{#each topics as {id}}
 						<div class='topic'>
-							<Link
+							<HyperLink
 								href={getWikipediaURL(id)}
 								target='_blank'
 								theme={$_linkTheme2}
@@ -209,9 +212,12 @@
 									on:mouseenter={() => asyncUpdateTopicDetails(id)}
 									on:mouseleave={clearActiveTopic}
 								>
-									<Pill label={getTopicLabel(id)} />
+									<Pill
+										label={getTopicLabel(id)}
+										theme={$_pillTheme}
+									/>
 								</div>
-							</Link>
+							</HyperLink>
 						</div>
 					{/each}
 				{/if}

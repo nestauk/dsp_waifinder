@@ -5,15 +5,15 @@
 	import * as _ from 'lamb';
 	import {getContext} from 'svelte';
 
-	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data';
+	import {getClusterExpansionZoom, getClusterLeaves} from '$lib/stores/data.js';
 	import {
 		_hero,
 		_isHeroInBounds,
 		clearHero,
 		setHero
-	} from '$lib/stores/interaction';
-	import {_isSmallScreen} from '$lib/stores/layout';
-	import {_orgTypeToColorFn} from '$lib/stores/theme';
+	} from '$lib/stores/interaction.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
+	import {_orgTypeToColorFn} from '$lib/stores/theme.js';
 
 	/* props */
 
@@ -22,7 +22,7 @@
 
 	/* context */
 
-	const {_bbox, _map, _projectFn} = getContext('mapBox');
+	const {_bbox, _map, _projectFn} = getContext('Mapbox');
 
 	/* groups */
 
@@ -255,10 +255,10 @@
 			on:mouseleave={onMouseLeaveMarker}
 			transform='translate({x},{y})'
 		>
-			{#each sectors as {arc, fill}}
+			{#each sectors as {arc: arcPath, fill}}
 				<path
 					{fill}
-					d={arc}
+					d={arcPath}
 				/>
 			{/each}
 		</g>
@@ -274,10 +274,10 @@
 			on:keydown|stopPropagation={null}
 			transform='translate({x},{y})'
 		>
-			{#each sectors as {arc, fill}}
+			{#each sectors as {arc: arcPath, fill}}
 				<path
 					{fill}
-					d={arc}
+					d={arcPath}
 				/>
 			{/each}
 			<text

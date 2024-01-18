@@ -6,7 +6,7 @@
 		Icon,
 		Info,
 		isServerSide,
-		Link,
+		HyperLink,
 		Menu,
 		Moon,
 		Send,
@@ -14,7 +14,7 @@
 		X
 	} from '@svizzle/ui';
 
-	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config';
+	import {changelogUrl, jsonUrl, LOGOS} from '$lib/config.js';
 	import {
 		_a11yIconFillColor,
 		_a11yIconStrokeColor,
@@ -24,8 +24,8 @@
 		_extLinkTheme,
 		_themeName,
 		toggleTheme,
-	} from '$lib/stores/theme';
-	import {version} from '$lib/utils/version';
+	} from '$lib/stores/theme.js';
+	import {version} from '$lib/utils/version.js';
 
 	export let contentHeight;
 	export let segment;
@@ -114,34 +114,34 @@
 				class='sponsors'
 				role='none'
 			>
-				<Link
+				<HyperLink
 					href='https://www.ukri.org/'
 					theme={$_linkTheme0}
 				>
 					<img src={logos.ukri} alt='UK Research and Innovation' />
-				</Link>
-				<Link
+				</HyperLink>
+				<HyperLink
 					href='https://www.nesta.org.uk/'
 					theme={$_linkTheme0}
 				>
 					<img src={logos.nesta} alt='Nesta' />
-				</Link>
+				</HyperLink>
 			</div>
 			<ul role='none'>
 				<li
 					aria-label='Source code repository'
 					role='none'
 				>
-					<Link
+					<HyperLink
 						href={changelogUrl}
 						type='external'
 						theme={$_extLinkTheme}
 					>
 						{version}
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/info'
 						rel='prefetch'
 						theme={{
@@ -156,10 +156,10 @@
 							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/feedback'
 						rel='prefetch'
 						theme={{
@@ -174,14 +174,14 @@
 							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 				<li
 					aria-label='Download the full dataset'
 					role='none'
 					title='Download the full dataset'
 				>
-					<Link
+					<HyperLink
 						download
 						href={jsonUrl}
 						theme={{
@@ -196,13 +196,13 @@
 							stroke={$_currThemeVars['--colorIcon']}
 							strokeWidth=1.5
 						/>
-					</Link>
+					</HyperLink>
 				</li>
 				<li
 					class='sectionStart'
 					role='none'
 				>
-					<Link
+					<HyperLink
 						href='/accessibility'
 						theme={{
 							...$_linkTheme0,
@@ -210,10 +210,10 @@
 						}}
 					>
 						Accessibility
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/guides'
 						theme={{
 							...$_linkTheme0,
@@ -221,10 +221,10 @@
 						}}
 					>
 						Guides
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/methodology'
 						theme={{
 							...$_linkTheme0,
@@ -232,10 +232,10 @@
 						}}
 					>
 						Methodology
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/explorer'
 						theme={{
 							...$_linkTheme0,
@@ -243,10 +243,10 @@
 						}}
 					>
 						Explorer
-					</Link>
+					</HyperLink>
 				</li>
 				<li role='none'>
-					<Link
+					<HyperLink
 						href='/'
 						theme={{
 							...$_linkTheme0,
@@ -254,7 +254,7 @@
 						}}
 					>
 						Home
-					</Link>
+					</HyperLink>
 				</li>
 			</ul>
 		</menu>

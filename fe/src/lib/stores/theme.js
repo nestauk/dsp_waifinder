@@ -2,14 +2,14 @@ import * as _ from 'lamb';
 import {derived, writable} from 'svelte/store';
 import {_isA11yDirty} from '@svizzle/ui';
 
-import {_dataset} from '$lib/stores/dataset';
-import {makeSegmentToCssVar} from '$lib/utils/theme';
+import {_dataset} from '$lib/stores/dataset.js';
+import {makeSegmentToCssVar} from '$lib/utils/theme.js';
 
 export const _isThemeEditorActive = writable(false);
 
 const prefersDarkTheme =
 	// eslint-disable-next-line no-undef
-	globalThis.matchMedia?.("(prefers-color-scheme: dark)").matches;
+	globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches;
 
 export const _themeName = writable(
 	prefersDarkTheme ? 'themeDark' : 'themeLight'
@@ -84,6 +84,18 @@ export const _getNavLinkColor = derived(
 		'--colorNavLink'
 	)
 );
+
+/* pills */
+
+export const _pillTheme = derived(
+	_currThemeVars,
+	currThemeVars => ({
+		backgroundColor: currThemeVars['--colorPillBackground'],
+		border: currThemeVars['--border'],
+		textColor: currThemeVars['--colorPillText'],
+	})
+);
+
 
 /* links */
 

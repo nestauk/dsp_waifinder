@@ -13,9 +13,9 @@
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURLs as styleURLs
-	} from '$lib/config';
-	import {_allOrgsBBox, _clusters} from '$lib/stores/data';
-	import {getLonLat} from '$lib/utils/dataUtils';
+	} from '$lib/config.js';
+	import {_allOrgsBBox, _clusters} from '$lib/stores/data.js';
+	import {getLonLat} from '$lib/utils/dataUtils.js';
 	import {
 		_autoZoom,
 		_hero,
@@ -23,10 +23,10 @@
 		clearInteractionStores,
 		clearIsCursorOnMap,
 		setIsCursorOnMap
-	} from '$lib/stores/interaction';
-	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
-	import {_themeName} from '$lib/stores/theme';
-	import {_activeTopicDetails} from '$lib/stores/topics';
+	} from '$lib/stores/interaction.js';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection.js';
+	import {_themeName} from '$lib/stores/theme.js';
+	import {_activeTopicDetails} from '$lib/stores/topics.js';
 
 	import Multiview from './Multiview.svelte';
 </script>
@@ -47,11 +47,11 @@
 			{_zoom}
 			{accessToken}
 			bounds={$_allOrgsBBox}
-			styleURL={styleURLs[$_themeName]}
 			on:bboxChanged
+			on:mapClick={clearHero}
+			style={styleURLs[$_themeName]}
 			withScaleControl={true}
 			withZoomControl={true}
-			on:mapClick={clearHero}
 		>
 			<SvgLayer>
 				<SvgMarkers

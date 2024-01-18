@@ -2,8 +2,8 @@
 	import {_screen, AlphabetPicker} from '@svizzle/ui';
 
 	import VirtualList from '$lib/components/VirtualList/VirtualList.svelte';
-	import {_orgsChar} from '$lib/stores/data';
-	import {_currThemeVars} from '$lib/stores/theme';
+	import {_orgsChar} from '$lib/stores/data.js';
+	import {_currThemeVars} from '$lib/stores/theme.js';
 
 	import OrgDetails from './OrgDetails.svelte';
 

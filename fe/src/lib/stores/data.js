@@ -14,9 +14,9 @@ import * as _ from 'lamb';
 import Supercluster from 'supercluster';
 import {derived, get} from 'svelte/store';
 
-import {DEFAULT_BBOX_WS_EN, nutsLevel} from '$lib/config';
-import {_dataset} from '$lib/stores/dataset';
-import {_autoZoom} from '$lib/stores/interaction';
+import {DEFAULT_BBOX_WS_EN, nutsLevel} from '$lib/config.js';
+import {_dataset} from '$lib/stores/dataset.js';
+import {_autoZoom} from '$lib/stores/interaction.js';
 import {
 	_bbox_WSEN,
 	_isOrgWithinBbox,
@@ -31,7 +31,7 @@ import {
 	_selectedRegionIds,
 	_selectedTopicIds,
 	_zoom
-} from '$lib/stores/selection';
+} from '$lib/stores/selection.js';
 import {
 	countOrgTypes,
 	getBoundingBox,
@@ -39,7 +39,7 @@ import {
 	getName,
 	getPlaceId,
 	getTopicIds,
-} from '$lib/utils/dataUtils';
+} from '$lib/utils/dataUtils.js';
 
 /* filtered orgs */
 

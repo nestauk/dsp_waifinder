@@ -2,23 +2,23 @@
 	import {BarchartVDiv} from '@svizzle/barchart';
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
 
-	import {_keyTopicIdValueOrgsCount} from '$lib/stores/data';
-	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_keyTopicIdValueOrgsCount} from '$lib/stores/data.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
 	import {
 		_isTopicsEditMode,
 		_selectedTopicIds,
 		enterTopicsEditMode,
 		exitTopicsEditMode,
 		toggleTopicId,
-	} from '$lib/stores/selection';
-	import {_barchartsTheme} from '$lib/stores/theme';
+	} from '$lib/stores/selection.js';
+	import {_barchartsTheme} from '$lib/stores/theme.js';
 	import {
 		asyncUpdateTopicDetails,
 		clearActiveTopic
-	} from '$lib/stores/topics';
-	import {getTopicLabel} from '$lib/utils/dataUtils';
+	} from '$lib/stores/topics.js';
+	import {getTopicLabel} from '$lib/utils/dataUtils.js';
 
-	const toggleItem = ({detail: {id}}) => toggleTopicId(id);
+	const toggleItem = ({detail: {key}}) => toggleTopicId(key);
 
 	const onKeyDown = event => {
 		if ($_isTopicsEditMode && event.keyCode === 27) {
@@ -30,7 +30,7 @@
 	$: onClick = $_isTopicsEditMode ? toggleItem : null;
 	$: onEntered = $_isSmallScreen
 		? null
-		: ({detail: {id}}) => asyncUpdateTopicDetails(id);
+		: ({detail: {key}}) => asyncUpdateTopicDetails(key);
 </script>
 
 <svelte:window on:keydown={onKeyDown} />

@@ -4,36 +4,33 @@
 		Mapbox,
 		SvgLayer
 	} from '@svizzle/mapbox';
+	import {Pill, View, ViewsXor} from '@svizzle/ui';
 
 	import OrgBanner from '$lib/components/explorer/banners/OrgBanner.svelte';
 	import TopicBanner from '$lib/components/explorer/banners/TopicBanner.svelte';
 	import SvgMarkers from '$lib/components/explorer/map/SvgMarkers.svelte';
 	import OrgsList from '$lib/components/explorer/orgs/OrgsList.svelte';
-	import Pill from '$lib/components/explorer/orgs/Pill.svelte';
 	import PlacesBar from '$lib/components/explorer/PlacesBar.svelte';
 	import RegionsBar from '$lib/components/explorer/RegionsBar.svelte';
 	import TopicsBar from '$lib/components/explorer/TopicsBar.svelte';
 	import Settings from '$lib/components/explorer/Settings.svelte';
 	import ToggleControl from '$lib/components/svizzle/ToggleControl.svelte';
-	import View from '$lib/components/viewports/View.svelte';
-	import ViewsXor from '$lib/components/viewports/ViewsXor.svelte';
 	import {
 		MAPBOXGL_ACCESSTOKEN as accessToken,
 		MAPBOXGL_STYLEURLs as styleURLs,
 		noOrgsMessage
-	} from '$lib/config';
+	} from '$lib/config.js';
 	import {
 		_allOrgsBBox,
 		_clusters,
 		_orgs,
-	} from '$lib/stores/data';
-
-	import {_autoZoom, _hero, clearHero} from '$lib/stores/interaction';
-	import {_activeViewId, setActiveView} from '$lib/stores/navigation';
-	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection';
-	import {_themeName} from '$lib/stores/theme';
-	import {_activeTopicDetails} from '$lib/stores/topics';
-	import {getLonLat} from '$lib/utils/dataUtils';
+	} from '$lib/stores/data.js';
+	import {_autoZoom, _hero, clearHero} from '$lib/stores/interaction.js';
+	import {_activeViewId, setActiveView} from '$lib/stores/navigation.js';
+	import {_bbox_WS_EN, _bbox_WSEN, _zoom} from '$lib/stores/selection.js';
+	import {_pillTheme, _themeName} from '$lib/stores/theme.js';
+	import {_activeTopicDetails} from '$lib/stores/topics.js';
+	import {getLonLat} from '$lib/utils/dataUtils.js';
 
 	import ViewSelector from './ViewSelector.svelte';
 </script>
@@ -51,9 +48,9 @@
 					{_zoom}
 					{accessToken}
 					bounds={$_allOrgsBBox}
-					styleURL={styleURLs[$_themeName]}
 					on:bboxChanged
 					on:mapClick={clearHero}
+					style={styleURLs[$_themeName]}
 					withScaleControl={true}
 					withZoomControl={true}
 				>
@@ -74,7 +71,10 @@
 				</Mapbox>
 				{#if $_orgs.length === 0}
 					<div class='noOrgsMessage'>
-						<Pill label={noOrgsMessage} />
+						<Pill
+							label={noOrgsMessage}
+							theme={$_pillTheme}
+						/>
 					</div>
 				{/if}
 			</View>
@@ -83,7 +83,10 @@
 					<OrgsList items={$_orgs} />
 				{:else}
 					<div class='noOrgsMessage'>
-						<Pill label={noOrgsMessage} />
+						<Pill
+							label={noOrgsMessage}
+							theme={$_pillTheme}
+						/>
 					</div>
 				{/if}
 			</View>
@@ -93,7 +96,10 @@
 						<TopicsBar />
 					{:else}
 						<div class='noOrgsMessage'>
-							<Pill label={noOrgsMessage} />
+							<Pill
+								label={noOrgsMessage}
+								theme={$_pillTheme}
+							/>
 							<!-- TBD unify `nowrap` prop for Pills -->
 						</div>
 					{/if}
@@ -105,7 +111,10 @@
 						<PlacesBar />
 					{:else}
 						<div class='noOrgsMessage'>
-							<Pill label={noOrgsMessage} />
+							<Pill
+								label={noOrgsMessage}
+								theme={$_pillTheme}
+							/>
 						</div>
 					{/if}
 				</div>
@@ -116,7 +125,10 @@
 						<RegionsBar />
 					{:else}
 						<div class='noOrgsMessage'>
-							<Pill label={noOrgsMessage} />
+							<Pill
+								label={noOrgsMessage}
+								theme={$_pillTheme}
+							/>
 						</div>
 					{/if}
 				</div>

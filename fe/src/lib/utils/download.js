@@ -12,14 +12,14 @@ import * as _ from 'lamb';
 import {get} from 'svelte/store';
 
 import {toolName} from '$lib/config.js';
-import {_orgs} from '$lib/stores/data';
+import {_orgs} from '$lib/stores/data.js';
 import {
 	_bbox_WSEN,
 	_orgSearchValue,
 	_orgTypesSelectionMode,
 	_placesSearchValue,
 	_selectedOrgTypes,
-} from '$lib/stores/selection';
+} from '$lib/stores/selection.js';
 import sanitizeFilepath from '$lib/utils/adapted/node-sanitize-filename/index.js';
 import {version} from '$lib/utils/version.js';
 

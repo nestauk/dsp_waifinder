@@ -1,5 +1,5 @@
 <script>
-	import {toolName, surveyFormUrl} from '$lib/config';
+	import {toolName, surveyFormUrl} from '$lib/config.js';
 </script>
 
 <svelte:head>

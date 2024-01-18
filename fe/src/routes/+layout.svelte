@@ -24,9 +24,9 @@
 	import {
 		bannersDefaultFooterText,
 		fontsInfo,
-	} from '$lib/config';
-	import {isDev} from '$lib/env';
-	import {_isSmallScreen} from '$lib/stores/layout';
+	} from '$lib/config.js';
+	import {isDev} from '$lib/env.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
 	import {
 		_a11yMenuTheme,
 		_bannersTheme,

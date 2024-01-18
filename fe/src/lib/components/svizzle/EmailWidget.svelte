@@ -1,9 +1,8 @@
 <script>
+	import {Input} from '@svizzle/ui';
 	// FIXME Consider RFC 5322 compliant email validation
 	import emailRegex from 'email-regex';
 	import {createEventDispatcher} from 'svelte';
-
-	import Input from '$lib/components/svizzle/Input.svelte';
 
 	export let buttonText = 'Submit';
 	export let hasButton = true;
@@ -15,6 +14,7 @@
 	};
 
 	let email = '';
+	let isValidEmail;
 
 	const dispatch = createEventDispatcher();
 

@@ -2,19 +2,19 @@
 	import {BarchartVDiv} from '@svizzle/barchart';
 	import {CheckCircle, Edit3, Icon} from '@svizzle/ui';
 
-	import {_keyPlaceIdValueOrgsCount} from '$lib/stores/data';
-	import {_placeIdToLabel} from '$lib/stores/dataset';
-	import {_isSmallScreen} from '$lib/stores/layout';
+	import {_keyPlaceIdValueOrgsCount} from '$lib/stores/data.js';
+	import {_placeIdToLabel} from '$lib/stores/dataset.js';
+	import {_isSmallScreen} from '$lib/stores/layout.js';
 	import {
 		_isPlacesEditMode,
 		_selectedPlaceIds,
 		enterPlacesEditMode,
 		exitPlacesEditMode,
 		togglePlaceId,
-	} from '$lib/stores/selection';
-	import {_barchartsTheme} from '$lib/stores/theme';
+	} from '$lib/stores/selection.js';
+	import {_barchartsTheme} from '$lib/stores/theme.js';
 
-	const toggleItem = ({detail: {id}}) => togglePlaceId(id);
+	const toggleItem = ({detail: {key}}) => togglePlaceId(key);
 
 	const onKeyDown = event => {
 		if ($_isPlacesEditMode && event.keyCode === 27) {
