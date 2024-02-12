@@ -1,3 +1,11 @@
+# 0.2.0
+
+- /etl: updated npm scripts
+- /fe:
+	- Removed feedback forms
+	- Added Google Tag Manager
+	- Upgraded dependencies (esp. `@svizzle` ones)
+
 # 0.1.1
 
 - Slightly updated the home page content
