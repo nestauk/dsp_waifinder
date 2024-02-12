@@ -2,7 +2,7 @@
 
 export const toolName = 'UK WAIfinder';
 export const toolLongName = 'UK AI Landscape map';
-export const contactEmail = 'dataanalytics@nesta.org.uk';
+export const contactEmail = 'waifinder@iuk.ktn-uk.org';
 export const changelogUrl = 'https://github.com/nestauk/dap_uk_ai_map/blob/staging/CHANGELOG.md';
 export const jsonUrl = '/data/ai_map_annotated_orgs.json';
 
@@ -21,23 +21,6 @@ export const noOrgsMessage = 'No results with current filters';
 /* regions level */
 
 export const nutsLevel = 3;
-
-/* feedback forms */
-
-// survey
-
-// source: https://docs.google.com/forms/d/1XuVTl_P6O5XEfRmPs_h7GHd3Ruc_YySxvZ5nDPUa-iM/edit
-export const surveyFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSflqKXmPR2eQ-G20L6QV9CAanQ2DLIXIcD_cePr4XfwLefimA/viewform?embedded=true';
-
-// add your org
-
-// source: https://docs.google.com/forms/d/1RfGhH3hEHYsq_hChpZYtIMP9urZVNu53UeIEbL2KaZg/edit
-export const addOrgFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScVgKNvr4-LW1LD9jfXrPaDRO09XMC2PMAVrn_TNk-p1K3Utw/viewform?embedded=true';
-
-// remove your org
-
-// source: https://docs.google.com/forms/d/177v6fMUUYjIDWrgRrSo5UIhFfmzDMX8_8JZECZja_8c/edit
-export const removeOrgFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdESWSlpXlPkmDfF-RGB2gG2Uvpdr7sIKahDQDAxtdhuCY01g/viewform?embedded=true';
 
 /* flags */
 
