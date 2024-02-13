@@ -1,6 +1,6 @@
 Cookies are files saved on your phone, tablet or computer when you visit a
 website.
 
-We only use essential cookies on this website.
-
-The tool itself does not collect any personal data.
+This tool uses [Google Analytics](https://tagmanager.google.com) which installs
+cookies: please check Google [Terms of Service](https://policies.google.com/terms)
+and [Data Privacy Policy](https://policies.google.com/privacy).

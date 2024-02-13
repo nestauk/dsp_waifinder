@@ -24,6 +24,7 @@
 	import {
 		bannersDefaultFooterText,
 		fontsInfo,
+		googleTagManagerId,
 	} from '$lib/config.js';
 	import {isDev} from '$lib/env.js';
 	import {_isSmallScreen} from '$lib/stores/layout.js';
@@ -64,7 +65,16 @@
 	onMount(() => {
 		scriptingActive = true;
 		window.nesta_isLayoutUndefined = () => isLayoutUndefined;
+
+		/* analytics */
+		window.dataLayer = window.dataLayer || [];
+		function gtag () {
+			window.dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+		gtag('config', googleTagManagerId);
 	});
+
 
 	beforeUpdate(async () => {
 		if (isLayoutUndefined) {
@@ -77,6 +87,12 @@
 	$: $_screen?.classes && (isLayoutUndefined = false);
 	$: withThemeEditor = isDev && !$_isSmallScreen && $_isThemeEditorActive;
 </script>
+
+
+<svelte:head>
+	<!-- analytics -->
+	<script src='https://www.googletagmanager.com/gtag/js?id={googleTagManagerId}' />
+</svelte:head>
 
 <StyleSensor
 	href='/css/global.css'

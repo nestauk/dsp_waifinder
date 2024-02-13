@@ -28,6 +28,10 @@ export const flags = {
 	showPOIs: false
 };
 
+/* analytics */
+
+export const googleTagManagerId = 'G-3YWWQW4HD4'; // Managed by KTN, not Nesta
+
 /* mapbox */
 
 export const MAPBOXGL_STYLEURLs = {
