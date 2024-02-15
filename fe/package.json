@@ -29,8 +29,6 @@
 		"@svizzle/dev": "^0.6.2",
 		"@svizzle/file": "^0.14.3",
 		"bowser": "^2.11.0",
-		"browserstack-capabilities": "^0.7.0",
-		"browserstack-local": "^1.5.5",
 		"cpy-cli": "^4.2.0",
 		"eslint": "^8.54.0",
 		"eslint-plugin-svelte": "^2.35.0",
@@ -70,7 +68,6 @@
 		"rmkit": "rimraf .svelte-kit",
 		"rmkv": "npm run rmkit && npm run rmvite",
 		"rmvite": "rimraf node_modules/.vite",
-		"selenium": "node test/browserstack/selenium-runner.mjs",
 		"uninstall": "rimraf node_modules package-lock.json",
 		"unittest": "mocha --spec src/**/*.spec.js"
 	},
