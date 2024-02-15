@@ -1,3 +1,10 @@
+# 1.0.0
+
+First public release
+
+- Added Open Graph `meta` tags
+- Removed unused files, updated some info
+
 # 0.2.0
 
 - /etl: updated npm scripts
