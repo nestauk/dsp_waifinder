@@ -1,3 +1,6 @@
+import {isClientSide} from '@svizzle/ui';
+import {objectToKeyValueArray} from '@svizzle/utils';
+
 /* tool */
 
 export const toolName = 'UK WAIfinder';
@@ -31,6 +34,21 @@ export const flags = {
 /* analytics */
 
 export const googleTagManagerId = 'G-3YWWQW4HD4'; // Managed by KTN, not Nesta
+
+/* social */
+
+const origin = isClientSide ? window.location.origin: '';
+const description =
+	'This interactive map shows entities operating in the AI industry in the UK.';
+export const openGraphTags = objectToKeyValueArray({
+	description,
+	image: '/images/WAIfinder_explorer_orgs.png',
+	'image:alt': description,
+	'image:type': 'image/png',
+	title: 'UK WAIfinder',
+	type: 'website',
+	url: origin,
+});
 
 /* mapbox */
 

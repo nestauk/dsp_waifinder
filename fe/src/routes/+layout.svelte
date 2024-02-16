@@ -21,10 +21,12 @@
 	import Footer from '$lib/components/layout/medium/Footer.svelte';
 	import Nav from '$lib/components/layout/Nav.svelte';
 	import ThemeEditor from '$lib/components/layout/medium/ThemeEditor.svelte';
+	import OpenGraphTags from '$lib/components/svizzle/OpenGraphTags.svelte';
 	import {
 		bannersDefaultFooterText,
 		fontsInfo,
 		googleTagManagerId,
+		openGraphTags
 	} from '$lib/config.js';
 	import {isDev} from '$lib/env.js';
 	import {_isSmallScreen} from '$lib/stores/layout.js';
@@ -90,8 +92,8 @@
 
 
 <svelte:head>
-	<!-- analytics -->
 	<script src='https://www.googletagmanager.com/gtag/js?id={googleTagManagerId}' />
+	<OpenGraphTags tags={openGraphTags} />
 </svelte:head>
 
 <StyleSensor
