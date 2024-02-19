@@ -4,7 +4,7 @@
 
 ## Organisation Data
 
-The organisations included in the {toolName} tool come from 2 main sources; organisations researching AI come from [Gateway to Research](https://gtr.ukri.org/), and AI companies and incubators come from a proprietary dataset from [Glass AI](https://www.glass.ai/). We also find organisations that fund AI companies using [Crunchbase](https://www.crunchbase.com/). Due to legal reasons we don't expose the information about these funder organisations directly using the Crunchbase dataset, but rather we find the information using the [Bing search
+The organisations included in the {toolName} tool come from 2 main sources; organisations researching AI come from [Gateway to Research](https://gtr.ukri.org/), and AI companies and incubators come from a proprietary dataset from [Glass.ai](https://www.glass.ai/). We also find organisations that fund AI companies using [Crunchbase](https://www.crunchbase.com/). Due to legal reasons we don't expose the information about these funder organisations directly using the Crunchbase dataset, but rather we find the information using the [Bing search
 API](https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/overview).
 
 ### Gateway to Research
@@ -43,13 +43,13 @@ We filter this data to only include key AI investors with the following criteria
 We then create our funders dataset by using the remaining funder organisation names to query the [Bing search
 API](https://docs.microsoft.com/en-us/bing/search-apis/bing-web-search/overview) to find their URLs and company descriptions.
 
-### GlassAI
+### Glass.ai
 
-Our data for companies and incubators/accelerators comes from [Glass AI](https://www.glass.ai/). Through a process of scraping companies' websites and searching for AI-related keywords in the company descriptions, Glass AI provided us with a list of organisations.
+Our data for companies and incubators/accelerators comes from [Glass.ai](https://www.glass.ai/). Through a process of scraping companies' websites and searching for AI-related keywords in the company descriptions, Glass.ai provided us with a list of organisations.
 
 If a company is also an incubator/accelerator then this is tagged as such in a 'is_incubator' field.
 
-We get the longitude/latitude data (which GlassAI didn't provide us with) for these companies using the [NSPL postcode look up](https://geoportal.statistics.gov.uk/datasets/7606baba633d4bbca3f2510ab78acf61/about).
+We get the longitude/latitude data (which Glass.ai didn't provide us with) for these companies using the [NSPL postcode look up](https://geoportal.statistics.gov.uk/datasets/7606baba633d4bbca3f2510ab78acf61/about).
 
 The only filtering needed for this dataset was:
 1. The company has longitude/latitude data
@@ -59,7 +59,7 @@ The only filtering needed for this dataset was:
 The three filtered datasets are concatenated together, then organisation names were cleaned in order to merge together organisations that might have been in more than one of the original datasets. For example the company [CodeBase](https://www.thisiscodebase.com/) is in both the Company and the Funder categories.
 
 If there is duplication we decide which rows to drop to include based on the criteria (useful if there are conflicting Links or latitude/longitude values):
-1. Trust Glass AI first - since several sources were considered to find Links and Lat/Long,
+1. Trust Glass.ai first - since several sources were considered to find Links and Lat/Long,
 2. then trust GtR - since Lat/Long was given in this data,
 3. lastly trust Crunchbase
 
