@@ -6,7 +6,7 @@ import {objectToKeyValueArray} from '@svizzle/utils';
 export const toolName = 'UK WAIfinder';
 export const toolLongName = 'UK AI Landscape map';
 export const contactEmail = 'waifinder@iuk.ktn-uk.org';
-export const changelogUrl = 'https://github.com/nestauk/dap_uk_ai_map/blob/staging/CHANGELOG.md';
+export const changelogUrl = 'https://github.com/nestauk/dsp_waifinder/blob/staging/CHANGELOG.md';
 export const jsonUrl = '/data/ai_map_annotated_orgs.json';
 
 /* map bounding box (UK) */
